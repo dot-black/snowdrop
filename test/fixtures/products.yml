@@ -11,3 +11,9 @@ ipad:
   description: The brand new iPad
   image: ipad.png
   price: 21.99
+
+macbook:
+  title: macbook
+  description: The brand new macbook
+  image: mac.png
+  price: 100
