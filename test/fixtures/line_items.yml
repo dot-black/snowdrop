@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  product: macbook
+  order: one
+
+two:
+  product: macbook
+  cart: one

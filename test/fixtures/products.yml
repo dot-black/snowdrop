@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+iphone:
+  title: iPhone
+  description: The brand new iPhone
+  image: iphone.jpg
+  price: 12.99
+
+ipad:
+  title: iPad
+  description: The brand new iPad
+  image: ipad.png
+  price: 21.99
+
+macbook:
+  title: macbook
+  description: The brand new macbook
+  image: mac.png
+  price: 100

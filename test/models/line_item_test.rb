@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ManagerTest < ActiveSupport::TestCase
+class LineItemTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

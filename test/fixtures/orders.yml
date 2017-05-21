@@ -1,0 +1,9 @@
+one:
+  name: Daniel Defoe
+  payment_method: <%= Order.payment_methods[:exchanging] %>
+  comment: My first order, be carefull with it. I preffer pay in cash.
+
+two:
+  name: Daniel Defoe
+  payment_method: <%= Order.payment_methods[:provisioning] %>
+  comment: Second order, I've almost been your's regular customer! It seems that you're trustworthy guys, I gonna pay with my credit card this time.
