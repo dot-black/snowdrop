@@ -1,0 +1,141 @@
+/* Only demo */
+@media (max-width: 1000px) {
+  .welcome-message {
+    display: none;
+  }
+}
+
+@media (max-width: 736px) {
+  .responsive {
+    padding-left: 0px;
+    padding-right: 0px;
+    font-size: 10px;
+  }
+
+  span.label {
+    font-size: 9px !important;
+  }
+
+  .ibox-content {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+}
+
+td span.label {
+  font-size: 11px;
+}
+
+div.alert {
+  z-index: 2;
+  display: none;
+  position: fixed;
+  top: 80px;
+  right: 10px;
+}
+
+.company-name {
+  padding-left: 45px;
+  padding-bottom: 15px;
+  color: #a7b1c2;
+  font-weight: 400;
+  font-size: 24px;
+}
+
+tr.footable-filtering th {
+  padding: 8px 0px !important;
+}
+
+td span.red {
+  color: #ED5565;
+}
+
+td span.green {
+  color: #1ab394;
+}
+
+.search-control {
+  padding: 0px 15px;
+}
+
+table {
+  tbody tr.selectable-row:hover {
+    -moz-box-shadow: 0 0 4px #999;
+    -webkit-box-shadow: 0 0 4px #999;
+    box-shadow: 0 0 4px #999;
+    opacity: 1;
+    -ms-filter: alpha(Opacity=100);
+    filter: alpha(opacity=100);
+    cursor: pointer
+  }
+}
+.grid .ibox {
+    margin-bottom: 0;
+}
+
+.grid-item {
+    margin-bottom: 25px;
+    width: 300px;
+}
+
+
+table.long-body {
+  // table-layout:fixed;
+
+  width: 100%;
+
+  td {
+    max-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  td.ppr {
+    width: 10%;
+  }
+
+  td.wraped {
+    width: 60%;
+    // overflow: hidden;
+    // white-space: nowrap;
+    // text-overflow: ellipsis;
+    // word-wrap:break-word;
+  }
+}
+
+#map {
+  height: 300px !important;
+  width: 100% !important;
+}
+
+.venue-cost {
+  letter-spacing: -1px;
+
+  .text-muted {
+    color: #ccc;
+  }
+}
+
+#search_result {
+  .address {
+    width: 20%;
+  }
+  // .cost {
+  //   max-width: 53px;
+  // }
+  .hotels {
+    width: 20%;
+  }
+  .kind {
+
+  }
+  .location {
+    width: 20%;
+  }
+  // .rating {
+  //   max-width: 111px;
+  // }
+  .title {
+    width: 20%;
+  }
+}

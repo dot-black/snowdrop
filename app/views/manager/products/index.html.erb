@@ -1,0 +1,18 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-10">
+    <h2> <%= current_page_name %> </h2>
+    <ol class="breadcrumb">
+      <li><%= current_page_name %></li>
+      <li><b>List</b></li>
+    </ol>
+  </div>
+  <div class="col-lg-2"></div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="row">
+    <% @products.each do |product| %>
+      <%= render partial: "product", locals: { product: product } %>
+    <% end %>
+  </div>
+</div>

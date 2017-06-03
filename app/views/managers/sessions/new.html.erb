@@ -1,0 +1,31 @@
+<div class="text-center animated fadeInDown">
+  <div>
+    <h1 class="logo-name">Snowdrop</h1>
+  </div>
+  <div class="middle-box">
+    <h3>Sign In</h3>
+
+    <p>Your are in lock screen. You need to enter your email and password.</p>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name), class: "form-horizontal m-t") do |f| %>
+      <% flash.each do |key, message| %>
+        <div class="alert <%= key == 'error' ? 'alert-danger' : 'alert-info' %>">
+          <%= message %>
+        </div>
+      <% end %>
+
+        <div class="form-group">
+          <%= f.email_field :email, class: "form-control validate", placeholder: "Email"%>
+          <%= f.password_field :password, class: "form-control validate", autocomplete: :off, placeholder: "Password" %>
+        </div>
+
+        <% if devise_mapping.rememberable? -%>
+          <div class="form-group">
+            <%= f.check_box :remember_me %>
+            <%= f.label :remember_me %>
+          </div>
+        <% end -%>
+        <br>
+        <%= f.submit "Log in", class: "btn btn-primary block full-width" %>
+    <% end %>
+  </div>
+</div>

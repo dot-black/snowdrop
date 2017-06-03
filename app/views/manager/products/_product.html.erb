@@ -1,0 +1,30 @@
+<div class="col-md-3">
+  <div class="ibox">
+    <div class="ibox-content product-box">
+      <div class="product-imitation" style="padding: 15px 0px">
+        <%= image_tag product.images.first, size: 160 %>
+      </div>
+      <div class="product-desc">
+        <span class="product-price">
+          <%= product.price %>
+        </span>
+        <small class="text-muted">Category</small>
+        <%= link_to product.title, edit_manager_product_path(product), class: "product-name" %>
+        <!-- <a href="#" class="product-name"> Product</a> -->
+
+        <div class="small m-t-xs">
+          Many desktop publishing packages and web page editors now.
+        </div>
+
+        <div class="m-t text-righ">
+          <%= link_to edit_manager_product_path(product), class: "btn btn-xs btn-outline btn-primary" do %>
+            Edit
+            <i class="fa fa-long-arrow-right"></i>
+          <% end %>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
