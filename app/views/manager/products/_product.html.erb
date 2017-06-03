@@ -1,16 +1,16 @@
 <div class="col-md-3">
   <div class="ibox">
     <div class="ibox-content product-box">
-
-      <div class="product-imitation">
-        <%= product.title %>
+      <div class="product-imitation" style="padding: 15px 0px">
+        <%= image_tag product.images.first, size: 160 %>
       </div>
       <div class="product-desc">
         <span class="product-price">
           <%= product.price %>
         </span>
         <small class="text-muted">Category</small>
-        <a href="#" class="product-name"> Product</a>
+        <%= link_to product.title, edit_manager_product_path(product), class: "product-name" %>
+        <!-- <a href="#" class="product-name"> Product</a> -->
 
         <div class="small m-t-xs">
           Many desktop publishing packages and web page editors now.
