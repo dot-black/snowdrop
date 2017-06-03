@@ -1,5 +1,5 @@
 class Manager::ProductsController < ApplicationController
-  before_action :set_product, only: :show
+  before_action :set_product, only: [:show, :edit]
   before_action :authenticate_manager!
   layout 'managers/dashboard'
 
@@ -59,6 +59,6 @@ class Manager::ProductsController < ApplicationController
     end
 
     def permitted_product_params
-      params.require(:product).permit(:title, :description, :image, :price)
+      params.require(:product).permit(:title, :description, :price, {image: []})
     end
 end

@@ -1,0 +1,103 @@
+<%= form_for @product do |form| %>
+  <% if product.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+      <ul>
+      <% product.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="wrapper wrapper-content animated fadeInRight ecommerce">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="tabs-container">
+          <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#tab-1"> Product info</a></li>
+            <li class=""><a data-toggle="tab" href="#tab-2"> Images</a></li>
+          </ul>
+
+          <div class="tab-content">
+            <div id="tab-1" class="tab-pane active">
+              <div class="panel-body">
+                <fieldset class="form-horizontal">
+                  <div class="field">
+                    <div class="form-group">
+                      <%= form.label :title, class:"col-sm-2 control-label" %>
+                      <div class="col-sm-10">
+                        <%= form.text_field :title, id: :product_title, placeholder:"Product name", class:"form-control" %>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <%= form.label :price, class:"col-sm-2 control-label" %>
+                    <div class="col-sm-10">
+                      <%= form.text_field :price, id: :product_price, class:"form-control" %>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <%= form.label :description, class:"col-sm-2 control-label" %>
+                    <div class="col-sm-10">
+                      <%= form.text_area :description, id: :product_description, class: "form-control" %>
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
+            </div>
+
+            <div id="tab-2" class="tab-pane">
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <button type="button" name="button" class="btn btn-primary pull-right">Upload photo</button>
+                  </div>
+                </div>
+
+                <br>
+
+                <div class="table-responsive">
+                  <table class="table table-bordered table-stripped">
+                    <thead>
+                      <tr>
+                        <th>Image preview</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <% @product.images.each do |image| %>
+                        <tr>
+                          <td><%= image_tag image, size: 120 %></td>
+                          <td>
+                            <button class="btn btn-white"><i class="fa fa-trash"></i> </button>
+                          </td>
+                        </tr>
+                      <% end %>
+                    </tbody>
+                  </table>
+
+                </div>
+              </div>
+            </div>
+
+            <br>
+
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="form-group">
+                  <%= form.submit class: "btn btn-primary pull-right" %>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -13,6 +13,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'devise'
 gem 'redis', '~> 3.0'
 gem 'kaminari'
+gem 'carrierwave', '~> 1.0'
 
 gem 'coffee-rails', '~> 4.2'
 gem 'sass-rails', '~> 5.0'
