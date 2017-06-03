@@ -1,0 +1,23 @@
+<% if manager_signed_in? %>
+  <div class="row border-bottom">
+    <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+      <div class="navbar-header">
+        <button type="button" name="button" class="navbar-minimalize minimalize-styl-2 btn btn-primary ">
+          <i class="fa fa-bars"></i>
+        </button>
+      </div>
+      <ul class="nav navbar-top-links navbar-right">
+        <li>
+          <span class="m-r-sm text-muted welcome-message" data-i18n="topnav.welcometext">
+            Welcome to Snowdrop's manager
+          </span>
+        </li>
+
+        <li>
+          <%= nav_link "Logout", destroy_manager_session_path, "fa fa-sign-out", :delete %>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+<% end %>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snowdrop</title>
+
+    <%= render 'layouts/managers/header' %>
+
+  </head>
+
+  <body>
+    <div id="wrapper">
+      <%= render 'layouts/managers/navigation' %>
+      <div id="page-wrapper" class="gray-bg">
+        <% flash.each do |key, message| %>
+          <div class="alert <%= key == 'error' ? 'alert-danger' : 'alert-info' %>">
+            <%= message %>
+          </div>
+        <% end %>
+
+        <%= render 'layouts/managers/topnavbar' %>
+        <%= yield %>
+      </div>
+    </div>
+  </body>
+</html>
