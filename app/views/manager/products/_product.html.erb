@@ -10,7 +10,6 @@
         </span>
         <small class="text-muted">Category</small>
         <%= link_to product.title, edit_manager_product_path(product), class: "product-name" %>
-        <!-- <a href="#" class="product-name"> Product</a> -->
 
         <div class="small m-t-xs">
           Many desktop publishing packages and web page editors now.
@@ -21,6 +20,8 @@
             Edit
             <i class="fa fa-long-arrow-right"></i>
           <% end %>
+
+          <%= link_to "Hide", "#", class: "btn btn-xs btn-outline btn-danger pull-right" %>
         </div>
       </div>
 

@@ -9,8 +9,15 @@
       <ul class="nav navbar-top-links navbar-right">
         <li>
           <span class="m-r-sm text-muted welcome-message" data-i18n="topnav.welcometext">
-            Welcome to Snowdrop's manager
+            Welcome to <%= t("application_name") %>
           </span>
+        </li>
+
+        <li>
+          <%= link_to nil, class: "count-info" do %>
+            <i class="fa fa-envelope"></i>
+            <span class="label label-warning">14</span>
+          <% end %>
         </li>
 
         <li>
