@@ -1,0 +1,38 @@
+<div class="col-md-3">
+  <div class="ibox">
+    <div class="ibox-content product-box">
+      <div class="product-imitation" style="padding: 15px 0px">
+        <%= image_tag product.images.first, class: "img-lg" %>
+      </div>
+      <div class="product-desc">
+
+        <span class="product-price">
+          <%= product.price %>
+        </span>
+
+          <small class="text-muted">Priority: <%= product.priority %></small>
+
+        <%= link_to product.title, manager_product_path(product), class: "product-name" %>
+
+        <div class="small m-t-xs">
+          <%= product.description %>
+        </div>
+
+        <div class="m-t text-righ">
+          <%= link_to archive_manager_product_path(product), class: "btn btn-xs btn-outline btn-warning" do %>
+            <i class="fa fa-plus-square-o"></i> Restore
+          <% end %>
+
+          <%= link_to edit_manager_product_path(product), class: "btn btn-xs btn-outline btn-primary" do %>
+            Edit <i class="fa fa-long-arrow-right"></i>
+          <% end %>
+
+            <%= link_to "Delete", manager_product_path(product), class: "btn btn-xs btn-outline btn-danger pull-right", method: "delete" %>
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>

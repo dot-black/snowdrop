@@ -14,10 +14,11 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap-sprockets
-//= require manager_custom
 //= require base/footable.min.js
 //= require base/jquery.metisMenu.js
 //= require base/sweetalert.min.js
 //= require base/jquery.slimscroll.min.js
 //= require base/jquery.barrating.min
+//= require base/slick.min.js
 //= require inspinia.js
+//= require manager_custom

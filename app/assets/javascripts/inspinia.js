@@ -171,6 +171,13 @@ ready = function () {
     $('.full-height-scroll').slimscroll({
         height: '100%'
     })
+
+    $(window).load(function() {
+      $('.product-images').slick({
+        dots: true
+    });
+});
+
 };
 
 

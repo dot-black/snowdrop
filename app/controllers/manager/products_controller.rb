@@ -1,10 +1,20 @@
 class Manager::ProductsController < ApplicationController
-  before_action :set_product, only: [:show, :edit]
+  before_action :set_product, only: [:show, :edit, :update, :destroy, :change_appearance, :archive, :remove_single_image]
   before_action :authenticate_manager!
   layout 'managers/dashboard'
 
   def index
-    @products = Product.all
+    @products = Product.relevant
+    @products = Product.visible if params[:visible].present?
+    @products = Product.hiden if params[:hiden].present?
+    filtering_params(params).each do |key, value|
+      @products = @products.public_send(key) if key.present?
+    end
+
+  end
+
+  def archival
+    @products = Product.archival
   end
 
   def show
@@ -22,24 +32,19 @@ class Manager::ProductsController < ApplicationController
 
     respond_to do |format|
       if @product.save
-        format.html { redirect_to @product, notice: 'Product was successfully created.' }
-        format.json { render :show, status: :created, location: @product }
+        format.html { redirect_to @product }
       else
         format.html { render :new }
-        format.json { render json: @product.errors, status: :unprocessable_entity }
       end
     end
   end
 
-
   def update
     respond_to do |format|
       if @product.update(permitted_product_params)
-        format.html { redirect_to @product, notice: 'Product was successfully updated.' }
-        format.json { render :show, status: :ok, location: @product }
+        format.html { redirect_to manager_products_path }
       else
         format.html { render :edit }
-        format.json { render json: @product.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -47,9 +52,28 @@ class Manager::ProductsController < ApplicationController
   def destroy
     @product.destroy
     respond_to do |format|
-      format.html { redirect_to products_url, notice: 'Product was successfully destroyed.' }
-      format.json { head :no_content }
+      format.html { redirect_to manager_products_path }
     end
+  end
+
+  def archive
+    @product.archive = !@product.archive
+    @product.save
+    respond_to do |format|
+      format.html { redirect_to manager_products_path }
+    end
+  end
+
+  def change_appearance
+    @product.visible = !@product.visible
+    @product.save
+    redirect_to manager_products_path
+  end
+
+  def remove_single_image
+    @product.remove_image_at_index(params[:index].to_i)
+    @product.save
+    redirect_back fallback_location: @product
   end
 
   private
@@ -59,6 +83,10 @@ class Manager::ProductsController < ApplicationController
     end
 
     def permitted_product_params
-      params.require(:product).permit(:title, :description, :price, {image: []})
+      params.require(:product).permit(:title, :description, :price, :priority, :index, {images: []}, sizes: [])
+    end
+
+    def filtering_params(params)
+      params.slice(:visible, :hiden)
     end
 end

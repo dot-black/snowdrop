@@ -1,0 +1,9 @@
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="row">
+    <% @products.each do |product| %>
+      <%= render partial: "product_archival", locals: { product: product } %>
+    <% end %>
+    <%= link_to "New", new_manager_product_path, class: "btn btn-large btn-outline btn-primary" %>
+
+  </div>
+</div>

@@ -5,8 +5,17 @@
       <li><%= current_page_name %></li>
       <li><b>List</b></li>
     </ol>
+    <%= link_to manager_products_path, class: "btn btn-white" do %>
+      <i class="fa fa-check-square-o"></i>
+    <% end %>
+    <%= link_to manager_products_path(visible: "true"), class: "btn btn-white" do %>
+      <i class="fa fa-eye"></i>
+    <% end %>
+    <%= link_to manager_products_path(hiden: "true"), class: "btn btn-white" do %>
+      <i class="fa fa-eye-slash"></i>
+    <% end %>
   </div>
   <div class="col-lg-2"></div>
 </div>
 
-<%= render "list" %>
+<%= render "list_relevant" %>

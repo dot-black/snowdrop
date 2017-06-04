@@ -6,7 +6,17 @@ Rails.application.routes.draw do
     # mount Sidekiq::Web => '/sidekiq'
     root 'dashboard#index'
     get :dashboard, to: 'dashboard#index'
-    resources :products
+
+    resources :products do
+      member do
+        get 'change_appearance'
+        get 'archive'
+        get 'remove_single_image'
+      end
+      collection do
+        get :archival
+      end
+    end
     resources :orders
   end
 
@@ -16,6 +26,8 @@ Rails.application.routes.draw do
   resources :carts
   resources :orders
   resources :products, only: [:index, :show]
+
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   root 'store#index', as: 'store'
