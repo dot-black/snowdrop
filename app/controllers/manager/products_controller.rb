@@ -5,8 +5,6 @@ class Manager::ProductsController < ApplicationController
 
   def index
     @products = Product.relevant
-    @products = Product.visible if params[:visible].present?
-    @products = Product.hiden if params[:hiden].present?
     filtering_params(params).each do |key, value|
       @products = @products.public_send(key) if key.present?
     end
@@ -57,23 +55,20 @@ class Manager::ProductsController < ApplicationController
   end
 
   def archive
-    @product.archive = !@product.archive
-    @product.save
+    @product.update archive: !@product.archive
     respond_to do |format|
       format.html { redirect_to manager_products_path }
     end
   end
 
   def change_appearance
-    @product.visible = !@product.visible
-    @product.save
+    @product.update visible: !@product.visible
     redirect_to manager_products_path
   end
 
   def remove_single_image
-    @product.remove_image_at_index(params[:index].to_i)
-    @product.save
-    redirect_back fallback_location: @product
+    @product.update images: @product.images.tap{ |a| a.delete_at(params[:index].to_i) }
+    redirect_to edit_manager_product_path(@product)
   end
 
   private

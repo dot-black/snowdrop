@@ -10,7 +10,7 @@
           <%= product.price %>
         </span>
 
-          <small class="text-muted">Priority: <%= product.priority %></small>
+          <small class="text-muted">Priority: <%= product.priority.upcase %></small>
 
         <%= link_to product.title, manager_product_path(product), class: "product-name" %>
 
