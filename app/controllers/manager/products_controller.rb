@@ -30,7 +30,7 @@ class Manager::ProductsController < ApplicationController
 
     respond_to do |format|
       if @product.save
-        format.html { redirect_to @product }
+        format.html { redirect_to manager_products_path  }
       else
         format.html { render :new }
       end
@@ -55,7 +55,8 @@ class Manager::ProductsController < ApplicationController
   end
 
   def archive
-    @product.update archive: !@product.archive
+    @product.update archive: !@product.archive, visible: false
+
     respond_to do |format|
       format.html { redirect_to manager_products_path }
     end

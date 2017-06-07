@@ -1301,16 +1301,19 @@ a.close-canvas-menu:hover {
 // IMAGES SIZE
 
 .img-sm {
+  object-fit: cover;
   width: 32px;
   height: 32px;
 }
 
 .img-md {
+  object-fit: cover;
   width: 64px;
   height: 64px;
 }
 
 .img-lg {
+  object-fit: cover;
   width: 96px;
   height: 96px;
 }

@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: :show
+  before_action :enusre_product_visible!, only: :show
 
   def index
     @products = Product.visible
@@ -55,6 +56,10 @@ class ProductsController < ApplicationController
 
     def set_product
       @product = Product.find(params[:id])
+    end
+
+    def enusre_product_visible!
+      redirect_to products_path unless @product.visible
     end
 
     # def permitted_product_params
