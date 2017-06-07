@@ -1,0 +1,15 @@
+<%= link_to product_path(product) do %>
+  <div class="product-basic">
+    <div class="product-image">
+      <%= image_tag product.images.first%>
+    </div>
+
+    <div class="product-basic-title">
+      <%= product.title %>
+    </div>
+
+    <div class="product-basic-price">
+      <%= number_to_currency product.price %>
+    </div>
+  </div>
+<% end  %>

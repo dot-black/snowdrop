@@ -1,3 +1,97 @@
-// Place all the styles related to the products controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@mixin max-width($width) {
+    @media screen and (max-width: $width) {
+        @content;
+    }
+}
+.category-item span{
+  color: #757575;
+  font-size: 12px;
+  font-family: 'Roboto', 'Noto', sans-serif;
+}
+
+.products {
+  position: relative;
+  display: flex;
+  flex-flow: row wrap;
+  margin-top: 30px;
+
+}
+
+.product-basic {
+  box-sizing: border-box;
+  padding: 20px;
+  flex: 1;
+  margin: 48 0;
+  text-align: center;
+  font-family: 'Roboto', 'Noto', sans-serif;
+}
+.product-basic:link{
+  text-decoration: none;
+}
+.product-image img{
+  object-fit: cover;
+  height: 300px;
+  width: 300px;
+
+}
+
+.product-basic-title{
+  color: #202020;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 13px;
+}
+.product-basic-price{
+  color: #757575;
+  font-size: 12px;
+}
+
+.product-detailed{
+  margin: 0 32px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.product-detailed-image{
+  flex: 1;
+}
+.product-detailed-image img{
+
+}
+.product-detailed-details{
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  margin: 64px 32px;
+}
+.product-detailed-details h1{
+  margin: 0;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 28px;
+}
+
+.product-detailed-details span{
+  font-size: 16px;
+  color: #757575;
+  margin: 16px 0 40px;
+}
+
+.product-detailed-details h2{
+  margin: 16px 0;
+  font-size: 13px;
+
+}
+.product-detailed-details p{
+  margin: 0;
+  color: #757575;
+  font-size: 13px;
+}
+.product-detailed-details select{
+  font-size: 16px;
+  padding: 16px 24px 16px 70px;
+}
+
+.product-detailed-description{
+  margin: 32px 0;
+}

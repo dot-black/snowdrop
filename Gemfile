@@ -13,11 +13,14 @@ gem 'jbuilder', '~> 2.5'
 gem 'devise'
 gem 'redis', '~> 3.0'
 gem 'kaminari'
+gem 'carrierwave', '~> 1.0'
 
 gem 'coffee-rails', '~> 4.2'
 gem 'sass-rails', '~> 5.0'
 gem 'bootstrap-sass', '~> 3.3.7'
 gem 'uglifier', '>= 1.3.0'
+gem "font-awesome-rails"
+gem 'jquery-rails'
 
 # gem 'therubyracer', platforms: :ruby
 # Use ActiveModel has_secure_password

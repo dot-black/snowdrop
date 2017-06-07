@@ -1,0 +1,42 @@
+<%= link_to manager_product_path(product) do %>
+  <div class="col-md-3">
+    <div class="ibox">
+      <div class="ibox-content product-box">
+        <div class="product-imitation" style="padding: 15px 0px">
+          <%= image_tag product.images.first, class: "img-lg" %>
+        </div>
+        <div class="product-desc">
+
+          <span class="product-price">
+            <%= product.price %>
+          </span>
+
+          <small class="text-muted">Priority: <%= product.priority.upcase %></small>
+
+          <span class="product-name">
+            <%= product.title %>
+          </span>
+
+          <div class="small m-t-xs">
+            <%= product.description %>
+          </div>
+
+          <div class="m-t text-righ">
+            <%= link_to archive_manager_product_path(product), class: "btn btn-xs btn-outline btn-danger" do %>
+              <i class="fa fa-minus-square-o"></i> Archive
+            <% end %>
+
+
+            <% if product.visible %>
+              <%= link_to "Hide", change_appearance_manager_product_path(product), class: "btn btn-xs btn-outline btn-warning pull-right" %>
+            <% else %>
+              <%= link_to "Release", change_appearance_manager_product_path(product), class: "btn btn-xs btn-outline btn-primary pull-right" %>
+            <% end %>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+<% end  %>
