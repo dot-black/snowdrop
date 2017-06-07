@@ -5,6 +5,7 @@
       <li><%= current_page_name %></li>
       <li><b>List</b></li>
     </ol>
+    <%= link_to "New", new_manager_product_path, class: "btn btn-large btn-outline btn-primary" %>
     <%= link_to manager_products_path, class: "btn btn-white" do %>
       <i class="fa fa-check-square-o"></i>
     <% end %>

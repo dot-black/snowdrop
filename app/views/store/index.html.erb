@@ -1,10 +1,15 @@
-<% @products.each do |product| %>
-  <div>
-    <h3><%= product.title %></h3>
-    <%= sanitize(product.description) %>
-    <div>
-      <span class="price"><%= number_to_currency(product.price) %></span>
-      <%= button_to 'Add to Cart', line_items_path(product_id: product),remote: true %>
-    </div>
+<div class="category-item">
+  <%= image_tag "categories/mens_outerwear.jpg", class: "category-image" %>
+    <h2> Men's Outerwear </h2>
+  <div class="category-button">
+    <%= link_to "Shop now", products_path, class:"material-button" %>
   </div>
-<% end %>
+</div>
+
+<div class="category-item">
+  <%= image_tag "categories/ladies_outerwear.jpg", class: "category-image" %>
+    <h2> Ladie's Outerwear </h2>
+  <div class="category-button">
+    <%= link_to "Shop now", products_path, class:"material-button" %>
+  </div>
+</div>

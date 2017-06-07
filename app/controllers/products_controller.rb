@@ -2,10 +2,11 @@ class ProductsController < ApplicationController
   before_action :set_product, only: :show
 
   def index
-    @products = Product.all
+    @products = Product.visible
   end
 
   def show
+
   end
 
   # def new

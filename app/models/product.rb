@@ -1,6 +1,6 @@
 class Product < ApplicationRecord
   enum size: { xs: 1, s: 2, m: 3, l: 4, xl: 5 }
-  enum priority: { hi: 1, mod: 2, low: 3 }
+  enum priority: { hi: 1, mid: 2, low: 3 }
   validates :title, :description, presence: true
   validates :price, numericality: {
     greater_than_or_equal_to: 0.01,
@@ -15,6 +15,10 @@ class Product < ApplicationRecord
   scope :visible, -> { where( visible: true, archive: false ) }
   scope :hiden, -> { where( visible: false, archive: false ) }
   scope :archival, -> { where( archive: true ) }
+
+  def sizes_collection
+    self.sizes.map{|s|[Product.sizes.key(s).to_s.upcase,s]}
+  end
 
   private
 

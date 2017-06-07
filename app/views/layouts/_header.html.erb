@@ -1,11 +1,19 @@
-<header class="navbar navbar-fixed-top navbar-inverse">
-  <div class="container">
-    <nav>
-      <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "Store",    store_path %></li>
-        <li><%= link_to "Products", products_path %></li>
-        <li><%= link_to "Orders",   orders_path %></li>
-      </ul>
-    </nav>
+<header class="navbar">
+  <div class="app-toolbar">
+    <div class="store-logo">
+      <%= link_to t("application_name"), store_path %>
+    </div>
+    <div class="cart-logo">
+      <%= link_to store_path, class:"btn btn-default" do %>
+        <i class="glyphicon glyphicon-shopping-cart"></i>
+      <% end  %>
+    </div>
+  </div>
+
+  <div class="items-toolbar">
+    <div class="toolbar-item"><%= link_to "Men's Outerwear", products_path, class: "btn btn-default" %></div>
+    <div class="toolbar-item"><%= link_to "Ladies Outerwear", products_path, class: "btn btn-default" %></div>
+    <div class="toolbar-item"><%= link_to "Men's T-Shirts", products_path, class: "btn btn-default" %></div>
+    <div class="toolbar-item"><%= link_to "Ladies T-Shirts", products_path, class: "btn btn-default" %></div>
   </div>
 </header>

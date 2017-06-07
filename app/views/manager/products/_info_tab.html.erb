@@ -21,11 +21,12 @@
         <%= form.label :size, class:"col-sm-2 control-label" %>
         <div class="col-sm-10">
           <% Product.sizes.each do |key, value| %>
-            <div class="i-checks">
+            <div class="checkbox-inline i-checks">
               <label>
+                <%= key.to_s.upcase %>
                 <%= form.check_box :sizes, { multiple: true }, value %>
-                <i></i><%= key %>
               </label>
+
             </div>
           <% end %>
         </div>
