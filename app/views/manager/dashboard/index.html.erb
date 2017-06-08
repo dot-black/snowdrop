@@ -7,6 +7,7 @@
 
 <div class="wrapper wrapper-content animated fadeIn">
   <div class="row">
+
     <div class="col-lg-6">
       <div class="ibox float-e-margins">
         <div class="ibox-title">
@@ -14,7 +15,17 @@
           <h5>Products</h5>
         </div>
         <div class="ibox-content">
-          <h1 class="no-margins"><%= @products_count %></h1>
+          <h1 class="no-margins"><%= @products_count[:visible] %></h1>
+          <div class="stat-percent font-bold text-success"> <%=number_to_percentage @products_percentage[:visible], precision: 0 %> <i class="fa fa-bolt"></i></div>
+          <small>Released</small>
+        </div>
+        <div class="ibox-content">
+          <h1 class="no-margins"><%= @products_count[:hiden] %></h1>
+          <div class="stat-percent font-bold text-success"><%= number_to_percentage @products_percentage[:hiden], precision: 0 %> <i class="fa fa-bolt"></i></div>
+          <small>Hiden</small>
+        </div>
+        <div class="ibox-content">
+          <h1 class="no-margins"><%= @products_count[:total]%></h1>
           <!-- <div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div> -->
           <small>Total count</small>
         </div>
@@ -25,13 +36,16 @@
       <div class="ibox float-e-margins">
         <div class="ibox-title">
           <span class="label label-primary pull-right">Total</span>
-          <h5>Orders</h5>
+          <h5>Categories</h5>
         </div>
-        <div class="ibox-content">
-          <h1 class="no-margins"> <%= @orders_count %> </h1>
-          <!-- <div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div> -->
-          <small>Total count</small>
-        </div>
+        <% @products_by_categories_count.each  do |key, value|  %>
+          <div class="ibox-content">
+            <h1 class="no-margins"> <%= value%> </h1>
+            <!-- <div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div> -->
+            <small><%= key.capitalize %></small>
+          </div>
+        <% end  %>
+
       </div>
     </div>
 

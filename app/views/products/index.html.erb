@@ -1,7 +1,7 @@
 <div class=category-item>
   <%= image_tag "categories/#{@current_category}.jpg", class: "category-image" %>
     <h2> <%= @current_category.pluralize(2).capitalize %> </h2>
-    <span><%= "(#{pluralize @products.count, 'item'})" %></span>
+    <span><%= "(#{pluralize @products.total_count, 'item'})" %></span>
 <div>
 
 <div class="products">
