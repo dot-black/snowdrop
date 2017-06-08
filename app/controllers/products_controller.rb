@@ -2,8 +2,13 @@ class ProductsController < ApplicationController
   before_action :set_product, only: :show
   before_action :enusre_product_visible!, only: :show
 
+
   def index
-    @products = Product.visible
+    @products = Product.visible.page params[:page]
+    filtering_params(params).each do |key, value|
+      @products = ( @products.public_send(key, value).page params[:page] )if permitted_value?(value)
+    end
+    @current_category = current_category
   end
 
   def show
@@ -65,4 +70,16 @@ class ProductsController < ApplicationController
     # def permitted_product_params
     #   params.require(:product).permit(:title, :description, :image, :price)
     # end
+
+    def filtering_params(params)
+      params.slice :category
+    end
+
+    def permitted_value?(value)
+      Product.categories.has_key?(value)
+    end
+
+    def current_category
+      ( params[:category].present? and permitted_value? params[:category] ) ?  params[:category] : "product"
+    end
 end

@@ -36,6 +36,10 @@
               <hr>
 
               <dl class="small m-t-md">
+                <dt>Category</dt>
+                <dd>
+                  <%= product.category.capitalize %>
+                </dd>
                 <dt>Avalible sizes</dt>
                 <dd>
                   <% product.sizes.each do |size| %>
