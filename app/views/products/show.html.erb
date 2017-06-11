@@ -13,7 +13,6 @@
       <%= select_tag "quantity", options_for_select((1..4).to_a.map{|s| [s,s]}) %>
     <div class="product-detailed-description">
       <h2>Description</h2>
-
       <p> <%= @product.description %> </p>
     </div>
     <div>

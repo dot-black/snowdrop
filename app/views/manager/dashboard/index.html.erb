@@ -10,20 +10,30 @@
 
     <div class="col-lg-6">
       <div class="ibox float-e-margins">
+
         <div class="ibox-title">
           <span class="label label-success pull-right">Total</span>
           <h5>Products</h5>
         </div>
+
         <div class="ibox-content">
           <h1 class="no-margins"><%= @products_count[:visible] %></h1>
-          <div class="stat-percent font-bold text-success"> <%=number_to_percentage @products_percentage[:visible], precision: 0 %> <i class="fa fa-bolt"></i></div>
+          <div class="stat-percent font-bold text-success">
+            <%=number_to_percentage @products_percentage[:visible], precision: 0 %>
+            <i class="fa fa-bolt"></i>
+          </div>
           <small>Released</small>
         </div>
+
         <div class="ibox-content">
           <h1 class="no-margins"><%= @products_count[:hiden] %></h1>
-          <div class="stat-percent font-bold text-success"><%= number_to_percentage @products_percentage[:hiden], precision: 0 %> <i class="fa fa-bolt"></i></div>
+          <div class="stat-percent font-bold text-success">
+            <%= number_to_percentage @products_percentage[:hiden], precision: 0 %>
+            <i class="fa fa-bolt"></i>
+          </div>
           <small>Hiden</small>
         </div>
+
         <div class="ibox-content">
           <h1 class="no-margins"><%= @products_count[:total]%></h1>
           <!-- <div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div> -->
@@ -45,9 +55,7 @@
             <small><%= key.capitalize %></small>
           </div>
         <% end  %>
-
       </div>
     </div>
-
   </div>
 </div>

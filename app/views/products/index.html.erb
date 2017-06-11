@@ -7,8 +7,7 @@
     <h2>  Products </h2>
   <% end %>
   <span><%= "(#{pluralize @products.total_count, 'item'})" %></span>
-<div>
-
+</div>
 <div class="products">
   <% @products.each do |product| %>
     <%= render partial: "product", locals: { product: product } %>
