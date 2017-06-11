@@ -8,7 +8,16 @@
 
 Manager.create email: "manager@snowdrop.com", password: "qweqweqwe"
 
-description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+Dir.glob("public/images/categories/*").each do |category|
+  current_category = category.split("/").last
+  Category.create(
+    title: "#{current_category.capitalize}",
+    image: Rails.root.join("public/images/categories/#{current_category}/#{current_category}.jpg").open,
+    visible: [true, false].sample,
+    archive: [true, false].sample
+  )
+end
+
 100.times do
   products_list = []
   Dir.glob("public/images/products/*").each do |product|
@@ -16,14 +25,15 @@ description = "Lorem Ipsum is simply dummy text of the printing and typesetting 
     current_product = product.split("/").last
     product = Product.create(
       title: "#{current_product.gsub('_',' ').capitalize}",
-      description: description,
+      description: IO.read( "public/sample_description.txt" ),
       price: rand(1000),
       visible: [true, false].sample,
       sizes: [rand(1..2), rand(3..4)],
-      category: rand(1..Product.categories.size)
+      category_id: Category.ids.sample,
+      archive: [true, false].sample
     )
     Dir.glob("public/images/products/#{current_product}/*.jpg").each{|image| images_paths.push Pathname.new(image).open }
     product.images = images_paths
     product.save
   end
-end  
+end

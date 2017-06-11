@@ -4,7 +4,7 @@ class Manager::DashboardController < ApplicationController
 
   def index
     @products_count = {
-      total: Product.count,
+      total: Product.relevant.count,
       visible: Product.visible.count,
       hiden: Product.hiden.count
     }
@@ -15,8 +15,8 @@ class Manager::DashboardController < ApplicationController
     }
 
     @products_by_categories_count = {}
-    Product.categories.each do |key, value|
-      @products_by_categories_count[key] = Product.public_send(key).count
+    Category.all.each do |category|
+      @products_by_categories_count[category.title.downcase] = Product.public_send( "category", category.id ).count
     end
   end
 end

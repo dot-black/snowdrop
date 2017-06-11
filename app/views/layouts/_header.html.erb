@@ -11,9 +11,9 @@
   </div>
 
   <div class="items-toolbar">
-    <% Product.categories.each do |key, value| %>
+    <% @categories.each do |category| %>
       <div class="toolbar-item">
-        <%= link_to key.pluralize(2).capitalize , products_path(category: key), class: "btn btn-default" %>
+        <%= link_to category.title , products_path(category: category.id ), class: "btn btn-default" %>
       </div>
     <% end  %>
   </div>

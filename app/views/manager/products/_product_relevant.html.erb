@@ -3,7 +3,7 @@
     <div class="ibox">
       <div class="ibox-content product-box">
         <div class="product-imitation" style="padding: 15px 0px">
-          <%= image_tag product.images.first, class: "img-lg" %>
+          <%= image_tag first_image(product), class: "img-lg" %>
         </div>
         <div class="product-desc">
 
@@ -11,7 +11,7 @@
             <%= product.price %>
           </span>
 
-          <small class="text-muted">Category: <%= product.category.capitalize %></small>
+          <small class="text-muted">Category: <%= product.category.title %></small>
           |
           <small class="text-muted">Priority: <%= product.priority.upcase %></small>
 

@@ -79,7 +79,7 @@ class Manager::ProductsController < ApplicationController
     end
 
     def permitted_product_params
-      params.require(:product).permit(:title, :description, :price, :priority, :index, :category, {images: []}, sizes: [])
+      params.require(:product).permit(:title, :description, :price, :priority, :index, :category_id, {images: []}, sizes: [])
     end
 
     def filtering_params(params)

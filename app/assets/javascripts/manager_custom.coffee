@@ -1,3 +1,3 @@
-$(window).load ->
-  $('.product-images').slick dots: true
-  return
+# $(window).load ->
+#   $('.product-images').slick dots: true
+#   return

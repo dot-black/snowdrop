@@ -10,7 +10,7 @@
                 <% product.images.each do |image| %>
                   <div>
                     <div class="image-imitation">
-                      <%= image_tag image, size: 400 %>
+                      <%= image_tag image %>
                     </div>
                   </div>
                 <% end %>
@@ -38,7 +38,7 @@
               <dl class="small m-t-md">
                 <dt>Category</dt>
                 <dd>
-                  <%= product.category.capitalize %>
+                  <%= product.category.title %>
                 </dd>
                 <dt>Avalible sizes</dt>
                 <dd>

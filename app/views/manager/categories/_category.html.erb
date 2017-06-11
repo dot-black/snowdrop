@@ -1,0 +1,29 @@
+<%= link_to edit_manager_category_path(category) do %>
+  <div class="col-md-3">
+    <div class="ibox">
+      <div class="ibox-content category-box">
+        <div class="category-imitation" style="padding: 15px 0px">
+          <%= image_tag category.image, class: "img-lg" %>
+        </div>
+        <div class="category-desc">
+
+          <span class="category-name">
+            <%= category.title %>
+          </span>
+
+          <div class="m-t text-righ">
+            <%= link_to manager_category_path(category), class: "btn btn-xs btn-outline btn-danger", method: :delete do %>
+              <i class="fa fa-minus-square-o"></i> Delete
+            <% end %>
+
+            <% if category.visible %>
+              <%= link_to "Hide", change_appearance_manager_category_path(category), class: "btn btn-xs btn-outline btn-warning pull-right" %>
+            <% else %>
+              <%= link_to "Release", change_appearance_manager_category_path(category), class: "btn btn-xs btn-outline btn-primary pull-right" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end  %>

@@ -17,7 +17,14 @@ Rails.application.routes.draw do
         get :archival
       end
     end
+
     resources :orders
+
+    resources :categories do
+      member do
+        get 'change_appearance'
+      end
+    end
   end
 
   devise_for :users

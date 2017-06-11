@@ -1,7 +1,7 @@
 <%= link_to product_path(product) do %>
   <div class="product-basic">
     <div class="product-image">
-      <%= image_tag product.images.first%>
+      <%= image_tag first_image(product) %>
     </div>
 
     <div class="product-basic-title">
