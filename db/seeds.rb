@@ -7,8 +7,7 @@ Dir.glob("public/images/categories/*").each do |category|
   Category.create(
     title: "#{current_category.capitalize}",
     image: Rails.root.join("public/images/categories/#{current_category}/#{current_category}.jpg").open,
-    visible: [true, false].sample,
-    archive: [true, false].sample
+    visible: [true, false].sample
   )
 end
 
