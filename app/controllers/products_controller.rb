@@ -1,47 +1,39 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: :show
-  before_action :set_categories, only: [:index, :show]
-  before_action :enusre_product_visible!, only: :show
+  before_action :_set_product, only: :show
+  before_action :_set_categories, only: [:index, :show]
+  before_action :_enusre_product_visible!, only: :show
 
 
   def index
+    @current_category = _current_category
     @products = Product.shown.page params[:page]
-    filtering_params(params).each do |key, value|
-      @products = ( @products.public_send(key, value).page params[:page] )if permitted_value?(value)
-    end
-    @current_category = current_category
+    @products = ( @products.category(params[:category]).page params[:page] )if _category_available?
   end
 
   def show
   end
 
+
   private
 
-    def set_categories
-      @categories = Category.visible
-    end
+  def _set_categories
+    @categories = Category.visible
+  end
 
-    def set_product
-      @product = Product.find(params[:id])
-    end
+  def _set_product
+    @product = Product.find params[:id]
+  end
 
-    def enusre_product_visible!
-      redirect_to products_path unless @product.visible
-    end
+  def _enusre_product_visible!
+    redirect_to products_path unless @product.visible
+  end
 
-    # def permitted_product_params
-    #   params.require(:product).permit(:title, :description, :image, :price)
-    # end
+  def _category_available?
+    Category.exists?(params[:category]) and Category.find(params[:category]).visible
+  end
 
-    def filtering_params(params)
-      params.slice :category
-    end
+  def _current_category
+    ( params[:category].present? and _category_available? ) ?  Category.find(params[:category]) : nil
+  end
 
-    def permitted_value?(id)
-      Category.exists?(id) and Category.find(id).visible
-    end
-
-    def current_category
-      ( params[:category].present? and permitted_value? params[:category] ) ?  Category.find(params[:category]) : nil
-    end
 end
