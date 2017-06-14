@@ -1,68 +1,38 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: :show
-  before_action :enusre_product_visible!, only: :show
+  before_action :_set_product, only: :show
+  before_action :_set_categories, only: [:index, :show]
+  before_action :_enusre_product_visible!, only: :show
+
 
   def index
-    @products = Product.visible
+    @current_category = _current_category
+    @products = Product.shown.category(params[:category]).page params[:page] if _category_available?
   end
 
   def show
-
   end
 
-  # def new
-  #   @product = Product.new
-  # end
-  #
-  # def edit
-  # end
-  #
-  # def create
-  #   @product = Product.new(permitted_product_params)
-  #
-  #   respond_to do |format|
-  #     if @product.save
-  #       format.html { redirect_to @product, notice: 'Product was successfully created.' }
-  #       format.json { render :show, status: :created, location: @product }
-  #     else
-  #       format.html { render :new }
-  #       format.json { render json: @product.errors, status: :unprocessable_entity }
-  #     end
-  #   end
-  # end
-  #
-  #
-  # def update
-  #   respond_to do |format|
-  #     if @product.update(permitted_product_params)
-  #       format.html { redirect_to @product, notice: 'Product was successfully updated.' }
-  #       format.json { render :show, status: :ok, location: @product }
-  #     else
-  #       format.html { render :edit }
-  #       format.json { render json: @product.errors, status: :unprocessable_entity }
-  #     end
-  #   end
-  # end
-  #
-  # def destroy
-  #   @product.destroy
-  #   respond_to do |format|
-  #     format.html { redirect_to products_url, notice: 'Product was successfully destroyed.' }
-  #     format.json { head :no_content }
-  #   end
-  # end
 
   private
 
-    def set_product
-      @product = Product.find(params[:id])
-    end
+  def _set_categories
+    @categories = Category.visible
+  end
 
-    def enusre_product_visible!
-      redirect_to products_path unless @product.visible
-    end
+  def _set_product
+    @product = Product.find params[:id]
+  end
 
-    # def permitted_product_params
-    #   params.require(:product).permit(:title, :description, :image, :price)
-    # end
+  def _enusre_product_visible!
+    redirect_to products_path unless @product.visible
+  end
+
+  def _category_available?
+    Category.exists?(params[:category]) and Category.find(params[:category]).visible
+  end
+
+  def _current_category
+    ( params[:category].present? and _category_available? ) ?  Category.find(params[:category]) : nil
+  end
+
 end

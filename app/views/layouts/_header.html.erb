@@ -11,9 +11,10 @@
   </div>
 
   <div class="items-toolbar">
-    <div class="toolbar-item"><%= link_to "Men's Outerwear", products_path, class: "btn btn-default" %></div>
-    <div class="toolbar-item"><%= link_to "Ladies Outerwear", products_path, class: "btn btn-default" %></div>
-    <div class="toolbar-item"><%= link_to "Men's T-Shirts", products_path, class: "btn btn-default" %></div>
-    <div class="toolbar-item"><%= link_to "Ladies T-Shirts", products_path, class: "btn btn-default" %></div>
+    <% @categories.each do |category| %>
+      <div class="toolbar-item">
+        <%= link_to category.title.pluralize(2) , products_path(category: category.id ), class: "btn btn-default" %>
+      </div>
+    <% end  %>
   </div>
 </header>

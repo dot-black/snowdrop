@@ -1,15 +1,11 @@
-<div class="category-item">
-  <%= image_tag "categories/mens_outerwear.jpg", class: "category-image" %>
-    <h2> Men's Outerwear </h2>
-  <div class="category-button">
-    <%= link_to "Shop now", products_path, class:"material-button" %>
-  </div>
-</div>
+<% @categories.each do |category|  %>
+  <div class="category-item">
+    <%= image_tag category.image, class: "category-image" %>
 
-<div class="category-item">
-  <%= image_tag "categories/ladies_outerwear.jpg", class: "category-image" %>
-    <h2> Ladie's Outerwear </h2>
-  <div class="category-button">
-    <%= link_to "Shop now", products_path, class:"material-button" %>
+    <h2><%= category.title %></h2>
+
+    <div class="category-button">
+      <%= link_to "Shop now", products_path(category: category.id), class: "material-button" %>
+    </div>
   </div>
-</div>
+<% end %>

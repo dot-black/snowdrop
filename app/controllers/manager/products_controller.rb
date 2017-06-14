@@ -4,15 +4,15 @@ class Manager::ProductsController < ApplicationController
   layout 'managers/dashboard'
 
   def index
-    @products = Product.relevant
+    @products = Product.relevant.page params[:page]
     filtering_params(params).each do |key, value|
-      @products = @products.public_send(key) if key.present?
+      @products = (@products.public_send(key).page params[:page] ) if key.present?
     end
 
   end
 
   def archival
-    @products = Product.archival
+    @products = Product.archival.page params[:page]
   end
 
   def show
@@ -79,7 +79,7 @@ class Manager::ProductsController < ApplicationController
     end
 
     def permitted_product_params
-      params.require(:product).permit(:title, :description, :price, :priority, :index, {images: []}, sizes: [])
+      params.require(:product).permit(:title, :description, :price, :priority, :index, :category_id, {images: []}, sizes: [])
     end
 
     def filtering_params(params)

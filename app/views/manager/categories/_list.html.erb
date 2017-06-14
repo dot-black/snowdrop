@@ -1,0 +1,7 @@
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="row">
+    <% @categories.each do |category| %>
+      <%= render partial: "category", locals: { category: category } %>
+    <% end %>
+  </div>
+</div>

@@ -1,10 +1,24 @@
 <div class=category-item>
-  <%= image_tag "categories/mens_outerwear.jpg", class: "category-image" %>
-    <h2> Men's Outerwear </h2>
-    <span><%= "(#{pluralize @products.count, 'item'})" %></span>
-<div>
-<div class="products">
-  <% @products.each do |product| %>
-    <%= render partial: "product", locals: { product: product } %>
+  <% if @current_category %>
+    <%= image_tag @current_category.image, class: "category-image" %>
+    <h2> <%= @current_category.title.pluralize(2).capitalize %> </h2>
+  <% else  %>
+    <%= image_tag "categories/default.jpg", class: "category-image" %>
+    <h2>Products</h2>
   <% end %>
+  <span><%= "(#{pluralize @products.total_count, 'item'})" %></span>
+</div>
+
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
+    <div class="products">
+      <% @products.each do |product| %>
+        <%= render partial: "product", locals: { product: product } %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="text-center">
+  <%= paginate @products %>
 </div>

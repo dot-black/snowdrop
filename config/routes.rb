@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   devise_for :managers, path: 'manager', controllers: { sessions: 'managers/sessions' },
       path_names: { sign_in: 'login', sign_out: 'logout' }
 
@@ -17,10 +18,15 @@ Rails.application.routes.draw do
         get :archival
       end
     end
-    resources :orders
-  end
 
-  devise_for :users
+    resources :orders
+
+    resources :categories do
+      member do
+        get 'change_appearance'
+      end
+    end
+  end
 
   resources :line_items
   resources :carts
