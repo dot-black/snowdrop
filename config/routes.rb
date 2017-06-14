@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   devise_for :managers, path: 'manager', controllers: { sessions: 'managers/sessions' },
       path_names: { sign_in: 'login', sign_out: 'logout' }
 
@@ -26,8 +27,6 @@ Rails.application.routes.draw do
       end
     end
   end
-
-  devise_for :users
 
   resources :line_items
   resources :carts

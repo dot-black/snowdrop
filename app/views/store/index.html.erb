@@ -1,10 +1,11 @@
 <% @categories.each do |category|  %>
-
   <div class="category-item">
     <%= image_tag category.image, class: "category-image" %>
-      <h2> <%= category.title %> </h2>
+
+    <h2><%= category.title %></h2>
+
     <div class="category-button">
-      <%= link_to "Shop now", products_path(category: category.id), class:"material-button" %>
+      <%= link_to "Shop now", products_path(category: category.id), class: "material-button" %>
     </div>
   </div>
 <% end %>

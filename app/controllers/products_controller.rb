@@ -6,8 +6,7 @@ class ProductsController < ApplicationController
 
   def index
     @current_category = _current_category
-    @products = Product.shown.page params[:page]
-    @products = ( @products.category(params[:category]).page params[:page] )if _category_available?
+    @products = Product.shown.category(params[:category]).page params[:page] if _category_available?
   end
 
   def show
