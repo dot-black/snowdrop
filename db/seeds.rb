@@ -14,6 +14,11 @@ end
 #Products
 require 'csv'
 CSV.foreach("public/example-names.csv") do |row|
+  images = []
+  ["main", "add"].each do |item|
+    image = Pathname.new("public/images/products/example-pictures/#{item}-#{$.}.jpg")
+    images << image.open if image.exist?
+  end
   product = Product.create(
     title: row.first,
     description: IO.read( "public/sample_description.txt" ),
@@ -22,9 +27,6 @@ CSV.foreach("public/example-names.csv") do |row|
     sizes: [rand(1..2), rand(3..4)],
     category_id: Category.ids.sample,
     archive: [true, false].sample,
-    images: [
-      Pathname.new("public/images/products/example-pictures/main-#{$.}.jpg").open,
-      Pathname.new("public/images/products/example-pictures/add-#{$.}.jpg").open
-    ]
+    images: images
   )
 end
