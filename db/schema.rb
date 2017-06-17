@@ -24,7 +24,6 @@ ActiveRecord::Schema.define(version: 20170610213732) do
     t.string "title"
     t.string "image"
     t.boolean "visible", default: false
-    t.boolean "archive", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
