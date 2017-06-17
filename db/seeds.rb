@@ -12,22 +12,19 @@ Dir.glob("public/images/categories/*").each do |category|
 end
 
 #Products
-100.times do
-  products_list = []
-  Dir.glob("public/images/products/*").each do |product|
-    images_paths = []
-    current_product = product.split("/").last
-    product = Product.create(
-      title: "#{current_product.gsub('_',' ').capitalize}",
-      description: IO.read( "public/sample_description.txt" ),
-      price: rand(1000),
-      visible: [true, false].sample,
-      sizes: [rand(1..2), rand(3..4)],
-      category_id: Category.ids.sample,
-      archive: [true, false].sample
-    )
-    Dir.glob("public/images/products/#{current_product}/*.jpg").each{|image| images_paths.push Pathname.new(image).open }
-    product.images = images_paths
-    product.save
-  end
+require 'csv'
+CSV.foreach("public/example-names.csv") do |row|
+  product = Product.create(
+    title: row.first,
+    description: IO.read( "public/sample_description.txt" ),
+    price: rand(1000),
+    visible: [true, false].sample,
+    sizes: [rand(1..2), rand(3..4)],
+    category_id: Category.ids.sample,
+    archive: [true, false].sample,
+    images: [
+      Pathname.new("public/images/products/example-pictures/main-#{$.}.jpg").open,
+      Pathname.new("public/images/products/example-pictures/add-#{$.}.jpg").open
+    ]
+  )
 end

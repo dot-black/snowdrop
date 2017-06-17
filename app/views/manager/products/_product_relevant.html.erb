@@ -3,7 +3,7 @@
     <div class="ibox">
       <div class="ibox-content product-box">
         <div class="product-imitation" style="padding: 15px 0px">
-          <%= image_tag first_image(product), class: "img-lg" %>
+          <%= image_tag first_image(product), size: 200 %>
         </div>
         <div class="product-desc">
 
@@ -20,7 +20,7 @@
           </span>
 
           <div class="small m-t-xs">
-            <%= product.description %>
+            <%= product.description.truncate(100) %>
           </div>
 
           <div class="m-t text-righ">
