@@ -73,8 +73,10 @@
   border: none;
 }
 .category-item {
-  height: 450px;
+  height: 490px;
+  width: 100%;
   text-align: center;
+  overflow: hidden;
 }
 .category-item h2 {
   height: 25px;
