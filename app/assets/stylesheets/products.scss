@@ -3,7 +3,21 @@
         @content;
     }
 }
-.category-item span{
+
+.category-headline {
+  height: auto;
+  text-align: center;
+}
+
+.category-headline  h2 {
+  height: 25px;
+  margin-top: 32px;
+  font-size: 1.2em;
+  font-weight: 500;
+  font-family: 'Roboto', 'Noto', sans-serif;
+}
+
+.category-headline span{
   color: #757575;
   font-size: 12px;
   font-family: 'Roboto', 'Noto', sans-serif;
@@ -57,7 +71,7 @@
   flex: 1;
 }
 .product-detailed-image img{
-
+    margin-top: 64px;
 }
 .product-detailed-details{
   display: flex;

@@ -1,6 +1,7 @@
 class ProductsController < ApplicationController
   before_action :_set_product, only: :show
   before_action :_set_categories, only: [:index, :show]
+  include Categories
 
 
   def index
@@ -18,9 +19,7 @@ class ProductsController < ApplicationController
 
   private
 
-  def _set_categories
-    @categories = manager_signed_in? ? Category.all : Category.visible
-  end
+
 
   def _set_product
     @product = Product.find params[:id]

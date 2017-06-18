@@ -1,4 +1,29 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
 
-<%= link_to 'Edit', edit_cart_path(@cart) %> |
-<%= link_to 'Back', carts_path %>
+  <div class="cart-headline">
+    <h2>Your Cart</h2>
+    <span><%= "(#{pluralize @line_items.count, 'item'})" %></span>
+  </div>
+
+
+  <%= form_tag orders_path, method: "post" do %>
+    <table class="table ">
+      <tbody>
+        <% @line_items.each do |line_item| %>
+          <tr>
+            <td><%= image_tag line_item.product.images.first, size:64 %></td>
+            <td><%= line_item.product.title %></td>
+            <td>Qty:<%=line_item.quantity%></td>
+            <!-- <td>Size:<%= line_item.product.sizes %></td> -->
+            <td>$:<%= line_item.product.price %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <div class="checkout-box">
+      <span> <strong>Total: <%= @total  %> <strong></span>
+      <%= submit_tag "Checkout", class:"material-button" %>
+    </div>
+  <% end  %>
+
+</div>

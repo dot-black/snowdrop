@@ -4,17 +4,9 @@
       <%= link_to t("application_name"), store_path %>
     </div>
     <div class="cart-logo">
-      <%= link_to store_path, class:"btn btn-default" do %>
+      <%= link_to cart_path, class:"btn btn-default" do %>
         <i class="glyphicon glyphicon-shopping-cart"></i>
       <% end  %>
     </div>
-  </div>
-
-  <div class="items-toolbar">
-    <% @categories.each do |category| %>
-      <div class="toolbar-item">
-        <%= link_to category.title.pluralize(2) , products_path(category: category.id ), class: "btn btn-default" %>
-      </div>
-    <% end  %>
   </div>
 </header>

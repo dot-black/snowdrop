@@ -1,4 +1,6 @@
-<div class=category-item>
+<%= render partial: "categories" %>
+
+<div class=category-headline>
   <%= image_tag @current_category.image, class: "category-image" %>
   <h2> <%= @current_category.title.pluralize(2).capitalize %> </h2>
   <span><%= "(#{pluralize @products.total_count, 'item'})" %></span>

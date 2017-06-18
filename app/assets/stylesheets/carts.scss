@@ -1,3 +1,40 @@
 // Place all the styles related to the carts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.cart-headline{
+  margin-top: 64px;
+  height: 64px;
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.cart-headline h2 {
+  margin: 0 0 4px 0;
+  font-size: 1.3em;
+  font-weight: 500;
+  font-family: 'Roboto', 'Noto', sans-serif;
+}
+
+.cart-headline span{
+  color: #757575;
+  font-size: 12px;
+  font-family: 'Roboto', 'Noto', sans-serif;
+}
+
+
+.table > tbody > tr > td {
+     vertical-align: middle;
+}
+
+.checkout-box {
+  display: inline-flex;
+  width: 100%;
+  align-items: center;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+.checkout-box span {
+    margin: 0 64px 0 24px;
+}

@@ -29,7 +29,7 @@ Rails.application.routes.draw do
   end
 
   resources :line_items
-  resources :carts
+  get :cart, to: 'carts#show'
   resources :orders
   resources :products, only: [:index, :show]
 

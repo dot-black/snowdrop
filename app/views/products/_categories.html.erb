@@ -1,0 +1,9 @@
+<div class="navbar">
+  <div class="items-toolbar">
+    <% @categories.each do |category| %>
+      <div class="toolbar-item">
+        <%= link_to category.title.pluralize(2) , products_path(category: category.id ), class: "btn btn-default" %>
+      </div>
+    <% end  %>
+  </div>
+</div>  

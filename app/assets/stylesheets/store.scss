@@ -3,7 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .navbar {
-  height: 130px;
+  height: 64px;
   padding: 0 16px;
   background-color: #FFFFFF;
   display: flex;
@@ -33,7 +33,7 @@
 .store-logo{
   text-transform: uppercase;
   text-align: center;
-  padding-left: 40px;
+  padding-left: 52px;
   flex: 1;
 }
 
@@ -81,13 +81,12 @@
 .category-item h2 {
   height: 25px;
   margin-top: 32px;
-  margin-bottom: 0px;
+  margin-bottom: 32px;
   font-size: 1.2em;
   font-weight: 500;
   font-family: 'Roboto', 'Noto', sans-serif;
 }
 .category-button {
-  padding-top: 32px;
 }
 .material-button {
   position: relative;
