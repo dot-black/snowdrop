@@ -73,16 +73,8 @@
   border: none;
 }
 .category-item {
-  @media (max-width: 1780px) {
-    height: 510px;
-  }
-  @media (max-width: 1000px) {
-    height: 430px;
-  }
-  @media (max-width: 700px) {
-    height: 360px;
-  }
-  height: 490px;
+  height: auto;
+  padding-bottom: 23px;
   width: 100%;
   text-align: center;
   overflow: hidden;
