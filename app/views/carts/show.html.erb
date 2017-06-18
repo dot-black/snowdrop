@@ -6,14 +6,15 @@
   </div>
 
 
-  <%= form_tag orders_path, method: "post" do %>
-    <table class="table ">
+  <%= form_tag update_multiple_line_items_path, method: "put" do %>
+
+    <table class="table">
       <tbody>
         <% @line_items.each do |line_item| %>
           <tr>
-            <td><%= image_tag line_item.product.images.first, size:64 %></td>
+            <td><%= image_tag first_image(line_item.product), size:64 %></td>
             <td><%= line_item.product.title %></td>
-            <td>Qty: <%=line_item.quantity%></td>
+            <td>Qty: <%= select_tag("line_items_quantities[]", options_for_select((1..10).to_a, line_item.quantity)) %></td>
             <td>Size: <%= line_item.size.upcase %></td>
             <td> <%= number_to_currency line_item.product.price %></td>
             <td>
@@ -22,6 +23,7 @@
               <% end  %>
             </td>
           </tr>
+          <%= hidden_field_tag "line_items_ids[]", line_item.id %>
         <% end %>
       </tbody>
     </table>
@@ -29,6 +31,5 @@
       <span> <strong>Total: <%= number_to_currency @total  %> <strong></span>
       <%= submit_tag "Checkout", class:"material-button" %>
     </div>
-  <% end  %>
-
+  <% end %>
 </div>

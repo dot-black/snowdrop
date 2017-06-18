@@ -1,32 +1,30 @@
-<%= form_with(model: order, local: true) do |form| %>
-  <% if order.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(order.errors.count, "error") %> prohibited this order from being saved:</h2>
+<div class="order-checkout">
+  <%= form_for @order do |form| %>
+    <% if order.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(order.errors.count, "error") %> prohibited this order from being saved:</h2>
 
-      <ul>
-      <% order.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+        <ul>
+        <% order.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name, id: :order_name %>
-  </div>
+      <%= form.label :name %>
+      <%= form.text_field :name, id: :order_name %>
 
-  <div class="field">
-    <%= form.label :payment_method %>
-    <%= form.select :payment_method, Order.payment_methods.keys %>
-  </div>
 
-  <div class="field">
-    <%= form.label :comment %>
-    <%= form.text_area :comment, id: :order_comment %>
-  </div>
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+      <%= form.label :payment_method %>
+      <%= form.select :payment_method, payment_methods %>
+
+
+      <%= form.label :comment %>
+      <%= form.text_area :comment, id: :order_comment %>
+
+      <%= form.submit "place order", class: "material-button" %>
+</div>
+
 <% end %>

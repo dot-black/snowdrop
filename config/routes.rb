@@ -28,7 +28,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :line_items
+  resources :line_items, only:[:create, :destroy] do
+    collection do
+      put 'update_multiple'
+    end
+  end
   get :cart, to: 'carts#show'
   resources :orders
   resources :products, only: [:index, :show]

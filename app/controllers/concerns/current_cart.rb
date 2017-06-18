@@ -7,4 +7,8 @@ module CurrentCart
       @cart = Cart.create
       session[:cart_id] = @cart.id
     end
+
+    def _ensure_cart_isnt_empty
+       redirect_to store_path if @cart.line_items.empty?
+    end
 end
