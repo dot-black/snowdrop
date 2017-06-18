@@ -13,15 +13,15 @@
           <tr>
             <td><%= image_tag line_item.product.images.first, size:64 %></td>
             <td><%= line_item.product.title %></td>
-            <td>Qty:<%=line_item.quantity%></td>
-            <!-- <td>Size:<%= line_item.product.sizes %></td> -->
-            <td>$:<%= line_item.product.price %></td>
+            <td>Qty: <%=line_item.quantity%></td>
+            <td>Size: <%= line_item.size.upcase %></td>
+            <td> <%= number_to_currency line_item.product.price %></td>
           </tr>
         <% end %>
       </tbody>
     </table>
     <div class="checkout-box">
-      <span> <strong>Total: <%= @total  %> <strong></span>
+      <span> <strong>Total: <%= number_to_currency @total  %> <strong></span>
       <%= submit_tag "Checkout", class:"material-button" %>
     </div>
   <% end  %>

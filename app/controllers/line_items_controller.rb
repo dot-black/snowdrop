@@ -5,8 +5,10 @@ class LineItemsController < ApplicationController
 
 
   def create
-    product = Product.find(params[:product_id])
-    @line_item = @cart.add_product(product, params[:quantity].to_i)
+    p "**********"
+    p params
+    product = Product.find(params[:line_item][:product_id])
+    @line_item = @cart.add_product(permitted_line_item_params)
     respond_to do |format|
       if @line_item.save
         format.html { redirect_to product_path(product) }
@@ -45,7 +47,7 @@ class LineItemsController < ApplicationController
     end
 
     def permitted_line_item_params
-      params.require(:line_item).permit(:product_id, :quantity)
+      params.require(:line_item).permit(:product_id, :quantity, :size)
     end
 
 end
