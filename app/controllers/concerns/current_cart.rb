@@ -11,4 +11,9 @@ module CurrentCart
     def _ensure_cart_isnt_empty
        redirect_to store_path if @cart.line_items.empty?
     end
+
+    def _destroy_cart
+      Cart.destroy(session[:cart_id])
+      session[:cart_id] = nil
+    end
 end

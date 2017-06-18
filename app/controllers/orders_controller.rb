@@ -5,7 +5,6 @@ class OrdersController < ApplicationController
 
   def new
     @order = Order.new
-    @payment_methods = Order.payment_methods.keys
   end
 
 
@@ -14,8 +13,7 @@ class OrdersController < ApplicationController
 
     respond_to do |format|
       if @order.save
-        Cart.destroy(session[:cart_id])
-        session[:cart_id] = nil
+        _destroy_cart
         format.html { redirect_to store_path}
         format.json { render :show, status: :created, location: @order }
       else
@@ -25,10 +23,9 @@ class OrdersController < ApplicationController
     end
   end
 
-
   private
-  def _permitted_order_params
-    params.require(:order).permit(:name, :payment_method, :comment )
-  end
 
+    def _permitted_order_params
+      params.require(:order).permit(:name, :payment_method, :comment )
+    end
 end
