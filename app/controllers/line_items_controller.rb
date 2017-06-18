@@ -5,8 +5,6 @@ class LineItemsController < ApplicationController
 
 
   def create
-    p "**********"
-    p params
     product = Product.find(params[:line_item][:product_id])
     @line_item = @cart.add_product(permitted_line_item_params)
     respond_to do |format|
@@ -35,7 +33,7 @@ class LineItemsController < ApplicationController
   def destroy
     @line_item.destroy
     respond_to do |format|
-      format.html { redirect_to line_items_url, notice: 'Line item was successfully destroyed.' }
+      format.html { redirect_to cart_path }
       format.json { head :no_content }
     end
   end

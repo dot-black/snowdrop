@@ -1,8 +1,7 @@
 class CartsController < ApplicationController
-  include Categories
   include CurrentCart
   before_action :_set_cart, only: [:show, :destroy]
-  before_action :_set_categories, only: :show
+
   # rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
 
   def show

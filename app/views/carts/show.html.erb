@@ -16,6 +16,11 @@
             <td>Qty: <%=line_item.quantity%></td>
             <td>Size: <%= line_item.size.upcase %></td>
             <td> <%= number_to_currency line_item.product.price %></td>
+            <td>
+              <%= link_to line_item_path(line_item), method: "delete" do  %>
+                <i class="glyphicon glyphicon-trash"></i>
+              <% end  %>
+            </td>
           </tr>
         <% end %>
       </tbody>
