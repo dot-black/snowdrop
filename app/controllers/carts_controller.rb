@@ -1,12 +1,13 @@
 class CartsController < ApplicationController
   include CurrentCart
+  include LineItemsAmount
   before_action :_set_cart, only: [:show, :destroy]
 
   # rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
 
   def show
     @line_items = @cart.line_items
-    @total = @line_items.map(&:product).map(&:price).zip(@line_items.map(&:quantity)).map{|x, y| x * y }.inject(0, &:+)
+    @total = _get_amount @line_items 
   end
 
   def destroy

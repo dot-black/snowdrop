@@ -42,6 +42,15 @@
           <%= nav_link "Archival", archival_manager_products_path, "fa fa-minus-square-o" %>
         </li>
 
+        <li>
+          <%= group_link "Orders", '/manager/orders', 'fa fa-tasks' do %>
+            <ul class="nav nav-second-level collapse">
+              <%= nav_link "All", manager_orders_path, nil %>
+              <%= orders_status_links %>
+            </ul>
+          <% end %>
+        </li>
+
 
       </ul>
     </div>

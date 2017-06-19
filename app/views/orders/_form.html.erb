@@ -13,8 +13,8 @@
     <%= form_for @order do |form| %>
       <%= form.label :name %>
       <%= form.text_field :name, id: :order_name, required: true %>
-      <%= form.label :payment_method %>
-      <%= form.select :payment_method, Order.payment_methods.keys %>
+      <%= form.label :email %>
+      <%= form.email_field :email, id: :order_email, required: true %>
       <%= form.label :comment %>
       <%= form.text_area :comment, id: :order_comment %>
       <%= form.submit "place order", class: "material-button" %>

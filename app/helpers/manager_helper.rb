@@ -31,18 +31,11 @@ module ManagerHelper
     end
   end
 
-  def income_stats today_sales_statistic
-    unless today_sales_statistic.infinite? || today_sales_statistic.nan?
-      if today_sales_statistic > 0
-        content_tag(:span, "(") +
-        content_tag(:span, "+#{today_sales_statistic.to_i}%", class: "text-navy") +
-        content_tag(:span, ")")
-      else
-        content_tag(:span, "(") +
-        content_tag(:span, "#{today_sales_statistic.to_i}%", class: "text-danger") +
-        content_tag(:span, ")")
-      end
+  def orders_status_links
+    Order.statuses.keys.each do |status|
+      concat nav_link status.capitalize, manager_orders_path(status: status), nil
     end
+    nil
   end
 
 end

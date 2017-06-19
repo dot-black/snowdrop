@@ -30,3 +30,8 @@ CSV.foreach("public/example-names.csv") do |row|
     images: images
   )
 end
+
+#Orders
+100.times do |count|
+  Order.create name:"User-#{count}", email:"user-#{count}@mail.com"
+end

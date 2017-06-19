@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
   include CurrentCart
+  include LineItemsAmount
   before_action :_set_cart, only: [:new, :create ]
   before_action :_ensure_cart_isnt_empty, only: :new
 
@@ -9,7 +10,9 @@ class OrdersController < ApplicationController
 
 
   def create
-    @order = Order.new(_permitted_order_params)
+    @order = Order.new _permitted_order_params 
+    @order.add_line_items_from_cart @cart
+    @order.amount = _get_amount @order.line_items
 
     respond_to do |format|
       if @order.save
@@ -26,6 +29,6 @@ class OrdersController < ApplicationController
   private
 
     def _permitted_order_params
-      params.require(:order).permit(:name, :payment_method, :comment )
+      params.require(:order).permit(:name, :email, :comment )
     end
 end
