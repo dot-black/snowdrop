@@ -7,7 +7,7 @@ class CartsController < ApplicationController
 
   def show
     @line_items = @cart.line_items
-    @total = _get_amount @line_items 
+    @total = _get_line_items_amount @line_items 
   end
 
   def destroy

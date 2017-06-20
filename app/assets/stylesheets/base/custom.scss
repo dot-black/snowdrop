@@ -77,3 +77,11 @@ table {
     margin-bottom: 25px;
     width: 300px;
 }
+
+.backgroundless{
+  background-color: transparent;
+}
+.aligned > tbody > tr > td {
+  border: none;
+  vertical-align: middle;
+}

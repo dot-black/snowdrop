@@ -10,9 +10,9 @@ class OrdersController < ApplicationController
 
 
   def create
-    @order = Order.new _permitted_order_params 
+    @order = Order.new _permitted_order_params
     @order.add_line_items_from_cart @cart
-    @order.amount = _get_amount @order.line_items
+    @order.amount = _get_line_items_amount @order.line_items
 
     respond_to do |format|
       if @order.save

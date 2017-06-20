@@ -9,6 +9,7 @@ class Manager::OrdersController < ApplicationController
     else
       @orders = Order.all.page params[:page]
     end
+
   end
 
   def show
