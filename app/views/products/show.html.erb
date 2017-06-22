@@ -10,7 +10,7 @@
     <div class="product-detailed-details">
       <h1><%= @product.title %></h1>
       <span><%= number_to_currency @product.price %></span>
-      <%= form_for :line_item, url: line_items_path do |f| %>
+      <%= form_for :line_item, url: line_items_path, remote: true  do |f| %>
         <%= f.label :size %>
         <%= f.select :size, options_for_select(@product.sizes_collection) %>
 
@@ -24,7 +24,7 @@
           <p><%= @product.description %></p>
         </div>
 
-        <%= f.submit "Add to cart", class: "material-button" %>
+        <%= f.submit "Add to cart", class: "material-button"%>
       <% end  %>
     </div>
   </div>

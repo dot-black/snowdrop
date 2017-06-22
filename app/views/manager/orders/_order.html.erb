@@ -1,17 +1,16 @@
 <div class="row">
   <div class="col-lg-12">
-    <div class="ibox chat-view">
-
+    <%= form_for [:manager, @order], method: "put" do |f| %>
       <div class="ibox-title">
-        <small class="pull-right text-muted">Created: <%= @order.created_at.strftime("%a %b %d %Y - %H:%M:%S") %></small>
-        Order #<%= @order.id  %>
+        <%= select_tag "order[status]", options_for_select(Order.statuses.keys, @order.status), class:"selectpicker" %>
+        <small class="pull-right text-muted">Order #<%= @order.id  %> Created: <%= @order.created_at.strftime("%a %b %d %Y - %H:%M:%S") %></small>
       </div>
+
 
       <div class="ibox-content">
         <div class="row">
 
           <div class="col-md-8">
-            <div class="chat-discussion backgroundless">
               <table class="table table-hover aligned">
                 <tbody>
                 <% @order.line_items.each do |line_item| %>
@@ -25,44 +24,36 @@
                 <% end  %>
                 </tbody>
               </table>
-            </div>
           </div>
 
           <div class="col-md-4">
-            <div class="chat-users">
-              <div class="users-list">
+            <div class="chat-user">
+              <div class="chat-user-name">
+                <strong>Name: </strong><%=@order.name%>
+              </div>
+            </div>
 
-                <div class="chat-user">
-                  <div class="chat-user-name">
-                    <strong>Name: </strong><%=@order.name%>
-                  </div>
-                </div>
+            <div class="chat-user">
+              <div class="chat-user-name">
+                <strong>Email: </strong><%=@order.email%>
+              </div>
+            </div>
 
-                <div class="chat-user">
-                  <div class="chat-user-name">
-                    <strong>Email: </strong><%=@order.email%>
-                  </div>
-                </div>
+            <div class="chat-user">
+              <div class="chat-user-name">
+                <strong>Amount: </strong><%=number_to_currency @order.amount%>
+              </div>
+            </div>
 
-                <div class="chat-user">
-                  <div class="chat-user-name">
-                    <strong>Amount: </strong><%=number_to_currency @order.amount%>
-                  </div>
-                </div>
-
-                <div class="chat-user">
-                  <div class="chat-user-name">
-                    <strong>Comment: </strong><%=@order.comment %>
-                  </div>
-                </div>
-
+            <div class="chat-user">
+              <div class="chat-user-name">
+                <strong>Comment: </strong><%=@order.comment %>
               </div>
             </div>
           </div>
-
         </div>
       </div>
-
-    </div>
+      <%= f.submit "Submit", class:"btn btn-primary fixed-right" %>
+    <% end %>
   </div>
 </div>

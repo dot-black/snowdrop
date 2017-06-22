@@ -11,14 +11,14 @@
             <%= product.price %>
           </span>
 
-          <small class="text-muted">Category: <%= product.category.title %></small>
-          |
-          <small class="text-muted">Priority: <%= product.priority.upcase %></small>
-
           <span class="product-name">
             <%= product.title %>
           </span>
-
+          <div class="small m-t-xs">
+            <small class="text-muted">Category: <%= product.category.title %></small>
+            |
+            <small class="text-muted">Priority: <%= product.priority.upcase %></small>
+          </div>
           <div class="small m-t-xs">
             <%= product.description.truncate(100) %>
           </div>
