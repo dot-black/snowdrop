@@ -19,7 +19,7 @@ CSV.foreach("public/example-names.csv") do |row|
     image = Pathname.new("public/images/products/example-pictures/#{item}-#{$.}.jpg")
     images << image.open if image.exist?
   end
-  product = Product.create(
+  Product.create(
     title: row.first,
     description: IO.read( "public/sample_description.txt" ),
     price: rand(1000),
@@ -31,7 +31,31 @@ CSV.foreach("public/example-names.csv") do |row|
   )
 end
 
-#Orders
+#Orders and Carts
 100.times do |count|
-  Order.create name:"User-#{count}", email:"user-#{count}@mail.com"
+  Cart.create!
+  Order.create!(
+    name:"User-#{count}",
+    email:"user#{count}@mail.com",
+    telephone: "38063475#{rand(1000..9999)}",
+    comment: IO.read( "public/sample_description.txt" ),
+    status: Order.statuses.values.sample
+  )
 end
+
+#LineItems
+Product.order("RANDOM()").limit(50).each do |product|
+  LineItem.create!(
+    cart_id: Cart.ids.sample,
+    product_id: product.id,
+    size: product.sizes.sample,
+    quantity: rand(1..10),
+    order_id: Order.ids.sample
+  )
+end
+
+Order.all.each do |order|
+  order.update amount: order.line_items.map(&:product).map(&:price).zip(order.line_items.map(&:quantity)).map{|x, y| x * y }.inject(0, &:+)
+end
+
+Order.where(amount: 0).each { |order| order.destroy }
