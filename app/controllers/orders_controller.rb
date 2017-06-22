@@ -11,6 +11,7 @@ class OrdersController < ApplicationController
 
   def create
     @order = Order.new _permitted_order_params
+    @order.email.downcase!
     @order.add_line_items_from_cart @cart
     @order.amount = _get_line_items_amount @order.line_items
 
@@ -29,6 +30,6 @@ class OrdersController < ApplicationController
   private
 
     def _permitted_order_params
-      params.require(:order).permit(:name, :email, :comment )
+      params.require(:order).permit(:name, :email, :telephone, :comment )
     end
 end

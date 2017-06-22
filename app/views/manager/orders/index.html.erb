@@ -11,5 +11,19 @@
   </div>
 </div>
 <div class="wrapper wrapper-content animated fadeInRight ecommerce">
+  <div class="row form-group">
+    <div class="col-lg-8 pull-right">
+      <%= form_tag manager_orders_path, class: "search-form", method: :get, remote: true do  %>
+        <div class="col-sx-12 col-sm-8 col-md-8 col-lg-4 pull-right input-group">
+          <%= hidden_field_tag :status, @current_status %>
+          <%= text_field_tag :search_query, nil, class: "form-control", placeholder: "Search", autofocus: true %>
+          <span class="input-group-btn"><%= button_tag "Clear", id: "clear_search", class: "btn btn-primary" %></span>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="orders-list">
     <%= render 'list' %>
+  </div>
 </div>

@@ -1,8 +1,11 @@
 class Order < ApplicationRecord
-  enum status: { pending: 0, shipped: 1, expired: 2, canceled: 4 }
-  validates :name, :email, presence: true
+  enum status: { pending: 0, accepted: 1, declined: 2, completed: 3 }
+  validates :name, :email, :telephone, presence: true
+  validates :telephone, numericality: true, length: { in: 9..15 }
   has_many :line_items, dependent: :destroy
-  scope :by_status, -> (status) { where( status: status ) }
+  scope :by_status, -> (status) {
+    status == "all" ? order(created_at: :desc) : where(status: status).order(created_at: :desc)
+  }
   paginates_per 20
 
   def add_line_items_from_cart(cart)
@@ -11,4 +14,5 @@ class Order < ApplicationRecord
       line_items << line_item
     end
   end
+
 end

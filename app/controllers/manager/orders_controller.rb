@@ -1,18 +1,26 @@
 class Manager::OrdersController < ApplicationController
-  before_action :set_order, only: :show
+  before_action :set_order, only: [:show, :update]
   before_action :authenticate_manager!
   layout 'managers/dashboard'
 
   def index
-    if params[:status] and Order.statuses.keys.include?(params[:status])
-      @orders = Order.by_status(params[:status]).page params[:page]
+    @current_status = params[:status]
+    @search_query = params[:search_query]
+
+    @orders = if @search_query.present?
+      Order.by_status(params[:status]).where("lower(email) like lower('#{@search_query}%') or telephone like '#{@search_query}%' ").page params[:page]
     else
-      @orders = Order.all.page params[:page]
+      Order.by_status(params[:status]).page params[:page]
     end
 
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def show
+    @current_status = @order.status
   end
 
   def edit
@@ -21,7 +29,7 @@ class Manager::OrdersController < ApplicationController
   def update
     respond_to do |format|
       if @order.update(permitted_order_params)
-        format.html { redirect_to @order, notice: 'Order was successfully updated.' }
+        format.html { redirect_to manager_order_path(status: "all") }
         format.json { render :show, status: :ok, location: @order }
       else
         format.html { render :edit }
@@ -45,6 +53,6 @@ class Manager::OrdersController < ApplicationController
     end
 
     def permitted_order_params
-      params.require(:order).permit(:title, :description, :image, :price)
+      params.require(:order).permit(:title, :description, :image, :price, :status)
     end
 end
