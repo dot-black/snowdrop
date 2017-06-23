@@ -81,5 +81,4 @@ test:
 production:
   <<: *default
   database: snowdrop_production
-  username: snowdrop
-  password: <%= ENV['SNOWDROP_DATABASE_PASSWORD'] %>
+  username: postgres
