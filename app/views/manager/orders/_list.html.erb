@@ -1,0 +1,55 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="ibox">
+      <div class="ibox-content">
+        <% if @orders.present? %>
+        <div class="form-group">
+          <table class="table table-hover table-stripped toggle-arrow-tiny" id="orders-table">
+            <thead>
+            <tr>
+              <th class="hidden-xs">Order ID</th>
+              <th>Email</th>
+              <th>Telephone</th>
+              <th>Amount</th>
+              <th class="hidden-xs">Date added</th>
+              <th class="hidden-xs">Date modified</th>
+              <th>Status</th>
+            </tr>
+            </thead>
+            <tbody>
+              <% @orders.each do |order|  %>
+                <tr data-link= "<%= manager_order_path(order) %>" class="selectable-row">
+                  <td class="hidden-xs"><%= order.id %></td>
+                  <td><%= order.email %></td>
+                  <td><%= order.telephone %></td>
+                  <td><%= number_to_currency order.amount %></td>
+                  <td class="hidden-xs"><%= order.created_at.strftime("%d.%m.%Y") %></td>
+                  <td class="hidden-xs"><%= order.updated_at.strftime("%d.%m.%Y") %></td>
+                  <td class="unselectable">
+                    <% case order.status %>
+                    <% when "pending" %>
+                      <%= content_tag :span, order.status, class: "label label-success col-md-7" %>
+                    <% when "accepted" %>
+                      <%= content_tag :span, order.status, class: "label label-warning col-md-7" %>
+                    <% when "declined" %>
+                      <%= content_tag :span, order.status, class: "label label-danger col-md-7" %>
+                    <% when "completed" %>
+                      <%= content_tag :span, order.status, class: "label label-primary col-md-7" %>
+                    <% end  %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+        </table>
+          <div class="text-center">
+            <%= paginate @orders %>
+          </div>
+        <% else %>
+          <div class="text-center">
+            <h2>No information</h2>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -19,7 +19,7 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :orders
+    resources :orders, only:[:index, :show, :update, :edit]
 
     resources :categories do
       member do
@@ -28,8 +28,12 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :line_items
-  resources :carts
+  resources :line_items, only:[:create, :destroy] do
+    collection do
+      put 'update_multiple'
+    end
+  end
+  get :cart, to: 'carts#show'
   resources :orders
   resources :products, only: [:index, :show]
 

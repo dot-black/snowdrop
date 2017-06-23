@@ -1,6 +1,6 @@
 class StoreController < ApplicationController
   def index
-    @categories = Category.visible
+  @categories = manager_signed_in? ? Category.all : Category.visible
   end
 
 end

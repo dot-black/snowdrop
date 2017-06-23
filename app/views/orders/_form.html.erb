@@ -1,32 +1,25 @@
-<%= form_with(model: order, local: true) do |form| %>
-  <% if order.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(order.errors.count, "error") %> prohibited this order from being saved:</h2>
-
-      <ul>
-      <% order.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name, id: :order_name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :payment_method %>
-    <%= form.select :payment_method, Order.payment_methods.keys %>
-  </div>
-
-  <div class="field">
-    <%= form.label :comment %>
-    <%= form.text_area :comment, id: :order_comment %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
+<% if @order.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(order.errors.count, "error") %> prohibited this order from being saved:</h2>
+    <ul>
+    <% @order.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
   </div>
 <% end %>
+<div class="order-form">
+  <div class="order-checkout">
+    <%= form_for @order do |form| %>
+      <%= form.label :name %>
+      <%= form.text_field :name, id: :order_name, required: true %>
+      <%= form.label :email %>
+      <%= form.email_field :email, id: :order_email, required: true %>
+      <%= form.label :telephone %>
+      <%= form.telephone_field :telephone, id: :order_telephone, required: true %>
+      <%= form.label :comment %>
+      <%= form.text_area :comment, id: :order_comment %>
+      <%= form.submit "place order", class: "material-button" %>
+    <% end %>
+  </div>
+</div>

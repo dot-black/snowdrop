@@ -12,22 +12,50 @@ Dir.glob("public/images/categories/*").each do |category|
 end
 
 #Products
-100.times do
-  products_list = []
-  Dir.glob("public/images/products/*").each do |product|
-    images_paths = []
-    current_product = product.split("/").last
-    product = Product.create(
-      title: "#{current_product.gsub('_',' ').capitalize}",
-      description: IO.read( "public/sample_description.txt" ),
-      price: rand(1000),
-      visible: [true, false].sample,
-      sizes: [rand(1..2), rand(3..4)],
-      category_id: Category.ids.sample,
-      archive: [true, false].sample
-    )
-    Dir.glob("public/images/products/#{current_product}/*.jpg").each{|image| images_paths.push Pathname.new(image).open }
-    product.images = images_paths
-    product.save
+require 'csv'
+CSV.foreach("public/example-names.csv") do |row|
+  images = []
+  ["main", "add"].each do |item|
+    image = Pathname.new("public/images/products/example-pictures/#{item}-#{$.}.jpg")
+    images << image.open if image.exist?
   end
+  Product.create(
+    title: row.first,
+    description: IO.read( "public/sample_description.txt" ),
+    price: rand(1000),
+    visible: [true, false].sample,
+    sizes: [rand(1..2), rand(3..4)],
+    category_id: Category.ids.sample,
+    archive: [true, false].sample,
+    images: images
+  )
 end
+
+#Orders and Carts
+100.times do |count|
+  Cart.create!
+  Order.create!(
+    name:"User-#{count}",
+    email:"user#{count}@mail.com",
+    telephone: "38063475#{rand(1000..9999)}",
+    comment: IO.read( "public/sample_description.txt" ),
+    status: Order.statuses.values.sample
+  )
+end
+
+#LineItems
+Product.order("RANDOM()").limit(50).each do |product|
+  LineItem.create!(
+    cart_id: Cart.ids.sample,
+    product_id: product.id,
+    size: product.sizes.sample,
+    quantity: rand(1..10),
+    order_id: Order.ids.sample
+  )
+end
+
+Order.all.each do |order|
+  order.update amount: order.line_items.map(&:product).map(&:price).zip(order.line_items.map(&:quantity)).map{|x, y| x * y }.inject(0, &:+)
+end
+
+Order.where(amount: 0).each { |order| order.destroy }

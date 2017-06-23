@@ -1,3 +1,22 @@
 // Place all the styles related to the categories controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.category-image {
+  @media (min-width: 1780px) {
+    width: 70%;
+  }
+  @media (max-width: 1280px) {
+    width: 126%;
+    margin: 0 -25%;
+  }
+  @media (max-width: 1000px) {
+    width: 130%;
+    margin: 0 -30%;
+  }
+  @media (max-width: 680px) {
+    width: 120%;
+    margin: 0 -40%;
+  }
+  // height: auto;
+  // width: 100%;
+}

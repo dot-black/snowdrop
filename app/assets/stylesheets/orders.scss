@@ -1,3 +1,71 @@
 // Place all the styles related to the orders controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.order-headline{
+  margin-top: 64px;
+  height: 64px;
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.order-headline h2 {
+  margin: 0 0 4px 0;
+  font-size: 1.3em;
+  font-weight: 500;
+  font-family: 'Roboto', 'Noto', sans-serif;
+}
+
+.order-headline span{
+  color: #757575;
+  font-size: 12px;
+  font-family: 'Roboto', 'Noto', sans-serif;
+}
+
+.order-form{
+  display: flex;
+  justify-content: center;
+  font-family: 'Roboto', 'Noto', sans-serif;
+
+}
+
+.order-checkout{
+  font-family: 'Roboto', 'Noto', sans-serif;
+  width: 500px;
+  padding: 30px;
+  background: transparent;
+
+}
+.order-checkout label{
+  font-size: 13px;
+}
+.order-checkout input[type="text"],
+.order-checkout input[type="email"],
+.order-checkout input[type="tel"],
+.order-checkout textarea,
+.order-checkout select
+{
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  outline: none;
+  display: block;
+  width: 100%;
+  padding: 7px;
+  border: none;
+  border-bottom: 1px solid #ddd;
+  background: transparent;
+  margin-bottom: 20px;
+  font: 16px 'Roboto', 'Noto', sans-serif;
+  height: 45px;
+}
+.order-checkout textarea{
+  resize:none;
+  overflow: hidden;
+}
+.material-button{
+  margin-top: 20px;
+
+}

@@ -1,11 +1,8 @@
-<div class=category-item>
-  <% if @current_category %>
-    <%= image_tag @current_category.image, class: "category-image" %>
-    <h2> <%= @current_category.title.pluralize(2).capitalize %> </h2>
-  <% else  %>
-    <%= image_tag "categories/default.jpg", class: "category-image" %>
-    <h2>Products</h2>
-  <% end %>
+<%= render partial: "categories" %>
+
+<div class=category-headline>
+  <%= image_tag @current_category.image, class: "category-image" %>
+  <h2> <%= @current_category.title.pluralize(2).capitalize %> </h2>
   <span><%= "(#{pluralize @products.total_count, 'item'})" %></span>
 </div>
 

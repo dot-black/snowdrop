@@ -5,18 +5,16 @@
       <li><%= current_page_name %></li>
       <li><b>List</b></li>
     </ol>
-    <%= link_to "New", new_manager_product_path, class: "btn btn-large btn-outline btn-primary" %>
-    <%= link_to manager_products_path, class: "btn btn-white" do %>
-      <i class="fa fa-check-square-o"></i>
-    <% end %>
-    <%= link_to manager_products_path(visible: "true"), class: "btn btn-white" do %>
-      <i class="fa fa-eye"></i>
-    <% end %>
-    <%= link_to manager_products_path(hiden: "true"), class: "btn btn-white" do %>
-      <i class="fa fa-eye-slash"></i>
-    <% end %>
+    <div class="dropdown-button">
+      <%= render "dropdown_button" %>
+    </div>
   </div>
   <div class="col-lg-2"></div>
 </div>
 
-<%= render "list_relevant" %>
+
+<div class="products-list">
+  <%= render "list_relevant" %>
+</div>
+
+<%= link_to "Add", new_manager_product_path, class: "btn btn-large  btn-warning fixed-right" %>

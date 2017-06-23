@@ -5,10 +5,15 @@ class Manager::ProductsController < ApplicationController
 
   def index
     @products = Product.relevant.page params[:page]
+    @current_category = "All"
     filtering_params(params).each do |key, value|
       @products = (@products.public_send(key).page params[:page] ) if key.present?
+      @current_category =  key.capitalize
     end
-
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def archival

@@ -22,6 +22,7 @@ class Product < ApplicationRecord
   scope :shown, -> { where( archive: false, visible: true,  category_id: Category.visible.ids ) }
   scope :category, -> (category_id) { where( category_id: category_id, archive: false, visible: true ) }
 
+
   def sizes_collection
     self.sizes.map{|s|[Product.sizes.key(s).to_s.upcase,s]}
   end

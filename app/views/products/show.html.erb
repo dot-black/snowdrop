@@ -1,3 +1,5 @@
+<%= render partial: "categories" %>
+
 <div class="container">
   <div class="product-detailed">
 
@@ -8,21 +10,22 @@
     <div class="product-detailed-details">
       <h1><%= @product.title %></h1>
       <span><%= number_to_currency @product.price %></span>
+      <%= form_for :line_item, url: line_items_path, remote: true  do |f| %>
+        <%= f.label :size %>
+        <%= f.select :size, options_for_select(@product.sizes_collection) %>
 
-      <%= label_tag :size %>
-      <%= select_tag :size, options_for_select(@product.sizes_collection) %>
+        <%= f.label :quantity %>
+        <%= f.select :quantity, options_for_select((1..4).to_a) %>
 
-      <%= label_tag :quantity %>
-      <%= select_tag :quantity, options_for_select((1..4).to_a) %>
+        <%= f.hidden_field :product_id, value: @product.id   %>
 
-      <div class="product-detailed-description">
-        <h2>Description</h2>
-        <p> <%= @product.description %> </p>
-      </div>
+        <div class="product-detailed-description">
+          <h2>Description</h2>
+          <p><%= @product.description %></p>
+        </div>
 
-      <div>
-        <%= link_to "Add to cart", "", class: "material-button"  %>
-      </div>
+        <%= f.submit "Add to cart", class: "material-button"%>
+      <% end  %>
     </div>
   </div>
 </div>
