@@ -3,17 +3,47 @@
 iphone:
   title: iPhone
   description: The brand new iPhone
-  image: iphone.jpg
   price: 12.99
+  visible: true
+  archive: false
+  category: first_visible
 
 ipad:
   title: iPad
   description: The brand new iPad
-  image: ipad.png
   price: 21.99
+  visible: true
+  archive: false
+  category: first_visible
 
-macbook:
+macbook_invisible:
   title: macbook
   description: The brand new macbook
-  image: mac.png
   price: 100
+  visible: false
+  archive: true
+  category: first_visible
+
+macbook_arhive:
+  title: macbook
+  description: The brand new macbook
+  price: 100
+  visible: true
+  archive: true
+  category: first_visible
+
+macbook_of_invisible_category:
+  title: macbook
+  description: The brand new macbook
+  price: 100
+  visible: true
+  archive: false
+  category: second_invisible
+
+odd_product:
+  title: odd_product
+  description: Test ptoduct
+  price: 100
+  visible: true
+  archive: false
+  category: third_to_delete
