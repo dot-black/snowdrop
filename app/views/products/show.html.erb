@@ -13,10 +13,6 @@
       <%= form_for :line_item, url: line_items_path, remote: true  do |f| %>
         <%= f.label :size %>
         <%= f.select :size, options_for_select(@product.sizes_collection) %>
-
-        <%= f.label :quantity %>
-        <%= f.select :quantity, options_for_select((1..4).to_a) %>
-
         <%= f.hidden_field :product_id, value: @product.id   %>
 
         <div class="product-detailed-description">

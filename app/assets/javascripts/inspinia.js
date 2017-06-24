@@ -172,10 +172,6 @@ ready = function () {
         height: '100%'
     })
 
-    $(window).load(function() {
-      $('.product-images').slick({
-        dots: true
-    });
 });
 
 };

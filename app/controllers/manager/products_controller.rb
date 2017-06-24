@@ -1,12 +1,12 @@
 class Manager::ProductsController < ApplicationController
-  before_action :set_product, only: [:show, :edit, :update, :destroy, :change_appearance, :archive, :remove_single_image]
+  before_action :_set_product, only: [:show, :edit, :update, :destroy, :change_appearance, :archive, :remove_single_image]
   before_action :authenticate_manager!
   layout 'managers/dashboard'
 
   def index
     @products = Product.relevant.page params[:page]
     @current_category = "All"
-    filtering_params(params).each do |key, value|
+    _filtering_params(params).each do |key, value|
       @products = (@products.public_send(key).page params[:page] ) if key.present?
       @current_category =  key.capitalize
     end
@@ -31,7 +31,7 @@ class Manager::ProductsController < ApplicationController
   end
 
   def create
-    @product = Product.new(permitted_product_params)
+    @product = Product.new(_permitted_product_params)
 
     respond_to do |format|
       if @product.save
@@ -44,7 +44,7 @@ class Manager::ProductsController < ApplicationController
 
   def update
     respond_to do |format|
-      if @product.update(permitted_product_params)
+      if @product.update(_permitted_product_params)
         format.html { redirect_to manager_products_path }
       else
         format.html { render :edit }
@@ -61,7 +61,6 @@ class Manager::ProductsController < ApplicationController
 
   def archive
     @product.update archive: !@product.archive, visible: false
-
     respond_to do |format|
       format.html { redirect_to manager_products_path }
     end
@@ -79,15 +78,15 @@ class Manager::ProductsController < ApplicationController
 
   private
 
-    def set_product
+    def _set_product
       @product = Product.find(params[:id])
     end
 
-    def permitted_product_params
+    def _permitted_product_params
       params.require(:product).permit(:title, :description, :price, :priority, :index, :category_id, {images: []}, sizes: [])
     end
 
-    def filtering_params(params)
+    def _filtering_params(params)
       params.slice(:visible, :hiden)
     end
 end

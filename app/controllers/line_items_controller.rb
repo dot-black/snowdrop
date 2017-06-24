@@ -1,6 +1,6 @@
 class LineItemsController < ApplicationController
-  before_action :_set_line_item, only: [:update, :destroy]
   include CurrentCart
+  before_action :_set_line_item, only: [:update, :destroy]
   before_action :_set_cart, only: [:create, :update_multiple]
   before_action :_ensure_cart_isnt_empty, only: :update_multiple
 
@@ -12,6 +12,7 @@ class LineItemsController < ApplicationController
       if @line_item.save
         format.html { redirect_to product_path(product) }
         format.json { render :show, status: :created, location: @line_item }
+        format.js { _set_cart_counter }
       else
         format.html { render :new }
         format.json { render json: @line_item.errors, status: :unprocessable_entity }
@@ -21,10 +22,15 @@ class LineItemsController < ApplicationController
 
 
   def update_multiple
-    LineItem.find(params[:line_items_ids]).zip(params[:line_items_quantities]).each do |line_item, quantity|
+    line_items = LineItem.find( params[:line_items_ids] )
+    line_items.zip( params[:line_items_quantities] ).each do |line_item, quantity|
       line_item.update quantity: quantity
     end
-    redirect_to new_order_path
+    _set_cart_total_amount line_items
+    respond_to do |format|
+      format.html { redirect_to new_order_path }
+      format.js
+    end
   end
 
   def destroy

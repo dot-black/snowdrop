@@ -45,10 +45,15 @@ class Manager::CategoriesController < ApplicationController
   end
 
   def destroy
-    @category.destroy
-    respond_to do |format|
-      format.html { redirect_to manager_categories_path, notice: 'Category was successfully destroyed.' }
-      format.json { head :no_content }
+
+    unless ( @category.products.ids & LineItem.products.ids ).any?
+      @category.destroy
+      respond_to do |format|
+        format.html { redirect_to manager_categories_path, notice: 'Category was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+    else
+      #Add notice
     end
   end
 
