@@ -14,11 +14,13 @@ class Product < ApplicationRecord
   mount_uploaders :images, ProductImageUploader
   before_save :remove_zero_sizes
 
-  default_scope { order(priority: :asc)}
-  scope :relevant, -> { where( archive: false ) }
-  scope :visible, -> { where( visible: true, archive: false ) }
-  scope :hiden, -> { where( visible: false, archive: false ) }
-  scope :archival, -> { where( archive: true ) }
+  #Manager scopes
+  scope :relevant, -> { where( archive: false ).reorder( created_at: :desc ) }
+  scope :visible, -> { where( visible: true, archive: false ).reorder( created_at: :desc ) }
+  scope :hiden, -> { where( visible: false, archive: false ).reorder( created_at: :desc ) }
+  scope :archival, -> { where( archive: true ).reorder( created_at: :desc ) }
+  #Client scopes
+  default_scope { order( priority: :asc ) }
   scope :shown, -> { where( archive: false, visible: true,  category_id: Category.visible.ids ) }
   scope :category, -> (category_id) { where( category_id: category_id, archive: false, visible: true ) }
 
@@ -29,8 +31,8 @@ class Product < ApplicationRecord
 
   private
 
-  def remove_zero_sizes
-    self.sizes.delete(0) if self.sizes
-  end
+    def remove_zero_sizes
+      self.sizes.delete(0) if self.sizes
+    end
 
 end
