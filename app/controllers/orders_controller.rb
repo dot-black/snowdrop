@@ -18,7 +18,8 @@ class OrdersController < ApplicationController
     respond_to do |format|
       if @order.save
         _destroy_cart
-        format.html { redirect_to store_path}
+        flash[:notice] = "Thank you for your order!"
+        format.html { redirect_to store_path }
         format.json { render :show, status: :created, location: @order }
       else
         format.html { render :new }

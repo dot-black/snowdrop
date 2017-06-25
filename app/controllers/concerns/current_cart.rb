@@ -8,7 +8,10 @@ module CurrentCart
     end
 
     def _ensure_cart_isnt_empty
-       redirect_to store_path if @cart.line_items.empty?
+      if @cart.line_items.empty?
+        flash[:notice] = "Please add something to cart."
+        redirect_to store_path
+      end
     end
 
     def _destroy_cart

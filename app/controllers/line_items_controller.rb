@@ -9,11 +9,14 @@ class LineItemsController < ApplicationController
     @line_item = @cart.add_product(_permitted_line_item_params)
     respond_to do |format|
       if @line_item.save
+        _set_cart_line_items
+        _set_cart_counter @line_items
         format.html { redirect_to product_path(product) }
         format.json { render :show, status: :created, location: @line_item }
         format.js
       else
-        format.html { render :new }
+        flash[:warning] = "Product wasn't added"
+        format.html { redirect_to store_url }
         format.json { render json: @line_item.errors, status: :unprocessable_entity }
       end
     end
@@ -29,7 +32,6 @@ class LineItemsController < ApplicationController
         format.json
         format.js
       else
-      #Add notice here
         format.json { render json: @line_item.errors, status: :unprocessable_entity }
       end
     end
@@ -46,7 +48,6 @@ class LineItemsController < ApplicationController
         format.json { head :no_content }
         format.js
       else
-      #Add no
       format.json { render json: @line_item.errors, status: :unprocessable_entity }
       end
     end
