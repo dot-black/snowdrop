@@ -51,4 +51,37 @@ class ClienStoriesTest < ActionDispatch::IntegrationTest
     # assert_equal 'Sam Ruby <depot@example.com>', mail[:from].value
     # assert_equal "Pragmatic Store Order Confirmation", mail.subject
   end
+
+  test "check if the same product with same size gets to the same line item " do
+    LineItem.delete_all
+    Order.delete_all
+    iphone = products(:iphone)
+
+    4.times do
+      post '/line_items', params: { line_item: { product_id: iphone.id, size: Product.sizes.values.first }}, xhr: true
+      assert_response :success
+    end
+
+    cart = Cart.find(session[:cart_id])
+    assert_equal 1, cart.line_items.size
+    assert_equal 4, cart.line_items.last.quantity
+  end
+
+  test "check if the same product with different sizes gets to the different line items " do
+    LineItem.delete_all
+    Order.delete_all
+    iphone = products(:iphone)
+
+    post '/line_items', params: { line_item: { product_id: iphone.id, size: Product.sizes.values.first }}, xhr: true
+    assert_response :success
+
+    post '/line_items', params: { line_item: { product_id: iphone.id, size: Product.sizes.values.second }}, xhr: true
+    assert_response :success
+
+    cart = Cart.find(session[:cart_id])
+    assert_equal 2, cart.line_items.size
+    assert_equal 1, cart.line_items.first.quantity
+    assert_equal 1, cart.line_items.second.quantity
+  end
+
 end
