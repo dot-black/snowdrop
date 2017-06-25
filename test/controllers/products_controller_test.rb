@@ -2,66 +2,41 @@ require 'test_helper'
 
 class ProductsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @product = products(:iphone)
-    @update = {
-      title: 'iPhone SE',
-      description: 'The brand new iphone SE',
-      image: 'iphonese.jpg',
-      price: 22.02
-    }
+    @product_visible = products(:iphone)
+    @product_hiden = products(:macbook_invisible)
+    @product_archived = products(:macbook_invisible)
+    @product_of_invisible_category = products(:macbook_of_invisible_category)
   end
 
-  test "should get index" do
-    get products_url
+  test "should get to products of visible category" do
+    get products_url(category: categories(:first_visible).id)
     assert_response :success
   end
 
-  test "should get new" do
-    get new_product_url
+  test "should not get to products of invisible category" do
+    get products_url(category: categories(:second_invisible).id)
+    assert_response :redirect
+  end
+
+  test "should show visible product" do
+    get product_url(@product_visible)
     assert_response :success
   end
 
-  test "should create product" do
-    assert_difference('Product.count') do
-      post products_url, params: {
-        product: {
-          description: @update[:description],
-          image: @update[:image],
-          price: @update[:price],
-          title: @update[:title]
-        }
-      }
-    end
-    assert_redirected_to product_url(Product.last)
+  test "should not show hiden product" do
+    get product_url(@product_hiden)
+    assert_response :redirect
   end
 
-  test "should show product" do
-    get product_url(@product)
-    assert_response :success
+  test "should not show archived product" do
+    get product_url(@product_archived)
+    assert_response :redirect
   end
 
-  test "should get edit" do
-    get edit_product_url(@product)
-    assert_response :success
+  test "should not show product of hiden category" do
+    get product_url(@product_of_invisible_category)
+    assert_response :redirect
   end
 
-  test "should update product" do
-    patch product_url(@product), params: {
-      product: {
-        description: @update[:description],
-        image: @update[:image],
-        price: @update[:price],
-        title: @update[:title]
-      }
-    }
-    assert_redirected_to product_url(@product)
-  end
 
-  test "should destroy product" do
-    assert_difference('Product.count', -1) do
-      delete product_url(@product)
-    end
-
-    assert_redirected_to products_url
-  end
 end
