@@ -4,11 +4,15 @@
       <td><%= image_tag first_image(line_item.product), size: 64 %></td>
       <td><%= line_item.product.title %></td>
       <td>
-        <%= link_to line_item_path(line_item, line_item:{ quantity: "#{line_item.quantity - 1}" }), method: :put, remote: true do  %>
+        <% if line_item.quantity > 1 %>
+          <%= link_to line_item_path(line_item, line_item:{ quantity: "#{line_item.quantity - 1}" }), method: :put, remote: true do  %>
+            <i class="glyphicon glyphicon glyphicon-minus"></i>
+          <% end  %>
+        <% else %>
           <i class="glyphicon glyphicon glyphicon-minus"></i>
-        <% end  %>
-        <%= line_item.quantity %>
-        <%= link_to line_item_path(line_item, line_item:{ quantity: "#{line_item.quantity + 1}" }), method: :put, remote: true  do  %>
+        <% end %>
+        <%= content_tag :span, line_item.quantity %>
+        <%= link_to line_item_path(line_item, line_item:{ quantity: "#{line_item.quantity + 1}" }), method: :put, remote: true, class:"button" do  %>
           <i class="glyphicon glyphicon glyphicon-plus"></i>
         <% end  %>
        </td>
