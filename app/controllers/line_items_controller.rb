@@ -1,9 +1,8 @@
 class LineItemsController < ApplicationController
   include CurrentCart
   before_action :_set_line_item, only: [:update, :destroy]
-  before_action :_set_cart, only: [:create, :update_multiple]
-  before_action :_ensure_cart_isnt_empty, only: :update_multiple
-
+  before_action :_set_cart, only: [:create, :update, :destroy]
+  before_action :_ensure_cart_isnt_empty, only: :update
 
   def create
     product = Product.find(params[:line_item][:product_id])
@@ -12,7 +11,7 @@ class LineItemsController < ApplicationController
       if @line_item.save
         format.html { redirect_to product_path(product) }
         format.json { render :show, status: :created, location: @line_item }
-        format.js { _set_cart_counter }
+        format.js
       else
         format.html { render :new }
         format.json { render json: @line_item.errors, status: :unprocessable_entity }
@@ -20,24 +19,36 @@ class LineItemsController < ApplicationController
     end
   end
 
-
-  def update_multiple
-    line_items = LineItem.find( params[:line_items_ids] )
-    line_items.zip( params[:line_items_quantities] ).each do |line_item, quantity|
-      line_item.update quantity: quantity
-    end
-    _set_cart_total_amount line_items
+  def update
     respond_to do |format|
-      format.html { redirect_to new_order_path }
-      format.js
+      if @line_item.update _permitted_line_item_params
+        _set_cart_line_items
+        _set_cart_total_amount @line_items
+        _set_cart_counter @line_items
+        format.html { redirect_to new_order_path}
+        format.json
+        format.js
+      else
+      #Add notice here
+        format.json { render json: @line_item.errors, status: :unprocessable_entity }
+      end
     end
+
   end
 
   def destroy
-    @line_item.destroy
     respond_to do |format|
-      format.html { redirect_to cart_path }
-      format.json { head :no_content }
+      if @line_item.destroy
+        _set_cart_line_items
+        _set_cart_total_amount @line_items
+        _set_cart_counter @line_items
+        format.html { redirect_to cart_path }
+        format.json { head :no_content }
+        format.js
+      else
+      #Add no
+      format.json { render json: @line_item.errors, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -49,5 +60,4 @@ class LineItemsController < ApplicationController
     def _set_line_item
       @line_item = LineItem.find(params[:id])
     end
-
 end

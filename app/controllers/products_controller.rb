@@ -3,11 +3,12 @@ class ProductsController < ApplicationController
   include CurrentCart
   before_action :_set_product, only: :show
   before_action :_set_categories, only: [:index, :show]
-  before_action :_set_cart
-  before_action :_set_cart_counter
+  before_action :_set_cart, only: [:index, :show]
 
   def index
     redirect_to store_path unless @current_category = _current_category
+    _set_cart_line_items
+    _set_cart_counter @line_items
     @products = Product.shown.category(params[:category]).page( params[:page] )
       # Manager can see products regardless it visible or hiden
       # manager_signed_in? ?
@@ -17,6 +18,8 @@ class ProductsController < ApplicationController
 
   def show
     redirect_to products_path unless _enusre_product_and_category_visible!
+    _set_cart_line_items
+    _set_cart_counter @line_items
   end
 
   private

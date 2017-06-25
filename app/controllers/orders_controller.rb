@@ -2,9 +2,10 @@ class OrdersController < ApplicationController
   include CurrentCart
   before_action :_set_cart, only: [:new, :create ]
   before_action :_ensure_cart_isnt_empty, only: :new
-  before_action :_set_cart_counter
 
   def new
+    _set_cart_line_items
+    _set_cart_counter @line_items
     @order = Order.new
   end
 

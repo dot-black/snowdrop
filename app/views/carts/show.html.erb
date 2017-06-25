@@ -2,34 +2,23 @@
 
   <div class="cart-headline">
     <h2>Your Cart</h2>
-    <span><%= "(#{pluralize @line_items.count, 'item'})" %></span>
+      <span id="line-items-count">
+        <%= render 'line_items_count' %>
+      </span>
   </div>
 
+  <table class="table", id="cart-table">
+    <%= render 'cart_table' %>
+  </table>
 
-  <%= form_tag update_multiple_line_items_path, method: "put" do %>
-
-    <table class="table">
-      <tbody>
-        <% @line_items.each do |line_item| %>
-          <tr>
-            <td><%= image_tag first_image(line_item.product), size:64 %></td>
-            <td><%= line_item.product.title %></td>
-            <td>Qty: <%= select_tag("line_items_quantities[]", options_for_select((1..10).to_a, line_item.quantity)) %></td>
-            <td>Size: <%= line_item.size.upcase %></td>
-            <td> <%= number_to_currency line_item.product.price %></td>
-            <td>
-              <%= link_to line_item_path(line_item), method: "delete" do  %>
-                <i class="glyphicon glyphicon-trash"></i>
-              <% end  %>
-            </td>
-          </tr>
-          <%= hidden_field_tag "line_items_ids[]", line_item.id %>
-        <% end %>
-      </tbody>
-    </table>
-    <div class="checkout-box">
-      <span> <strong>Total: <%= number_to_currency @total  %> <strong></span>
-      <%= submit_tag "Checkout", class:"material-button" %>
-    </div>
-  <% end %>
+  <div class="checkout-box">
+    <span>
+      <strong>Total:
+        <div id="cart-total-amount">
+          <%= render 'cart_total_amount' %>
+        </div>
+      <strong>
+    </span>
+    <%= link_to "Checkout", new_order_path,  class:"material-button" %>
+  </div>
 </div>

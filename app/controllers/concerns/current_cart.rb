@@ -17,14 +17,18 @@ module CurrentCart
     end
 
     def _get_line_items_amount(line_items)
-        line_items.map(&:product).map(&:price).zip(line_items.map(&:quantity)).map{|x, y| x * y }.inject(0, &:+)
+        line_items ? line_items.map(&:product).map(&:price).zip(line_items.map(&:quantity)).map{|x, y| x * y }.inject(0, &:+) : 0
     end
 
-    def _set_cart_counter
-      @cart_line_items_quantity = @cart.line_items.sum(:quantity)
+    def _set_cart_counter(line_items)
+      @cart_line_items_quantity = line_items ? line_items.sum(:quantity) : 0
     end
 
     def _set_cart_total_amount(line_items)
       @total = _get_line_items_amount(line_items)
+    end
+
+    def _set_cart_line_items
+      @line_items = @cart.line_items
     end
 end

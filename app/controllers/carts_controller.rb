@@ -1,13 +1,12 @@
 class CartsController < ApplicationController
   include CurrentCart
   before_action :_set_cart, only: [:show, :destroy]
-  before_action :_set_cart_counter, only: :show
-
   # rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
 
   def show
-    @line_items = @cart.line_items
+    _set_cart_line_items
     _set_cart_total_amount @line_items
+    _set_cart_counter @line_items
   end
 
   def destroy
