@@ -1,24 +1,25 @@
 class OrdersController < ApplicationController
   include CurrentCart
-  include LineItemsAmount
   before_action :_set_cart, only: [:new, :create ]
   before_action :_ensure_cart_isnt_empty, only: :new
 
   def new
+    _set_cart_line_items
+    _set_cart_counter @line_items
     @order = Order.new
   end
 
 
   def create
     @order = Order.new _permitted_order_params
-    @order.email.downcase!
     @order.add_line_items_from_cart @cart
     @order.amount = _get_line_items_amount @order.line_items
 
     respond_to do |format|
       if @order.save
         _destroy_cart
-        format.html { redirect_to store_path}
+        flash[:notice] = "Thank you for your order!"
+        format.html { redirect_to store_path }
         format.json { render :show, status: :created, location: @order }
       else
         format.html { render :new }

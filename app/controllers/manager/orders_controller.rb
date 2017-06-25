@@ -1,5 +1,5 @@
 class Manager::OrdersController < ApplicationController
-  before_action :set_order, only: [:show, :update]
+  before_action :_set_order, only: [:show, :update]
   before_action :authenticate_manager!
   layout 'managers/dashboard'
 
@@ -28,7 +28,7 @@ class Manager::OrdersController < ApplicationController
 
   def update
     respond_to do |format|
-      if @order.update(permitted_order_params)
+      if @order.update(_permitted_order_params)
         format.html { redirect_to manager_order_path(status: "all") }
         format.json { render :show, status: :ok, location: @order }
       else
@@ -48,11 +48,11 @@ class Manager::OrdersController < ApplicationController
 
   private
 
-    def set_order
+    def _set_order
       @order = Order.find(params[:id])
     end
 
-    def permitted_order_params
+    def _permitted_order_params
       params.require(:order).permit(:title, :description, :image, :price, :status)
     end
 end

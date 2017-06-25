@@ -28,7 +28,9 @@
      vertical-align: middle;
 }
 
-.table > tbody > tr > td > a > i {
+.table > tbody > tr > td  i {
+  margin-left: 5px;
+  margin-right: 5px;
   color: #202020;
 }
 

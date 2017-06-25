@@ -1,9 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  product: macbook
+  product: iphone
   order: one
+  cart: one
+  quantity: 2
 
 two:
-  product: macbook
+  product: ipad
   cart: one
+  order: two
+  quantity: 3

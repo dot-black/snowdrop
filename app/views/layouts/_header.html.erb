@@ -3,10 +3,7 @@
     <div class="store-logo">
       <%= link_to t("application_name"), store_path %>
     </div>
-    <div class="cart-logo">
-      <%= link_to cart_path, class:"btn btn-default" do %>
-        <i class="glyphicon glyphicon-shopping-cart"></i>
-      <% end  %>
-    </div>
+  <div class="cart-logo">
+    <%= render "layouts/cart_logo" %>
   </div>
 </header>

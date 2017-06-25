@@ -46,4 +46,6 @@ end
 
 group :test do
   gem 'rspec-rails'
+  gem 'capybara-selenium'
+  gem 'rails-controller-testing'
 end
