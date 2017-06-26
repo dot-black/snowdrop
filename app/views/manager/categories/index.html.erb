@@ -5,9 +5,10 @@
       <li><%= current_page_name %></li>
       <li><b>List</b></li>
     </ol>
-    <%= link_to "New", new_manager_category_path, class: "btn btn-large btn-outline btn-primary" %>
   </div>
   <div class="col-lg-2"></div>
 </div>
-
-<%= render "list" %>
+<div class="category-index">
+  <%= render "list" %>
+</div>
+<%= link_to "New", new_manager_category_path, class: "btn btn-warning fixed-right" %>

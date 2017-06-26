@@ -1,10 +1,10 @@
 class Manager::CategoriesController < ApplicationController
-  before_action :set_category, only: [:show, :edit, :update, :destroy, :change_appearance]
+  before_action :_set_category, only: [:show, :edit, :update, :destroy, :change_appearance, :destroy]
   before_action :authenticate_manager!
   layout 'managers/dashboard'
 
   def index
-    @categories = Category.all
+    _set_categories
   end
 
   def show
@@ -18,14 +18,14 @@ class Manager::CategoriesController < ApplicationController
   end
 
   def create
-    @category = Category.new(permitted_category_params)
+    @category = Category.new _permitted_category_params
 
     respond_to do |format|
       if @category.save
         format.html { redirect_to manager_categories_path, notice: 'Category was successfully created.' }
         format.json { render :show, status: :created, location: @category }
       else
-        format.html { render :new }
+        format.html { render :new, notice: "Category wasn't created, please check errors below" }
         format.json { render json: @category.errors, status: :unprocessable_entity }
       end
     end
@@ -34,41 +34,52 @@ class Manager::CategoriesController < ApplicationController
 
   def update
     respond_to do |format|
-      if @category.update(permitted_category_params)
-        format.html { redirect_to manager_categories_path, notice: 'Category was successfully updated.' }
+      if @category.update(_permitted_category_params)
+        format.html { redirect_to manager_categories_path, notice: "Category was successfully updated." }
         format.json { render :show, status: :ok, location: @category }
       else
-        format.html { render :edit }
+        format.html { render :edit, notice: "Category wasn't updated, please check errors below"  }
         format.json { render json: @category.errors, status: :unprocessable_entity }
       end
     end
   end
 
   def destroy
-
-    unless ( @category.products.ids & LineItem.products.ids ).any?
-      @category.destroy
-      respond_to do |format|
-        format.html { redirect_to manager_categories_path, notice: 'Category was successfully destroyed.' }
+    respond_to do |format|
+      ivolved_products = @category.products.ids & LineItem.all.map(&:product_id)
+      unless ivolved_products.any?
+        @category.destroy
+        format.html { redirect_to manager_categories_path, notice: "Category was successfully destroyed." }
         format.json { head :no_content }
+        format.js
+      else
+        format.html { redirect_to manager_categories_path, notice: "Category can't be destroyed, there are #{ ivolved_products.count } #{'product'.pluralize(ivolved_products.count)} involved."}
       end
-    else
-      #Add notice
     end
   end
 
   def change_appearance
-    @category.update visible: !@category.visible
-    redirect_to manager_categories_path
+    _set_categories
+    respond_to do |format|
+      if @category.update visible: !@category.visible
+        format.html { redirect_to manager_categories_path, notice: "Category '#{@category.title}' is #{@category.visible ? "visible" : "invisible"} now." }
+      else
+        format.html { redirect_to manager_categories_path, notice: "Category's appearance wasn't changed." }
+      end
+    end
   end
 
   private
 
-    def set_category
+    def _set_category
       @category = Category.find(params[:id])
     end
 
-    def permitted_category_params
+    def _set_categories
+      @categories = Category.all
+    end
+
+    def _permitted_category_params
       params.require(:category).permit(:title, :description, :image, :price)
     end
 end
