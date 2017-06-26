@@ -22,6 +22,7 @@ class OrdersController < ApplicationController
         format.html { redirect_to store_path }
         format.json { render :show, status: :created, location: @order }
       else
+        flash[:notice] = "Order wasn't created, please fill in all the fields correctly."
         format.html { render :new }
         format.json { render json: @order.errors, status: :unprocessable_entity }
       end
