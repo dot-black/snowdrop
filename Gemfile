@@ -22,6 +22,7 @@ gem 'bootstrap-sass', '~> 3.3.7'
 gem 'uglifier', '>= 1.3.0'
 gem "font-awesome-rails"
 gem 'jquery-rails'
+gem 'fog'
 
 # gem 'therubyracer', platforms: :ruby
 # Use ActiveModel has_secure_password
@@ -43,7 +44,6 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'capistrano-rails'
-  gem 'fog'
 end
 
 group :test do
