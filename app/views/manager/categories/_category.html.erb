@@ -17,9 +17,9 @@
             <% end %>
 
             <% if category.visible %>
-              <%= link_to "Hide", change_appearance_manager_category_path(category), class: "btn btn-xs btn-outline btn-warning pull-right" %>
+              <%= link_to "Hide", change_appearance_manager_category_path(category), class: "btn btn-xs btn-outline btn-warning pull-right", data: { confirm: "Are you sure that you want to make category '#{ category.title }' invisible ?" }  %>
             <% else %>
-              <%= link_to "Release", change_appearance_manager_category_path(category), class: "btn btn-xs btn-outline btn-primary pull-right" %>
+              <%= link_to "Release", change_appearance_manager_category_path(category), class: "btn btn-xs btn-outline btn-primary pull-right",  data: { confirm: "Are you sure that you want to make category '#{ category.title }' visible ?" } %>
             <% end %>
           </div>
         </div>

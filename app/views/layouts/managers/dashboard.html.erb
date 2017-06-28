@@ -10,15 +10,10 @@
   </head>
 
   <body>
+    <%= render 'layouts/flash' %>
     <div id="wrapper">
       <%= render 'layouts/managers/navigation' %>
       <div id="page-wrapper" class="gray-bg">
-        <% flash.each do |key, message| %>
-          <div class="alert <%= key == 'error' ? 'alert-danger' : 'alert-info' %>">
-            <%= message %>
-          </div>
-        <% end %>
-
         <%= render 'layouts/managers/topnavbar' %>
         <%= yield %>
       </div>

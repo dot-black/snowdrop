@@ -4,6 +4,10 @@ class Manager::OrdersController < ApplicationController
   layout 'managers/dashboard'
 
   def index
+    unless params[:status].present?
+      flash[:notice] = "Parameter status must be present!"
+      redirect_to manager_dashboard_path
+    end
     @current_status = params[:status]
     @search_query = params[:search_query]
 
@@ -29,7 +33,7 @@ class Manager::OrdersController < ApplicationController
   def update
     respond_to do |format|
       if @order.update(_permitted_order_params)
-        format.html { redirect_to manager_order_path(status: "all") }
+        format.html { redirect_to manager_order_path(status: "all")}
         format.json { render :show, status: :ok, location: @order }
       else
         format.html { render :edit }

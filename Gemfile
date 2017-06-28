@@ -14,6 +14,7 @@ gem 'devise'
 gem 'redis', '~> 3.0'
 gem 'kaminari'
 gem 'carrierwave', '~> 1.0'
+gem "mini_magick"
 
 gem 'coffee-rails', '~> 4.2'
 gem 'sass-rails', '~> 5.0'
@@ -21,12 +22,12 @@ gem 'bootstrap-sass', '~> 3.3.7'
 gem 'uglifier', '>= 1.3.0'
 gem "font-awesome-rails"
 gem 'jquery-rails'
+gem 'fog'
 
 # gem 'therubyracer', platforms: :ruby
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-gem 'capistrano-rails', group: :development
 
 gem 'rails_12factor', group: :production
 
@@ -42,6 +43,7 @@ group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'capistrano-rails'
 end
 
 group :test do

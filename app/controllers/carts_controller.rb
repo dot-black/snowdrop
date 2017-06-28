@@ -1,7 +1,6 @@
 class CartsController < ApplicationController
   include CurrentCart
   before_action :_set_cart, only: [:show, :destroy]
-  # rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
 
   def show
     _set_cart_line_items
@@ -18,10 +17,4 @@ class CartsController < ApplicationController
       format.js
     end
   end
-
-  private
-
-    # def invalid_cart
-    #   logger.error "Attempt to access invalid cart #{params[:id]}" redirect_to products_path
-    # end
 end

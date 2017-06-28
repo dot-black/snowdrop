@@ -6,7 +6,10 @@ class ProductsController < ApplicationController
   before_action :_set_cart, only: [:index, :show]
 
   def index
-    redirect_to store_path unless @current_category = _current_category
+    unless @current_category = _current_category
+      flash[:notice] = "Category must be present!"
+      redirect_to store_path
+    end
     _set_cart_line_items
     _set_cart_counter @line_items
     @products = Product.shown.category(params[:category]).page( params[:page] )
@@ -17,7 +20,10 @@ class ProductsController < ApplicationController
   end
 
   def show
-    redirect_to products_path unless _enusre_product_and_category_visible!
+    unless _enusre_product_and_category_visible!
+      flash[:notice] = "Can't find such product!"
+      redirect_to store_path
+    end
     _set_cart_line_items
     _set_cart_counter @line_items
   end

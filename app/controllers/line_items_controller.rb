@@ -28,10 +28,12 @@ class LineItemsController < ApplicationController
         _set_cart_line_items
         _set_cart_total_amount @line_items
         _set_cart_counter @line_items
-        format.html { redirect_to new_order_path}
+        format.html { redirect_to new_order_path }
         format.json
         format.js
       else
+        flash[:warning] = "Can't update line item!"
+        format.html { redirect_to cart_path }
         format.json { render json: @line_item.errors, status: :unprocessable_entity }
       end
     end
@@ -48,7 +50,9 @@ class LineItemsController < ApplicationController
         format.json { head :no_content }
         format.js
       else
-      format.json { render json: @line_item.errors, status: :unprocessable_entity }
+        flash[:warning] = "Can't destroy line item!"
+        format.html { redirect_to cart_path }
+        format.json { render json: @line_item.errors, status: :unprocessable_entity }
       end
     end
   end
