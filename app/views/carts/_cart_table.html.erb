@@ -1,8 +1,12 @@
 <tbody>
   <% @line_items.each do |line_item| %>
     <tr>
-      <td><%= image_tag first_image(line_item.product), size: 64 %></td>
-      <td><%= line_item.product.title %></td>
+      <td>
+        <%=  link_to product_path(line_item.product) do %>
+          <%= image_tag first_image(line_item.product), size: 64 %>
+        <% end %>
+      </td>
+      <td class="title"><%= line_item.product.title %></td>
       <td>
         <% if line_item.quantity > 1 %>
           <%= link_to line_item_path(line_item, line_item:{ quantity: "#{line_item.quantity - 1}" }), method: :put, remote: true do  %>
@@ -16,7 +20,15 @@
           <i class="glyphicon glyphicon glyphicon-plus"></i>
         <% end  %>
        </td>
-      <td>Size: <%= line_item.size.upcase %></td>
+      <td>Size:
+        <% if line_item.product.category.complex %>
+          <%= line_item.size.to_a.join(" ") %>
+        <% elsif line_item.product.category.title.downcase == "bra" %>
+          <%= line_item.size["bra"] %>
+        <% else %>
+          <%= line_item.size["standard"] %>
+        <% end %>
+      </td>
       <td> <%= number_to_currency line_item.product.price %></td>
       <td>
         <%= link_to line_item_path(line_item), method: "delete", remote: true do  %>

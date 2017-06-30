@@ -11,8 +11,22 @@
       <h1><%= @product.title %></h1>
       <span><%= number_to_currency @product.price %></span>
       <%= form_for :line_item, url: line_items_path, remote: true  do |f| %>
-        <%= f.label :size %>
-        <%= f.select :size, options_for_select(@product.sizes_collection),{} ,{ class: "material-select" } %>
+        <% if @product.sizes.present? %>
+          <%= f.fields_for :size do |ff| %>
+            <% if @product.category.complex %>
+              <h2>Bra size:</h2>
+              <%= ff.select :bra, @product.sizes["bra"], {}, { class: "material-select" } %>
+              <h2>Brief size:</h2>
+              <%= ff.select :brief, @product.sizes["standard"], {}, { class: "material-select" } %>
+            <% elsif @product.category.title.downcase == "bra" %>
+              <h2>Bra size:</h2>
+              <%= ff.select :bra, @product.sizes["bra"], {}, { class: "material-select" } %>
+            <% else %>
+              <h2><%= @product.category.title %> size:</h2>
+              <%= ff.select :standard, @product.sizes["standard"], {}, { class: "material-select" } %>
+            <% end %>
+          <% end %>
+        <% end %>
         <%= f.hidden_field :product_id, value: @product.id   %>
 
         <div class="product-detailed-description">

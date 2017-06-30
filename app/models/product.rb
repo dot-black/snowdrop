@@ -1,5 +1,9 @@
 class Product < ApplicationRecord
-  enum size: { xs: 1, s: 2, m: 3, l: 4, xl: 5 }
+  enum size: {
+     standard: [ "XS", "S", "M", "L", "XL"],
+     bra: [ "70A", "70B", "70C", "75A", "75B", "75C", "75D", "80B", "80C", "85B", "85C" ]
+  }
+
   enum priority: { hi: 1, mid: 2, low: 3 }
 
   validates :title, :description, :category, presence: true
