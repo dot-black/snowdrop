@@ -23,6 +23,15 @@
   font-family: 'Roboto', 'Noto', sans-serif;
 }
 
+.table-container {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+}
+#cart-table {
+  max-width: 80%;
+  align-self: center;
+}
 
 .table > tbody > tr > td {
      vertical-align: middle;
@@ -36,11 +45,15 @@
 
 .checkout-box {
   display: inline-flex;
-  width: 100%;
+  width: 90%;
   align-items: center;
   flex-direction: row;
   justify-content: flex-end;
 }
 .checkout-box span {
     margin: 0 64px 0 24px;
+}
+
+.cart-total-amount{
+  margin-right: 10px;
 }

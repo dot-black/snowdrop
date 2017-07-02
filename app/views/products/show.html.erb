@@ -3,8 +3,9 @@
 <div class="container">
   <div class="product-detailed">
 
-    <div class="product-detailed-image">
-      <%= image_tag first_image(@product), size: 400 %>
+    <div class="product-detailed-images">
+      <!-- <%= image_tag first_image(@product), size: 400 %> -->
+      <%= render 'images_carousel'%>
     </div>
 
     <div class="product-detailed-details">
@@ -14,15 +15,15 @@
         <% if @product.sizes.present? %>
           <%= f.fields_for :size do |ff| %>
             <% if @product.category.complex %>
-              <h2>Bra size:</h2>
+              <%= ff.label :bra_size %>
               <%= ff.select :bra, @product.sizes["bra"], {}, { class: "material-select" } %>
-              <h2>Brief size:</h2>
+              <%= ff.label :brief_size %>
               <%= ff.select :brief, @product.sizes["standard"], {}, { class: "material-select" } %>
             <% elsif @product.category.title.downcase == "bra" %>
-              <h2>Bra size:</h2>
+              <%= ff.label :bra_size %>
               <%= ff.select :bra, @product.sizes["bra"], {}, { class: "material-select" } %>
             <% else %>
-              <h2><%= @product.category.title %> size:</h2>
+              <%= ff.label :size %>
               <%= ff.select :standard, @product.sizes["standard"], {}, { class: "material-select" } %>
             <% end %>
           <% end %>
