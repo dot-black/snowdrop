@@ -7,6 +7,7 @@ iphone:
   visible: true
   archive: false
   category: first_visible
+  sizes: {'standard':['regular', 'plus']}
 
 ipad:
   title: iPad
@@ -15,6 +16,7 @@ ipad:
   visible: true
   archive: false
   category: first_visible
+  sizes: {'standard':['regular', 'mini']}
 
 macbook_invisible:
   title: macbook
@@ -23,6 +25,7 @@ macbook_invisible:
   visible: false
   archive: true
   category: first_visible
+  sizes: {'standard':['13', '15']}
 
 macbook_arhive:
   title: macbook
@@ -31,6 +34,7 @@ macbook_arhive:
   visible: true
   archive: true
   category: first_visible
+  sizes: {'standard':['13', '15']}
 
 macbook_of_invisible_category:
   title: macbook
@@ -39,6 +43,7 @@ macbook_of_invisible_category:
   visible: true
   archive: false
   category: second_invisible
+  sizes: {'standard':['13', '15']}
 
 odd_product:
   title: odd_product
@@ -47,3 +52,4 @@ odd_product:
   visible: true
   archive: false
   category: third_to_delete
+  sizes: {'standard':['S', 'M']}
