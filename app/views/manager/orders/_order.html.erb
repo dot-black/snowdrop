@@ -18,7 +18,7 @@
                     <td><%= line_item.quantity %> X </td>
                     <td><%= image_tag first_image(line_item.product), size:128  %></td>
                     <td><%= line_item.product.title %></td>
-                    <td><%= line_item.size.upcase %></td>
+                    <td><%= line_item.size.to_a.join(' ') %></td>
                     <td><%= number_to_currency line_item.product.price %></td>
                   </tr>
                 <% end  %>

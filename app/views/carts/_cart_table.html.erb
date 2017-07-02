@@ -7,19 +7,19 @@
         <% end %>
       </td>
       <td class="title"><%= line_item.product.title %></td>
-      <td>
+      <%= content_tag :td, id: get_string_of_line_item_title_and_size(line_item) do %>
         <% if line_item.quantity > 1 %>
-          <%= link_to line_item_path(line_item, line_item:{ quantity: "#{line_item.quantity - 1}" }), method: :put, remote: true do  %>
+          <%= link_to line_item_path(line_item, line_item:{ quantity: "#{line_item.quantity - 1}" }), method: :put, remote: true, class: "minus-button" do  %>
             <i class="glyphicon glyphicon glyphicon-minus"></i>
           <% end  %>
         <% else %>
           <i class="glyphicon glyphicon glyphicon-minus"></i>
         <% end %>
         <%= content_tag :span, line_item.quantity %>
-        <%= link_to line_item_path(line_item, line_item:{ quantity: "#{line_item.quantity + 1}" }), method: :put, remote: true, class:"button" do  %>
+        <%= link_to line_item_path(line_item, line_item:{ quantity: "#{line_item.quantity + 1}" }), method: :put, remote: true, class: "plus-button" do  %>
           <i class="glyphicon glyphicon glyphicon-plus"></i>
         <% end  %>
-       </td>
+       <% end %>
       <td>Size:
         <% if line_item.product.category.complex %>
           <%= line_item.size.to_a.join(" ") %>

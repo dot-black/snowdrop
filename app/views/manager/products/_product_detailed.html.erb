@@ -33,9 +33,9 @@
                 </dd>
                 <dt>Avalible sizes</dt>
                 <dd>
-                  <% product.sizes.each do |size| %>
-                    <%= "#{ (Product.sizes.key size).upcase } " %>
-                  <% end %>
+                  <p><%= "Bra: #{product.sizes["bra"].to_a.join(" ")}" if product.sizes["bra"].present? %></p>
+                  <p><%= "Standard: #{product.sizes["standard"].to_a.join(" ")}" if product.sizes["standard"].present? %></p>
+
                 </dd>
                 <dt>Priority</dt>
                 <dd> <%= product.priority.upcase %> </dd>
