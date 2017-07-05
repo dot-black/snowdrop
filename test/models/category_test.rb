@@ -2,7 +2,7 @@ require 'test_helper'
 
 class CategoryTest < ActiveSupport::TestCase
   setup do
-    @catgory = categories(:third_to_delete)
+    @category = categories(:third_to_delete)
     @image = Rails.root.join("test/fixtures/files/image.png").open
   end
   def new_order
@@ -28,8 +28,8 @@ class CategoryTest < ActiveSupport::TestCase
   end
 
   test "products should be destoyed if category is destroyed" do
-    assert_difference 'Product.count', -@catgory.products.count do
-      @catgory.destroy
+    assert_difference 'Product.count', -@category.products.count do
+      @category.destroy
     end
   end
 end

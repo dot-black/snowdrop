@@ -14,3 +14,7 @@ second_invisible:
 
 third_to_delete:
   title: odd_category
+
+fourth_complex:
+  title: complex_category
+  complex: true  

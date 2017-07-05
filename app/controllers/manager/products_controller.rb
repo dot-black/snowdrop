@@ -1,5 +1,6 @@
 class Manager::ProductsController < ApplicationController
-  before_action :_set_product, only: [:show, :edit, :update, :destroy, :change_appearance, :archive, :remove_single_image]
+  before_action :_set_product, except:[:index, :archival,:new, :create]
+  before_action :_set_sizes, only: [:new, :edit]
   before_action :authenticate_manager!
   layout 'managers/dashboard'
 
@@ -101,8 +102,11 @@ class Manager::ProductsController < ApplicationController
       @product = Product.find(params[:id])
     end
 
+    def _set_sizes
+    end
+
     def _permitted_product_params
-      params.require(:product).permit(:title, :description, :price, :priority, :index, :category_id, {images: []}, sizes: [])
+      params.require(:product).permit(:title, :description, :price, :priority, :index, :category_id, {images: []}, sizes:[bra:[], brief:[], standard:[]])
     end
 
     def _filtering_params(params)

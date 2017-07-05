@@ -7,7 +7,8 @@ Dir.glob(Rails.root.join("app/assets/images/categories/*")).each do |category|
   Category.create(
     title: "#{current_category.capitalize}",
     image: Rails.root.join("app/assets/images/categories/#{current_category}/#{current_category}.jpg").open,
-    visible: [true, false].sample
+    visible: [true, false].sample,
+    complex: current_category == "bodysuite" ? true : false
   )
 end
 
@@ -19,13 +20,18 @@ CSV.foreach("public/example-names.csv") do |row|
     image = Pathname.new("#{Rails.root.join("app/assets/")}images/products/example-pictures/#{item}-#{$.}.jpg")
     images << image.open if image.exist?
   end
+  sizes = {
+    complex: { bra: Product.sizes[:bra].sample(5), standard: Product.sizes[:standard].sample(3) },
+    bra: { bra: Product.sizes[:bra].sample(5) },
+    standard: { standard: Product.sizes[:standard].sample(3) }
+  }
   Product.create(
     title: row.first,
     description: IO.read( "public/sample_description.txt" ),
     price: rand(1000),
     visible: [true, false].sample,
-    sizes: [rand(1..2), rand(3..4)],
-    category_id: Category.ids.sample,
+    category_id: id = Category.ids.sample,
+    sizes: ( Category.find(id).complex ? sizes[:complex] : ( Category.find(id).title.downcase == "bra" ? sizes[:bra] : sizes[:standard] )),
     archive: [true, false].sample,
     images: images
   )
@@ -48,7 +54,7 @@ Product.order("RANDOM()").limit(50).each do |product|
   LineItem.create!(
     cart_id: Cart.ids.sample,
     product_id: product.id,
-    size: product.sizes.sample,
+    size: ( product.category.complex ? { bra: product.sizes["bra"].sample , brief: product.sizes["standard"].sample } : product.category.title.downcase == "bra" ? { bra: product.sizes["bra"].sample } : { standard: product.sizes["standard"].sample } ),
     quantity: rand(1..10),
     order_id: Order.ids.sample
   )

@@ -58,7 +58,7 @@ class ClienStoriesTest < ActionDispatch::IntegrationTest
     iphone = products(:iphone)
 
     4.times do
-      post '/line_items', params: { line_item: { product_id: iphone.id, size: Product.sizes.values.first }}, xhr: true
+      post '/line_items', params: { line_item: { product_id: iphone.id, size: { standard: Product.sizes[:standard].first } }}, xhr: true
       assert_response :success
     end
 
@@ -72,10 +72,10 @@ class ClienStoriesTest < ActionDispatch::IntegrationTest
     Order.delete_all
     iphone = products(:iphone)
 
-    post '/line_items', params: { line_item: { product_id: iphone.id, size: Product.sizes.values.first }}, xhr: true
+    post '/line_items', params: { line_item: { product_id: iphone.id, size: { standard: Product.sizes[:standard].first } }}, xhr: true
     assert_response :success
 
-    post '/line_items', params: { line_item: { product_id: iphone.id, size: Product.sizes.values.second }}, xhr: true
+    post '/line_items', params: { line_item: { product_id: iphone.id, size: { standard: Product.sizes[:standard].second } }}, xhr: true
     assert_response :success
 
     cart = Cart.find(session[:cart_id])

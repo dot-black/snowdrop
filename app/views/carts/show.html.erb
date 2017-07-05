@@ -7,18 +7,15 @@
       </span>
   </div>
 
-  <table class="table", id="cart-table">
-    <%= render 'cart_table' %>
-  </table>
-
-  <div class="checkout-box">
-    <span>
-      <strong>Total:
-        <div id="cart-total-amount">
-          <%= render 'cart_total_amount' %>
-        </div>
-      <strong>
-    </span>
-    <%= link_to "Checkout", new_order_path,  class:"material-button" %>
+  <div class="table-container">
+    <table class="table", id="cart-table">
+      <%= render 'cart_table' %>
+    </table>
+    <div class="checkout-box">
+      <div id="cart-total-amount">
+        <%= render 'cart_total_amount' %>
+      </div>
+      <%= link_to "Checkout", new_order_path,  class:"material-button" %>
+    </div>
   </div>
 </div>

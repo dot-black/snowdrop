@@ -3,16 +3,30 @@
 <div class="container">
   <div class="product-detailed">
 
-    <div class="product-detailed-image">
-      <%= image_tag first_image(@product), size: 400 %>
+    <div class="product-detailed-images">
+      <%= render 'images_carousel'%>
     </div>
 
     <div class="product-detailed-details">
       <h1><%= @product.title %></h1>
       <span><%= number_to_currency @product.price %></span>
       <%= form_for :line_item, url: line_items_path, remote: true  do |f| %>
-        <%= f.label :size %>
-        <%= f.select :size, options_for_select(@product.sizes_collection),{} ,{ class: "material-select" } %>
+        <% if @product.sizes.present? %>
+          <%= f.fields_for :size do |ff| %>
+            <% if @product.category.complex %>
+              <%= ff.label :bra_size %>
+              <%= ff.select :bra, @product.sizes["bra"], {}, { class: "material-select" } %>
+              <%= ff.label :brief_size %>
+              <%= ff.select :brief, @product.sizes["standard"], {}, { class: "material-select" } %>
+            <% elsif @product.category.title.downcase == "bra" %>
+              <%= ff.label :bra_size %>
+              <%= ff.select :bra, @product.sizes["bra"], {}, { class: "material-select" } %>
+            <% else %>
+              <%= ff.label :size %>
+              <%= ff.select :standard, @product.sizes["standard"], {}, { class: "material-select" } %>
+            <% end %>
+          <% end %>
+        <% end %>
         <%= f.hidden_field :product_id, value: @product.id   %>
 
         <div class="product-detailed-description">
