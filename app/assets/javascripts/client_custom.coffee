@@ -4,12 +4,12 @@ ready = ->
 
   #Image madal
   $('.item img').click ->
-    $('#myModal').css('display','block')
-    $('#img01').attr('src', $(this).attr('src'))
+    $('#product-image-modal').css('display','block')
+    $('#full-screen-image').attr('src', $(this).attr('src'))
     $('#caption').html($(this).attr('alt'))
     return
   $('.close').click ->
-    $('#myModal').css('display','none')
+    $('#product-image-modal').css('display','none')
     return
 
 $(document).ready(ready)
