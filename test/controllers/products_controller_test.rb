@@ -2,10 +2,10 @@ require 'test_helper'
 
 class ProductsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @product_visible = products(:iphone)
-    @product_hiden = products(:macbook_invisible)
-    @product_archived = products(:macbook_invisible)
-    @product_of_invisible_category = products(:macbook_of_invisible_category)
+    @product_visible = products(:bra)
+    @product_hiden = products(:bra_invisible)
+    @product_archived = products(:bra_archive)
+    @product_of_invisible_category = products(:brief_invisible_category)
   end
 
   test "should get to products of visible category" do

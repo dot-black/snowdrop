@@ -1,49 +1,49 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-iphone:
-  title: iPhone
-  description: The brand new iPhone
+bra:
+  title: Ari Dar Bra The First
+  description: Super duper bra
   price: 12.99
   visible: true
   archive: false
   category: first_visible
-  sizes: {'standard':['regular', 'plus']}
+  sizes: {'bra':['70A', '80B']}
 
-ipad:
-  title: iPad
-  description: The brand new iPad
+new_bra:
+  title: Ari Dar Bra The Second
+  description: The best bra ever
   price: 21.99
   visible: true
   archive: false
   category: first_visible
-  sizes: {'standard':['regular', 'mini']}
+  sizes: {'bra':['70A', '80B']}
 
-macbook_invisible:
-  title: macbook
-  description: The brand new macbook
+bra_invisible:
+  title: Ari Dar Bra The Third (unreleased)
+  description: The best bra ever made
+  price: 100
+  visible: false
+  archive: false
+  category: first_visible
+  sizes: {'bra':['70A', '80B']}
+
+bra_archive:
+  title: Ari Dar Bra (archive)
+  description: Original Ari Dar bra
   price: 100
   visible: false
   archive: true
   category: first_visible
-  sizes: {'standard':['13', '15']}
+  sizes: {'bra':['70A', '80B']}
 
-macbook_arhive:
-  title: macbook
-  description: The brand new macbook
-  price: 100
-  visible: true
-  archive: true
-  category: first_visible
-  sizes: {'standard':['13', '15']}
-
-macbook_of_invisible_category:
-  title: macbook
-  description: The brand new macbook
+brief_invisible_category:
+  title: Ari Dar Brief (new kind of product)
+  description: Original Ari Dar brief
   price: 100
   visible: true
   archive: false
   category: second_invisible
-  sizes: {'standard':['13', '15']}
+  sizes: {'standard':['S', 'M']}
 
 odd_product:
   title: odd_product
