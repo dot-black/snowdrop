@@ -20,8 +20,19 @@ ready = ->
   #Flash toast animation
   $('.toast').delay(3000).fadeOut(600);
 
+  #Image madal
+  $('.manager-product-image').click ->
+    $('#product-image-modal').css('display','block')
+    $('#full-screen-image').attr('src', $(this).attr('src'))
+    $('#caption').html($(this).attr('alt'))
+    return
+  $('.close').click ->
+    $('#product-image-modal').css('display','none')
+    return
+
 #Form select switch for sizes
 form_select_disabler = ->
+  $("#manager-product-category").selectpicker('refresh')
   sizes =  if $("#hiden-manager-sizes").length then jQuery.parseJSON($("#hiden-manager-sizes").val()) else null
   switch $('#manager-product-category option:selected').text()
     when "Bra"
