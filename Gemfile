@@ -16,20 +16,21 @@ gem 'kaminari'
 gem 'carrierwave', '~> 1.0'
 gem "mini_magick"
 
-gem 'coffee-rails', '~> 4.2'
 gem 'sass-rails', '~> 5.0'
-gem 'bootstrap-sass', '~> 3.3.7'
+gem 'coffee-rails', '~> 4.2'
 gem 'uglifier', '>= 1.3.0'
+gem 'bootstrap-sass', '~> 3.3.7'
 gem "font-awesome-rails"
 gem 'jquery-rails'
-gem 'fog'
 
 # gem 'therubyracer', platforms: :ruby
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-
-gem 'rails_12factor', group: :production
+group :production do
+  gem 'fog'
+  gem 'rails_12factor'
+end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
