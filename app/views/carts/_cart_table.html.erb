@@ -7,7 +7,7 @@
         <% end %>
       </td>
       <td class="title"><%= line_item.product.title %></td>
-      <%= content_tag :td, id: get_string_of_line_item_title_and_size(line_item) do %>
+      <%= content_tag :td do %>
         <% if line_item.quantity > 1 %>
           <%= link_to line_item_path(line_item, line_item:{ quantity: "#{line_item.quantity - 1}" }), method: :put, remote: true, class: "minus-button" do  %>
             <i class="glyphicon glyphicon glyphicon-minus"></i>
