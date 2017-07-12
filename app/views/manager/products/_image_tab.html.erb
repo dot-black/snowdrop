@@ -2,36 +2,15 @@
   <div class="panel-body">
     <div class="row">
       <div class="col-lg-12">
-        <%= form.file_field :images, multiple: true %>
+        <%= form.file_field :images, multiple: true, id: "manager-product-images-upload" %>
       </div>
     </div>
-
     <br>
-
-    <div class="table-responsive">
-      <table class="table table-bordered table-stripped">
-        <thead>
-          <tr>
-            <th>Image preview</th>
-            <th></th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <% if @product.valid? %>
-            <% @product.images.each_with_index do |image, index| %>
-              <tr>
-                <td><%= image_tag image, class: "img-md" %></td>
-                <td>
-                  <%= link_to remove_single_image_manager_product_path(@product, index: index), class: "btn btn-white" do %>
-                    <i class="fa fa-trash"></i>
-                  <% end %>
-                </td>
-              </tr>
-            <% end %>
-          <% end %>
-        </tbody>
-      </table>
+    <div class="table-responsive" id="image-tab-table">
+      <%= render "image_tab_table" %>
     </div>
   </div>
 </div>
+
+<!-- The Modal -->
+<%= render "image_modal" %>
