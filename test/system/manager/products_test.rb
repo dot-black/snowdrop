@@ -31,24 +31,4 @@ class Manager::ProductsTest < ApplicationSystemTestCase
     has_no_content? @product_visible.title
     has_content? @product_invisible.title
   end
-
-  test 'check new' do
-    #Check validation
-    click_on "New"
-    click_on "Create Product"
-    has_content? '6 errors prohibited this category from being saved:'
-    fill_in 'Title', with: 'some title'
-    fill_in 'Price', with: "12,99"
-    click_on "Select category"
-    sleep
-    find('span', text: "Brief").first(:xpath, '..//..').click
-
-    click_on "Pick bra sizes"
-    find('span', text: "S").first(:xpath, '..//..').click
-
-
-  end
-
-
-
 end
