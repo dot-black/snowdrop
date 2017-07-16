@@ -18,6 +18,5 @@
 //= require base/sweetalert.min.js
 //= require base/jquery.slimscroll.min.js
 //= require base/jquery.barrating.min
-//= require base/bootstrap-select.js
 //= require inspinia.js
 //= require manager_custom

@@ -30,41 +30,7 @@ ready = ->
     $('#product-image-modal').css('display','none')
     return
 
-#Form select switch for sizes
-form_select_disabler = ->
-  $("#manager-product-category").selectpicker('refresh')
-  sizes =  if $("#hiden-manager-sizes").length then jQuery.parseJSON($("#hiden-manager-sizes").val()) else null
-  switch $('#manager-product-category option:selected').text()
-    when "Bra"
-      $('#manager-bra-sizes')
-        .attr('disabled', false)
-        .selectpicker('refresh')
-      $('#manager-standard-sizes')
-        .attr('disabled', true)
-        .selectpicker("deselectAll")
-        .selectpicker('refresh')
-      if sizes then $('#manager-bra-sizes').selectpicker('val', sizes["bra"])
-    when "Bodysuite"
-      $('#manager-bra-sizes')
-        .attr('disabled', false)
-        .selectpicker('refresh')
-      $('#manager-standard-sizes')
-        .attr('disabled', false)
-        .selectpicker('refresh')
-      if sizes then $('#manager-bra-sizes').selectpicker('val', sizes["bra"])
-      if sizes then $('#manager-standard-sizes').selectpicker('val', sizes["standard"])
-    else
-      $('#manager-bra-sizes')
-        .attr('disabled', true)
-        .selectpicker("deselectAll")
-        .selectpicker('refresh')
-      $('#manager-standard-sizes')
-        .attr('disabled', false)
-        .selectpicker('refresh')
-      if sizes then $('#manager-standard-sizes').selectpicker('val', sizes["standard"])
-  return
 
-$(document).ready ready, form_select_disabler
-$(document).on 'page:load', ready, form_select_disabler
-$(document).on 'turbolinks:load', ready, form_select_disabler
-$(document).on 'change','#manager-product-category', form_select_disabler
+$(document).ready ready
+$(document).on 'page:load', ready
+$(document).on 'turbolinks:load', ready
