@@ -35,10 +35,11 @@ CSV.foreach("public/example-names.csv") do |row|
     archive: [true, false].sample,
     images: images
   )
+  break if $. > 20
 end
 
 #Orders and Carts
-100.times do |count|
+10.times do |count|
   Cart.create!
   Order.create!(
     name:"User-#{count}",
