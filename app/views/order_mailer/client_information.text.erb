@@ -1,0 +1,12 @@
+Thank you for your order!
+
+You've just made an order. Our manager will contact with you to confirm the it.
+
+Details of order:
+<% @order.line_items.each do |line_item| %>
+  <%= line_item.quantity %>x <%= line_item.product.title %> [<%= line_item.size.values.join(" / ") %>]
+    <%= number_to_currency(line_item.quantity * line_item.product.price) %>
+<% end %>
+
+Total:
+  <%= number_to_currency @order.amount %>

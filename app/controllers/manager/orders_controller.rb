@@ -31,8 +31,11 @@ class Manager::OrdersController < ApplicationController
   end
 
   def update
+    @send_email = params[:send_email]
     respond_to do |format|
       if @order.update(_permitted_order_params)
+        OrderMailer.manager_information(@order).deliver
+        OrderMailer.client_confirmation(@order).deliver if @send_email
         format.html { redirect_to manager_order_path(status: "all")}
         format.json { render :show, status: :ok, location: @order }
       else

@@ -18,6 +18,8 @@ class OrdersController < ApplicationController
     respond_to do |format|
       if @order.save
         _destroy_cart
+        OrderMailer.manager_information(@order).deliver
+        OrderMailer.client_information(@order).deliver
         flash[:notice] = "Thank you for your order!"
         format.html { redirect_to store_path }
         format.json { render :show, status: :created, location: @order }

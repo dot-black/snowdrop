@@ -2,7 +2,8 @@
   <div class="col-lg-12">
     <%= form_for [:manager, @order], method: "put" do |f| %>
       <div class="ibox-title">
-        <%= select_tag "order[status]", options_for_select(Order.statuses.keys, @order.status), class:"selectpicker" %>
+        <%= select_tag "order[status]", options_for_select(Order.statuses.keys, @order.status)%>
+          Send email to client <%= check_box_tag :send_email, true, false %>
         <small class="pull-right text-muted">Order #<%= @order.id  %> Created: <%= @order.created_at.strftime("%a %b %d %Y - %H:%M:%S") %></small>
       </div>
 
@@ -36,6 +37,12 @@
             <div class="chat-user">
               <div class="chat-user-name">
                 <strong>Email: </strong><%=@order.email%>
+              </div>
+            </div>
+
+            <div class="chat-user">
+              <div class="chat-user-name">
+                <strong>Telephone: </strong><%= @order.telephone %>
               </div>
             </div>
 
