@@ -32,7 +32,8 @@ Rails.application.routes.draw do
 
   get :cart, to: 'carts#show'
   resources :orders
-  resources :products, only: [:index, :show]
+  resources :products, only: [:show]
+  get 'list/:category', to: 'products#index', as: 'category_products'
 
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

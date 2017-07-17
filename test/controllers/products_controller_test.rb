@@ -9,12 +9,12 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get to products of visible category" do
-    get products_url(category: categories(:first_visible).id)
+    get category_products_path(category: categories(:first_visible).title.downcase)
     assert_response :success
   end
 
   test "should not get to products of invisible category" do
-    get products_url(category: categories(:second_invisible).id)
+    get category_products_path(category: categories(:second_invisible).title.downcase)
     assert_response :redirect
   end
 
