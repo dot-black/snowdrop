@@ -7,23 +7,21 @@ class OrderMailer < ApplicationMailer
   #
   def client_information order
     @order = order
-    mail to: order.email, subject: "ARI DAR LINGERIE order"
+    mail to: order.email, subject: "ARI DAR LINGERIE order #{order.id}"
   end
-
-
-  def manager_information order
-    @order = order
-    if Rails.env.production?
-      mail to: ENV['GMAIL_NAME'],subject: "Order #{order.id} from #{order.name} / status: #{order.status}"
-    else
-      mail to: 'vdavyden@gmail.com',subject: "Order #{order.id} from #{order.name} / status: #{order.status}"
-    end
-  end
-
 
   def client_confirmation order
     @order = order
     mail to: order.email,
-         subject: "ARI DAR LINGERIE order"
+         subject: "ARI DAR LINGERIE order #{order.id}"
   end
+
+  def manager_information order
+    @order = order
+    mailto = Rails.env.production? ?  ENV['GMAIL_NAME'] : 'aridar@example.com'
+    mail to: mailto,subject: "Order #{order.id} from #{order.name} / status: #{order.status}"
+  end
+
+
+
 end
