@@ -38,4 +38,7 @@ module ManagerHelper
     nil
   end
 
+  def pending_orders_counter
+    Order.where(status: 'pending').count
+  end  
 end
