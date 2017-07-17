@@ -36,11 +36,11 @@ class ProductsController < ApplicationController
     end
 
     def _category_available?
-      Category.exists?(["lower(title) = ?", params[:category]]) and Category.where('lower(title) = ?', params[:category]).take.visible
+      Category.exists?(["lower(title) = ?", params[:category].gsub("_", " ")]) and Category.where('lower(title) = ?', params[:category].gsub("_", " ")).take.visible
     end
 
     def _current_category
-      ( params[:category].present? and _category_available? ) ?  Category.where('lower(title) = ?', params[:category]).take : nil
+      ( params[:category].present? and _category_available? ) ?  Category.where('lower(title) = ?', params[:category].gsub("_", " ")).take : nil
     end
 
 end
