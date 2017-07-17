@@ -5,16 +5,16 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
     @product_visible = products(:bra)
     @product_hiden = products(:bra_invisible)
     @product_archived = products(:bra_archive)
-    @product_of_invisible_category = products(:brief_invisible_category)
+    @product_of_invisible_category = products(:panties_invisible_category)
   end
 
   test "should get to products of visible category" do
-    get category_products_path(category: categories(:first_visible).title.downcase)
+    get category_products_path(category: categories(:first_visible).title.downcase.downcase.gsub(" ","_"))
     assert_response :success
   end
 
   test "should not get to products of invisible category" do
-    get category_products_path(category: categories(:second_invisible).title.downcase)
+    get category_products_path(category: categories(:second_invisible).title.downcase.gsub(" ","_"))
     assert_response :redirect
   end
 

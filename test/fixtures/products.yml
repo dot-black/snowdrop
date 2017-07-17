@@ -36,9 +36,9 @@ bra_archive:
   category: first_visible
   sizes: {'bra':['70A', '80B']}
 
-brief_invisible_category:
-  title: Ari Dar Brief (new kind of product)
-  description: Original Ari Dar brief
+panties_invisible_category:
+  title: Ari Dar Panties (new kind of product)
+  description: Original Ari Dar panties
   price: 100
   visible: true
   archive: false

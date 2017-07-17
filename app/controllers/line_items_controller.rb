@@ -59,7 +59,7 @@ class LineItemsController < ApplicationController
 
   private
     def _permitted_line_item_params
-      params.require(:line_item).permit(:product_id, :quantity, size:[:bra, :brief, :standard])
+      params.require(:line_item).permit(:product_id, :quantity, size:[:bra, :panties, :standard])
     end
 
     def _set_line_item
