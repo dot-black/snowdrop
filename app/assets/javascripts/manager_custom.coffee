@@ -14,9 +14,6 @@ ready = ->
   $("#clear_search").on 'click', ->
     $("#search_query").val('')
 
-  # Import bootstrap-selecr
-  $('.selectpicker').selectpicker()
-
   #Flash toast animation
   $('.toast').delay(3000).fadeOut(600);
 
