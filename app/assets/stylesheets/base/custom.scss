@@ -95,3 +95,7 @@ table {
 .product-imitation{
   padding: 0px;
 }
+
+.nav.nav-second-level.collapse.in li a > span {
+  display: -webkit-inline-box;
+}
