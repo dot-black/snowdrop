@@ -5,9 +5,11 @@ one:
   order: one
   cart: one
   quantity: 2
+  size: {'bra':'70A'}
 
 two:
   product: new_bra
   cart: one
   order: two
   quantity: 3
+  size: {'bra':'70A'}

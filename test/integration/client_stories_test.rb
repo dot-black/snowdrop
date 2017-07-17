@@ -13,12 +13,12 @@ class ClienStoriesTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_template "index"
 
-    post '/line_items', params: { line_item: { product_id: bra.id }}, xhr: true
+    post '/line_items', params: { line_item: { product_id: bra.id, size: { bra: bra.sizes["bra"].first} }}, xhr: true
     assert_response :success
 
     cart = Cart.find(session[:cart_id])
     assert_equal 1, cart.line_items.size
-    assert_equal bra, cart.line_items[0].product
+    assert_equal bra, cart.line_items.first.product
 
     get "/orders/new"
     assert_response :success
@@ -72,10 +72,10 @@ class ClienStoriesTest < ActionDispatch::IntegrationTest
     Order.delete_all
     bra = products(:bra)
 
-    post '/line_items', params: { line_item: { product_id: bra.id, size: { standard: Product.sizes[:standard].first } }}, xhr: true
+    post '/line_items', params: { line_item: { product_id: bra.id, size: { bra: Product.sizes[:bra].first } }}, xhr: true
     assert_response :success
 
-    post '/line_items', params: { line_item: { product_id: bra.id, size: { standard: Product.sizes[:standard].second } }}, xhr: true
+    post '/line_items', params: { line_item: { product_id: bra.id, size: { bra: Product.sizes[:bra].second } }}, xhr: true
     assert_response :success
 
     cart = Cart.find(session[:cart_id])
