@@ -12,6 +12,58 @@
       <div class="ibox float-e-margins">
 
         <div class="ibox-title">
+          <span class="label label-warning pull-right">Total</span>
+          <h5>Orders</h5>
+        </div>
+
+        <div class="ibox-content">
+          <h1 class="no-margins"><%= @orders_count[:pending] %></h1>
+          <div class="stat-percent font-bold text-success">
+            <%=number_to_percentage @orders_percentage[:pending], precision: 0 %>
+            <i class="fa fa-bolt"></i>
+          </div>
+          <small>Pending</small>
+        </div>
+
+        <div class="ibox-content">
+          <h1 class="no-margins"><%= @orders_count[:accepted] %></h1>
+          <div class="stat-percent font-bold text-success">
+            <%=number_to_percentage @orders_percentage[:accepted], precision: 0 %>
+            <i class="fa fa-bolt"></i>
+          </div>
+          <small>Accepted</small>
+        </div>
+
+        <div class="ibox-content">
+          <h1 class="no-margins"><%= @orders_count[:completed] %></h1>
+          <div class="stat-percent font-bold text-success">
+            <%=number_to_percentage @orders_percentage[:completed], precision: 0 %>
+            <i class="fa fa-bolt"></i>
+          </div>
+          <small>Comleted</small>
+        </div>
+
+        <div class="ibox-content">
+          <h1 class="no-margins"><%= @orders_count[:declined] %></h1>
+          <div class="stat-percent font-bold text-success">
+            <%=number_to_percentage @orders_percentage[:declined], precision: 0 %>
+            <i class="fa fa-bolt"></i>
+          </div>
+          <small>Declined</small>
+        </div>
+
+        <div class="ibox-content">
+          <h1 class="no-margins"><%= @orders_count[:total]%></h1>
+          <!-- <div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div> -->
+          <small>Total count</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-6">
+      <div class="ibox float-e-margins">
+
+        <div class="ibox-title">
           <span class="label label-success pull-right">Total</span>
           <h5>Products</h5>
         </div>

@@ -15,8 +15,8 @@
 
         <li>
           <%= link_to nil, class: "count-info" do %>
-            <i class="fa fa-envelope"></i>
-            <span class="label label-warning">14</span>
+            <i class="fa fa-tasks"></i>
+            <span class="label label-warning"> <%= @orders_count[:pending]  %></span>
           <% end %>
         </li>
 
