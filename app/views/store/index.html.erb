@@ -1,13 +1,13 @@
 <%= render partial: "categories" %>
 <% @categories.each do |category|  %>
   <div class="category-item">
-    <%= link_to category_products_path(category: category.title.downcase.downcase.gsub(" ","_")) do %>
+    <%= link_to category_products_path(category: category.title.parameterize.underscore) do %>
       <%= image_tag category_image(category.image), class: "category-image" %>
     <% end %>
     <h2><%= category.title %></h2>
 
     <div class="category-button">
-      <%= link_to "Shop now", category_products_path(category: category.title.downcase.downcase.gsub(" ","_")), class: "material-button" %>
+      <%= link_to "Shop now", category_products_path(category: category.title.parameterize.underscore), class: "material-button" %>
     </div>
   </div>
 <% end %>

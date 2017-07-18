@@ -1,8 +1,8 @@
-<div class="navbar" >
+<div class="navbar">
   <div class="items-toolbar">
     <% @categories.each do |category| %>
       <div class="toolbar-item">
-        <%= link_to category.title.pluralize(2) , category_products_path(category: category.title.downcase.downcase.gsub(" ","_") ), class: "btn btn-default" %>
+        <%= link_to category.title.pluralize(2), category_products_path(category: category.title.parameterize.underscore), class: "btn btn-default" %>
       </div>
     <% end  %>
   </div>

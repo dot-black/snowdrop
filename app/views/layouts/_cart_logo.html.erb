@@ -1,6 +1,6 @@
 <%= link_to cart_path, class:"btn btn-default" do %>
   <i class="glyphicon glyphicon-shopping-cart"></i>
-  <% if @cart_line_items_quantity.present? and @cart_line_items_quantity > 0 %>
+  <% if @cart_line_items_quantity.present? %>
     <div class="cart-badge" id="cart-badge">
       <%= @cart_line_items_quantity %>
     </div>

@@ -33,7 +33,7 @@ Rails.application.routes.draw do
   get :cart, to: 'carts#show'
   resources :orders
   resources :products, only: [:show]
-  get 'list/:category', to: 'products#index', as: 'category_products'
+  get 'category/:category', to: 'products#index', as: 'category_products'
   get :cart_items_count, to: "store#get_cart_items_count"
 
 
