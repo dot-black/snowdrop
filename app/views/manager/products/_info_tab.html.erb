@@ -28,16 +28,16 @@
         <%= form.label :sizes, class:"col-sm-2 control-label" %>
         <%= form.fields_for :sizes do |ff| %>
           <% Product.sizes.each do |key, value| %>
-              <div class="col-sm-10">
-                <% value.each do |size|  %>
-                <% if @product.sizes[key].present? and @product.sizes[key].include? size %>
-                  <%= ff.check_box key,{ multiple: true, checked: true }, size, false %>
+            <div class="col-sm-10">
+              <% value.each do |size|  %>
+                <% if @product.sizes and @product.sizes[key].present? and @product.sizes[key].include?(size) %>
+                  <%= ff.check_box key, { multiple: true, checked: true }, size, false %>
                 <% else %>
-                  <%= ff.check_box key,{ multiple: true, checked: false }, size, false %>
+                  <%= ff.check_box key, { multiple: true, checked: false }, size, false %>
                 <% end %>
-                  <%= ff.label size %>
-                <% end %>
-              </div>
+                <%= ff.label size %>
+              <% end %>
+            </div>
           <% end %>
         <% end %>
 
