@@ -1,10 +1,8 @@
 class LineItemsController < ApplicationController
   include CurrentCart
-  before_action :_set_line_item, only: [:update, :destroy]
-  before_action :_set_cart, only: [:create, :update, :destroy]
-  before_action :_ensure_cart_isnt_empty, only: :update
 
   def create
+    _set_cart
     product = Product.find(params[:line_item][:product_id])
     @line_item = @cart.add_product(_permitted_line_item_params)
     respond_to do |format|
@@ -23,6 +21,9 @@ class LineItemsController < ApplicationController
   end
 
   def update
+    _set_line_item
+    _set_cart
+    _ensure_cart_isnt_empty
     respond_to do |format|
       if @line_item.update _permitted_line_item_params
         _set_cart_line_items
@@ -41,6 +42,8 @@ class LineItemsController < ApplicationController
   end
 
   def destroy
+    _set_line_item
+    _set_cart
     respond_to do |format|
       if @line_item.destroy
         _set_cart_line_items

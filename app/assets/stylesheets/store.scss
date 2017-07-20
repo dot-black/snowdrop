@@ -1,138 +1,67 @@
-// Place all the styles related to the store controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+// GLOBAL FONT
 * {
     font-family: 'Roboto', 'Noto', sans-serif;
   }
-.navbar {
+// NAVBAR
+.navbar{
+  border: none;
   height: 64px;
-  padding: 0 16px;
+  margin-bottom: 0px;
+  a.menu-btn {
+    padding-top: 8px;
+    color: black;
+    text-decoration: none;
+  }
+}
+.app-navbar {
+  height: 64px;
+  padding-top: 10px;
+  margin-bottom: 0px;
+  text-align: center;
   background-color: #FFFFFF;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  margin-bottom: 0;
-}
 
-.app-toolbar {
-  height: 64px;
-  width: 100%;
-  display: inline-flex;
-  align-items: center;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.items-toolbar {
-  height: 66px;
-  display: inline-flex;
-  align-items: center;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-
-.store-logo{
-  text-transform: uppercase;
-  text-align: center;
-  padding-left: 60px;
-  flex: 1;
-}
-
-.cart-logo{
-  margin: 0;
-  padding: 8px;
-  flex-basis: 40px;
-
-}
-
-.store-logo a {
-  font-size: 16px;
-  font-weight: 600;
-  letter-spacing: 0.3em;
-  color: #202020;
-  text-decoration: none;
-  font-family: 'Roboto', 'Noto', sans-serif;
-
-}
-.cart-logo i {
-  font-size: 20px;
-  color: #202020;
-}
-.cart-logo a{
-  border: none;
-}
-.toolbar-item{
-  margin: 0 10px;
-}
-.toolbar-item a{
-  font-size: 13px;
-  font-weight: 500;
-  color: #202020;
-  font-family: 'Roboto', 'Noto', sans-serif;
-  text-decoration: none;
-  padding: 9px 5px;
-  border: none;
-}
-.category-item {
-  height: auto;
-  padding-bottom: 23px;
-  margin-bottom: 33px;
-  width: 100%;
-  text-align: center;
-  overflow: hidden;
-}
-.category-item h2 {
-  height: 25px;
-  margin-top: 32px;
-  margin-bottom: 32px;
-  font-size: 1.2em;
-  font-weight: 500;
-  font-family: 'Roboto', 'Noto', sans-serif;
-}
-.category-button {
-  height: 21px;
-  margin: 0px;
-  padding: 8px 44px;
-
-  @media (max-width: 680px) {
-    padding: 0px 0px;
+  .menu-logo{
+    margin-top: 9px;
+    padding-left: 22px;
+    i {
+      color: #202020;
+    }
   }
-}
-.material-button {
-  position: relative;
-  box-sizing: border-box;
-  border: 2px solid #000;
-  background-color: #FFF;
-  font-size: 14px;
-  font-weight: 500;
-  color: #202020;
-  margin: 0px;
-  padding: 8px 44px;
-  text-decoration: none;
-  text-transform: uppercase;
-  border-radius: 0;
-  outline: none;
-  line-height: 1.5;
-  &:hover {
-   text-decoration: none;
+  .store-logo{
+    margin-top: 11px;
+    text-transform: uppercase;
+    a {
+      font-size: 1.2em;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      color: #202020;
+      text-decoration: none;
+    }
   }
-
-  @media (max-width: 680px) {
-    padding: 16px 30%;
+  .cart-logo{
+    align-items: center;
+    i {
+      position: absolute;
+      top: 9px;
+      right: 27px;
+      width: 20px;
+      height: 20px;
+      color: #202020;
+    }
+    a{
+      border: none;
+    }
   }
-}
-
-.cart-badge {
+  .cart-badge {
     position: absolute;
-    top: 9px;
-    right: 24px;
+    top: 0px;
+    right: 14px;
     width: 20px;
     height: 20px;
     background-color: #172C50;
     border-radius: 50%;
     color: white;
-    font-size: 12px;
+    font-size: 0.8em;
     font-weight: 500;
     pointer-events: none;
     display: -ms-flexbox;
@@ -147,4 +76,95 @@
     -ms-flex-pack: center;
     -webkit-justify-content: center;
     justify-content: center;
+  }
+}
+
+//TOOLBAR
+.app-toolbar {
+  height: 66px;
+  text-align: center;
+  .nav-tabs {
+    padding-top: 13px;
+    border-bottom: none;
+    text-align:center;
+  }
+  .nav-tabs > li {
+    float:none;
+    display:inline-block;
+  }
+  a{
+    padding: 9px 5px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #202020;
+    text-decoration: none;
+    border: none;
+  }
+}
+// CATEGORIES
+
+.category-item {
+  width: 100%;
+  padding-bottom: 23px;
+  margin-bottom: 33px;
+  text-align: center;
+  overflow: hidden;
+  h2 {
+    height: 25px;
+    margin-top: 32px;
+    margin-bottom: 32px;
+    font-size: 1.2em;
+    font-weight: 500;
+  }
+  .category-button {
+    height: 21px;
+    margin: 0px;
+    padding: 8px 44px;
+    @media (max-width: 768px) {
+      padding: 0px 0px;
+    }
+    .material-button {
+      position: relative;
+      box-sizing: border-box;
+      border: 2px solid #000;
+      background-color: #FFF;
+      font-size: 14px;
+      font-weight: 500;
+      color: #202020;
+      margin: 0px;
+      padding: 8px 44px;
+      text-decoration: none;
+      text-transform: uppercase;
+      border-radius: 0;
+      outline: none;
+      line-height: 1.5;
+      &:hover {
+       text-decoration: none;
+      }
+      @media (max-width: 768px) {
+        padding: 16px 30%;
+      }
+    }
+  }
+}
+
+//MOBILE IMAGE CROP
+.content {
+  width: 100%;
+  text-align: center;
+  overflow: hidden;
+  img {
+    position: relative;
+    height: 320px;
+    left: 100%;
+    margin-left: -200%;
+  }
+  @media (max-width: 768px) {
+    img {
+      position: relative;
+      height: 240px;
+      left: 100%;
+      margin-left: -200%;
+    }
+  }
 }

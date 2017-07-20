@@ -1,8 +1,8 @@
 <%= render partial: "categories" %>
 <% @categories.each do |category|  %>
   <div class="category-item">
-    <%= link_to category_products_path(category: category.title.parameterize.underscore) do %>
-      <%= image_tag category_image(category.image), class: "category-image" %>
+    <%= link_to category_products_path(category: category.title.parameterize.underscore), class: "content" do %>
+      <%= image_tag category_image(category.image) %>
     <% end %>
     <h2><%= category.title %></h2>
 

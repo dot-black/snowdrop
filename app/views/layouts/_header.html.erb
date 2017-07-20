@@ -1,9 +1,37 @@
-<header class="navbar">
-  <div class="app-toolbar">
-    <div class="store-logo">
-      <%= link_to t("application_name"), store_path %>
-    </div>
-  <div class="cart-logo">
+<nav id="myNavmenu" class="navmenu navmenu-default navmenu-fixed-left offcanvas" role="navigation">
+  <%= link_to t("application_name_short"), store_path, class: "navmenu-brand" %>
+
+  <ul class="nav navmenu-nav">
+    <% @categories.each do |category| %>
+      <li class="<%= category == @current_category ? 'active' : '' %>">
+        <%= link_to category.title.pluralize(2) , category_products_path(category: category.title.parameterize.underscore ) %>
+      </li>
+    <% end  %>
+  </ul>
+
+</nav>
+<div class="navbar navbar-default container-fluid app-navbar">
+  <div class="col-xs-2">
+    <a href="#" class="menu-btn material-icons md-24 visible-xs pull-left"
+      data-toggle="offcanvas"
+      data-target="#myNavmenu"
+      data-canvas="body">
+      <span>
+        <i class="menu-btn material-icons md-24 visible-xs pull-left">
+           menu
+        </i>
+      </span>
+    </a>
+  </div>
+
+  <div class="col-xs-8 visible-xs text-center store-logo">
+    <%= link_to t("application_name_short"), store_path %>
+  </div>
+  <div class="col-sm-8 col-md-8 col-lg-8 hidden-xs text-center store-logo">
+    <%= link_to t("application_name"), store_path %>
+  </div>
+
+  <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 cart-logo">
     <%= render "layouts/cart_logo" %>
   </div>
-</header>
+</div>
