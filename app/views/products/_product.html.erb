@@ -1,15 +1,19 @@
-<%= link_to product_path(product) do %>
-  <div class="product-basic">
-    <div class="product-image">
-      <%= image_tag first_image(product), size: 400 %>
-    </div>
+<div class="oriented">
+  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+    <%= link_to product_path(product) do %>
+      <div class="product-basic">
+        <div class="product-image">
+          <%= image_tag first_image(product), class: "img-responsive" %>
+        </div>
 
-    <div class="product-basic-title">
-      <%= product.title %>
-    </div>
+        <div class="product-basic-title text-center">
+          <%= product.title %>
+        </div>
 
-    <div class="product-basic-price">
-      <%= number_to_currency product.price %>
-    </div>
+        <div class="product-basic-price">
+          <%= number_to_currency product.price %>
+        </div>
+      </div>
+    <% end %>
   </div>
-<% end  %>
+</div>

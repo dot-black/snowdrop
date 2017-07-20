@@ -1,16 +1,21 @@
 <%= render partial: "categories" %>
 
 <div class="container">
-  <div class="product-detailed">
+  <%= form_for :line_item, url: line_items_path, remote: true  do |f| %>
+  <div class="oriented">
+    <div class="row product-detailed">
+      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+        <div class="product-detailed-images">
+          <%= render 'images_carousel'%>
+        </div>
+      </div>
 
-    <div class="product-detailed-images">
-      <%= render 'images_carousel'%>
-    </div>
+      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 product-detailed-details oriented">
+        <h1><%= @product.title %></h1>
+        <div class="product-details-price">
+          <span><%= number_to_currency @product.price %></span>
+        </div>
 
-    <div class="product-detailed-details">
-      <h1><%= @product.title %></h1>
-      <span><%= number_to_currency @product.price %></span>
-      <%= form_for :line_item, url: line_items_path, remote: true  do |f| %>
         <%= f.fields_for :size do |ff| %>
           <% @product.sizes.each do |key,value| %>
             <% if @product.sizes[key].present? %>
@@ -25,9 +30,16 @@
           <h2>Description</h2>
           <p><%= @product.description %></p>
         </div>
-
-        <%= f.submit "Add to cart", class: "material-button"%>
-      <% end  %>
+      </div>
     </div>
+
+    <div class="add-to-cart-btn">
+      <%= f.submit "Add to cart", class: "material-button" %>
+    </div>
+
   </div>
+
+
+
+  <% end %>
 </div>

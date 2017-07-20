@@ -1,19 +1,19 @@
 <%= render partial: "categories" %>
 
-<div class=category-headline>
-  <%= image_tag category_image(@current_category.image), class: "category-image" %>
+<div class="category-headline content">
+  <%= image_tag category_image(@current_category.image), class: "hidden-xs" %>
   <h2> <%= @current_category.title.pluralize(2).capitalize %> </h2>
   <span><%= "(#{pluralize @products.total_count, 'item'})" %></span>
 </div>
 
-<div class="row">
-  <div class="col-md-10 col-md-offset-1">
-    <div class="products">
-      <% @products.each do |product| %>
-        <%= render partial: "product", locals: { product: product } %>
-      <% end %>
-    </div>
+<div class="container products">
+  <div class="row ">
+    <% @products.each do |product| %>
+      <%= render partial: "product", locals: { product: product } %>
+    <% end %>
   </div>
+</div>
+
 </div>
 
 <div class="text-center">

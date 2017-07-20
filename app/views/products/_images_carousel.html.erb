@@ -15,11 +15,11 @@
     <% @product.images.each_with_index do |image, index| %>
       <% if index == 0 %>
         <%= content_tag :div, class:"item active" do %>
-          <%= image_tag image, alt: @product.title, id: "myImg", class:"product-detailed-image" %>
+          <%= image_tag image, alt: @product.title, id: "myImg" %>
         <% end %>
       <% else %>
         <%= content_tag :div, class:"item" do %>
-          <%= image_tag image, alt: @product.title, class:"product-detailed-image" %>
+          <%= image_tag image, alt: @product.title %>
         <% end %>
       <% end %>
     <% end %>
