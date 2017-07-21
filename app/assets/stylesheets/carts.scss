@@ -1,59 +1,101 @@
-// Place all the styles related to the carts controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+// GLOBAL FONT
+* {
+    font-family: 'Roboto', 'Noto', sans-serif;
+    line-height: 1.5
+  }
+//HEADLINE
 .cart-headline{
-  margin-top: 64px;
   height: 64px;
-  width: 100%;
-  display: inline-flex;
-  align-items: center;
-  flex-direction: column;
+  margin-bottom: 10px;
+  h2 {
+    margin: 0 0 4px 0;
+    font-size: 1.1em;
+    font-weight: 500;
+  }
+  span{
+    color: #757575;
+    font-size: 1em;
+  }
 }
 
-.cart-headline h2 {
-  margin: 0 0 4px 0;
-  font-size: 1.3em;
+//TABLE
+.cart-table{
+  i{
+    color: #757575;
+    font-size: 1.5em;
+  }
+  //MOBILE
+  .cart-mobile-image{
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+  }
+
+  .cart-mobile-quantity{
+    display: inline-block;
+    div{
+      padding-left: 10px;
+      padding-right: 10px;
+      span{
+        vertical-align: middle;
+      }
+    }
+  }
+  .cart-mobile-title{
+    color: #202020;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  //OTHER
+  .cart-image{
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+  }
+  .cart-quantity{
+    div{
+      padding-left: 10px;
+      padding-right: 10px;
+      span{
+        vertical-align: middle;
+      }
+    }
+  }
+  .cart-delete{
+    i{
+      padding-left: 7px;
+    }
+  }
+}
+
+.checkout-box{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.material-button {
+  position: relative;
+  box-sizing: border-box;
+  border: 2px solid #000;
+  background-color: #FFF;
+  font-size: 14px;
   font-weight: 500;
-  font-family: 'Roboto', 'Noto', sans-serif;
-}
-
-.cart-headline span{
-  color: #757575;
-  font-size: 12px;
-  font-family: 'Roboto', 'Noto', sans-serif;
-}
-
-.table-container {
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
-}
-#cart-table {
-  max-width: 80%;
-  align-self: center;
-}
-
-.table > tbody > tr > td {
-     vertical-align: middle;
-}
-
-.table > tbody > tr > td  i {
-  margin-left: 5px;
-  margin-right: 5px;
   color: #202020;
+  margin: 0px;
+  padding: 8px 44px;
+  text-decoration: none;
+  text-transform: uppercase;
+  border-radius: 0;
+  outline: none;
+  line-height: 1.5;
+  &:hover {
+   text-decoration: none;
+  }
+  @media (max-width: 767px) {
+    padding: 16px 30%;
+  }
 }
-
-.checkout-box {
-  display: inline-flex;
-  width: 90%;
-  align-items: center;
-  flex-direction: row;
-  justify-content: flex-end;
-}
-.checkout-box span {
-    margin: 0 64px 0 24px;
-}
-
-.cart-total-amount{
-  margin-right: 10px;
+.cart-container{
+  margin-bottom: 30px;
 }
