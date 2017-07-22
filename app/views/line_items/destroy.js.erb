@@ -4,3 +4,7 @@ $("#cart-table").html('<%= j render "carts/cart_table" %>');
 $(".cart-total-amount").each(function(){
   $(this).html('<%= j render(partial: "carts/cart_total_amount", locals: { total: @total }) %>');
 });
+<% if @line_items.count == 0 %>
+  $(".full-cart").remove();
+  $(".empty-cart").html('<%= j render "carts/empty_cart" %>');
+<% end %>
