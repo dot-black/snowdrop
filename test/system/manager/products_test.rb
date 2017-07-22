@@ -26,8 +26,8 @@ class Manager::ProductsTest < ApplicationSystemTestCase
     has_content? @product_visible.title
     has_no_content? @product_invisible.title
     find("#manager-products-filter").click
-    click_on "Hiden"
-    assert_selector "button", text: "Hiden"
+    click_on "Hidden"
+    assert_selector "button", text: "Hidden"
     has_no_content? @product_visible.title
     has_content? @product_invisible.title
   end

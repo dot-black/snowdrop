@@ -6,12 +6,12 @@ class Manager::DashboardController < ApplicationController
     @products_count = {
       total: Product.relevant.count,
       visible: Product.visible.count,
-      hiden: Product.hiden.count
+      hidden: Product.hidden.count
     }
 
     @products_percentage = {
       visible: ( @products_count[:visible].to_f / @products_count[:total].to_f * 100.0 ),
-      hiden:  ( @products_count[:hiden].to_f / @products_count[:total].to_f * 100.0 )
+      hidden:  ( @products_count[:hidden].to_f / @products_count[:total].to_f * 100.0 )
     }
 
     @products_by_categories_count = {}

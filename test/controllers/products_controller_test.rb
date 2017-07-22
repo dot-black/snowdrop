@@ -3,7 +3,7 @@ require 'test_helper'
 class ProductsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @product_visible = products(:bra)
-    @product_hiden = products(:bra_invisible)
+    @product_hidden = products(:bra_invisible)
     @product_archived = products(:bra_archive)
     @product_of_invisible_category = products(:panties_invisible_category)
   end
@@ -23,8 +23,8 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should not show hiden product" do
-    get product_url(@product_hiden)
+  test "should not show hidden product" do
+    get product_url(@product_hidden)
     assert_response :redirect
   end
 
@@ -33,7 +33,7 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
     assert_response :redirect
   end
 
-  test "should not show product of hiden category" do
+  test "should not show product of hidden category" do
     get product_url(@product_of_invisible_category)
     assert_response :redirect
   end

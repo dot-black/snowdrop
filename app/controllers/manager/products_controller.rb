@@ -4,12 +4,12 @@ class Manager::ProductsController < ApplicationController
   layout 'managers/dashboard'
 
   def index
-    @current_category = "All"
+    @current_category = "all"
     @products = Product.relevant.page params[:page]
     _filtering_params(params).each do |key, value|
       if key.present?
         @products =  @products.public_send(key).page params[:page]
-        @current_category =  key.capitalize
+        @current_category =  key
       end
     end
     respond_to do |format|
@@ -111,7 +111,7 @@ class Manager::ProductsController < ApplicationController
     end
 
     def _filtering_params(params)
-      params.slice(:visible, :hiden)
+      params.slice(:visible, :hidden)
     end
 
     def _permitted_product_images_params

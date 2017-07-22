@@ -7,34 +7,34 @@
           <table class="table table-hover table-stripped toggle-arrow-tiny" id="orders-table">
             <thead>
             <tr>
-              <th class="hidden-xs">Order ID</th>
-              <th>Email</th>
+              <th>ID</th>
+              <th class="hidden-xs">Email</th>
               <th>Telephone</th>
-              <th>Amount</th>
-              <th class="hidden-xs">Date added</th>
-              <th class="hidden-xs">Date modified</th>
-              <th>Status</th>
+              <th class="hidden-xs">Amount</th>
+              <th class="hidden-xs hidden-sm">Created</th>
+              <th class="hidden-xs hidden-sm">Delay</th>
+              <th class="text-center">Status</th>
             </tr>
             </thead>
             <tbody>
               <% @orders.each do |order|  %>
                 <tr data-link= "<%= manager_order_path(order) %>" class="selectable-row">
-                  <td class="hidden-xs"><%= order.id %></td>
-                  <td><%= order.email %></td>
+                  <td><%= order.id %></td>
+                  <td class="hidden-xs"><%= order.email.truncate 20 %></td>
                   <td><%= order.telephone %></td>
-                  <td><%= number_to_currency order.amount %></td>
-                  <td class="hidden-xs"><%= order.created_at.strftime("%d.%m.%Y") %></td>
-                  <td class="hidden-xs"><%= order.updated_at.strftime("%d.%m.%Y") %></td>
+                  <td class="hidden-xs" ><%= number_to_currency order.amount %></td>
+                  <td class="hidden-xs hidden-sm"><%= order.created_at.strftime("%d.%m.%Y") %></td>
+                  <td class="hidden-xs hidden-sm"><%= time_ago_in_words(Time.now - (Time.now - order.created_at.to_time).seconds) %></td>
                   <td class="unselectable">
                     <% case order.status %>
                     <% when "pending" %>
-                      <%= content_tag :span, order.status, class: "label label-success col-md-7" %>
+                      <%= content_tag :span, order.status, class: "label label-success col-xs-12 col-sm-12" %>
                     <% when "accepted" %>
-                      <%= content_tag :span, order.status, class: "label label-warning col-md-7" %>
+                      <%= content_tag :span, order.status, class: "label label-warning col-xs-12 col-sm-12" %>
                     <% when "declined" %>
-                      <%= content_tag :span, order.status, class: "label label-danger col-md-7" %>
+                      <%= content_tag :span, order.status, class: "label label-danger col-xs-12 col-sm-12" %>
                     <% when "completed" %>
-                      <%= content_tag :span, order.status, class: "label label-primary col-md-7" %>
+                      <%= content_tag :span, order.status, class: "label label-primary col-xs-12 col-sm-12" %>
                     <% end  %>
                   </td>
                 </tr>
