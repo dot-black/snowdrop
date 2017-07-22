@@ -42,10 +42,14 @@ module ManagerHelper
   end
 
   def products_categories_links
-    {
+    links_hash = {
       all: manager_products_path,
       visible: manager_products_path(visible: "true"),
       hidden: manager_products_path(hidden: "true")
     }
+    Category.all.each do |category|
+      links_hash[category.title.parameterize.to_sym] = manager_products_path(manager_category: category.id)
+    end
+    links_hash
   end
 end

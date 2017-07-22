@@ -8,8 +8,9 @@
             <thead>
             <tr>
               <th>ID</th>
-              <th class="hidden-xs">Email</th>
-              <th>Telephone</th>
+              <th>Name</th>
+              <th class="hidden-xs hidden-sm">Email</th>
+              <th class="hidden-xs hidden-sm">Telephone</th>
               <th class="hidden-xs">Amount</th>
               <th class="hidden-xs hidden-sm">Created</th>
               <th class="hidden-xs hidden-sm">Delay</th>
@@ -20,8 +21,9 @@
               <% @orders.each do |order|  %>
                 <tr data-link= "<%= manager_order_path(order) %>" class="selectable-row">
                   <td><%= order.id %></td>
-                  <td class="hidden-xs"><%= order.email.truncate 20 %></td>
-                  <td><%= order.telephone %></td>
+                  <td><%= order.name.truncate 20 %>
+                  <td class="hidden-xs hidden-sm"><%= order.email.truncate 20 %></td>
+                  <td class="hidden-xs hidden-sm"><%= order.telephone %></td>
                   <td class="hidden-xs" ><%= number_to_currency order.amount %></td>
                   <td class="hidden-xs hidden-sm"><%= order.created_at.strftime("%d.%m.%Y") %></td>
                   <td class="hidden-xs hidden-sm"><%= time_ago_in_words(Time.now - (Time.now - order.created_at.to_time).seconds) %></td>

@@ -8,8 +8,9 @@ class Manager::ProductsController < ApplicationController
     @products = Product.relevant.page params[:page]
     _filtering_params(params).each do |key, value|
       if key.present?
-        @products =  @products.public_send(key).page params[:page]
+        @products =  @products.public_send(key,value).page params[:page]
         @current_category =  key
+        @current_id = value
       end
     end
     respond_to do |format|
@@ -111,7 +112,7 @@ class Manager::ProductsController < ApplicationController
     end
 
     def _filtering_params(params)
-      params.slice(:visible, :hidden)
+      params.slice(:visible, :hidden, :manager_category)
     end
 
     def _permitted_product_images_params
