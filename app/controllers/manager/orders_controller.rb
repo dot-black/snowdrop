@@ -31,7 +31,7 @@ class Manager::OrdersController < ApplicationController
   end
 
   def update
-    @send_email = params[:send_email]
+    @send_email = params[:send_email] == "Send email" ? true : false
     respond_to do |format|
       if @order.update(_permitted_order_params)
         OrderMailer.manager_information(@order).deliver

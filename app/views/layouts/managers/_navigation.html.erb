@@ -43,15 +43,8 @@
         </li>
 
         <li>
-          <%= group_link "Orders", '/manager/orders', 'fa fa-tasks' do %>
-            <ul class="nav nav-second-level collapse">
-              <%= nav_link "All", manager_orders_path(status: "all"), nil %>
-              <%= orders_status_links %>
-            </ul>
-          <% end %>
+          <%= nav_link "Orders", manager_orders_path(status: "all"), "fa fa-tasks" %>
         </li>
-
-
       </ul>
     </div>
   </nav>

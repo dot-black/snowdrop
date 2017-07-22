@@ -32,13 +32,20 @@ module ManagerHelper
   end
 
   def orders_status_links
-    Order.statuses.keys.each do |status|
-      concat nav_link status.capitalize, manager_orders_path(status: status), nil
-    end
-    nil
+    links_hash = {all: manager_orders_path(status: 'all')  }
+    Order.statuses.keys.each { |status| links_hash[status] = manager_orders_path(status: status) }
+    links_hash
   end
 
   def pending_orders_counter
     Order.where(status: 'pending').count
-  end  
+  end
+
+  def products_categories_links
+    {
+      all: manager_products_path,
+      visible: manager_products_path(visible: "true"),
+      hidden: manager_products_path(hidden: "true")
+    }
+  end
 end
