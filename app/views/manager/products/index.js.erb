@@ -1,2 +1,2 @@
-$(".products-list").html("<%= escape_javascript(render partial: 'list_relevant') %>");
-$(".dropdown-button").html("<%= escape_javascript(render partial: 'dropdown_button') %>");
+$(".products-list").html("<%= j render 'list_relevant' %>");
+$(".manager-products-filter").html("<%= j render 'manager_products_filter' %>");
