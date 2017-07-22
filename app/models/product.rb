@@ -19,8 +19,8 @@ class Product < ApplicationRecord
 
   #Manager scopes
   scope :relevant, -> { where( archive: false ).reorder( created_at: :desc ) }
-  scope :visible, -> { where( visible: true, archive: false ).reorder( created_at: :desc ) }
-  scope :hidden, -> { where( visible: false, archive: false ).reorder( created_at: :desc ) }
+  scope :visible, -> (visible) { where( visible: true, archive: false ).reorder( created_at: :desc ) }
+  scope :hidden, -> (hidden) { where( visible: true, archive: false ).reorder( created_at: :desc ) }
   scope :archival, -> { where( archive: true ).reorder( created_at: :desc ) }
   scope :manager_category, -> (category_id) { where( category_id: category_id, archive: false ).reorder( created_at: :desc ) }
   #Client scopes
