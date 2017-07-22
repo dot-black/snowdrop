@@ -8,103 +8,122 @@
 <div class="wrapper wrapper-content animated fadeIn">
   <div class="row">
 
-    <div class="col-lg-6">
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
       <div class="ibox float-e-margins">
 
-        <div class="ibox-title">
-          <span class="label label-warning pull-right">Total</span>
-          <h5>Orders</h5>
+        <div class="ibox-title ">
+          <!-- <span class="label label-warning pull-right">Total</span> -->
+          <h4>Orders</h4>
         </div>
 
         <div class="ibox-content">
-          <h1 class="no-margins"><%= @orders_count[:pending] %></h1>
-          <div class="stat-percent font-bold text-success">
-            <%=number_to_percentage @orders_percentage[:pending], precision: 0 %>
-            <i class="fa fa-bolt"></i>
+          <div class="container-fluid">
+            <h1><%= @orders_count[:pending] %></h1>
+            <div class="stat-percent font-bold text-warning">
+              <%=number_to_percentage @orders_percentage[:pending], precision: 0 %>
+              <i class="fa fa-bolt"></i>
+            </div>
+            <small>Pending</small>
           </div>
-          <small>Pending</small>
         </div>
 
         <div class="ibox-content">
-          <h1 class="no-margins"><%= @orders_count[:accepted] %></h1>
-          <div class="stat-percent font-bold text-success">
-            <%=number_to_percentage @orders_percentage[:accepted], precision: 0 %>
-            <i class="fa fa-bolt"></i>
+          <div class="container-fluid">
+            <h1 class="no-margins"><%= @orders_count[:accepted] %></h1>
+            <div class="stat-percent font-bold text-primary">
+              <%=number_to_percentage @orders_percentage[:accepted], precision: 0 %>
+              <i class="fa fa-bolt"></i>
+            </div>
+            <small>Accepted</small>
           </div>
-          <small>Accepted</small>
         </div>
 
         <div class="ibox-content">
-          <h1 class="no-margins"><%= @orders_count[:completed] %></h1>
-          <div class="stat-percent font-bold text-success">
-            <%=number_to_percentage @orders_percentage[:completed], precision: 0 %>
-            <i class="fa fa-bolt"></i>
+          <div class="container-fluid">
+            <h1 class="no-margins"><%= @orders_count[:completed] %></h1>
+            <div class="stat-percent font-bold text-success">
+              <%=number_to_percentage @orders_percentage[:completed], precision: 0 %>
+              <i class="fa fa-bolt"></i>
+            </div>
+            <small>Completed</small>
           </div>
-          <small>Completed</small>
         </div>
 
         <div class="ibox-content">
-          <h1 class="no-margins"><%= @orders_count[:declined] %></h1>
-          <div class="stat-percent font-bold text-success">
-            <%=number_to_percentage @orders_percentage[:declined], precision: 0 %>
-            <i class="fa fa-bolt"></i>
+          <div class="container-fluid">
+            <h1 class="no-margins"><%= @orders_count[:declined] %></h1>
+            <div class="stat-percent font-bold text-danger">
+              <%=number_to_percentage @orders_percentage[:declined], precision: 0 %>
+              <i class="fa fa-bolt"></i>
+            </div>
+            <small>Declined</small>
           </div>
-          <small>Declined</small>
         </div>
 
         <div class="ibox-content">
-          <h1 class="no-margins"><%= @orders_count[:total]%></h1>
-          <!-- <div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div> -->
-          <small>Total count</small>
+          <div class="container-fluid">
+            <h1 class="no-margins"><strong><%= @orders_count[:total]%></strong></h1>
+            <!-- <div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div> -->
+            <small>Total count</small>
+          </div>
+
         </div>
       </div>
     </div>
 
-    <div class="col-lg-6">
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
       <div class="ibox float-e-margins">
 
         <div class="ibox-title">
-          <span class="label label-success pull-right">Total</span>
+          <!-- <span class="label label-success pull-right">Total</span> -->
           <h5>Products</h5>
         </div>
 
         <div class="ibox-content">
-          <h1 class="no-margins"><%= @products_count[:visible] %></h1>
-          <div class="stat-percent font-bold text-success">
-            <%=number_to_percentage @products_percentage[:visible], precision: 0 %>
-            <i class="fa fa-bolt"></i>
+          <div class="container-fluid">
+            <h1 class="no-margins"><%= @products_count[:visible] %></h1>
+            <div class="stat-percent font-bold text-success">
+              <%=number_to_percentage @products_percentage[:visible], precision: 0 %>
+              <i class="fa fa-bolt"></i>
+            </div>
+            <small>Released</small>
           </div>
-          <small>Released</small>
         </div>
 
         <div class="ibox-content">
-          <h1 class="no-margins"><%= @products_count[:hiden] %></h1>
-          <div class="stat-percent font-bold text-success">
-            <%= number_to_percentage @products_percentage[:hiden], precision: 0 %>
-            <i class="fa fa-bolt"></i>
+          <div class="container-fluid">
+            <h1 class="no-margins"><%= @products_count[:hidden] %></h1>
+            <div class="stat-percent font-bold text-warning">
+              <%= number_to_percentage @products_percentage[:hidden], precision: 0 %>
+              <i class="fa fa-bolt"></i>
+            </div>
+            <small>Hidden</small>
           </div>
-          <small>Hiden</small>
         </div>
 
         <div class="ibox-content">
-          <h1 class="no-margins"><%= @products_count[:total]%></h1>
-          <!-- <div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div> -->
-          <small>Total count</small>
+          <div class="container-fluid">
+            <h1 class="no-margins"><strong><%= @products_count[:total]%></strong></h1>
+            <!-- <div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div> -->
+            <small>Total count</small>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="col-lg-6">
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
       <div class="ibox float-e-margins">
         <div class="ibox-title">
-          <span class="label label-primary pull-right">Total</span>
+          <!-- <span class="label label-primary pull-right">Total</span> -->
           <h5>Categories</h5>
         </div>
         <% @products_by_categories_count.each  do |key, value|  %>
           <div class="ibox-content">
-            <h1 class="no-margins"> <%= value%> </h1>
-            <!-- <div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div> -->
-            <small><%= key.capitalize %></small>
+            <div class="container-fluid">
+              <h1 class="no-margins"> <%= value%> </h1>
+              <!-- <div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div> -->
+              <small><%= key.capitalize %></small>
+            </div>
           </div>
         <% end  %>
       </div>
