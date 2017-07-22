@@ -29,11 +29,8 @@ class ClienStoriesTest < ActionDispatch::IntegrationTest
         telephone: "+380631001010"
       }
     }
-    follow_redirect!
     assert_response :success
-    assert_template "index"
-    cart = Cart.find(session[:cart_id])
-    assert_equal 0, cart.line_items.size
+    assert_template "successful_order"
     orders = Order.all
     assert_equal 1, orders.size
     order = orders[0]

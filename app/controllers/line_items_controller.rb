@@ -9,9 +9,10 @@ class LineItemsController < ApplicationController
       if @line_item.save
         _set_cart_line_items
         _set_cart_counter @line_items
+
         format.html { redirect_to product_path(product) }
         format.json { render :show, status: :created, location: @line_item }
-        format.js
+        format.js {flash.now[:notice] = "Product is added to cart"}
       else
         flash[:warning] = "Product wasn't added"
         format.html { redirect_to store_url }

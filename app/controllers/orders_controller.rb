@@ -13,6 +13,7 @@ class OrdersController < ApplicationController
 
 
   def create
+    _set_categories
     _set_cart
     @order = Order.new _permitted_order_params
     @order.add_line_items_from_cart @cart
@@ -23,8 +24,7 @@ class OrdersController < ApplicationController
         _destroy_cart
         OrderMailer.manager_information(@order).deliver
         OrderMailer.client_information(@order).deliver
-        flash[:notice] = "Thank you for your order!"
-        format.html { redirect_to store_path }
+        format.html { render 'successful_order' }
         format.json { render :show, status: :created, location: @order }
       else
         flash[:notice] = "Order wasn't created, please fill in all the fields correctly."

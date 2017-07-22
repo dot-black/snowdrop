@@ -92,6 +92,20 @@
     float:none;
     display:inline-block;
   }
+  .nav-tabs > li > a:hover{
+    background-color: transparent;
+    border-top-color: transparent;
+    border-left-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+  }
+  .nav-tabs > li.active > a{
+    color: #202020;
+    border: 2px solid #172C50;
+    border-top-color: transparent;
+    border-left-color: transparent;
+    border-right-color: transparent;
+  }
   a{
     padding: 9px 5px;
     font-size: 13px;
