@@ -5,7 +5,7 @@ $(window).on 'popstate', (e) ->
       success: (response) ->
         $('#cart-badge').html(response['catr_items_count'])
         return
-ready = ->
+client_ready = ->
   #Flash toast animation
   $('.toast').delay(3000).fadeOut(600);
 
@@ -19,6 +19,6 @@ ready = ->
     $('#product-image-modal').css('display','none')
     return
 
-$(document).ready(ready)
-$(document).on('page:load', ready)
-$(document).on('turbolinks:load', ready)
+# $(document).ready(client_ready)
+$(document).on('page:load', client_ready)
+$(document).on('turbolinks:load', client_ready)

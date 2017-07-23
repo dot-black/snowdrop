@@ -166,24 +166,3 @@
     }
   }
 }
-
-//MOBILE IMAGE CROP
-.content {
-  width: 100%;
-  text-align: center;
-  overflow: hidden;
-  img {
-    position: relative;
-    height: 320px;
-    left: 100%;
-    margin-left: -200%;
-  }
-  @media (max-width: 768px) {
-    img {
-      position: relative;
-      height: 240px;
-      left: 100%;
-      margin-left: -200%;
-    }
-  }
-}

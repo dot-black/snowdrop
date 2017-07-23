@@ -1,4 +1,4 @@
-ready = ->
+manager_ready = ->
   # Ability to select table row and redirect to url in it
   $(document).on 'click', "tr.selectable-row td", ->
     unless $(this).hasClass("unselectable")
@@ -28,6 +28,6 @@ ready = ->
     return
 
 
-$(document).ready ready
-$(document).on 'page:load', ready
-$(document).on 'turbolinks:load', ready
+# $(document).ready manager_ready
+$(document).on 'page:load', manager_ready
+$(document).on 'turbolinks:load', manager_ready
