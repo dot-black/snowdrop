@@ -28,16 +28,18 @@
                   <td class="hidden-xs hidden-sm"><%= order.created_at.strftime("%d.%m.%Y") %></td>
                   <td class="hidden-xs hidden-sm"><%= time_ago_in_words(Time.now - (Time.now - order.created_at.to_time).seconds) %></td>
                   <td class="unselectable">
-                    <% case order.status %>
-                    <% when "pending" %>
-                      <%= content_tag :span, order.status, class: "label label-success col-xs-12 col-sm-12" %>
-                    <% when "accepted" %>
-                      <%= content_tag :span, order.status, class: "label label-warning col-xs-12 col-sm-12" %>
-                    <% when "declined" %>
-                      <%= content_tag :span, order.status, class: "label label-danger col-xs-12 col-sm-12" %>
-                    <% when "completed" %>
-                      <%= content_tag :span, order.status, class: "label label-primary col-xs-12 col-sm-12" %>
-                    <% end  %>
+                    <%= link_to manager_order_path(order) do%>
+                      <% case order.status %>
+                      <% when "pending" %>
+                        <%= content_tag :span, order.status, class: "label label-success col-xs-12 col-sm-12" %>
+                      <% when "accepted" %>
+                        <%= content_tag :span, order.status, class: "label label-warning col-xs-12 col-sm-12" %>
+                      <% when "declined" %>
+                        <%= content_tag :span, order.status, class: "label label-danger col-xs-12 col-sm-12" %>
+                      <% when "completed" %>
+                        <%= content_tag :span, order.status, class: "label label-primary col-xs-12 col-sm-12" %>
+                      <% end  %>
+                    <% end %>  
                   </td>
                 </tr>
               <% end %>
