@@ -101,7 +101,7 @@ table {
 }
 
 @media only screen
-  and (max-device-width: 667px)
+  and (max-device-width: 768px)
   and (-webkit-min-device-pixel-ratio: 2)
   and (orientation: landscape) {
     .oriented > div.col-xs-12 {
