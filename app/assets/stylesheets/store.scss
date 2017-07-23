@@ -81,28 +81,21 @@
 .app-toolbar {
   height: 66px;
   text-align: center;
-  .nav-tabs {
-    padding-top: 13px;
-    border-bottom: none;
-    text-align:center;
-  }
-  .nav-tabs > li {
-    float:none;
-    display:inline-block;
-  }
-  .nav-tabs > li > a:hover {
-    background-color: transparent;
-    border-top-color: transparent;
-    border-left-color: transparent;
-    border-right-color: transparent;
-    border-bottom-color: transparent;
-  }
-  .nav-tabs > li.active > a {
-    color: #202020;
-    border: 2px solid #172C50;
-    border-top-color: transparent;
-    border-left-color: transparent;
-    border-right-color: transparent;
+  
+  .material-tabs {
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    list-style-type: none;
+    padding: 23px;
+    margin: 0px;
+    li {
+      margin: 0px 10px;
+      padding: 0px 5px;
+    }
+    li.active {
+      border-bottom: 2px solid #172C50;
+    }
   }
   a {
     padding: 9px 5px;

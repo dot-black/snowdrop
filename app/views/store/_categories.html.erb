@@ -1,7 +1,7 @@
 <div class="app-toolbar hidden-xs">
-  <ul class="nav nav-tabs">
+  <ul class="material-tabs">
     <% @categories.each do |category| %>
-      <li role="presentation">
+      <li>
         <%= link_to category.title.pluralize(2) , category_products_path(category: category.title.parameterize.underscore ) %>
       </li>
     <% end  %>
