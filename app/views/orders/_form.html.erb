@@ -19,7 +19,9 @@
       <%= form.telephone_field :telephone, id: :order_telephone, required: true %>
       <%= form.label :comment %>
       <%= form.text_area :comment, id: :order_comment %>
-      <%= form.submit "place order", class: "material-button" %>
+      <div class="order-submit-button">
+          <%= form.submit "place order", class: "material-button" %>
+      </div>
     <% end %>
   </div>
 </div>

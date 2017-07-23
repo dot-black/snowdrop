@@ -3,15 +3,10 @@
     font-family: 'Roboto', 'Noto', sans-serif;
   }
 // NAVBAR
-.navbar{
+.navbar {
   border: none;
   height: 64px;
   margin-bottom: 0px;
-  a.menu-btn {
-    padding-top: 8px;
-    color: black;
-    text-decoration: none;
-  }
 }
 .app-navbar {
   height: 64px;
@@ -20,14 +15,17 @@
   text-align: center;
   background-color: #FFFFFF;
 
-  .menu-logo{
+  .menu-logo {
     margin-top: 9px;
     padding-left: 22px;
-    i {
-      color: #202020;
+    a {
+      i {
+        text-decoration: none;
+        color: #202020;
+      }
     }
   }
-  .store-logo{
+  .store-logo {
     margin-top: 11px;
     text-transform: uppercase;
     a {
@@ -38,7 +36,7 @@
       text-decoration: none;
     }
   }
-  .cart-logo{
+  .cart-logo {
     align-items: center;
     i {
       position: absolute;
@@ -48,7 +46,7 @@
       height: 20px;
       color: #202020;
     }
-    a{
+    a {
       border: none;
     }
   }
@@ -92,21 +90,21 @@
     float:none;
     display:inline-block;
   }
-  .nav-tabs > li > a:hover{
+  .nav-tabs > li > a:hover {
     background-color: transparent;
     border-top-color: transparent;
     border-left-color: transparent;
     border-right-color: transparent;
     border-bottom-color: transparent;
   }
-  .nav-tabs > li.active > a{
+  .nav-tabs > li.active > a {
     color: #202020;
     border: 2px solid #172C50;
     border-top-color: transparent;
     border-left-color: transparent;
     border-right-color: transparent;
   }
-  a{
+  a {
     padding: 9px 5px;
     font-size: 13px;
     font-weight: 500;
