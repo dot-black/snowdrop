@@ -5,8 +5,8 @@ class Manager::DashboardController < ApplicationController
   def index
     @products_count = {
       total: Product.relevant.count,
-      visible: Product.visible.count,
-      hidden: Product.hidden.count
+      visible: Product.visible("true").count,
+      hidden: Product.hidden("true").count
     }
 
     @products_percentage = {
