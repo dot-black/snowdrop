@@ -8,6 +8,66 @@
 <div class="wrapper wrapper-content animated fadeIn">
   <div class="row">
 
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h5>Orders statistics </h5>
+          <div class="ibox-tools">
+            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-wrench"></i></a>
+            <ul class="dropdown-menu dropdown-user">
+              <li><a href="#">Config option 1</a></li>
+              <li><a href="#">Config option 2</a></li>
+            </ul>
+            <a class="close-link"><i class="fa fa-times"></i></a>
+          </div>
+        </div>
+        <div class="ibox-content">
+          <div id="morris-line-chart"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h5>Popular categories</h5>
+          <div class="ibox-tools">
+            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-wrench"></i></a>
+            <ul class="dropdown-menu dropdown-user">
+              <li><a href="#">Config option 1</a></li>
+              <li><a href="#">Config option 2</a></li>
+            </ul>
+            <a class="close-link"><i class="fa fa-times"></i></a>
+          </div>
+        </div>
+        <div class="ibox-content">
+          <div id="morris-donut-chart"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h5>Popular sizes</h5>
+          <div class="ibox-tools">
+            <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-wrench"></i></a>
+            <ul class="dropdown-menu dropdown-user">
+              <li><a href="#">Config option 1</a></li>
+              <li><a href="#">Config option 2</a></li>
+            </ul>
+            <a class="close-link"><i class="fa fa-times"></i></a>
+          </div>
+        </div>
+        <div class="ibox-content">
+          <div id="morris-donut-chart-sizes"></div>
+        </div>
+      </div>
+    </div>
+
     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
       <div class="ibox float-e-margins">
 
@@ -16,53 +76,60 @@
           <h4>Orders</h4>
         </div>
 
-        <div class="ibox-content">
-          <div class="container-fluid">
-            <h1><%= @orders_count[:pending] %></h1>
-            <div class="stat-percent font-bold text-warning">
-              <%=number_to_percentage @orders_percentage[:pending], precision: 0 %>
-              <i class="fa fa-bolt"></i>
+        <%= link_to manager_orders_path(status: 'pending') do %>
+          <div class="ibox-content">
+            <div class="container-fluid">
+              <h1><%= @orders[:count][:pending] %></h1>
+              <div class="stat-percent font-bold text-warning">
+                <%=number_to_percentage @orders[:percentage][:pending], precision: 0 %>
+                <i class="fa fa-bolt"></i>
+              </div>
+              <small>Pending</small>
             </div>
-            <small>Pending</small>
           </div>
-        </div>
+        <% end %>
+
+        <%= link_to manager_orders_path(status: 'accepted') do %>
+          <div class="ibox-content">
+            <div class="container-fluid">
+              <h1 class="no-margins"><%= @orders[:count][:accepted] %></h1>
+              <div class="stat-percent font-bold text-primary">
+                <%=number_to_percentage @orders[:percentage][:accepted], precision: 0 %>
+                <i class="fa fa-bolt"></i>
+              </div>
+              <small>Accepted</small>
+            </div>
+          </div>
+        <% end %>
+
+        <%= link_to manager_orders_path(status: 'completed') do %>
+          <div class="ibox-content">
+            <div class="container-fluid">
+              <h1 class="no-margins"><%= @orders[:count][:completed] %></h1>
+              <div class="stat-percent font-bold text-success">
+                <%=number_to_percentage @orders[:percentage][:completed], precision: 0 %>
+                <i class="fa fa-bolt"></i>
+              </div>
+              <small>Completed</small>
+            </div>
+          </div>
+        <% end %>
+        <%= link_to manager_orders_path(status: 'declined') do %>
+          <div class="ibox-content">
+            <div class="container-fluid">
+              <h1 class="no-margins"><%= @orders[:count][:declined] %></h1>
+              <div class="stat-percent font-bold text-danger">
+                <%=number_to_percentage @orders[:percentage][:declined], precision: 0 %>
+                <i class="fa fa-bolt"></i>
+              </div>
+              <small>Declined</small>
+            </div>
+          </div>
+        <% end %>
 
         <div class="ibox-content">
           <div class="container-fluid">
-            <h1 class="no-margins"><%= @orders_count[:accepted] %></h1>
-            <div class="stat-percent font-bold text-primary">
-              <%=number_to_percentage @orders_percentage[:accepted], precision: 0 %>
-              <i class="fa fa-bolt"></i>
-            </div>
-            <small>Accepted</small>
-          </div>
-        </div>
-
-        <div class="ibox-content">
-          <div class="container-fluid">
-            <h1 class="no-margins"><%= @orders_count[:completed] %></h1>
-            <div class="stat-percent font-bold text-success">
-              <%=number_to_percentage @orders_percentage[:completed], precision: 0 %>
-              <i class="fa fa-bolt"></i>
-            </div>
-            <small>Completed</small>
-          </div>
-        </div>
-
-        <div class="ibox-content">
-          <div class="container-fluid">
-            <h1 class="no-margins"><%= @orders_count[:declined] %></h1>
-            <div class="stat-percent font-bold text-danger">
-              <%=number_to_percentage @orders_percentage[:declined], precision: 0 %>
-              <i class="fa fa-bolt"></i>
-            </div>
-            <small>Declined</small>
-          </div>
-        </div>
-
-        <div class="ibox-content">
-          <div class="container-fluid">
-            <h1 class="no-margins"><strong><%= @orders_count[:total]%></strong></h1>
+            <h1 class="no-margins"><strong><%= @orders[:count][:total]%></strong></h1>
             <!-- <div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div> -->
             <small>Total count</small>
           </div>
@@ -78,32 +145,35 @@
           <!-- <span class="label label-success pull-right">Total</span> -->
           <h5>Products</h5>
         </div>
-
-        <div class="ibox-content">
-          <div class="container-fluid">
-            <h1 class="no-margins"><%= @products_count[:visible] %></h1>
-            <div class="stat-percent font-bold text-success">
-              <%=number_to_percentage @products_percentage[:visible], precision: 0 %>
-              <i class="fa fa-bolt"></i>
+        <%= link_to manager_products_path(visible: 'true') do %>
+          <div class="ibox-content">
+            <div class="container-fluid">
+              <h1 class="no-margins"><%= @products[:count][:visible] %></h1>
+              <div class="stat-percent font-bold text-success">
+                <%=number_to_percentage @products[:percentage][:visible], precision: 0 %>
+                <i class="fa fa-bolt"></i>
+              </div>
+              <small>Released</small>
             </div>
-            <small>Released</small>
           </div>
-        </div>
+        <% end %>
 
-        <div class="ibox-content">
-          <div class="container-fluid">
-            <h1 class="no-margins"><%= @products_count[:hidden] %></h1>
-            <div class="stat-percent font-bold text-warning">
-              <%= number_to_percentage @products_percentage[:hidden], precision: 0 %>
-              <i class="fa fa-bolt"></i>
+        <%= link_to manager_products_path(visible: 'true') do %>
+          <div class="ibox-content">
+            <div class="container-fluid">
+              <h1 class="no-margins"><%= @products[:count][:hidden] %></h1>
+              <div class="stat-percent font-bold text-warning">
+                <%= number_to_percentage @products[:percentage][:hidden], precision: 0 %>
+                <i class="fa fa-bolt"></i>
+              </div>
+              <small>Hidden</small>
             </div>
-            <small>Hidden</small>
           </div>
-        </div>
+        <% end %>
 
         <div class="ibox-content">
           <div class="container-fluid">
-            <h1 class="no-margins"><strong><%= @products_count[:total]%></strong></h1>
+            <h1 class="no-margins"><strong><%= @products[:count][:total]%></strong></h1>
             <!-- <div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div> -->
             <small>Total count</small>
           </div>
@@ -117,16 +187,73 @@
           <!-- <span class="label label-primary pull-right">Total</span> -->
           <h5>Categories</h5>
         </div>
-        <% @products_by_categories_count.each  do |key, value|  %>
-          <div class="ibox-content">
-            <div class="container-fluid">
-              <h1 class="no-margins"> <%= value%> </h1>
-              <!-- <div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div> -->
-              <small><%= key.capitalize %></small>
+        <% @products[:categories].each  do |key, value|  %>
+          <%= link_to manager_products_path(manager_category: value[:id]) do %>
+            <div class="ibox-content">
+              <div class="container-fluid">
+                <h1 class="no-margins"> <%= value[:count] %> </h1>
+                <!-- <div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i></div> -->
+                <small><%= key.capitalize %></small>
+              </div>
             </div>
-          </div>
-        <% end  %>
+          <% end  %>
+        <% end %>
       </div>
     </div>
   </div>
 </div>
+
+<script type="text/javascript", charset="utf-8">
+$(function() {
+  Morris.Line({
+    element: 'morris-line-chart',
+    data: [
+      <% @orders[:statistics][:total_count].each do |key,value| %>
+        { x:'<%= key %>', y:<%=value%>},
+      <% end %>
+    ],
+    xkey: 'x',
+    ykeys: 'y',
+    xLabelFormat: function(date) {
+      var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun","Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+      return date.getDate()+' '+ monthNames[date.getMonth()];
+    },
+    labels: ['Orders count'],
+    hideHover: 'auto',
+    resize: true,
+    lineColors: ['#54cdb4'],
+  });
+
+  Morris.Donut({
+    element: 'morris-donut-chart',
+    data: [
+      <% @orders[:statistics][:line_items_category_count].each do |key,value| %>
+        { label:'<%= key %>', value: <%= value %> },
+      <% end %>
+    ],
+    resize: true,
+    colors: [
+      <% @orders[:statistics][:line_items_category_count].each_with_index do |(key,value),index| %>
+        '<%= @orders[:statistics][:colors][index]%>',
+      <% end %>
+    ],
+
+  });
+  Morris.Donut({
+    element: 'morris-donut-chart-sizes',
+    data: [
+      <% @orders[:statistics][:line_items_sizes_count].each do |key,value| %>
+        { label:'<%= key %>', value: <%= value %> },
+      <% end %>
+    ],
+    resize: true,
+    colors: [
+      <% @orders[:statistics][:line_items_sizes_count].each_with_index do |(key,value),index| %>
+        '<%= @orders[:statistics][:colors][index]%>',
+      <% end %>
+    ],
+
+  });
+
+});
+</script>

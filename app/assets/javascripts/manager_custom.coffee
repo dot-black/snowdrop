@@ -18,12 +18,12 @@ manager_ready = ->
   $('.toast').delay(3000).fadeOut(600);
 
   #Image madal
-  $('.manager-product-image').click ->
+  $('.manager-product-image').on 'click', ->
     $('#product-image-modal').css('display','block')
     $('#full-screen-image').attr('src', $(this).attr('src'))
     $('#caption').html($(this).attr('alt'))
     return
-  $('.close').click ->
+  $('.close').on 'click', ->
     $('#product-image-modal').css('display','none')
     return
 
