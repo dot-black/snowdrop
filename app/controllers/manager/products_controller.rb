@@ -71,9 +71,9 @@ class Manager::ProductsController < ApplicationController
   def archive
     respond_to do |format|
       if @product.update archive: !@product.archive, visible: false
-        format.html { redirect_to manager_products_path , notice: "Product #{@product.title } has been archived." }
+        format.html { redirect_to (@product.archive ? manager_products_path : archival_manager_products_path), notice: "Product #{@product.title } has been archived." }
       else
-        format.html { redirect_to manager_products_path , notice: "Product #{@product.title } hasn't been archived!" }
+        format.html { redirect_to (@product.archive ? manager_products_path : archival_manager_products_path), notice: "Product #{@product.title } hasn't been archived!" }
       end
     end
   end
