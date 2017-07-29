@@ -5,7 +5,7 @@ Info:
   <%= @order.name %>
   <%= @order.telephone %>
   <%= @order.email %>
-  Comment: "<%= @order.comment %>"
+  Comment: <%= @order.comment %>
 
 Order:
 <% @order.line_items.each do |line_item| %>
