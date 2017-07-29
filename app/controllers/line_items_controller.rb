@@ -1,19 +1,18 @@
 class LineItemsController < ApplicationController
   include CurrentCart
-  before_action :_set_line_item, only: [:update, :destroy]
-  before_action :_set_cart, only: [:create, :update, :destroy]
-  before_action :_ensure_cart_isnt_empty, only: :update
 
   def create
+    _set_cart
     product = Product.find(params[:line_item][:product_id])
     @line_item = @cart.add_product(_permitted_line_item_params)
     respond_to do |format|
       if @line_item.save
         _set_cart_line_items
         _set_cart_counter @line_items
+
         format.html { redirect_to product_path(product) }
         format.json { render :show, status: :created, location: @line_item }
-        format.js
+        format.js {flash.now[:notice] = "Product is added to cart"}
       else
         flash[:warning] = "Product wasn't added"
         format.html { redirect_to store_url }
@@ -23,6 +22,9 @@ class LineItemsController < ApplicationController
   end
 
   def update
+    _set_line_item
+    _set_cart
+    _ensure_cart_isnt_empty
     respond_to do |format|
       if @line_item.update _permitted_line_item_params
         _set_cart_line_items
@@ -41,6 +43,8 @@ class LineItemsController < ApplicationController
   end
 
   def destroy
+    _set_line_item
+    _set_cart
     respond_to do |format|
       if @line_item.destroy
         _set_cart_line_items
@@ -59,7 +63,7 @@ class LineItemsController < ApplicationController
 
   private
     def _permitted_line_item_params
-      params.require(:line_item).permit(:product_id, :quantity, size:[:bra, :brief, :standard])
+      params.require(:line_item).permit(:product_id, :quantity, size:[:bra, :panties, :standard])
     end
 
     def _set_line_item

@@ -1,8 +1,8 @@
-<%= link_to cart_path, class:"btn btn-default" do %>
-  <i class="glyphicon glyphicon-shopping-cart"></i>
-  <% if @cart_line_items_quantity.present? and @cart_line_items_quantity > 0 %>
-    <div class="cart-badge">
+<%= link_to cart_path do %>
+  <i class="material-icons md-24 pull-right">shopping_cart</i>
+  <% if @cart_line_items_quantity.present? %>
+    <%=content_tag :div, class: "cart-badge#{' hidden' if @cart_line_items_quantity == 0}", id: "cart-badge" do %>
       <%= @cart_line_items_quantity %>
-    </div>
+    <% end %>
   <% end %>
 <% end  %>

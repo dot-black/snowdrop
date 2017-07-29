@@ -1,9 +1,11 @@
 class OrdersController < ApplicationController
   include CurrentCart
-  before_action :_set_cart, only: [:new, :create ]
-  before_action :_ensure_cart_isnt_empty, only: :new
+  include Categories
 
   def new
+    _set_categories
+    _set_cart
+    _ensure_cart_isnt_empty
     _set_cart_line_items
     _set_cart_counter @line_items
     @order = Order.new
@@ -11,6 +13,8 @@ class OrdersController < ApplicationController
 
 
   def create
+    _set_categories
+    _set_cart
     @order = Order.new _permitted_order_params
     @order.add_line_items_from_cart @cart
     @order.amount = _get_line_items_amount @order.line_items
@@ -18,8 +22,9 @@ class OrdersController < ApplicationController
     respond_to do |format|
       if @order.save
         _destroy_cart
-        flash[:notice] = "Thank you for your order!"
-        format.html { redirect_to store_path }
+        OrderMailer.manager_information(@order).deliver
+        OrderMailer.client_information(@order).deliver
+        format.html { render 'successful_order' }
         format.json { render :show, status: :created, location: @order }
       else
         flash[:notice] = "Order wasn't created, please fill in all the fields correctly."

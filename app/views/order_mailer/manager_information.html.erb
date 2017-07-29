@@ -1,0 +1,55 @@
+<table class="body-wrap">
+  <td class="container" width="600">
+    <div class="content">
+      <table class="main" width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+          <td class="content-wrap aligncenter">
+            <table width="100%" cellpadding="0" cellspacing="0">
+              <tr>
+                <td class="content-block">
+                    <%= image_tag (image_path 'mailer/header.png'), class:"img-responsive"  %>
+                </td>
+              </tr>
+              <tr>
+                <td class="content-block">
+                  <table class="invoice">
+                    <tr>
+                      <td>
+                        <%= @order.name %><br />
+                        <%= @order.telephone %><br />
+                        <%= @order.email %><br />
+                        Comment: <%= @order.comment %><br />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <table class="invoice-items" cellpadding="0" cellspacing="0">
+                          <% @order.line_items.each do |line_item| %>
+                            <tr>
+                              <td><%= line_item.quantity %>x <%= line_item.product.title %> (<%= line_item.size.values.join(" / ") %>)</td>
+                              <td class="alignright"><%= number_to_currency(line_item.quantity * line_item.product.price) %></td>
+                            </tr>
+                          <% end %>
+
+                          <tr class="total">
+                            <td class="alignright" width="80%">Total</td>
+                            <td class="alignright"><%= number_to_currency @order.amount %></td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td class="content-block">
+                  <%= link_to "View in browser", manager_order_url(@order) %>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </td>
+</table>

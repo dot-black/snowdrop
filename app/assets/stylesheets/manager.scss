@@ -13,9 +13,6 @@
 @import "bootstrap";
 @import "font-awesome";
 
-// Bootstrap-select
-@import "base/bootstrap-select";
-
 // Variables, Mixins
 @import "base/variables";
 @import "base/mixins";
@@ -65,6 +62,9 @@
 
 // Materialize toast
 @import "materialize_toast";
+// Image modal
+@import "image";
+
 // Clear layout on print mode
 @media print {
   nav.navbar-static-side {

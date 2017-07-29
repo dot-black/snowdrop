@@ -1,25 +1,25 @@
 class ProductsController < ApplicationController
   include Categories
   include CurrentCart
-  before_action :_set_product, only: :show
-  before_action :_set_categories, only: [:index, :show]
-  before_action :_set_cart, only: [:index, :show]
 
   def index
-    unless @current_category = _current_category
+    _set_cart
+    _set_categories
+    if @current_category = _current_category
+      _set_cart_line_items
+      _set_cart_counter @line_items
+      @products = Product.shown.category(@current_category.id).page(params[:page]).per(10)
+    else
       flash[:notice] = "Category must be present!"
       redirect_to store_path
     end
-    _set_cart_line_items
-    _set_cart_counter @line_items
-    @products = Product.shown.category(params[:category]).page( params[:page] )
-      # Manager can see products regardless it visible or hiden
-      # manager_signed_in? ?
-      #   Product.relevant.category(params[:category]).page( params[:page] ) :
-      #   Product.shown.category(params[:category]).page( params[:page] )
   end
 
   def show
+    _set_product
+    _set_categories
+    _set_cart
+    @current_category = @product.category
     unless _enusre_product_and_category_visible!
       flash[:notice] = "Can't find such product!"
       redirect_to store_path
@@ -35,17 +35,15 @@ class ProductsController < ApplicationController
     end
 
     def _enusre_product_and_category_visible!
-      # manager_signed_in? or ( @product.visible and @product.category.visible ) # Mmanager can see categories regardless it visible or hiden
       @product.visible and @product.category.visible
     end
 
     def _category_available?
-      # Category.exists?(params[:category]) and ( Category.find(params[:category]).visible or manager_signed_in? ) # Manager can see categories regardless it visible or hiden
-      Category.exists?(params[:category]) and Category.find(params[:category]).visible
+      Category.exists?(["lower(title) = ?", params[:category].gsub("_", " ")]) and Category.where('lower(title) = ?', params[:category].gsub("_", " ")).take.visible
     end
 
     def _current_category
-      ( params[:category].present? and _category_available? ) ?  Category.find(params[:category]) : nil
+      ( params[:category].present? and _category_available? ) ?  Category.where('lower(title) = ?', params[:category].gsub("_", " ")).take : nil
     end
 
 end

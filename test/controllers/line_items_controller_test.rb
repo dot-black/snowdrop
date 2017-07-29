@@ -9,7 +9,7 @@ class LineItemsControllerTest < ActionDispatch::IntegrationTest
   test "should create line_item" do
     assert_difference 'LineItem.count' do
       post line_items_url params: { line_item: {
-        product_id: products(:iphone).id,
+        product_id: products(:bra).id,
         cart_id: carts(:one).id
       }}
     end

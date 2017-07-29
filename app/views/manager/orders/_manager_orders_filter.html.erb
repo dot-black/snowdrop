@@ -1,0 +1,15 @@
+<ul class="nav nav-tabs hidden-xs">
+  <% orders_status_links.each do |key,link| %>
+    <%= content_tag :li, class: "#{'active' if key.to_s == @current_status }" do %>
+      <%= link_to key.capitalize, link, remote: true %>
+    <% end %>
+  <% end %>
+</ul>
+
+<ul class="nav nav-tabs visible-xs">
+  <% ["all", "pending"].each do |status| %>
+    <%= content_tag :li, class: "#{'active' if status == @current_status }" do %>
+      <%= link_to status.capitalize, manager_orders_path(status: status) , remote: true %>
+    <% end %>
+  <% end %>
+</ul>

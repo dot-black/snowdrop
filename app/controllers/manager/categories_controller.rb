@@ -80,6 +80,6 @@ class Manager::CategoriesController < ApplicationController
     end
 
     def _permitted_category_params
-      params.require(:category).permit(:title, :image, :complex)
+      params.require(:category).permit(:title, :image)
     end
 end

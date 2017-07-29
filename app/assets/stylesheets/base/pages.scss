@@ -1113,24 +1113,6 @@ del {
   border: 1px solid $border-color;
 }
 
-table.shoping-cart-table {
-  margin-bottom: 0;
-
-  tr td {
-    border: none;
-    text-align: right;
-  }
-
-  tr td.desc, tr td:first-child {
-    text-align: left;
-  }
-
-  tr td:last-child {
-    width: 80px;
-  }
-
-}
-
 .product-name {
   font-size: 16px;
   font-weight: 600;
@@ -1358,4 +1340,3 @@ body.body-small .vote-icon {
 .lightBoxGallery img {
   margin: 5px
 }
-

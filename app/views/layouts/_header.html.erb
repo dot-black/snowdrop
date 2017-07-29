@@ -1,9 +1,37 @@
-<header class="navbar">
-  <div class="app-toolbar">
-    <div class="store-logo">
-      <%= link_to t("application_name"), store_path %>
-    </div>
-  <div class="cart-logo">
+<nav id="myNavmenu" class="navmenu navmenu-default navmenu-fixed-left offcanvas" role="navigation">
+  <%= link_to t("application_name_short"), store_path, class: "navmenu-brand" %>
+
+  <ul class="nav navmenu-nav">
+    <% @categories.each do |category| %>
+      <li class="<%= category == @current_category ? 'active' : '' %>">
+        <%= link_to category.title.pluralize(2) , category_products_path(category: category.title.parameterize.underscore ) %>
+      </li>
+    <% end  %>
+  </ul>
+
+</nav>
+<div class="navbar navbar-default container-fluid app-navbar">
+  <div class="menu-logo col-xs-2 col-sm-2 col-md-2 col-lg-2">
+    <% if @product.present?  %>
+      <%= link_to category_products_path(@product.category.title.parameterize.underscore) do %>
+        <%= content_tag :i, 'arrow_back', class:"material-icons md-24 pull-left" %>
+      <% end %>
+    <% else %>
+      <%= link_to "#", data:{ toggle: "offcanvas", target: "#myNavmenu", canvas: "body"} do %>
+        <%= content_tag :i, 'menu', class:"visible-xs material-icons md-24 pull-left" %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="col-xs-8 visible-xs text-center store-logo">
+    <%= link_to t("application_name_short"), store_path %>
+  </div>
+
+  <div class="col-sm-8 col-md-8 col-lg-8 hidden-xs text-center store-logo">
+    <%= link_to t("application_name"), store_path %>
+  </div>
+
+  <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 cart-logo">
     <%= render "layouts/cart_logo" %>
   </div>
-</header>
+</div>

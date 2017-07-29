@@ -259,14 +259,14 @@ function SmoothlyMenu() {
         // For smoothly turn on menu
         setTimeout(
             function () {
-                $('#side-menu').fadeIn(400);
-            }, 200);
+                $('#side-menu').fadeIn(100);
+            }, 100);
     } else if ($('body').hasClass('fixed-sidebar')) {
         $('#side-menu').hide();
         setTimeout(
             function () {
-                $('#side-menu').fadeIn(400);
-            }, 100);
+                $('#side-menu').fadeIn(100);
+            }, 50);
     } else {
         // Remove all inline style from jquery fadeIn function to reset menu state
         $('#side-menu').removeAttr('style');
@@ -288,5 +288,6 @@ function WinMove() {
         })
         .disableSelection();
 }
-$(document).ready(ready);
-$(document).on('page:load', ready);
+// $(document).ready(ready);
+$(document).on('page:load',ready);
+$(document).on('turbolinks:load', ready);

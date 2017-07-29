@@ -1,28 +1,30 @@
 <%= link_to manager_product_path(product) do %>
-  <div class="col-md-3">
-    <div class="ibox">
-      <div class="ibox-content product-box">
-        <div class="product-imitation" style="padding: 15px 0px">
-          <%= image_tag first_image(product), size: 200 %>
-        </div>
-
-        <div class="product-desc">
-          <span class="product-price"> <%= product.price %> </span>
-          <small class="text-muted">Priority: <%= product.priority.upcase %></small>
-
-          <span class="product-name">
-            <%= product.title %>
-          </span>
-
-          <div class="small m-t-xs">
-            <%= product.description.truncate 100 %>
+  <div class="oriented">
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+      <div class="ibox">
+        <div class="ibox-content product-box">
+          <div class="product-imitation">
+            <%= image_tag first_image(product), class:'img-responsive' %>
           </div>
 
-          <div class="m-t text-righ">
-            <%= link_to archive_manager_product_path(product), class: "btn btn-xs btn-outline btn-warning" do %>
-              <i class="fa fa-plus-square-o"></i> Restore
-            <% end %>
-            <%= link_to "Delete", manager_product_path(product), class: "btn btn-xs btn-outline btn-danger pull-right", method: "delete" %>
+          <div class="product-desc">
+            <span class="product-price"> <%= product.price %> </span>
+            <small class="text-muted">Priority: <%= product.priority.upcase %></small>
+
+            <span class="product-name">
+              <%= product.title.truncate 20 %>
+            </span>
+
+            <div class="small m-t-xs">
+              <%= product.description.truncate 70 %>
+            </div>
+
+            <div class="m-t text-righ">
+              <%= link_to archive_manager_product_path(product), class: "btn btn-xs btn-outline btn-warning" do %>
+                <i class="fa fa-plus-square-o"></i> Restore
+              <% end %>
+              <%= link_to "Delete", manager_product_path(product), class: "btn btn-xs btn-outline btn-danger pull-right", method: "delete" %>
+            </div>
           </div>
         </div>
       </div>

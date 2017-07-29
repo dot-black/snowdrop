@@ -7,18 +7,18 @@ class ClienStoriesTest < ActionDispatch::IntegrationTest
   test "buying a product" do
     LineItem.delete_all
     Order.delete_all
-    iphone = products(:iphone)
+    bra = products(:bra)
 
     get "/"
     assert_response :success
     assert_template "index"
 
-    post '/line_items', params: { line_item: { product_id: iphone.id }}, xhr: true
+    post '/line_items', params: { line_item: { product_id: bra.id, size: { bra: bra.sizes["bra"].first} }}, xhr: true
     assert_response :success
 
     cart = Cart.find(session[:cart_id])
     assert_equal 1, cart.line_items.size
-    assert_equal iphone, cart.line_items[0].product
+    assert_equal bra, cart.line_items.first.product
 
     get "/orders/new"
     assert_response :success
@@ -29,11 +29,8 @@ class ClienStoriesTest < ActionDispatch::IntegrationTest
         telephone: "+380631001010"
       }
     }
-    follow_redirect!
     assert_response :success
-    assert_template "index"
-    cart = Cart.find(session[:cart_id])
-    assert_equal 0, cart.line_items.size
+    assert_template "successful_order"
     orders = Order.all
     assert_equal 1, orders.size
     order = orders[0]
@@ -44,7 +41,7 @@ class ClienStoriesTest < ActionDispatch::IntegrationTest
 
     assert_equal 1, order.line_items.size
     line_item = order.line_items[0]
-    assert_equal iphone, line_item.product
+    assert_equal bra, line_item.product
 
     # mail = ActionMailer::Base.deliveries.last
     # assert_equal ["dave@example.com"], mail.to
@@ -55,10 +52,10 @@ class ClienStoriesTest < ActionDispatch::IntegrationTest
   test "check if the same product with same size gets to the same line item " do
     LineItem.delete_all
     Order.delete_all
-    iphone = products(:iphone)
+    bra = products(:bra)
 
     4.times do
-      post '/line_items', params: { line_item: { product_id: iphone.id, size: { standard: Product.sizes[:standard].first } }}, xhr: true
+      post '/line_items', params: { line_item: { product_id: bra.id, size: { standard: Product.sizes[:standard].first } }}, xhr: true
       assert_response :success
     end
 
@@ -70,12 +67,12 @@ class ClienStoriesTest < ActionDispatch::IntegrationTest
   test "check if the same product with different sizes gets to the different line items " do
     LineItem.delete_all
     Order.delete_all
-    iphone = products(:iphone)
+    bra = products(:bra)
 
-    post '/line_items', params: { line_item: { product_id: iphone.id, size: { standard: Product.sizes[:standard].first } }}, xhr: true
+    post '/line_items', params: { line_item: { product_id: bra.id, size: { bra: Product.sizes[:bra].first } }}, xhr: true
     assert_response :success
 
-    post '/line_items', params: { line_item: { product_id: iphone.id, size: { standard: Product.sizes[:standard].second } }}, xhr: true
+    post '/line_items', params: { line_item: { product_id: bra.id, size: { bra: Product.sizes[:bra].second } }}, xhr: true
     assert_response :success
 
     cart = Cart.find(session[:cart_id])

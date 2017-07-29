@@ -3,8 +3,8 @@ require "application_system_test_case"
 class OrdersTest < ApplicationSystemTestCase
   setup do
     @category_first = categories(:first_visible)
-    @product_first = products(:iphone)
-    @product_second = products(:ipad)
+    @product_first = products(:bra)
+    @product_second = products(:new_bra)
   end
   test "Check out order" do
     assert_difference 'LineItem.count' do

@@ -6,7 +6,7 @@ class Product < ApplicationRecord
 
   enum priority: { hi: 1, mid: 2, low: 3 }
 
-  validates :title, :description, :category, presence: true
+  validates :title, :description, :category, :sizes, presence: true
   validates :price, numericality: {
     greater_than_or_equal_to: 0.01,
     message:'incorrect, please enter a value at least greater then 0.01 or equal one'
@@ -16,27 +16,16 @@ class Product < ApplicationRecord
   belongs_to :category
 
   mount_uploaders :images, ProductImageUploader
-  before_save :remove_zero_sizes
 
   #Manager scopes
   scope :relevant, -> { where( archive: false ).reorder( created_at: :desc ) }
-  scope :visible, -> { where( visible: true, archive: false ).reorder( created_at: :desc ) }
-  scope :hiden, -> { where( visible: false, archive: false ).reorder( created_at: :desc ) }
+  scope :visible, -> (visible) { where( visible: true, archive: false ).reorder( created_at: :desc ) }
+  scope :hidden, -> (hidden) { where( visible: false, archive: false ).reorder( created_at: :desc ) }
   scope :archival, -> { where( archive: true ).reorder( created_at: :desc ) }
+  scope :manager_category, -> (category_id) { where( category_id: category_id, archive: false ).reorder( created_at: :desc ) }
   #Client scopes
   default_scope { order( priority: :asc ) }
   scope :shown, -> { where( archive: false, visible: true,  category_id: Category.visible.ids ) }
   scope :category, -> (category_id) { where( category_id: category_id, archive: false, visible: true ) }
-
-
-  def sizes_collection
-    self.sizes.map{|s|[Product.sizes.key(s).to_s.upcase,s]}
-  end
-
-  private
-
-    def remove_zero_sizes
-      self.sizes.delete(0) if self.sizes
-    end
 
 end

@@ -18,6 +18,7 @@
 //= require base/sweetalert.min.js
 //= require base/jquery.slimscroll.min.js
 //= require base/jquery.barrating.min
-//= require base/bootstrap-select.js
 //= require inspinia.js
 //= require manager_custom
+//= require base/morris/morris.js
+//= require base/morris/raphael-2.1.0.min

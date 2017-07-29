@@ -1,10 +1,9 @@
-<div class="navbar" >
-  <div class="items-toolbar">
+<div class="app-toolbar hidden-xs">
+  <ul class="material-tabs">
     <% @categories.each do |category| %>
-      <div class="toolbar-item">
-        <%= link_to category.title.pluralize(2) , products_path(category: category.id ), class: "btn btn-default" %>
-      </div>
+      <li>
+        <%= link_to category.title.pluralize(2) , category_products_path(category: category.title.parameterize.underscore ) %>
+      </li>
     <% end  %>
-  </div>
+  </ul>
 </div>
-  

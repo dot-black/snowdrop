@@ -1,3 +1,6 @@
-$("#cart-total-amount").html('<%= j render "carts/cart_total_amount", locals: { total: @total } %>');
-$(".cart-logo").html("<%= escape_javascript(render partial: 'layouts/cart_logo') %>");
+$(".cart-total-amount").each(function(){
+  $(this).html('<%= j render(partial: "carts/cart_total_amount", locals: { total: @total }) %>');
+});
+
+$(".cart-logo").html('<%= j render "layouts/cart_logo" %>');
 $("#cart-table").html('<%= j render "carts/cart_table" %>');

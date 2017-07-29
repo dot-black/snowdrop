@@ -1,9 +1,9 @@
-<div class="navbar">
-  <div class="items-toolbar">
+<div class="app-toolbar hidden-xs">
+  <%= content_tag :ul, class: "material-tabs" do %>
     <% @categories.each do |category| %>
-      <div class="toolbar-item">
-        <%= link_to category.title.pluralize(2) , products_path(category: category.id ), class: "btn btn-default" %>
-      </div>
+      <%= content_tag :li, class: "#{ category == @current_category ? 'active' : '' }" do  %>
+        <%= link_to category.title.pluralize(2) , category_products_path(category: category.title.parameterize.underscore ) %>
+      <% end %>
     <% end  %>
-  </div>
-</div>  
+  <% end %>
+</div>

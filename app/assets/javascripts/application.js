@@ -15,3 +15,4 @@
 //= require rails-ujs
 //= require turbolinks
 //= require client_custom
+//= require base/jasny-bootstrap.min.js

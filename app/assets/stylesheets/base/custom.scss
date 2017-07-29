@@ -91,3 +91,32 @@ table {
   position: fixed;
   top: 92%;
 }
+
+.product-imitation{
+  padding: 0px;
+}
+
+.nav.nav-second-level.collapse.in li a > span {
+  display: -webkit-inline-box;
+}
+
+@media only screen
+  and (max-device-width: 768px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: landscape) {
+    .oriented > div.col-xs-12 {
+      width: 50%;
+    }
+    .oriented > div.add-to-cart-btn {
+      text-align: center;
+    }
+}
+
+@media only screen
+  and (max-device-width: 375px)
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (orientation: portrait) {
+    .oriented > div.add-to-cart-btn {
+      text-align: center;
+    }
+}

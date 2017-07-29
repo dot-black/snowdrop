@@ -13,27 +13,41 @@
       <div class="form-group">
         <%= form.label :price, class:"col-sm-2 control-label" %>
         <div class="col-sm-10">
-          <%= form.text_field :price, id: :product_price, class:"form-control" %>
+          <%= form.text_field :price, id: :product_price, placeholder:"Product price", class:"form-control" %>
         </div>
       </div>
 
       <div class="form-group">
         <%= form.label :category, class:"col-sm-2 control-label", title: "choose category" %>
         <div class="col-sm-10">
-          <%= form.collection_select :category_id, Category.all, :id, :title, { }, { class:"selectpicker form-control m-b", title: 'Select Something', id:"manager-product-category" } %>
+          <%= form.collection_select :category_id, Category.all, :id, :title, { }, { class:"selectpicker form-control m-b", title: 'Select category', id:"manager-product-category" } %>
         </div>
       </div>
 
       <div class="form-group">
-        <%= form.label :sizes, class:"col-sm-2 control-label" %>
-        <%= hidden_field_tag :sizes, @product.sizes.to_json, id: "hiden-manager-sizes" %>
-        <%= form.fields_for :sizes do |ff| %>
-          <div class="col-sm-10">
-            <%= render partial: "select_sizes", locals: { form: ff, category: :standard, sizes: Product.sizes[:standard]} %>
-            <%= render partial: "select_sizes", locals: { form: ff, category: :bra, sizes: Product.sizes[:bra]} %>
-          </div>
 
-        <% end %>
+        <%= form.label :sizes, class:"col-sm-2 control-label" %>
+        <div class="col-sm-10">
+          <%= form.fields_for :sizes do |ff| %>
+            <% Product.sizes.each do |key, value| %>
+              <div class="row">
+                <div class="col-sm-1">
+                  <small><%= key.capitalize %></small>
+                </div>
+                <div class="col-sm-10">
+                  <% value.each do |size| %>
+                    <% if @product.sizes and @product.sizes[key].present? and @product.sizes[key].include?(size) %>
+                      <%= ff.check_box key, { multiple: true, checked: true }, size, false %>
+                    <% else %>
+                      <%= ff.check_box key, { multiple: true, checked: false }, size, false %>
+                    <% end %>
+                    <%= ff.label "#{key}_#{size.downcase}", size %>
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
       </div>
 
       <div class="form-group">
@@ -47,7 +61,7 @@
       <div class="form-group">
         <%= form.label :description, class:"col-sm-2 control-label" %>
         <div class="col-sm-10">
-          <%= form.text_area :description, id: :product_description, class: "form-control" %>
+          <%= form.text_area :description, id: :product_description, placeholder: "Enter description here", class: "form-control" %>
         </div>
       </div>
     </fieldset>

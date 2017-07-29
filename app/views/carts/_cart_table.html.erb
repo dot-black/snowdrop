@@ -1,40 +1,103 @@
-<tbody>
-  <% @line_items.each do |line_item| %>
-    <tr>
-      <td>
-        <%=  link_to product_path(line_item.product) do %>
-          <%= image_tag first_image(line_item.product), size: 64 %>
+<% @line_items.each do |line_item| %>
+  <div class="row">
+<!-- Mobie version -->
+    <div class="row visible-xs">
+      <div class="col-xs-4 cart-mobile-image">
+        <%= link_to product_path(line_item.product) do %>
+          <%= image_tag first_image(line_item.product),  class:'img-responsive'%>
         <% end %>
-      </td>
-      <td class="title"><%= line_item.product.title %></td>
-      <%= content_tag :td, id: get_string_of_line_item_title_and_size(line_item) do %>
-        <% if line_item.quantity > 1 %>
-          <%= link_to line_item_path(line_item, line_item:{ quantity: "#{line_item.quantity - 1}" }), method: :put, remote: true, class: "minus-button" do  %>
-            <i class="glyphicon glyphicon glyphicon-minus"></i>
+      </div>
+      <div class="col-xs-8">
+        <div class="row">
+          <div class="col-xs-9 cart-mobile-title">
+            <strong><%= line_item.product.title %></strong>
+          </div>
+          <div class="col-xs-3 cart-mobile-delete">
+            <%= link_to line_item_path(line_item), method: "delete", remote: true do  %>
+              <i class="material-icons pull-right">close</i>
+            <% end  %>
+          </div>
+        </div>
+        <div class="row cart-mobile-quantity pull-left">
+          <% if line_item.quantity > 1 %>
+            <div class="col-xs-4 text-center">
+              <%= link_to line_item_path(line_item, line_item:{ quantity: "#{line_item.quantity - 1}" }), method: :put, remote: true, class: "minus-button" do  %>
+                <i class="material-icons">remove</i>
+              <% end  %>
+            </div>
+          <% else %>
+            <div class="col-xs-4 text-center">
+              <i class="material-icons">remove</i>
+            </div>
+          <% end %>
+          <div class="col-xs-4 text-center">
+            <span><strong><%= line_item.quantity %></strong></span>
+          </div>
+          <div class="col-xs-4 text-center">
+            <%= link_to line_item_path(line_item, line_item:{ quantity: "#{line_item.quantity + 1}" }), method: :put, remote: true, class: "plus-button" do  %>
+              <i class="material-icons">add</i>
+            <% end  %>
+          </div>
+        </div>
+        <div class="row cart-monile-size">
+            <div class="col-xs-12">
+              Size: <%= line_item.size.values.join(" & ")  if line_item.size.present? %>
+            </div>
+        </div>
+        <div class="row cart-mobile-price">
+          <div class="col-xs-12">
+            <%= number_to_currency line_item.product.price %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<!-- Other versions -->
+    <table class="hidden-xs">
+      <tr>
+        <td class="col-sm-2 col-md-2 col-lg-2 cart-image" valign="middle">
+          <%= link_to product_path(line_item.product) do %>
+            <%= image_tag first_image(line_item.product), class:'img-responsive' %>
+          <% end %>
+        </td>
+        <td class="col-sm-3 col-md-3 col-lg-3" valign="middle">
+          <strong><%= line_item.product.title %></strong>
+        </td>
+        <td class="col-sm-2 col-md-2 col-lg-2 cart-quantity" valign="middle">
+          <div class="row">
+            <% if line_item.quantity > 1 %>
+              <div class="col-sm-4 col-md-4 col-lg-4 text-center">
+                <%= link_to line_item_path(line_item, line_item:{ quantity: "#{line_item.quantity - 1}" }), method: :put, remote: true, class: "minus-button" do  %>
+                  <i class="material-icons">remove</i>
+                <% end  %>
+              </div>
+            <% else %>
+              <div class="col-sm-4 col-md-4 col-lg-4 text-center">
+                <i class="material-icons">remove</i>
+              </div>
+            <% end %>
+            <div class="col-sm-4 col-md-4 col-lg-4 text-center">
+              <span><strong><%= line_item.quantity %></strong></span>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4 text-center">
+              <%= link_to line_item_path(line_item, line_item:{ quantity: "#{line_item.quantity + 1}" }), method: :put, remote: true, class: "plus-button" do  %>
+                <i class="material-icons">add</i>
+              <% end  %>
+            </div>
+          </div>
+        </td>
+        <td class="col-sm-2 col-md-2 col-lg-2 cart-size" valign="middle">
+          Size: <%= line_item.size.values.join(" & ")  if line_item.size.present? %>
+        </td>
+        <td class="col-sm-2 col-md-2 col-lg-2 cart-price">
+          <%= number_to_currency line_item.product.price %>
+        </td>
+        <td class="col-sm-1 col-md-1 col-lg-1 cart-delete" valign="middle">
+          <%= link_to line_item_path(line_item), method: "delete", remote: true do  %>
+            <i class="material-icons">close</i>
           <% end  %>
-        <% else %>
-          <i class="glyphicon glyphicon glyphicon-minus"></i>
-        <% end %>
-        <%= content_tag :span, line_item.quantity %>
-        <%= link_to line_item_path(line_item, line_item:{ quantity: "#{line_item.quantity + 1}" }), method: :put, remote: true, class: "plus-button" do  %>
-          <i class="glyphicon glyphicon glyphicon-plus"></i>
-        <% end  %>
-       <% end %>
-      <td>Size:
-        <% if line_item.product.category.complex %>
-          <%= line_item.size.to_a.join(" ") %>
-        <% elsif line_item.product.category.title.downcase == "bra" %>
-          <%= line_item.size["bra"] %>
-        <% else %>
-          <%= line_item.size["standard"] %>
-        <% end %>
-      </td>
-      <td> <%= number_to_currency line_item.product.price %></td>
-      <td>
-        <%= link_to line_item_path(line_item), method: "delete", remote: true do  %>
-          <i class="glyphicon glyphicon-trash"></i>
-        <% end  %>
-      </td>
-    </tr>
-  <% end %>
-</tbody>
+        </td>
+      </tr>
+    </table>
+  </div>
+<% end %>

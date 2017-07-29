@@ -8,7 +8,7 @@ Dir.glob(Rails.root.join("app/assets/images/categories/*")).each do |category|
     title: "#{current_category.capitalize}",
     image: Rails.root.join("app/assets/images/categories/#{current_category}/#{current_category}.jpg").open,
     visible: [true, false].sample,
-    complex: current_category == "bodysuite" ? true : false
+    complex: [true, false].sample
   )
 end
 
@@ -35,10 +35,11 @@ CSV.foreach("public/example-names.csv") do |row|
     archive: [true, false].sample,
     images: images
   )
+  break if $. > 20
 end
 
 #Orders and Carts
-100.times do |count|
+10.times do |count|
   Cart.create!
   Order.create!(
     name:"User-#{count}",
@@ -54,7 +55,7 @@ Product.order("RANDOM()").limit(50).each do |product|
   LineItem.create!(
     cart_id: Cart.ids.sample,
     product_id: product.id,
-    size: ( product.category.complex ? { bra: product.sizes["bra"].sample , brief: product.sizes["standard"].sample } : product.category.title.downcase == "bra" ? { bra: product.sizes["bra"].sample } : { standard: product.sizes["standard"].sample } ),
+    size: ( product.category.complex ? { bra: product.sizes["bra"].sample , panties: product.sizes["standard"].sample } : product.category.title.downcase == "bra" ? { bra: product.sizes["bra"].sample } : { standard: product.sizes["standard"].sample } ),
     quantity: rand(1..10),
     order_id: Order.ids.sample
   )

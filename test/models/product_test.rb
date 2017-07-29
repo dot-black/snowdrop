@@ -7,7 +7,8 @@ class ProductTest < ActiveSupport::TestCase
       title: "My Product Title",
       description: "My product description",
       price: 22.99,
-      category_id: Category.first.id
+      category_id: Category.first.id,
+      sizes: Product.sizes[:standard]
     )
   end
 
@@ -17,6 +18,7 @@ class ProductTest < ActiveSupport::TestCase
       assert product.errors[:title].any?
       assert product.errors[:description].any?
       assert product.errors[:price].any?
+      assert product.errors[:sizes].any?
     end
 
     test "product price must be positive" do

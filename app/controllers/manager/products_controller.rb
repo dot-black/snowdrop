@@ -1,16 +1,16 @@
 class Manager::ProductsController < ApplicationController
   before_action :_set_product, except:[:index, :archival,:new, :create]
-  before_action :_set_sizes, only: [:new, :edit]
   before_action :authenticate_manager!
   layout 'managers/dashboard'
 
   def index
-    @current_category = "All"
+    @current_category = "all"
     @products = Product.relevant.page params[:page]
     _filtering_params(params).each do |key, value|
       if key.present?
-        @products =  @products.public_send(key).page params[:page]
-        @current_category =  key.capitalize
+        @products =  @products.public_send(key,value).page params[:page]
+        @current_category =  key
+        @current_id = value
       end
     end
     respond_to do |format|
@@ -37,6 +37,7 @@ class Manager::ProductsController < ApplicationController
     @product = Product.new _permitted_product_params
     respond_to do |format|
       if @product.save
+        _add_more_images if _permitted_product_images_params.present?
         format.html { redirect_to manager_products_path, notice: "Product has been successfully created." }
       else
         flash.now.notice = "Product wasn't created, please check errors below!"
@@ -48,7 +49,8 @@ class Manager::ProductsController < ApplicationController
   def update
     respond_to do |format|
       if @product.update _permitted_product_params
-        format.html { redirect_to manager_products_path, notice: "Product has been successfully updated." }
+        _add_more_images if _permitted_product_images_params.present?
+        format.html { redirect_to manager_product_path(@product), notice: "Product has been successfully updated." }
       else
         flash.now.notice = "Product wasn't updated, please check errors below!"
         format.html { render :edit }
@@ -59,9 +61,9 @@ class Manager::ProductsController < ApplicationController
   def destroy
     respond_to do |format|
       if @product.destroy
-        format.html { redirect_to manager_products_path, notice: "Product has been successfully destroyed." }
+        format.html { redirect_to archival_manager_products_path, notice: "Product has been successfully destroyed." }
       else
-        format.html { redirect_to manager_products_path, notice: "Product hasn't been destroyed!" }
+        format.html { redirect_to archival_manager_products_path, notice: "Product hasn't been destroyed!" }
       end
     end
   end
@@ -90,11 +92,14 @@ class Manager::ProductsController < ApplicationController
     respond_to do |format|
       if @product.update images: @product.images.tap{ |a| a.delete_at(params[:index].to_i) }
         format.html { redirect_to edit_manager_product_path(@product), notice: "Single image was deleted." }
+        format.js
       else
         format.html { redirect_to edit_manager_product_path(@product), notice: "Single image couldn't be deleted!" }
+        format.js
       end
     end
   end
+
 
   private
 
@@ -102,14 +107,21 @@ class Manager::ProductsController < ApplicationController
       @product = Product.find(params[:id])
     end
 
-    def _set_sizes
-    end
-
     def _permitted_product_params
-      params.require(:product).permit(:title, :description, :price, :priority, :index, :category_id, {images: []}, sizes:[bra:[], brief:[], standard:[]])
+      params.require(:product).permit(:title, :description, :price, :priority, :index, :category_id, sizes:[bra:[], panties:[], standard:[]])
     end
 
     def _filtering_params(params)
-      params.slice(:visible, :hiden)
+      params.slice(:visible, :hidden, :manager_category)
     end
+
+    def _permitted_product_images_params
+      params.require(:product).permit({images: []})
+    end
+
+    def _add_more_images
+      @product.update images: (@product.images + _permitted_product_images_params[:images])
+    end
+
+
 end

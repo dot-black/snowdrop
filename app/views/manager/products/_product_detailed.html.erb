@@ -4,58 +4,73 @@
       <div class="ibox product-detail">
         <div class="ibox-content">
           <div class="row">
-
-            <div class="col-md-5">
-                <%= image_tag first_image(product) , size:300 %>
-            </div>
-
-            <div class="col-md-7">
-              <h2 class="font-bold m-b-xs"> <%= product.title %> </h2>
-
-              <div class="m-t-md">
-                <h2 class="product-main-price"> <%= number_to_currency product.price %> </h2>
-              </div>
-
-              <hr>
-
-              <h4>Product description</h4>
-
-              <div class="small text-muted">
-                <%= product.description %>
-              </div>
-
-              <hr>
-
-              <dl class="small m-t-md">
-                <dt>Category</dt>
-                <dd>
-                  <%= product.category.title %>
-                </dd>
-                <dt>Avalible sizes</dt>
-                <dd>
-                  <p><%= "Bra: #{product.sizes["bra"].to_a.join(" ")}" if product.sizes["bra"].present? %></p>
-                  <p><%= "Standard: #{product.sizes["standard"].to_a.join(" ")}" if product.sizes["standard"].present? %></p>
-
-                </dd>
-                <dt>Priority</dt>
-                <dd> <%= product.priority.upcase %> </dd>
-              </dl>
-
-              <div>
-                <hr>
-                <div class="btn-group">
-                  <% if product.visible %>
-                  <%= link_to change_appearance_manager_product_path(product), class: "btn btn-warning btn-sm" do %>
-                    <i class="fa fa-eye-slash"></i> Hide
-                  <% end %>
-                  <% else  %>
-                    <%= link_to change_appearance_manager_product_path(product), class: "btn btn-primary btn-sm" do %>
-                      <i class="fa fa-eye"></i> Release
-                    <% end %>
-                  <% end  %>
+            <div class="oriented">
+              <div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
+                <div class="row">
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <%= image_tag first_image(product), class:"img-responsive manager-product-image" %>
+                  </div>
                 </div>
-                <div class="btn-group">
-                  <%= link_to "Edit", edit_manager_product_path(product), class: "btn btn-primary btn-sm"%>
+                <br>
+                <div class="row">
+                  <div class="col-md-9">
+                  <% product.images.each do |image| %>
+                    <%= image_tag image, size: 64, class:"manager-product-image" %>
+                  <% end %>
+                </div>
+                </div>
+              </div>
+
+              <div class="col-xs-12 col-sm-7 col-md-7 col-lg-7">
+                <h2 class="font-bold m-b-xs"> <%= product.title %> </h2>
+
+                <div class="m-t-md">
+                  <h2 class="product-main-price"> <%= number_to_currency product.price %> </h2>
+                </div>
+
+                <hr>
+
+                <h4>Product description</h4>
+
+                <div class="small text-muted">
+                  <%= product.description %>
+                </div>
+
+                <hr>
+
+                <dl class="small m-t-md">
+                  <dt>Category</dt>
+                  <dd>
+                    <%= product.category.title %>
+
+                  </dd>
+                  <br>
+                  <dt>Avalible sizes</dt>
+                  <dd>
+                    <%= "Bra: #{product.sizes["bra"].to_a.join(" ")}" if product.sizes["bra"].present? %><br>
+                    <%= "Standard: #{product.sizes["standard"].to_a.join(" ")}" if product.sizes["standard"].present? %>
+                  </dd>
+                  <br>
+                  <dt>Priority</dt>
+                  <dd> <%= product.priority.upcase %> </dd>
+                </dl>
+
+                <div>
+                  <hr>
+                  <div class="btn-group">
+                    <% if product.visible %>
+                    <%= link_to change_appearance_manager_product_path(product), class: "btn btn-warning btn-sm" do %>
+                      <i class="fa fa-eye-slash"></i> Hide
+                    <% end %>
+                    <% else  %>
+                      <%= link_to change_appearance_manager_product_path(product), class: "btn btn-primary btn-sm" do %>
+                        <i class="fa fa-eye"></i> Release
+                      <% end %>
+                    <% end  %>
+                  </div>
+                  <div class="btn-group">
+                    <%= link_to "Edit", edit_manager_product_path(product), class: "btn btn-primary btn-sm"%>
+                  </div>
                 </div>
               </div>
             </div>
@@ -63,5 +78,6 @@
         </div>
       </div>
     </div>
+    <%= render "image_modal" %>
   </div>
 </div>
