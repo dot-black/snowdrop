@@ -22,6 +22,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'bootstrap-sass', '~> 3.3.7'
 gem "font-awesome-rails"
 gem 'jquery-rails'
+gem 'jquery-validation-rails'
 
 # gem 'therubyracer', platforms: :ruby
 # Use ActiveModel has_secure_password
