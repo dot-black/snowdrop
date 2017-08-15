@@ -94,14 +94,16 @@
                           <%= content_tag :br %>
                           <%= content_tag :ul, id: "orders-list", class: "list-group collapse" do %>
                             <% LineItem.where(product_id: @category.products.ids).each do |line_item| %>
-                              <%= content_tag :li, class: "list-group-item" do %>
-                                <%= link_to manager_order_path(line_item.order_id) do %>
-                                  <%= "Order##{ line_item.order_id }: #{Order.find(line_item.order_id).status}" %>
+                              <% if line_item.order.present? %>
+                                <%= content_tag :li, class: "list-group-item" do %>
+                                  <%= link_to manager_order_path(line_item.order_id) do %>
+                                    <%= "Order##{ line_item.order_id }: #{Order.find(line_item.order_id).status}" %>
+                                  <% end %>
                                 <% end %>
                               <% end %>
                             <% end %>
                           <% end %>
-                        <% end %>  
+                        <% end %>
                       </td>
                       <td><%= LineItem.where(product_id: @category.products.ids).count %></td>
                     </tr>
