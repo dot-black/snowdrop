@@ -67,7 +67,7 @@
                         <%= content_tag :br %>
                         <% if @category.products.present?  %>
                           <%= button_tag "List", class: "btn btn-xs btn-outline btn-primary", data:{toggle: "collapse", target: "#products-list"} %>
-                          <%= link_to "All", manager_product_path(manager_category: @category.id), class: "btn btn-xs btn-outline btn-warning" %>
+                          <%= link_to "All", manager_products_path(manager_category: @category), class: "btn btn-xs btn-outline btn-warning" %>
                           <%= content_tag :br %>
                           <%= content_tag :ul, id: "products-list", class: "list-group collapse" do %>
                             <% @category.products.each do |product| %>
@@ -93,11 +93,11 @@
                           <%= button_tag "List", class: "btn btn-xs btn-outline btn-primary", data:{toggle: "collapse", target: "#orders-list"} %>
                           <%= content_tag :br %>
                           <%= content_tag :ul, id: "orders-list", class: "list-group collapse" do %>
-                            <% LineItem.where(product_id: @category.products.ids).each do |line_item| %>
+                            <% @line_items.each do |line_item| %>
                               <% if line_item.order.present? %>
                                 <%= content_tag :li, class: "list-group-item" do %>
-                                  <%= link_to manager_order_path(line_item.order_id) do %>
-                                    <%= "Order##{ line_item.order_id }: #{Order.find(line_item.order_id).status}" %>
+                                  <%= link_to manager_order_path(line_item.order) do %>
+                                    <%= "Order##{ line_item.order_id }: #{line_item.order.status}" %>
                                   <% end %>
                                 <% end %>
                               <% end %>
@@ -105,7 +105,7 @@
                           <% end %>
                         <% end %>
                       </td>
-                      <td><%= LineItem.where(product_id: @category.products.ids).count %></td>
+                      <td><%=  @line_items.count %></td>
                     </tr>
                     </table>
                   </div>
