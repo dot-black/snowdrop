@@ -51,6 +51,7 @@
 // Your custom style to override base style
 @import "base/custom";
 @import "base/sweetalert";
+@import "manager/product";
 
 // Select2 autocomplete styles
 // @import "select2";
@@ -64,6 +65,7 @@
 @import "materialize_toast";
 // Image modal
 @import "image";
+
 
 // Clear layout on print mode
 @media print {

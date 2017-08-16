@@ -27,6 +27,8 @@ manager_ready = ->
     $('#product-image-modal').css('display','none')
     return
 
+  $('#new_product').validate
+    debag: false
 
 # $(document).ready manager_ready
 $(document).on 'page:load', manager_ready

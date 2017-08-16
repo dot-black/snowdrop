@@ -14,15 +14,87 @@
   <div class="wrapper wrapper-content animated fadeInRight ecommerce">
     <div class="row">
       <div class="col-lg-12">
-        <div class="tabs-container">
-          <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" href="#tab-1"> Product info</a></li>
-            <li class=""><a data-toggle="tab" href="#tab-2"> Images</a></li>
-          </ul>
+        <div class="ibox product-detail">
+          <div class="ibox-content">
+            <fieldset class="form-horizontal">
 
-          <div class="tab-content">
-            <%= render partial: "info_tab", locals: { form: form } %>
-            <%= render partial: "image_tab", locals: { form: form } %>
+              <div class="field">
+                <div class="form-group">
+                  <%= form.label :title, class:"col-sm-2 col-lg-1 control-label" %>
+                  <div class="col-sm-10 col-lg-11">
+                    <%= form.text_field :title, id: :product_title, placeholder:"Product name", class:"form-control", required: true %>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <%= form.label :price, class:"col-sm-2 col-lg-1 control-label" %>
+                <div class="col-sm-10 col-lg-11">
+                  <%= form.text_field :price, id: :product_price, placeholder:"Product price", class:"form-control", required: true %>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <%= form.label :category, class:"col-sm-2 col-lg-1 control-label", title: "choose category" %>
+                <div class="col-sm-10 col-lg-11">
+                  <%= form.collection_select :category_id, Category.all, :id, :title, { }, { class:"selectpicker form-control m-b", title: 'Select category', id:"manager-product-category" } %>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <%= form.label :priority, class:"col-sm-2 col-lg-1 control-label"%>
+                <div class="col-sm-10 col-lg-11">
+                  <%= form.select :priority, Product.priorities.keys, {}, { class:"form-control m-b" } %>
+                </div>
+              </div>
+
+
+              <div class="form-group">
+                <%= form.label :description, class:"col-sm-2 col-lg-1 control-label" %>
+                <div class="col-sm-10 col-lg-11">
+                  <%= form.text_area :description, id: :product_description, placeholder: "Enter description here", class: "form-control", required: true %>
+                </div>
+              </div>
+
+              <div class="form-group">
+
+                <%= form.label :sizes, class:"col-sm-2 col-lg-1 control-label" %>
+                <div class="col-sm-10 col-lg-11">
+                  <%= form.fields_for :sizes do |ff| %>
+                    <% Product.sizes.each do |key, value| %>
+                      <div class="row">
+                        <div class="col-sm-1">
+                          <small><%= key.capitalize %></small>
+                        </div>
+                        <div class="col-sm-10">
+                          <% value.each do |size| %>
+                            <% if @product.sizes and @product.sizes[key].present? and @product.sizes[key].include?(size) %>
+                              <%= ff.check_box key, { multiple: true, checked: true }, size, false %>
+                            <% else %>
+                              <%= ff.check_box key, { multiple: true, checked: false }, size, false %>
+                            <% end %>
+                            <%= ff.label "#{key}_#{size.downcase}", size %>
+                          <% end %>
+                        </div>
+                      </div>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
+
+              <div class="field">
+                <div class="form-group">
+                  <%= form.label :images, class:"col-sm-2 col-lg-1 control-label text-left" %>
+                  <div class="col-sm-10 col-lg-11">
+                    <div class="row" id="product-image-preview">
+                      <%= render "product_image_preview"%>
+                    </div>
+                    <br>
+                    <%= form.file_field :images, multiple: true, id: "manager-product-images-upload" %>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
 
             <br>
 
@@ -39,3 +111,5 @@
     </div>
   </div>
 <% end %>
+
+<%= render "image_modal" %>

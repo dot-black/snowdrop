@@ -26,38 +26,6 @@ td span.label {
   font-size: 11px;
 }
 
-div.alert {
-  z-index: 2;
-  display: none;
-  position: fixed;
-  top: 80px;
-  right: 10px;
-}
-
-.company-name {
-  padding-left: 45px;
-  padding-bottom: 15px;
-  color: #a7b1c2;
-  font-weight: 400;
-  font-size: 24px;
-}
-
-tr.footable-filtering th {
-  padding: 8px 0px !important;
-}
-
-td span.red {
-  color: #ED5565;
-}
-
-td span.green {
-  color: #1ab394;
-}
-
-.search-control {
-  padding: 0px 15px;
-}
-
 table {
   tbody tr.selectable-row:hover {
     -moz-box-shadow: 0 0 4px #999;
@@ -76,20 +44,6 @@ table {
 .grid-item {
     margin-bottom: 25px;
     width: 300px;
-}
-
-.backgroundless{
-  background-color: transparent;
-}
-.aligned > tbody > tr > td {
-  border: none;
-  vertical-align: middle;
-}
-
-.fixed-right{
-  left: 93%;
-  position: fixed;
-  top: 92%;
 }
 
 .product-imitation{

@@ -1,55 +1,120 @@
-<%= form_for [:manager, @category] do |form| %>
-  <% if @category.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@category.errors.count, "error") %> prohibited this category from being saved:</h2>
+<div class="wrapper wrapper-content animated fadeInRight ecommerce">
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <div class="tabs-container">
+        <ul class="nav nav-tabs">
+          <li class="active"><a data-toggle="tab" href="#tab-1"> Category</a></li>
+          <li class=""><a data-toggle="tab" href="#tab-2"> Info</a></li>
+        </ul>
+        <div class="tab-content">
 
-      <ul>
-      <% @category.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+          <div id="tab-1" class="tab-pane active">
+            <%= form_for [:manager, @category] do |form| %>
+              <% if @category.errors.any? %>
+                <div id="error_explanation">
+                  <h2><%= pluralize(@category.errors.count, "error") %> prohibited this category from being saved:</h2>
+                  <ul>
+                    <% @category.errors.full_messages.each do |message| %>
+                      <li><%= message %></li>
+                  <% end %>
+                  </ul>
+                </div>
+              <% end %>
+              <%= image_tag category_image(@category.image), class:'img-responsive' %>
+              <div class="panel-body">
+                <fieldset class="form-horizontal">
+                  <div class="field">
+                    <div class="form-group">
+                      <%= form.label :title, class:"col-xs-2 col-sm-2 col-md-2 col-lg-2  control-label" %>
+                      <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                        <%= form.text_field :title, id: :category_title, placeholder:"Category name", class:"form-control" %>
+                      </div>
+                    </div>
+                  </div>
 
-  <div class="wrapper wrapper-content animated fadeInRight ecommerce">
-    <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <%= image_tag category_image(@category.image), class:'img-responsive' %>
-        <div class="panel-body">
-          <fieldset class="form-horizontal">
+                  <div class="field">
+                    <div class="form-group">
+                      <%= form.label :image, class:"col-xs-2 col-sm-2 col-md-2 col-lg-2 control-label" %>
+                      <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                        <%= form.file_field :image, class:"form-control" %>
+                      </div>
+                    </div>
+                  </div>
 
+                </fieldset>
+              </div>
 
-            <div class="field">
-              <div class="form-group">
-                <%= form.label :title, class:"col-xs-2 col-sm-2 col-md-2 col-lg-2  control-label" %>
-                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-                  <%= form.text_field :title, id: :category_title, placeholder:"Product name", class:"form-control" %>
+              <br>
+
+              <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                  <%= form.submit class: "btn btn-primary pull-right" %>
                 </div>
               </div>
             </div>
+          <% end %>
+          <div id="tab-2" class="tab-pane">
+            <div class="panel-body">
+              <fieldset class="form-horizontal">
+                <div class="row">
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <table class="table">
+                      <th>Dependencies</th>
+                      <th>Count</th>
+                    <tr>
+                      <td>
+                        <%= content_tag :span, "Products" %>
+                        <%= content_tag :br %>
+                        <% if @category.products.present?  %>
+                          <%= button_tag "List", class: "btn btn-xs btn-outline btn-primary", data:{toggle: "collapse", target: "#products-list"} %>
+                          <%= link_to "All", manager_products_path(manager_category: @category), class: "btn btn-xs btn-outline btn-warning" %>
+                          <%= content_tag :br %>
+                          <%= content_tag :ul, id: "products-list", class: "list-group collapse" do %>
+                            <% @category.products.each do |product| %>
+                              <%= content_tag :li, class: "list-group-item" do %>
+                                <%= link_to manager_product_path(product) do %>
+                                  <%= product.title  %>
+                                <% end %>
+                              <% end %>
+                            <% end %>
+                          <% end %>
+                        <% end %>
+                      </td>
+                      </td>
+                      <td><%= @category.products.count %></td>
+                      <td>
 
-            <div class="field">
-              <div class="form-group">
-                <%= form.label :image, class:"col-xs-2 col-sm-2 col-md-2 col-lg-2 control-label" %>
-                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-                  <%= form.file_field :image, class:"form-control" %>
+                    </tr>
+                    <tr>
+                      <td>
+                        <%= content_tag :span, "Orders" %>
+                        <%= content_tag :br %>
+                        <% if @category.products.present?  %>
+                          <%= button_tag "List", class: "btn btn-xs btn-outline btn-primary", data:{toggle: "collapse", target: "#orders-list"} %>
+                          <%= content_tag :br %>
+                          <%= content_tag :ul, id: "orders-list", class: "list-group collapse" do %>
+                            <% @line_items.each do |line_item| %>
+                              <% if line_item.order.present? %>
+                                <%= content_tag :li, class: "list-group-item" do %>
+                                  <%= link_to manager_order_path(line_item.order) do %>
+                                    <%= "Order##{ line_item.order_id }: #{line_item.order.status}" %>
+                                  <% end %>
+                                <% end %>
+                              <% end %>
+                            <% end %>
+                          <% end %>
+                        <% end %>
+                      </td>
+                      <td><%=  @line_items.count %></td>
+                    </tr>
+                    </table>
+                  </div>
                 </div>
-              </div>
-            </div>
-
-          </fieldset>
-        </div>
-
-        <br>
-
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="form-group">
-              <%= form.submit class: "btn btn-primary pull-right" %>
+              </fieldset>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-<% end %>
+</div>

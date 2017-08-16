@@ -1,13 +1,11 @@
 class Manager::CategoriesController < ApplicationController
-  before_action :_set_category, only: [:show, :edit, :update, :destroy, :change_appearance, :destroy]
   before_action :authenticate_manager!
+  before_action :_set_category, only: [:edit, :update, :destroy, :change_appearance]
+  before_action :_set_line_items, only: :edit
   layout 'managers/dashboard'
 
   def index
     _set_categories
-  end
-
-  def show
   end
 
   def new
@@ -30,7 +28,6 @@ class Manager::CategoriesController < ApplicationController
       end
     end
   end
-
 
   def update
     respond_to do |format|
@@ -77,6 +74,10 @@ class Manager::CategoriesController < ApplicationController
 
     def _set_categories
       @categories = Category.all
+    end
+
+    def _set_line_items
+      @line_items = LineItem.where(product_id: @category.products.ids).where.not(order_id: nil)
     end
 
     def _permitted_category_params
