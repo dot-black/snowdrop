@@ -1,7 +1,8 @@
 class Manager::CategoriesController < ApplicationController
   before_action :authenticate_manager!
   before_action :_set_category, only: [:edit, :update, :destroy, :change_appearance]
-  before_action :_set_line_items, only: :edit
+  before_action :_set_category_products, only: :edit
+  before_action :_set_category_orders, only: [:edit, :destroy]
   layout 'managers/dashboard'
 
   def index
@@ -43,20 +44,18 @@ class Manager::CategoriesController < ApplicationController
 
   def destroy
     respond_to do |format|
-      ivolved_products = @category.products.ids & LineItem.all.map(&:product_id)
-      unless ivolved_products.any?
+      unless @category_orders.any?
         @category.destroy
         format.html { redirect_to manager_categories_path, notice: "Category was successfully destroyed." }
         format.json { head :no_content }
         format.js
       else
-        format.html { redirect_to manager_categories_path, notice: "Category can't be destroyed, there are #{ ivolved_products.count } #{'product'.pluralize(ivolved_products.count)} involved."}
+        format.html { redirect_to manager_categories_path, notice: "Category can't be destroyed, there are #{ @category_orders.count } #{'order'.pluralize(@category_orders.count)} involved."}
       end
     end
   end
 
   def change_appearance
-    _set_categories
     respond_to do |format|
       if @category.update visible: !@category.visible
         format.html { redirect_to manager_categories_path, notice: "Category '#{@category.title}' is #{@category.visible ? "visible" : "invisible"} now." }
@@ -76,8 +75,12 @@ class Manager::CategoriesController < ApplicationController
       @categories = Category.all
     end
 
-    def _set_line_items
-      @line_items = LineItem.where(product_id: @category.products.ids).where.not(order_id: nil)
+    def _set_category_orders
+      @category_orders = Order.find(LineItem.where(product_id: @category.products.ids).map(&:order_id))
+    end
+
+    def _set_category_products
+      @category_products = @category.products
     end
 
     def _permitted_category_params
