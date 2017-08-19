@@ -19,7 +19,7 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :orders, only:[:index, :show, :update, :edit]
+    resources :orders, only:[:index, :show, :update]
 
     resources :categories do
       member do
