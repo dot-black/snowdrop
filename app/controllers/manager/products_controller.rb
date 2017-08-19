@@ -1,6 +1,8 @@
 class Manager::ProductsController < ApplicationController
-  before_action :_set_product, except:[:index, :archival,:new, :create]
   before_action :authenticate_manager!
+  before_action :_set_product, except:[:index, :archival,:new, :create]
+  before_action :_set_product_orders, only: :destroy
+
   layout 'managers/dashboard'
 
   def index
@@ -60,43 +62,34 @@ class Manager::ProductsController < ApplicationController
 
   def destroy
     respond_to do |format|
-      if @product.destroy
-        format.html { redirect_to archival_manager_products_path, notice: "Product has been successfully destroyed." }
+      unless @product_orders.present?
+        notice = @product.destroy ? "Product has been successfully destroyed." : "Destroy failed!"
+        format.html { redirect_to archival_manager_products_path, notice: notice }
       else
-        format.html { redirect_to archival_manager_products_path, notice: "Product hasn't been destroyed!" }
-      end
+        format.html { redirect_to archival_manager_products_path, notice: "Product can't be destroyed, because of #{ @product_orders.count } #{'order'.pluralize(@product_orders.count)} involved."}
+     end
     end
   end
 
   def archive
     respond_to do |format|
-      if @product.update archive: !@product.archive, visible: false
-        format.html { redirect_to (@product.archive ? manager_products_path : archival_manager_products_path), notice: "Product #{@product.title } has been archived." }
-      else
-        format.html { redirect_to (@product.archive ? manager_products_path : archival_manager_products_path), notice: "Product #{@product.title } hasn't been archived!" }
-      end
+      notice = ( @product.update archive: !@product.archive, visible: false ) ? "Product #{@product.title } has been #{@product.archive ? 'archived' : 'restored'}." : "Archive failed!"
+      format.html { redirect_to (@product.archive ? manager_products_path : archival_manager_products_path), notice: notice }
     end
   end
 
   def change_appearance
     respond_to do |format|
-      if @product.update visible: !@product.visible
-        format.html { redirect_to manager_products_path, notice: "Product #{@product.title } has become #{@product.visible ? 'visible' : 'invisible' }." }
-      else
-        format.html { redirect_to manager_products_path , notice: "Product #{@product.title } hasn't change it's appearance!" }
-      end
+      notice = ( @product.update visible: !@product.visible ) ? "Product '#{@product.title }' has become #{@product.visible ? 'visible' : 'invisible' }." : "Change apperance failed"
+      format.html { redirect_to manager_products_path, notice: notice }
     end
   end
 
   def remove_single_image
     respond_to do |format|
-      if @product.update images: @product.images.tap{ |a| a.delete_at(params[:index].to_i) }
-        format.html { redirect_to edit_manager_product_path(@product), notice: "Single image was deleted." }
-        format.js
-      else
-        format.html { redirect_to edit_manager_product_path(@product), notice: "Single image couldn't be deleted!" }
-        format.js
-      end
+      notice = ( @product.update images: @product.images.tap{ |a| a.delete_at(params[:index].to_i) } ) ? "Single image was deleted." : "Remove single image failed"
+      format.html { redirect_to edit_manager_product_path(@product), notice: notice}
+      format.js
     end
   end
 
@@ -123,5 +116,8 @@ class Manager::ProductsController < ApplicationController
       @product.update images: (@product.images + _permitted_product_images_params[:images])
     end
 
+    def _set_product_orders
+      @product_orders = Order.find(LineItem.where(product_id: @product.id).map(&:order_id))
+    end
 
 end
