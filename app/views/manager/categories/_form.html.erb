@@ -82,7 +82,7 @@
                             <% end %>
                           </td>
                           </td>
-                          <td><%= @category_products.count %></td>
+                          <td><%= @category_products.present? ? @category_products.count : 0 %></td>
                         </tr>
                         <tr>
                           <td>
@@ -102,7 +102,7 @@
                               <% end %>
                             <% end %>
                           </td>
-                          <td><%= @category_orders.count %></td>
+                          <td><%= @category_orders.present? ? @category_orders.count : 0 %></td>
                         </tr>
                       </table>
                     </div>
