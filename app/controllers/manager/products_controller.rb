@@ -80,14 +80,14 @@ class Manager::ProductsController < ApplicationController
 
   def change_appearance
     respond_to do |format|
-      notice = ( @product.update visible: !@product.visible ) ? "Product '#{@product.title }' has become #{@product.visible ? 'visible' : 'invisible' }." : "Change apperance failed"
+      notice = ( @product.update visible: !@product.visible ) ? "Product '#{@product.title }' has become #{@product.visible ? 'visible' : 'invisible' }." : "Change apperance failed!"
       format.html { redirect_to manager_products_path, notice: notice }
     end
   end
 
   def remove_single_image
     respond_to do |format|
-      notice = ( @product.update images: @product.images.tap{ |a| a.delete_at(params[:index].to_i) } ) ? "Single image was deleted." : "Remove single image failed"
+      notice = ( @product.update images: @product.images.tap{ |a| a.delete_at(params[:index].to_i) } ) ? "Single image was deleted." : "Remove single image failed!"
       format.html { redirect_to edit_manager_product_path(@product), notice: notice}
       format.js
     end

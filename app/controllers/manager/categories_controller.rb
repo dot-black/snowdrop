@@ -24,7 +24,7 @@ class Manager::CategoriesController < ApplicationController
         format.html { redirect_to manager_categories_path, notice: 'Category was successfully created.' }
         format.json { render :show, status: :created, location: @category }
       else
-        format.html { render :new, notice: "Category wasn't created, please check errors below" }
+        format.html { render :new, notice: "Category wasn't created, please check errors below!" }
         format.json { render json: @category.errors, status: :unprocessable_entity }
       end
     end
@@ -36,7 +36,7 @@ class Manager::CategoriesController < ApplicationController
         format.html { redirect_to manager_categories_path, notice: "Category was successfully updated." }
         format.json { render :show, status: :ok, location: @category }
       else
-        format.html { render :edit, notice: "Category wasn't updated, please check errors below"  }
+        format.html { render :edit, notice: "Category wasn't updated, please check errors below!"  }
         format.json { render json: @category.errors, status: :unprocessable_entity }
       end
     end
@@ -45,12 +45,11 @@ class Manager::CategoriesController < ApplicationController
   def destroy
     respond_to do |format|
       unless @category_orders.any?
-        @category.destroy
-        format.html { redirect_to manager_categories_path, notice: "Category was successfully destroyed." }
-        format.json { head :no_content }
+        notice = @category.destroy ? "Category was successfully destroyed." : "Category wasn't destroyed."
+        format.html { redirect_to manager_categories_path, notice: notice }
         format.js
       else
-        format.html { redirect_to manager_categories_path, notice: "Category can't be destroyed, there are #{ @category_orders.count } #{'order'.pluralize(@category_orders.count)} involved."}
+        format.html { redirect_to manager_categories_path, notice: "Category can't be destroyed, because of #{ @category_orders.count } #{'order'.pluralize(@category_orders.count)} involved."}
       end
     end
   end
@@ -60,7 +59,7 @@ class Manager::CategoriesController < ApplicationController
       if @category.update visible: !@category.visible
         format.html { redirect_to manager_categories_path, notice: "Category '#{@category.title}' is #{@category.visible ? "visible" : "invisible"} now." }
       else
-        format.html { redirect_to manager_categories_path, notice: "Category's appearance wasn't changed." }
+        format.html { redirect_to manager_categories_path, notice: "Change appearance failed!" }
       end
     end
   end

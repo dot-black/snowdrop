@@ -3,15 +3,16 @@ class Manager::DashboardController < ApplicationController
   layout 'managers/dashboard'
 
   def index
+    products_count_persent = Product.relevant.count.to_f / 100.0
     @products = {
       count: {
         total: Product.relevant.count,
-        visible: Product.visible("true").count,
-        hidden:Product.hidden("true").count
+        visible: Product.visible.count,
+        hidden: Product.hidden.count
       },
       percentage: {
-        visible: Product.visible("true").count.to_f / Product.relevant.count.to_f * 100.0,
-        hidden: Product.hidden("true").count.to_f / Product.relevant.count.to_f * 100.0,
+        visible: Product.visible.count.to_f / products_count_persent,
+        hidden: Product.hidden.count.to_f / products_count_persent,
       },
       categories:{}
     }
@@ -23,20 +24,20 @@ class Manager::DashboardController < ApplicationController
       }
     end
 
-    uniq_dates = Order.all
+    orders_count_percent = Order.count.to_f / 100.0
     @orders = {
       count:{
         total: Order.count,
-        pending: Order.where(status: "pending").count,
-        accepted: Order.where(status: "accepted").count,
-        completed: Order.where(status: "completed").count,
-        declined: Order.where(status: "declined").count
+        pending: Order.accepted.count,
+        accepted: Order.accepted.count,
+        completed: Order.completed.count,
+        declined: Order.declined.count
       },
       percentage:{
-        pending: Order.where(status: "pending").count.to_f / Order.count.to_f * 100.0,
-        accepted: Order.where(status: "accepted").count.to_f / Order.count.to_f * 100.0,
-        completed: Order.where(status: "completed").count.to_f / Order.count.to_f * 100.0,
-        declined: Order.where(status: "declined").count.to_f / Order.count.to_f * 100.0
+        pending: Order.pending.count.to_f / orders_count_percent,
+        accepted: Order.accepted.count.to_f / orders_count_percent,
+        completed: Order.completed.count.to_f / orders_count_percent,
+        declined: Order.declined.count.to_f / orders_count_percent
       },
       statistics:{
         total_count: {},
@@ -47,7 +48,7 @@ class Manager::DashboardController < ApplicationController
     }
     #Orders total count statistics
     (2.weeks.ago.to_date..Date.today).map{ |date| date.strftime("%Y-%m-%d") }.each do |date|
-       @orders[:statistics][:total_count][date] = Order.where(created_at: Date.parse(date).midnight..Date.parse(date).end_of_day).count
+      @orders[:statistics][:total_count][date] = Order.where(created_at: Date.parse(date).midnight..Date.parse(date).end_of_day).count
     end
     #Orders line items statistics by categories
     Category.all.each do |category|
