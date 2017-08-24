@@ -9,8 +9,8 @@ class OrdersTest < ApplicationSystemTestCase
   test "Check out order" do
     assert_difference 'LineItem.count' do
       visit store_url
-      click_on @category_first.title.pluralize(2)
-      click_on @product_first.title
+      click_on @category_first.title.pluralize(2), match: :first
+      click_on @product_first.title, match: :first
       click_on 'Add to cart'
       visit cart_url
       click_on 'Checkout'
