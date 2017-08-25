@@ -187,7 +187,7 @@
           <!-- <span class="label label-primary pull-right">Total</span> -->
           <h5>Categories</h5>
         </div>
-        <% @products[:categories].each  do |key, value|  %>
+        <% @categories.each  do |key, value|  %>
           <%= link_to manager_products_path(manager_category: value[:id]) do %>
             <div class="ibox-content">
               <div class="container-fluid">
@@ -208,7 +208,7 @@ $(function() {
   Morris.Line({
     element: 'morris-line-chart',
     data: [
-      <% @orders[:statistics][:total_count].each do |key,value| %>
+      <% @visual_statistics[:orders_total_count].each do |key,value| %>
         { x:'<%= key %>', y:<%=value%>},
       <% end %>
     ],
@@ -227,14 +227,14 @@ $(function() {
   Morris.Donut({
     element: 'morris-donut-chart',
     data: [
-      <% @orders[:statistics][:line_items_category_count].each do |key,value| %>
+      <% @visual_statistics[:line_items_category_count].each do |key,value| %>
         { label:'<%= key %>', value: <%= value %> },
       <% end %>
     ],
     resize: true,
     colors: [
-      <% @orders[:statistics][:line_items_category_count].each_with_index do |(key,value),index| %>
-        '<%= @orders[:statistics][:colors][index]%>',
+      <% @visual_statistics[:line_items_category_count].each_with_index do |(key,value),index| %>
+        '<%= @visual_statistics[:colors][index]%>',
       <% end %>
     ],
 
@@ -242,14 +242,14 @@ $(function() {
   Morris.Donut({
     element: 'morris-donut-chart-sizes',
     data: [
-      <% @orders[:statistics][:line_items_sizes_count].each do |key,value| %>
+      <% @visual_statistics[:line_items_sizes_count].each do |key,value| %>
         { label:'<%= key %>', value: <%= value %> },
       <% end %>
     ],
     resize: true,
     colors: [
-      <% @orders[:statistics][:line_items_sizes_count].each_with_index do |(key,value),index| %>
-        '<%= @orders[:statistics][:colors][index]%>',
+      <% @visual_statistics[:line_items_sizes_count].each_with_index do |(key,value),index| %>
+        '<%= @visual_statistics[:colors][index]%>',
       <% end %>
     ],
 
