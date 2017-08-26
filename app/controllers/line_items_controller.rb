@@ -7,9 +7,7 @@ class LineItemsController < ApplicationController
     @line_item = @cart.add_product(_permitted_line_item_params)
     respond_to do |format|
       if @line_item.save
-        _set_cart_line_items
-        _set_cart_counter @line_items
-
+        _set_line_items_variables
         format.html { redirect_to product_path(product) }
         format.json { render :show, status: :created, location: @line_item }
         format.js {flash.now[:notice] = "Product is added to cart"}
@@ -27,9 +25,7 @@ class LineItemsController < ApplicationController
     _ensure_cart_isnt_empty
     respond_to do |format|
       if @line_item.update _permitted_line_item_params
-        _set_cart_line_items
-        _set_cart_total_amount @line_items
-        _set_cart_counter @line_items
+        _set_line_items_variables
         format.html { redirect_to new_order_path }
         format.json
         format.js
@@ -47,9 +43,7 @@ class LineItemsController < ApplicationController
     _set_cart
     respond_to do |format|
       if @line_item.destroy
-        _set_cart_line_items
-        _set_cart_total_amount @line_items
-        _set_cart_counter @line_items
+        _set_line_items_variables
         format.html { redirect_to cart_path }
         format.json { head :no_content }
         format.js
@@ -67,6 +61,12 @@ class LineItemsController < ApplicationController
     end
 
     def _set_line_item
-      @line_item = LineItem.find(params[:id])
+      outcome = FetchLineItem.run(params)
+      if outcome.valid?
+        @line_item = outcome.result
+      else
+        raise ActiveRecord::RecordNotFound,
+          outcome.errors.full_messages.to_sentence
+      end
     end
 end

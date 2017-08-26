@@ -6,8 +6,7 @@ class OrdersController < ApplicationController
     _set_categories
     _set_cart
     _ensure_cart_isnt_empty
-    _set_cart_line_items
-    _set_cart_counter @line_items
+    _set_line_items_variables
     @order = Order.new
   end
 

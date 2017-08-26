@@ -6,8 +6,7 @@ class ProductsController < ApplicationController
     _set_cart
     _set_categories
     if @current_category = _current_category
-      _set_cart_line_items
-      _set_cart_counter @line_items
+      _set_line_items_variables
       @products = Product.shown.category(@current_category.id).page(params[:page]).per(10)
     else
       flash[:notice] = "Category must be present!"
@@ -24,8 +23,7 @@ class ProductsController < ApplicationController
       flash[:notice] = "Can't find such product!"
       redirect_to store_path
     end
-    _set_cart_line_items
-    _set_cart_counter @line_items
+    _set_line_items_variables
   end
 
   private
