@@ -1,22 +1,14 @@
-class OrdersController < ApplicationController
-  include CurrentCart
-  include Categories
-
+class OrdersController < StoreController
   def new
-    _set_categories
-    _set_cart
     _ensure_cart_isnt_empty
-    _set_line_items_variables
     @order = Order.new
   end
 
 
   def create
-    _set_categories
-    _set_cart
     @order = Order.new _permitted_order_params
     @order.add_line_items_from_cart @cart
-    @order.amount = _get_line_items_amount @order.line_items
+    @order.amount = GetLineItemsTotalAmount.run!(line_items: @order.line_items)
 
     respond_to do |format|
       if @order.save

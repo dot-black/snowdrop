@@ -4,9 +4,13 @@ class FetchLineItem < ActiveInteraction::Base
   integer :id
 
   def execute
-    line_item = LineItem.find id
-    errors.add(:id, :not_found) unless line_item
-    line_item
+    begin
+      line_item = LineItem.find id
+    rescue ActiveRecord::RecordNotFound
+      errors.add(:id, :not_found)
+    else
+      line_item
+    end
   end
-  
+
 end

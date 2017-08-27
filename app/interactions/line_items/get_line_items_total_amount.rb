@@ -8,7 +8,6 @@ class GetLineItemsTotalAmount < ActiveInteraction::Base
   end
 
   private
-  
   def _get_prices
     line_items.map(&:product).map(&:price)
   end
