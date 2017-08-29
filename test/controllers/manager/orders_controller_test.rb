@@ -50,5 +50,5 @@ class OrdersControllerTest < ActionDispatch::IntegrationTest
       manager_orders_path(status: status)
       assert_equal "Status of order ##{@order.id} has been changed.", flash[:notice]
     end
-  end  
+  end
 end
