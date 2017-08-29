@@ -2,9 +2,9 @@ Order #<%= @order.id %>
 Updated: <%= @order.updated_at.strftime("%d.%m.%Y %H:%M") %>
 Status: <%= @order.status %>
 Info:
-  <%= @order.name %>
-  <%= @order.telephone %>
-  <%= @order.email %>
+  <%= @order.user.name %>
+  <%= @order.user.telephone %>
+  <%= @order.user.email %>
   Comment: <%= @order.comment %>
 
 Order:
