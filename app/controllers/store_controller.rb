@@ -1,12 +1,11 @@
 class StoreController < ApplicationController
-  before_action :_set_cart, :_set_categories, :_set_line_items_variables
+  before_action :_set_cart, :_set_categories
+  before_action :_set_line_items_variables, except:[:update, :destroy]
   def index
 
   end
 
   def get_cart_items_count
-    _set_cart
-    _set_line_items_variables
     render json: {
       catr_items_count: @cart_line_items_quantity,
       status: :success

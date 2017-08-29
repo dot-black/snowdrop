@@ -18,6 +18,7 @@ class LineItemsController < StoreController
 
   def update
     _ensure_cart_isnt_empty
+    _set_line_item
     respond_to do |format|
       if @line_item.update _permitted_line_item_params
         _set_line_items_variables
