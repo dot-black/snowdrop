@@ -1,7 +1,7 @@
 <div class="container">
   <div class="order-headline">
-    <h2>Checkout</h2>
+    <h2>Enter personal information</h2>
     <span><%= link_to "Enter your information",new_user_path  %> or <%= link_to "edit the information",edit_users_path %></span>
   </div>
-  <%= render partial: "form", locals: { order: @order } %>
+  <%= render "form"%>
 </div>

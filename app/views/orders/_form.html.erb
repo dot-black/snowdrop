@@ -2,7 +2,7 @@
   <div id="error_explanation">
     <h2><%= pluralize(order.errors.count, "error") %> prohibited this order from being saved:</h2>
     <ul>
-    <% @order.errors.full_messages.each do |message| %>
+    <% @user.errors.full_messages.each do |message| %>
       <li><%= message %></li>
     <% end %>
     </ul>
@@ -10,13 +10,20 @@
 <% end %>
 <div class="order-form">
   <div class="order-checkout">
+
+    <%= label_tag :name %>
+    <br>
+    <%= content_tag :p, @user.name %>
+    <br>
+    <%= label_tag :email %>
+    <br>
+    <%= content_tag :p, @user.email %>
+    <br>
+    <%= label_tag :telephone %>
+    <br>
+    <%= content_tag :p, @user.telephone %>
+    <br>
     <%= form_for @order do |form| %>
-      <%= form.label :name %>
-      <%= form.text_field :name, id: :order_name, required: true %>
-      <%= form.label :email %>
-      <%= form.email_field :email, id: :order_email, required: true %>
-      <%= form.label :telephone %>
-      <%= form.telephone_field :telephone, id: :order_telephone, required: true %>
       <%= form.label :comment %>
       <%= form.text_area :comment, id: :order_comment %>
       <div class="order-submit-button">
