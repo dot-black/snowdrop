@@ -1,18 +1,21 @@
 class OrdersController < StoreController
+  before_action :_ensure_session_for_user_presisted, only:[:new, :create]
   def new
     _ensure_cart_isnt_empty
+    _set_user
     @order = Order.new
   end
 
 
   def create
-    @order = Order.new _permitted_order_params
+    _set_user
+    @order = @user.orders.new _permitted_order_params
     @order.add_line_items_from_cart @cart
     @order.amount = GetLineItemsTotalAmount.run!(line_items: @order.line_items)
 
     respond_to do |format|
       if @order.save
-        _destroy_cart
+        DestroyCart.run! session: session
         OrderMailer.manager_information(@order).deliver
         OrderMailer.client_information(@order).deliver
         format.html { render 'successful_order' }
@@ -28,6 +31,19 @@ class OrdersController < StoreController
   private
 
     def _permitted_order_params
-      params.require(:order).permit(:name, :email, :telephone, :comment )
+      params.require(:order).permit( :comment )
+    end
+
+    def _ensure_session_for_user_presisted
+      redirect_to new_user_path unless session[:user_id].present?
+    end
+    def _set_user
+      outcome = FetchUser.run(id: session[:user_id])
+      if outcome.valid?
+        @user = outcome.result
+      else
+        raise ActiveRecord::RecordNotFound,outcome.errors.full_messages.to_sentence
+        redirect_to new_user_path
+      end
     end
 end
