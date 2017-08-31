@@ -1,11 +1,10 @@
 class LineItemsController < StoreController
   def create
-    product = Product.find(params[:line_item][:product_id])
-    @line_item = @cart.add_product(_permitted_line_item_params)
+    @line_item = AddProductOrUpdateQuantity.run! session: session, line_item_params: _permitted_line_item_params
     respond_to do |format|
       if @line_item.save
         _set_line_items_variables
-        format.html { redirect_to product_path(product) }
+        format.html { redirect_to product_path(params[:line_item][:product_id]) }
         format.json { render :show, status: :created, location: @line_item }
         format.js {flash.now[:notice] = "Product is added to cart"}
       else
@@ -17,7 +16,7 @@ class LineItemsController < StoreController
   end
 
   def update
-    _ensure_cart_isnt_empty
+    # _ensure_cart_isnt_empty
     _set_line_item
     respond_to do |format|
       if @line_item.update _permitted_line_item_params

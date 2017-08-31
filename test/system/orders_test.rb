@@ -12,6 +12,7 @@ class OrdersTest < ApplicationSystemTestCase
       click_on @category_first.title.pluralize(2), match: :first
       click_on @product_first.title, match: :first
       click_on 'Add to cart'
+      click_on 'Add to cart'
       visit cart_url
       click_on 'Checkout'
       assert_selector 'h2', text: 'Enter personal information'

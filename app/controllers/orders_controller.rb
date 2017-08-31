@@ -1,16 +1,21 @@
 class OrdersController < StoreController
   before_action :_ensure_session_for_user_presisted, only:[:new, :create]
   def new
-    _ensure_cart_isnt_empty
-    _set_user
-    @order = Order.new
+    _set_line_items_variables
+    if @line_items.empty?
+      flash[:notice] = "Please add something to cart."
+      redirect_to store_path
+    else
+      _set_user
+      @order = Order.new
+    end
   end
 
 
   def create
     _set_user
     @order = @user.orders.new _permitted_order_params
-    @order.add_line_items_from_cart @cart
+    AddLineItemsFromCart.run! session: session, order: @order
     @order.amount = GetLineItemsTotalAmount.run!(line_items: @order.line_items)
 
     respond_to do |format|
