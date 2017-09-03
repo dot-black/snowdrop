@@ -5,4 +5,5 @@ class User < ApplicationRecord
   validates :name, length: { maximum: 50 }
   validates :telephone, length: { in: 9..20 }
   has_many :orders
+  paginates_per 20
 end
