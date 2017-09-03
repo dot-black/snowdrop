@@ -141,4 +141,17 @@ class ManagerStoriesTest < ActionDispatch::IntegrationTest
     }
     assert_redirected_to manager_orders_path(status: "accepted")
   end
+
+  test "check users" do
+    sign_in managers(:first) #Login as manager
+
+    get "/manager/users"
+    assert_response :success
+    assert_template "index"
+
+    user = User.last
+    get "/manager/users/#{user.id}"
+    assert_response :success
+    assert_template "show"
+  end
 end
