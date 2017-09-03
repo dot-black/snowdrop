@@ -25,6 +25,9 @@ Rails.application.routes.draw do
         get 'change_appearance'
       end
     end
+
+    resources :users, only:[:index, :show]
+
   end
 
   resources :line_items, only:[:create, :destroy, :update]
