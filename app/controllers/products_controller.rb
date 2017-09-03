@@ -9,7 +9,7 @@ class ProductsController < StoreController
         flash[:notice] = "Category is not avalible"
         redirect_to store_path
       else
-        @products = Product.shown.category(@current_category.id).page(params[:page]).per(10)
+        @products = Product.shown.category(@current_category.id).page(params[:page])
       end
     end
   end
