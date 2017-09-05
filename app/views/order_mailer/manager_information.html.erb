@@ -18,8 +18,8 @@
                     <tr>
                       <td>
                         <h4 class="aligncenter"> <%= "Order #{@order.id} #{@order.status}" %></h4>
-                        <%= @order.user.name %><br />
-                        <%= @order.user.telephone %><br />
+                        <%= @order.user_information.name %><br />
+                        <%= @order.user_information.telephone %><br />
                         <%= @order.user.email %><br />
                         Comment: <%= @order.comment %><br />
                       </td>

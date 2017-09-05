@@ -19,7 +19,7 @@ class OrderMailer < ApplicationMailer
   def manager_information order
     @order = order
     mailto = Rails.env.production? ?  ENV['GMAIL_NAME'] : 'aridar@example.com'
-    mail to: mailto,subject: "Order #{order.id} from #{order.user.name} / status: #{order.status}"
+    mail to: mailto,subject: "Order #{order.id} from #{order.user_information.name} / status: #{order.status}"
   end
 
 
