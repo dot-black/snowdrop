@@ -7,6 +7,7 @@ class OrdersController < StoreController
       redirect_to store_path
     else
       _set_user
+      _set_user_information
       @order = Order.new
     end
   end
@@ -14,7 +15,9 @@ class OrdersController < StoreController
 
   def create
     _set_user
+    _set_user_information
     @order = @user.orders.new _permitted_order_params
+    @order.user_information_id = @user_information.id
     AddLineItemsFromCart.run! session: session, order: @order
     @order.amount = GetLineItemsTotalAmount.run!(line_items: @order.line_items)
 
@@ -40,15 +43,19 @@ class OrdersController < StoreController
     end
 
     def _ensure_session_for_user_presisted
-      redirect_to new_user_path unless session[:user_id].present?
-    end
-    def _set_user
-      outcome = FetchUser.run(id: session[:user_id])
-      if outcome.valid?
-        @user = outcome.result
+      if session[:user_id].present?
+        redirect_to new_user_information_path unless session[:user_information_id].present?
       else
-        raise ActiveRecord::RecordNotFound,outcome.errors.full_messages.to_sentence
         redirect_to new_user_path
       end
+    end
+
+    def _set_user
+      @user = User.find session[:user_id]
+      redirect_to new_user_path unless @user.present?
+    end
+    def _set_user_information
+      @user_information = UserInformation.find session[:user_information_id]
+      redirect_to new_user_information_path unless @user_information.present?
     end
 end

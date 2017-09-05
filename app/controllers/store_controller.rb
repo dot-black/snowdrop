@@ -1,7 +1,7 @@
 class StoreController < ApplicationController
   before_action :_set_categories
   def index
-
+    _set_line_items_variables
   end
 
   def get_cart_items_count

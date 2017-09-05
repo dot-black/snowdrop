@@ -6,7 +6,7 @@ class Manager::UsersController < ApplicationController
   def index
     @search_query = params[:search_query]
     @users = if @search_query.present?
-      User.where("lower(email) like lower('#{@search_query}%') or telephone like '#{@search_query}%' or lower(name) like lower('#{@search_query}%')").page params[:page]
+      User.where(id: User.where("lower(email) like lower('#{@search_query}%')").ids + UserInformation.where("telephone like '#{@search_query}%' or lower(name) like lower('#{@search_query}%')").map(&:user_id)).page params[:page]
     else
       User.all.page params[:page]
     end
