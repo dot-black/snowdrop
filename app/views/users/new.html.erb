@@ -1,7 +1,10 @@
 <div class="container">
   <div class="order-headline">
-    <h2>Enter personal information</h2>
-    <span><%= link_to "Enter your information",new_user_path  %> or <%= link_to "edit the information",edit_users_path %></span>
+    <h2>Enter your email</h2>
+    <span>
+       <%= link_to("Enter different information",new_user_information_path) if session[:user_information_id].present? %>
+       <%= link_to(" or get back to order",new_order_path) if session[:user_id].present? and session[:user_information_id].present? %>
+     </span>
   </div>
   <%= render "form"%>
 </div>

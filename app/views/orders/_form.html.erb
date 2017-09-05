@@ -1,19 +1,16 @@
 <% if @order.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(order.errors.count, "error") %> prohibited this order from being saved:</h2>
-    <ul>
-    <% @user.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-    </ul>
-  </div>
+<div id="toast-container">
+  <% @order.errors.full_messages.each do |message| %>
+    <%= content_tag :div, message, class: 'toast' %>
+  <% end %>
+</div>
 <% end %>
 <div class="order-form">
   <div class="order-checkout">
 
     <%= label_tag :name %>
     <br>
-    <%= content_tag :p, @user.name %>
+    <%= content_tag :p, @user_information.name %>
     <br>
     <%= label_tag :email %>
     <br>
@@ -21,7 +18,7 @@
     <br>
     <%= label_tag :telephone %>
     <br>
-    <%= content_tag :p, @user.telephone %>
+    <%= content_tag :p, @user_information.telephone %>
     <br>
     <%= form_for @order do |form| %>
       <%= form.label :comment %>

@@ -1,23 +1,16 @@
 <% if @user.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@user.errors.count, "error") %> prohibited this order from being saved:</h2>
-    <ul>
+  <div id="toast-container">
     <% @user.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
+      <%= content_tag :div, message, class: 'toast' %>
     <% end %>
-    </ul>
   </div>
 <% end %>
 
 <div class="order-form">
   <div class="order-checkout">
     <%= form_for @user do |form| %>
-      <%= form.label :name %>
-      <%= form.text_field :name, required: true %>
       <%= form.label :email %>
       <%= form.email_field :email, required: true %>
-      <%= form.label :telephone %>
-      <%= form.telephone_field :telephone, required: true %>
       <div class="order-submit-button">
           <%= form.submit "continue", class: "material-button" %>
       </div>

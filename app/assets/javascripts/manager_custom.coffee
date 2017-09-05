@@ -8,7 +8,7 @@ manager_ready = ->
   $("#search_query").on 'keyup', ->
     setTimeout ->
       $(".search-form").submit()
-    ,1000
+    ,500
 
   # Clear search input
   $("#clear_search").on 'click', ->
