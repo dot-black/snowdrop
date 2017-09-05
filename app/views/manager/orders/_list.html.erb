@@ -18,12 +18,12 @@
             </tr>
             </thead>
             <tbody>
-              <% @orders.each do |order|  %>
+              <% @orders.each do |order|  %>  
                 <tr data-link= "<%= manager_order_path(order) %>" class="selectable-row">
                   <td><%= order.id %></td>
-                  <td><%= order.user.name.truncate 20 %>
+                  <td><%= order.user_information.name.truncate 20 %>
                   <td class="hidden-xs hidden-sm"><%= order.user.email.truncate 20 %></td>
-                  <td class="hidden-xs hidden-sm"><%= order.user.telephone %></td>
+                  <td class="hidden-xs hidden-sm"><%= order.user_information.telephone %></td>
                   <td class="hidden-xs" ><%= number_to_currency order.amount %></td>
                   <td class="hidden-xs hidden-sm"><%= order.created_at.strftime("%d.%m.%Y") %></td>
                   <td class="hidden-xs hidden-sm"><%= time_ago_in_words(Time.now - (Time.now - order.created_at.to_time).seconds) %></td>

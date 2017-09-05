@@ -8,8 +8,9 @@
             <thead>
             <tr>
               <th>ID</th>
-              <th>Name</th>
               <th>Email</th>
+              <th>Name</th>
+
               <th>Telephone</th>
             </tr>
             </thead>
@@ -17,9 +18,9 @@
               <% @users.each do |user|  %>
                 <tr data-link= "<%= manager_user_path(user) %>" class="selectable-row">
                   <td><%= user.id %></td>
-                  <td><%= user.name.truncate 20 %>
                   <td><%= user.email.truncate 20 %></td>
-                  <td><%= user.telephone %></td>
+                  <td><%= user.user_informations.last.name.truncate(20) if user.user_informations.present?  %></td>
+                  <td><%= user.user_informations.last.telephone if user.user_informations.present?  %></td>
                   <td class="unselectable">
                     <%= link_to manager_user_path(user) do %>
                         <%= content_tag :span, 'show', class: "label label-success col-xs-12 col-sm-12" %>

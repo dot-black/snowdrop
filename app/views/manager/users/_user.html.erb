@@ -10,19 +10,43 @@
 
       <div class="chat-user">
         <div class="chat-user-name">
-          <strong>Name: </strong><%=@user.name%>
-        </div>
-      </div>
-
-      <div class="chat-user">
-        <div class="chat-user-name">
           <strong>Email: </strong><%=@user.email%>
         </div>
       </div>
 
       <div class="chat-user">
         <div class="chat-user-name">
-          <strong>Telephone: </strong><%= @user.telephone %>
+          <strong>Name: </strong>
+          <% if @user.user_informations.present?%>
+          <%=@user.user_informations.last.name %>
+          <%= button_tag "List", class: "btn btn-xs btn-outline btn-primary", data:{toggle: "collapse", target: "#names-list"} if @user.user_informations.size > 1%>
+          <%= content_tag :br %>
+          <%= content_tag :ul, id: "names-list", class: "list-group collapse" do %>
+            <% @user.user_informations.each do |info| %>
+              <%= content_tag :li, class: "list-group-item" do %>
+                  <%= info.name %>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
+        </div>
+      </div>
+
+      <div class="chat-user">
+        <div class="chat-user-name">
+          <strong>Telephone: </strong>
+          <% if @user.user_informations.present? %>
+            <%= @user.user_informations.last.telephone %>
+            <%= button_tag "List", class: "btn btn-xs btn-outline btn-primary", data:{toggle: "collapse", target: "#telephones-list"} if @user.user_informations.size > 1%>
+            <%= content_tag :br %>
+            <%= content_tag :ul, id: "telephones-list", class: "list-group collapse" do %>
+              <% @user.user_informations.each do |info| %>
+                <%= content_tag :li, class: "list-group-item" do %>
+                    <%= info.telephone %>
+                <% end %>
+              <% end %>
+            <% end %>
+          <% end %>
         </div>
       </div>
     </div>
