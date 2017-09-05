@@ -37,12 +37,8 @@ Rails.application.routes.draw do
   resources :products, only: [:show]
   get 'category/:category', to: 'products#index', as: 'category_products'
   get :cart_items_count, to: "store#get_cart_items_count"
-  resources :users, only:[:new, :create] do
-    collection do
-      post 'update', as: 'update'
-      get 'edit'
-    end
-  end
+  resources :users, only:[:new, :create]
+  resources :user_informations, only:[:new, :create]
 
 
 
