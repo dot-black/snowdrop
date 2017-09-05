@@ -13,8 +13,12 @@ class OrdersControllerTest < ActionDispatch::IntegrationTest
   test "should create order" do
     post users_url, params: {
       user: {
+        email: 'test@email.com'
+      }
+    }
+    post user_informations_url, params:{
+      user_information:{
         name: 'some name',
-        email: 'test@email.com',
         telephone: '456789876545'
       }
     }

@@ -23,7 +23,7 @@ class OrderMailerTest < ActionMailer::TestCase
 
   test "manager_information" do
     mail = OrderMailer.manager_information @order
-    assert_equal "Order #{@order.id} from #{@order.user.name} / status: #{@order.status}", mail.subject
+    assert_equal "Order #{@order.id} from #{@order.user_information.name} / status: #{@order.status}", mail.subject
     # assert_equal ["to@example.org"], mail.to
     # assert_equal ["from@example.com"], mail.from
     # assert_match "Hi", mail.body.encoded

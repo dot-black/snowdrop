@@ -24,8 +24,13 @@ class ClienStoriesTest < ActionDispatch::IntegrationTest
     assert_response :redirect
     post users_path params: {
       user: {
-        name: 'Daniel Defoe',
         email: 'daniel@example.com',
+      }
+    }
+    assert_response :redirect
+    post user_informations_path params: {
+      user_information: {
+        name: 'Daniel Defoe',
         telephone: '+380631001010'
       }
     }
@@ -41,9 +46,9 @@ class ClienStoriesTest < ActionDispatch::IntegrationTest
     assert_equal 1, orders.size
     order = orders[0]
 
-    assert_equal "Daniel Defoe",       order.user.name
+    assert_equal "Daniel Defoe",       order.user_information.name
     assert_equal "daniel@example.com", order.user.email
-    assert_equal "+380631001010",      order.user.telephone
+    assert_equal "+380631001010",      order.user_information.telephone
 
     assert_equal 1, order.line_items.size
     line_item = order.line_items[0]

@@ -15,13 +15,15 @@ class OrdersTest < ApplicationSystemTestCase
       click_on 'Add to cart'
       visit cart_url
       click_on 'Checkout'
-      assert_selector 'h2', text: 'Enter personal information'
-      fill_in 'Name', with: 'Bob'
+      assert_selector 'h2', text: 'Enter your email'
       fill_in 'Email', with: 'bob@gmail.com'
-      fill_in 'Telephone',with: "+1234567890"
       click_on 'continue'
-      assert_selector "h2", text: "Checkout"
-      fill_in 'Comment',with: "It's a gorgeous site, I gonna buy products over here all the time!"
+      assert_selector 'h2', text: 'Enter your information'
+      fill_in 'Name', with: 'Bob'
+      fill_in 'Telephone', with: "+1234567890"
+      click_on 'continue'
+      assert_selector "h2", text: "Leave your comment"
+      fill_in 'Comment', with: "It's a gorgeous site, I gonna buy products over here all the time!"
       click_on 'place order'
     end
   end

@@ -46,6 +46,6 @@ class LineItemsTest < ApplicationSystemTestCase
     find("td", text: @product_first.title).first(:xpath, './/..').has_link? '.minus-button'
     #Check if checkout button is working
     click_on 'Checkout'
-    assert_selector "h2", text: "Enter personal information"
+    assert_selector "h2", text: "Enter your email"
   end
 end
