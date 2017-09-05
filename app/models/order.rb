@@ -3,6 +3,7 @@ class Order < ApplicationRecord
   validates :comment, length: { maximum: 500 }
   has_many :line_items, dependent: :destroy
   belongs_to :user
+  belongs_to :user_information
   scope :by_status, -> (status) {
     status == "all" ? order(created_at: :desc) : where(status: status).order(created_at: :desc)
   }
