@@ -1,5 +1,6 @@
 class StoreController < ApplicationController
-  before_action :_set_categories, :_set_line_items_variables,except: [:create, :update, :destroy]
+  before_action :_set_categories,except: [:update, :destroy]
+  before_action :_set_line_items_variables,except: [:create, :update, :destroy]
   def index
   end
 
