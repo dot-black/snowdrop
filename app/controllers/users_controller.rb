@@ -1,6 +1,5 @@
 class UsersController < StoreController
   def new
-    _set_line_items_variables
     @user = User.new
   end
 

@@ -1,7 +1,6 @@
 class OrdersController < StoreController
   before_action :_ensure_session_for_user_presisted, only:[:new, :create]
   def new
-    _set_line_items_variables
     if @line_items.empty?
       flash[:notice] = "Please add something to cart."
       redirect_to store_path

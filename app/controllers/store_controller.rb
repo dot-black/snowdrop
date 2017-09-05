@@ -1,7 +1,6 @@
 class StoreController < ApplicationController
-  before_action :_set_categories
+  before_action :_set_categories, :_set_line_items_variables,except: [:create, :update, :destroy]
   def index
-    _set_line_items_variables
   end
 
   def get_cart_items_count

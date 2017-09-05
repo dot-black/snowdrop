@@ -1,7 +1,6 @@
 class UserInformationsController < StoreController
   before_action :_ensure_user_session_and_user_present
   def new
-    _set_line_items_variables
     _set_user
     @user_information = @user.user_informations.new
   end
