@@ -43,11 +43,11 @@ end
   Order.create!(
     comment: IO.read( "public/sample_description.txt" ),
     status: Order.statuses.values.sample,
-    user_id: User.create!(
+    user_id: user_id = User.create!(
+      email:"user#{count}@mail.com").id,
+    user_information_id: User.find(user_id).user_informations.create!(
       name:"User-#{count}",
-      email:"user#{count}@mail.com",
-      telephone: "38063475#{rand(1000..9999)}"
-    ).id
+      telephone: "38063475#{rand(1000..9999)}").id
   )
 end
 
