@@ -13,12 +13,12 @@
     <%= content_tag :p, @user.email %>
     <br>
     <%= form_for @user_information do |form| %>
-    <%= form.label :name %>
-    <%= form.text_field :name, required: true %>
-    <%= form.label :telephone %>
-    <%= form.telephone_field :telephone, required: true %>
+      <%= form.label :name %>
+      <%= form.text_field :name, required: true %>
+      <%= form.label :telephone %>
+      <%= form.telephone_field :telephone, required: true %>
       <div class="order-submit-button">
-          <%= form.submit "continue", class: "material-button" %>
+        <%= form.submit "continue", class: "material-button" %>
       </div>
     <% end %>
   </div>
