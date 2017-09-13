@@ -13,7 +13,7 @@ class OrdersController < StoreController
 
   def create
     @order = @user.orders.new _permitted_order_params
-    @order.user_information_id = @user_information.id
+    @order.user_information = @user_information
     AddLineItemsFromCart.run! session: session, order: @order
     @order.amount = GetLineItemsTotalAmount.run!(line_items: @order.line_items)
 

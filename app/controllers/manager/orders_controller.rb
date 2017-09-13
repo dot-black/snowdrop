@@ -12,7 +12,11 @@ class Manager::OrdersController < ApplicationController
     @search_query = params[:search_query]
 
     @orders = if @search_query.present?
-      Order.by_status(params[:status]).where(user_information_id: UserInformation.where("lower(name) like lower('#{@search_query}%') or telephone like '#{@search_query}%' ").ids).page params[:page]
+      Order.by_status(params[:status]).joins(:user).joins(:user_information).where(
+        "lower(users.email) like lower('#{@search_query}%')
+        or lower(user_informations.name) like lower('#{@search_query}%')
+        or user_informations.telephone like '#{@search_query}%' "
+      ).page params[:page]
     else
       Order.by_status(params[:status]).page params[:page]
     end
