@@ -14,28 +14,28 @@ class UserInformationTest < ActiveSupport::TestCase
   end
 
 
-  test "user should not be created without name" do
-    user = new_user_information
-    user.name = ""
-    assert user.invalid?
-    user.errors[:name]
-    user.name = "Daniel Defoe"
-    assert user.valid?
+  test "user_information should not be created without name" do
+    info = new_user_information
+    info.name = ""
+    assert info.invalid?
+    info.errors[:name]
+    info.name = "Daniel Defoe"
+    assert info.valid?
   end
 
-  test "user can not be created without correct telephone" do
-    user = new_user_information
-    user.telephone = ""
-    assert user.invalid?
-    user.errors[:telephone]
-    user.telephone = "5345"
-    assert user.invalid?
-    user.errors[:telephone]
-    user.telephone = "534543453453443500000"
-    assert user.invalid?
-    user.errors[:telephone]
-    user.telephone = "380631001010"
-    assert user.valid?
+  test "user_information can not be created without correct telephone" do
+    info = new_user_information
+    info.telephone = ""
+    assert info.invalid?
+    info.errors[:telephone]
+    info.telephone = "5345"
+    assert info.invalid?
+    info.errors[:telephone]
+    info.telephone = "534543453453443500000"
+    assert info.invalid?
+    info.errors[:telephone]
+    info.telephone = "380631001010"
+    assert info.valid?
   end
 
 end
