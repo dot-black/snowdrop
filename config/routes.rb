@@ -28,6 +28,14 @@ Rails.application.routes.draw do
 
     resources :users, only:[:index, :show]
 
+    resources :discounts do
+      member do
+        get 'change_appearance'
+        get 'edit_products'
+        put 'update_products'
+      end
+    end
+
   end
 
   resources :line_items, only:[:create, :destroy, :update]

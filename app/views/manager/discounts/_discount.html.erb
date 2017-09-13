@@ -1,0 +1,81 @@
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox product-detail">
+        <div class="ibox-content">
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+              <h2 class="font-bold m-b-xs"> <%= @discount.title %> </h2>
+              <div class="m-t-md">
+                <h2 class="product-main-price">
+                  <%= number_to_percentage @discount.value, precision: 0  %>
+                </h2>
+              </div>
+
+              <hr>
+              <h4>Schedule</h4>
+
+              <div class="small text-muted">
+                Start: <%= @discount.start_at ? @discount.start_at.strftime("%d.%m.%Y") : "Any time"%>
+                End: <%= @discount.end_at ? @discount.end_at.strftime("%d.%m.%Y %H:%M:%S") : "Never"%>
+              </div>
+
+              <hr>
+
+              <h4>Description</h4>
+
+              <div class="small text-muted">
+                <%= @discount.description %>
+              </div>
+
+              <hr>
+
+              <h4>Products</h4>
+              <div class="small text-muted">
+                <% if @discount.products.present?  %>
+                  <%= button_tag "Show", class: "btn btn-xs btn-outline btn-primary", data:{toggle: "collapse", target: "#products-list"} %>
+                  <%= content_tag :br %>
+                  <%= content_tag :ul, id: "products-list", class: "list-group collapse" do %>
+                    <% @discount.products.each do |product| %>
+                      <%= content_tag :li, class: "list-group-item" do %>
+                        <%= link_to manager_product_path(product) do %>
+                          <%= product.title  %>
+                        <% end %>
+                      <% end %>
+                    <% end %>
+                  <% end %>
+                <% else %>
+                  <%= content_tag :p, "No products" %>
+                <% end %>
+              </div>
+
+              <div>
+                <hr>
+                <div class="btn-group">
+                  <% if @discount.actual %>
+                  <%= link_to change_appearance_manager_discount_path(@discount), class: "btn btn-warning btn-sm", data: { confirm: "Are you sure? Schedule date and time will be changed."} do %>
+                    <i class="fa fa-eye-slash"></i> Deactivate
+                  <% end %>
+                  <% else  %>
+                    <%= link_to change_appearance_manager_discount_path(@discount), class: "btn btn-primary btn-sm",data: { confirm: "Are you sure? Schedule date and time will be erased."} do %>
+                      <i class="fa fa-eye"></i> Activate
+                    <% end %>
+                  <% end  %>
+                </div>
+                <div class="btn-group">
+                  <%= link_to "Add products", edit_products_manager_discount_path(@discount), class: "btn btn-primary btn-sm"%>
+                </div>
+                <div class="btn-group">
+                  <%= link_to "Edit", edit_manager_discount_path(@discount), class: "btn btn-primary btn-sm pull-right"%>
+                </div>
+                <div class="btn-group">
+                  <%= link_to "Destroy", manager_discount_path(@discount), class: "btn btn-danger btn-sm pull-right", method: "delete", data: { confirm: "Are you sure?"} %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

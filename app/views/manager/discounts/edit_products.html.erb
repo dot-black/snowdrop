@@ -1,0 +1,79 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-10">
+    <h2> <%= current_page_name %> </h2>
+    <ol class="breadcrumb">
+      <li><%= current_page_name %></li>
+      <li><b>Edit</b></li>
+    </ol>
+  </div>
+  <div class="col-lg-2"></div>
+</div>
+
+<div class="manager-edit-form">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h4>
+            <%= link_to manager_discount_path(@discount) do %>
+              <%= content_tag :i,"",class:"fa fa-arrow-left" %>
+              <%= @discount.title %>
+            <% end %>
+          </h4>
+        </div>
+        <div class="ibox-content">
+          <div class="table-responsive">
+            <%= form_tag update_products_manager_discount_path, method: :put do %>
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th></th>
+                    <th>Title</th>
+                    <th class="hidden-xs">Category</th>
+                    <th>Price</th>
+                    <th class="hidden-xs">Discount title</th>
+
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @products.each do |product| %>
+                    <%= content_tag :tr do %>
+                      <%= content_tag :td do %>
+                        <% if product.discount and product.discount.id == @discount.id %>
+                          <%= check_box_tag "product_ids[]", product.id, checked: true %>
+                        <% else %>
+                        <%= check_box_tag "product_ids[]", product.id %>
+                        <% end %>
+                      <% end %>
+                      <%= content_tag :td do %>
+                        <%= image_tag first_image(product), size:32 %>
+                        <% if product.discount and product.discount.id == @discount.id %>
+                          <%= content_tag :i,"",class:"fa fa-check text-navy" %>
+                        <% end %>
+                      <% end %>
+                      <%= content_tag :td do %>
+                        <%= product.title %>
+                      <% end %>
+                      <%= content_tag :td, class:"hidden-xs" do %>
+                        <%= product.category.title %>
+                      <% end %>
+                      <%= content_tag :td do %>
+                        <%= number_to_currency product.price %>
+                      <% end %>
+                      <%= content_tag :td, class:"hidden-xs" do %>
+                        <%= product.discount ? product.discount.title : "-" %>
+                      <% end %>
+                    <% end %>
+                  <% end %>
+                </tbody>
+              </table>
+              <%= submit_tag "Update Checked", class: "btn btn-primary pull-right" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
