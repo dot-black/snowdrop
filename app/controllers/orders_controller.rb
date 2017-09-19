@@ -47,8 +47,8 @@ class OrdersController < StoreController
     end
 
     def _set_user
-      @user = User.find session[:user_id]
-      redirect_to new_user_path unless @user.present?
+      @user = User.find_by_id session[:user_id]
+      redirect_to new_user_path unless @user
     end
     def _set_user_information
       @user_information = UserInformation.find session[:user_information_id]

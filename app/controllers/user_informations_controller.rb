@@ -24,7 +24,7 @@ class UserInformationsController < StoreController
     redirect_to new_user_path unless session[:user_id].present? and User.find_by_id(session[:user_id])
   end
   def _set_user
-    @user = User.find session[:user_id]
-    redirect_to new_user_path unless @user.present?
+    @user = User.find_by_id session[:user_id]
+    redirect_to new_user_path unless @user
   end
 end
