@@ -53,12 +53,12 @@ class Manager::DiscountsController < ApplicationController
 
   def change_appearance
     respond_to do |format|
-      if @discount.actual
-        @discount.update start_at: nil, end_at: Time.now
-        notice = "Discount is not active right now."
+      notice = if @discount.actual and @discount.update_attributes start_at: nil, end_at: Time.now
+        "Discount is not active right now."
+      elsif not @discount.actual and @discount.update_attributes start_at: nil, end_at: nil
+        "Discount activated."
       else
-        @discount.update start_at: nil, end_at: nil
-        notice = "Discount activated."
+        "An error is occured during updating appearence of discount"  
       end
       format.html { redirect_to manager_discount_path(@discount), notice: notice }
     end

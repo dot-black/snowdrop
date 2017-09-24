@@ -24,11 +24,10 @@
                   <td class="hidden-xs"><%= discount.end_at ? discount.end_at.strftime("%d.%m.%Y") : "Never"%></td>
                   <td class="hidden-xs"><%= discount.products.count%></td>
                   <td class="unselectable">
-                    <%= link_to manager_discount_path(discount) do%>
-                      <% case discount.actual %>
-                      <% when true %>
+                    <%= link_to manager_discount_path(discount) do %>
+                      <% if discount.actual %>
                         <%= content_tag :span, discount.actual, class: "label label-success col-xs-12 col-sm-12" %>
-                      <% when false %>
+                      <% else %>
                         <%= content_tag :span, discount.actual, class: "label label-warning col-xs-12 col-sm-12" %>
                       <% end  %>
                     <% end %>

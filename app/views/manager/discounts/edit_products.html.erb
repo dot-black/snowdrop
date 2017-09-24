@@ -16,8 +16,7 @@
         <div class="ibox-title">
           <h4>
             <%= link_to manager_discount_path(@discount) do %>
-              <%= content_tag :i,"",class:"fa fa-arrow-left" %>
-              <%= @discount.title %>
+              <i class="fa fa-arrow-left"></i> <%= @discount.title %>
             <% end %>
           </h4>
         </div>
@@ -33,39 +32,29 @@
                     <th class="hidden-xs">Category</th>
                     <th>Price</th>
                     <th class="hidden-xs">Discount title</th>
-
-
                   </tr>
                 </thead>
                 <tbody>
                   <% @products.each do |product| %>
-                    <%= content_tag :tr do %>
-                      <%= content_tag :td do %>
+                    <tr>
+                      <td>
                         <% if product.discount and product.discount.id == @discount.id %>
                           <%= check_box_tag "product_ids[]", product.id, checked: true %>
                         <% else %>
-                        <%= check_box_tag "product_ids[]", product.id %>
+                          <%= check_box_tag "product_ids[]", product.id, checked: false %>
                         <% end %>
-                      <% end %>
-                      <%= content_tag :td do %>
-                        <%= image_tag first_image(product), size:32 %>
+                      </td>
+                      <td>
+                        <%= image_tag first_image(product), size: 32 %>
                         <% if product.discount and product.discount.id == @discount.id %>
-                          <%= content_tag :i,"",class:"fa fa-check text-navy" %>
+                          <i class = "fa fa-check text-navy"></i>
                         <% end %>
-                      <% end %>
-                      <%= content_tag :td do %>
-                        <%= product.title %>
-                      <% end %>
-                      <%= content_tag :td, class:"hidden-xs" do %>
-                        <%= product.category.title %>
-                      <% end %>
-                      <%= content_tag :td do %>
-                        <%= number_to_currency product.price %>
-                      <% end %>
-                      <%= content_tag :td, class:"hidden-xs" do %>
-                        <%= product.discount ? product.discount.title : "-" %>
-                      <% end %>
-                    <% end %>
+                      </td>
+                      <td><%= product.title %></td>
+                      <td class="hidden-xs"><%= product.category.title %></td>
+                      <td><%= number_to_currency product.price %></td>
+                      <td class="hidden-xs"><%= product.discount ? product.discount.title : "-" %></td>
+                    </tr>
                   <% end %>
                 </tbody>
               </table>

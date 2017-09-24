@@ -4,7 +4,7 @@
       <div class="product-basic">
         <div class="product-image">
           <% if product.discount and product.discount.actual  %>
-            <%= content_tag :span, number_to_percentage(-product.discount.value, precision: 0) , class: "discount-value" %>
+            <span class="discount-value">-<%= number_to_percentage(product.discount.value, precision: 0) %></span>
           <% end %>
           <%= image_tag first_image(product), class: "img-responsive" %>
         </div>

@@ -33,19 +33,11 @@
               <h4>Products</h4>
               <div class="small text-muted">
                 <% if @discount.products.present?  %>
-                  <%= button_tag "Show", class: "btn btn-xs btn-outline btn-primary", data:{toggle: "collapse", target: "#products-list"} %>
-                  <%= content_tag :br %>
-                  <%= content_tag :ul, id: "products-list", class: "list-group collapse" do %>
-                    <% @discount.products.each do |product| %>
-                      <%= content_tag :li, class: "list-group-item" do %>
-                        <%= link_to manager_product_path(product) do %>
-                          <%= product.title  %>
-                        <% end %>
-                      <% end %>
-                    <% end %>
+                  <%= collapse_button "Show", "btn btn-xs btn-outline btn-primary", "products-list", @discount.products do |item| %>
+                    <%= link_to item.title, manager_product_path(item) %>
                   <% end %>
                 <% else %>
-                  <%= content_tag :p, "No products" %>
+                  <p>No products</p>
                 <% end %>
               </div>
 
