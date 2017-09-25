@@ -11,6 +11,11 @@ class StoreController < ApplicationController
     }
   end
 
+  def update_locale
+    session[:locale] = params[:new_locale]
+    redirect_to store_path
+  end
+
   private
 
   def _set_categories
