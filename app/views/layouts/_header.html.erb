@@ -1,12 +1,28 @@
 <nav id="myNavmenu" class="navmenu navmenu-default navmenu-fixed-left offcanvas" role="navigation">
-  <%= link_to t("application_name_short"), store_path, class: "navmenu-brand" %>
 
+  <%= link_to "#", data:{ toggle: "offcanvas", target: "#myNavmenu", canvas: "body"}, class: "navmenu-brand" do %>
+    <%= content_tag :i, 'arrow_back', class:"visible-xs material-icons md-24 pull-left" %>
+  <% end %>
+  <%= link_to store_path, class: "navmenu-brand" do %>
+    <h3> <%= t 'application_name' %></h3>
+  <% end %>
   <ul class="nav navmenu-nav">
+    <h4><%= t 'category' %></h4>
     <% @categories.each do |category| %>
       <li class="<%= category == @current_category ? 'active' : '' %>">
         <%= link_to category.title.pluralize(2) , category_products_path(category: category.title.parameterize.underscore ) %>
       </li>
     <% end  %>
+  </ul>
+  <ul class="nav navmenu-nav">
+    <h4><%= t 'language' %></h4>
+    <% I18n.available_locales.each do |locale| %>
+      <li class="<%= params[:locale] == locale ? 'active' : '' %>">
+        <%= link_to update_locale_path(new_locale: locale) do  %>
+         <%= image_tag "languages/#{locale}.png", size: 32 %> <%= t "#{locale}" %>
+        <% end %>
+      </li>
+    <% end %>
   </ul>
 
 </nav>
@@ -19,6 +35,11 @@
     <% else %>
       <%= link_to "#", data:{ toggle: "offcanvas", target: "#myNavmenu", canvas: "body"} do %>
         <%= content_tag :i, 'menu', class:"visible-xs material-icons md-24 pull-left" %>
+      <% end %>
+      <% I18n.available_locales.each do |locale| %>
+        <%= link_to update_locale_path(new_locale: locale)  do  %>
+         <%= image_tag "languages/#{locale}.png", size: 24, class:"hidden-xs pull-left" %>
+        <% end %>
       <% end %>
     <% end %>
   </div>
