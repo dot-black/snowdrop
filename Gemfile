@@ -16,6 +16,8 @@ gem 'kaminari'
 gem 'carrierwave', '~> 1.0'
 gem "mini_magick"
 gem 'active_interaction', '~> 3.5'
+gem 'globalize', github: 'globalize/globalize'
+gem 'activemodel-serializers-xml'
 
 gem 'sass-rails', '~> 5.0'
 gem 'coffee-rails', '~> 4.2'

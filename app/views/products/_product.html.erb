@@ -3,16 +3,25 @@
     <%= link_to product_path(product) do %>
       <div class="product-basic">
         <div class="product-image">
+          <% if product.discount and product.discount.actual  %>
+            <span class="discount-value">-<%= number_to_percentage(product.discount.value, precision: 0) %></span>
+          <% end %>
           <%= image_tag first_image(product), class: "img-responsive" %>
         </div>
 
-        <div class="product-basic-title text-center">
+        <div class="product-title text-center">
           <%= product.title %>
         </div>
-
-        <div class="product-basic-price">
-          <%= number_to_currency product.price %>
-        </div>
+        <% if product.discount and product.discount.actual %>
+          <div class="product-price-discount">
+            <span class="old"><%= number_to_currency product.price %></span>
+            <span class="new"><%= number_to_currency product.discount_price %></span>
+          </div>
+        <% else %>
+          <div class="product-price">
+            <%= number_to_currency product.price%>
+          </div>
+        <% end %>
       </div>
     <% end %>
   </div>

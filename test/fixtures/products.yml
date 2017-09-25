@@ -8,6 +8,7 @@ bra:
   archive: false
   category: first_visible
   sizes: {'bra':['70A', '80B']}
+  discount: one
 
 new_bra:
   title: Ari Dar Bra The Second

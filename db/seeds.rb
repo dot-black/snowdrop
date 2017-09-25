@@ -37,6 +37,18 @@ CSV.foreach("public/example-names.csv") do |row|
   break if $. > 20
 end
 
+#Discounts
+5.times do |count|
+  Discount.create!(
+    title:"Discount #{count + 1}0% off",
+    value: (count + 1) * 10,
+    description: "Discount without time limits"
+  )
+end
+Product.relevant.order("RANDOM()").limit(10).each do |product|
+  product.update! discount_id: Discount.all.ids.sample
+end
+
 #Orders and Carts
 10.times do |count|
   Cart.create!
@@ -62,7 +74,8 @@ Product.order("RANDOM()").limit(50).each do |product|
       { standard: Product.sizes[:standard].sample }
     ].sample,
     quantity: rand(1..10),
-    order_id: Order.ids.sample
+    order_id: Order.ids.sample,
+    actual_price: product.discount_price
   )
 end
 

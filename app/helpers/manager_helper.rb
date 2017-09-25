@@ -52,4 +52,18 @@ module ManagerHelper
     end
     links_hash
   end
+
+  def collapse_button button_title, button_class, target_id, target, &block
+    concat button_tag button_title, class: button_class, data: { toggle: "collapse", target: "##{target_id}" }
+    concat content_tag :br
+    content_tag :ul, id: target_id, class: "list-group collapse" do
+      target.each do |item|
+        concat (
+          content_tag :li, class: "list-group-item" do
+            yield item
+          end
+        )
+      end
+    end
+  end
 end

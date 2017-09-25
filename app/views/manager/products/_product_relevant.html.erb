@@ -8,10 +8,15 @@
           </div>
           <div class="product-desc">
 
-            <span class="product-price">
-              <%= product.price %>
-            </span>
-
+            <% if product.discount and product.discount.actual %>
+              <span class="product-discount-price">
+                <%= product.discount_price %>
+              </span>
+            <% else %>
+              <span class="product-price">
+                <%= product.price %>
+              </span>
+            <% end %>
             <span class="product-name">
               <%= product.title.truncate 20 %>
             </span>

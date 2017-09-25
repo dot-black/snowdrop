@@ -12,9 +12,16 @@
 
       <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 product-detailed-details oriented">
         <h1><%= @product.title %></h1>
-        <div class="product-details-price">
-          <span><%= number_to_currency @product.price %></span>
+        <% if @product.discount and @product.discount.actual %>
+        <div class="product-details-price-discount">
+          <span class="old"><%= number_to_currency @product.price %></span>
+          <span class="new"><%= number_to_currency @product.discount_price %></span>
         </div>
+        <% else %>
+          <div class="product-details-price">
+            <%= number_to_currency @product.price %>
+          </div>
+        <% end %>
 
         <%= f.fields_for :size do |ff| %>
           <% @product.sizes.each do |key,value| %>

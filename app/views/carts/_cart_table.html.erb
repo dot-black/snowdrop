@@ -46,7 +46,12 @@
         </div>
         <div class="row cart-mobile-price">
           <div class="col-xs-12">
-            <%= number_to_currency line_item.product.price %>
+            <% if line_item.product.discount and line_item.product.discount.actual %>
+              <%= content_tag :span, number_to_currency(line_item.product.discount_price) %>
+              <%= content_tag :span, number_to_currency(line_item.product.price), class: "old-price"  %>
+            <% else %>
+              <%= content_tag :span, number_to_currency(line_item.product.price) %>
+            <% end %>
           </div>
         </div>
       </div>
@@ -90,7 +95,12 @@
           <%= t 'carts.show.size' %>: <%= line_item.size.values.join(" & ")  if line_item.size.present? %>
         </td>
         <td class="col-sm-2 col-md-2 col-lg-2 cart-price">
-          <%= number_to_currency line_item.product.price %>
+          <% if line_item.product.discount and line_item.product.discount.actual %>
+            <%= number_to_currency line_item.product.discount_price %>
+            <%= content_tag :span, number_to_currency(line_item.product.price), class: "old-price"  %>
+          <% else %>
+            <%= number_to_currency line_item.product.price %>
+          <% end %>
         </td>
         <td class="col-sm-1 col-md-1 col-lg-1 cart-delete" valign="middle">
           <%= link_to line_item_path(line_item), method: "delete", remote: true do  %>

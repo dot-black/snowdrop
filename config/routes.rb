@@ -25,6 +25,13 @@ Rails.application.routes.draw do
       end
     end
     resources :users, only:[:index, :show]
+    resources :discounts do
+      member do
+        get 'change_appearance'
+        get 'edit_products'
+        put 'update_products'
+      end
+    end
   end
 
   root 'store#index', as: 'store'
