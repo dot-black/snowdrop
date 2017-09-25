@@ -1,0 +1,73 @@
+ru:
+  en: English
+  ru: Русский
+  ua: Українська
+  application_name: "Ari Dar Lingerie"
+  application_name_short: "Ari Dar"
+  application_name_shortest: "Ari"
+  category: "Категория"
+  language: "Язык"
+  store:
+    index:
+      shop_now: "Купить"
+  products:
+    index:
+      item:
+        one: "позиция"
+        other: "позиции"
+    show:
+      add_to_cart: "Добавить"
+      description: "Описание"
+    flash:
+      index:
+        missing_category: "Категория должна присутсвовать!"
+        unavailable_category: "Категория недоступна"
+      show:
+        missing_product: "Продукт не найден!"
+  carts:
+    show:
+      your_cart: 'Ваша корзина'
+      item:
+        one: "позиция"
+        other: "позиции"
+      size: 'Размер'
+      total: 'Всего'
+      checkout: 'Оформить'
+      your: 'Ваша'
+      is_empty: "пуста"
+      back_shoping: "Продолжить"
+  user_informations:
+    new:
+      headline: "Введите свою информацию"
+      change_email: "Ввести другой адрес электронной почты"
+      back_to_order: "или вернуться к заказу"
+      continue: 'Продолжить'
+  users:
+    new:
+      headline: "Ввести свой адрес электронной почты"
+      change_information: "Ввести другую информацию"
+      back_to_order: "или вернуться к заказу"
+      continue: 'Продовжити'
+  orders:
+    new:
+      headline: "Оставить свой коментарий"
+      change_email: "Ввести другой адрес электронной почты"
+      change_information: "или информацию"
+      place_order: "Замовити"
+    create:
+      successful_order: "Благодарим за ваш заказ!"
+      back_shopping: "Вернуться"
+    flash:
+      new:
+        empty_cart: "Пожалуйста, добавте что-то в корзину."
+      create:
+        failure: "Неудалось создать заказ, пожалуйста, заполните все поля корректно."
+  line_items:
+    flash:
+      create:
+        success: "Товар добавлен в корзину"
+        failure: "Товар не был добавлен"
+      update:
+        failure: "Не удалось обновить позицию!"
+      destroy:
+        failure: "Не удалось обновить позицию!"

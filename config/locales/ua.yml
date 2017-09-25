@@ -1,0 +1,73 @@
+ua:
+  en: English
+  ru: Русский
+  ua: Українська
+  application_name: "Ari Dar Lingerie"
+  application_name_short: "Ari Dar"
+  application_name_shortest: "Ari"
+  category: "Категорія"
+  language: "Мова"
+  store:
+    index:
+      shop_now: "Купити"
+  products:
+    index:
+      item:
+        one: "позиція"
+        other: "позиції"
+    show:
+      add_to_cart: "Додати в кошик"
+      description: "Опис"
+    flash:
+      index:
+        missing_category: "Категорія має бути присутня!"
+        unavailable_category: "Категорія недоступна"
+      show:
+        missing_product: "Не вдалося знайти такий продук!"
+  carts:
+    show:
+      your_cart: 'Ваш кошик'
+      item:
+        one: "позиція"
+        other: "позиції"
+      size: 'Розмір'
+      total: 'Всього'
+      checkout: 'Оформити'
+      your: 'Ваш'
+      is_empty: "пустий"
+      back_shoping: "Продовжити"
+  user_informations:
+    new:
+      headline: "Введіть свою інформацію"
+      change_email: "Ввести іншу адресу електронної пошти"
+      back_to_order: "чи повернутися до замовлення"
+      continue: 'Продовжити'
+  users:
+    new:
+      headline: "Введіть свою адресу електронної пошти"
+      change_information: "Ввести іншу інформацію"
+      back_to_order: "чи повернутися до замовлення"
+      continue: 'Продовжити'
+  orders:
+    new:
+      headline: "Залиште свій коментар"
+      change_email: "Ввести іншу адресу електронної пошти"
+      change_information: "чи інформацію"
+      place_order: "Замовити"
+    create:
+      successful_order: "Дякуємо за ваше замовлення!"
+      back_shopping: "Повернутися"
+    flash:
+      new:
+        empty_cart: "Будь ласка, додайте щось в кошик."
+      create:
+        failure: "Невдалося свторити ззамовлення, будь ласка, заповніть всі поля корректно."
+  line_items:
+    flash:
+      create:
+        success: "Товар доданий в кошик"
+        failure: "Товар не був доданий"
+      update:
+        failure: "Не вдалось оновити позиію!"
+      destroy:
+        failure: "Не вдалось видалити позицію!"
