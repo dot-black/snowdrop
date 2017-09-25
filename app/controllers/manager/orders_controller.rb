@@ -4,15 +4,19 @@ class Manager::OrdersController < ApplicationController
   layout 'managers/dashboard'
 
   def index
-    unless params[:status].present?
-      flash[:notice] = "Parameter status must be present!"
+    unless params[:status].present? and Order.statuses.keys.push("all").include? params[:status]
+      flash[:notice] = params[:status].present? ? "Status parameter '#{params[:status]}' is prohibited." : "Status parameter must be present."
       redirect_to manager_dashboard_path
     end
     @current_status = params[:status]
     @search_query = params[:search_query]
 
     @orders = if @search_query.present?
-      Order.by_status(params[:status]).where("lower(email) like lower('#{@search_query}%') or telephone like '#{@search_query}%' ").page params[:page]
+      Order.by_status(params[:status]).joins(:user).joins(:user_information).where(
+        "lower(users.email) like lower('#{@search_query}%')
+        or lower(user_informations.name) like lower('#{@search_query}%')
+        or user_informations.telephone like '#{@search_query}%' "
+      ).page params[:page]
     else
       Order.by_status(params[:status]).page params[:page]
     end
@@ -27,16 +31,13 @@ class Manager::OrdersController < ApplicationController
     @current_status = @order.status
   end
 
-  def edit
-  end
-
   def update
     @send_email = params[:send_email] == "Send email" ? true : false
     respond_to do |format|
       if @order.update(_permitted_order_params)
         OrderMailer.manager_information(@order).deliver
         OrderMailer.client_confirmation(@order).deliver if @send_email
-        format.html { redirect_to manager_orders_path(status: "all")}
+        format.html { redirect_to manager_orders_path(status: _permitted_order_params[:status]), notice: "Status of order ##{@order.id} has been changed."}
         format.json { render :show, status: :ok, location: @order }
       else
         format.html { render :edit }

@@ -21,12 +21,23 @@ class ClienStoriesTest < ActionDispatch::IntegrationTest
     assert_equal bra, cart.line_items.first.product
 
     get "/orders/new"
-    assert_response :success
+    assert_response :redirect
+    post users_path params: {
+      user: {
+        email: 'daniel@example.com',
+      }
+    }
+    assert_response :redirect
+    post user_informations_path params: {
+      user_information: {
+        name: 'Daniel Defoe',
+        telephone: '+380631001010'
+      }
+    }
+    assert_response :redirect
     post "/orders", params: {
       order: {
-        name:     "Daniel Defoe",
-        email:    "daniel@example.com",
-        telephone: "+380631001010"
+        comment: "A nice comment"
       }
     }
     assert_response :success
@@ -35,9 +46,9 @@ class ClienStoriesTest < ActionDispatch::IntegrationTest
     assert_equal 1, orders.size
     order = orders[0]
 
-    assert_equal "Daniel Defoe",       order.name
-    assert_equal "daniel@example.com", order.email
-    assert_equal "+380631001010",      order.telephone
+    assert_equal "Daniel Defoe",       order.user_information.name
+    assert_equal "daniel@example.com", order.user.email
+    assert_equal "+380631001010",      order.user_information.telephone
 
     assert_equal 1, order.line_items.size
     line_item = order.line_items[0]

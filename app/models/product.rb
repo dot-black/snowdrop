@@ -3,7 +3,6 @@ class Product < ApplicationRecord
      standard: [ "XS", "S", "M", "L", "XL"],
      bra: [ "70A", "70B", "70C", "75A", "75B", "75C", "75D", "80B", "80C", "85B", "85C" ]
   }
-
   enum priority: { hi: 1, mid: 2, low: 3 }
 
   validates :title, :description, :category, :sizes, presence: true
@@ -11,6 +10,7 @@ class Product < ApplicationRecord
     greater_than_or_equal_to: 0.01,
     message:'incorrect, please enter a value at least greater then 0.01 or equal one'
   }
+
   has_many :line_items
   has_many :orders, through: :line_items
   belongs_to :category
@@ -19,8 +19,8 @@ class Product < ApplicationRecord
 
   #Manager scopes
   scope :relevant, -> { where( archive: false ).reorder( created_at: :desc ) }
-  scope :visible, -> (visible) { where( visible: true, archive: false ).reorder( created_at: :desc ) }
-  scope :hidden, -> (hidden) { where( visible: false, archive: false ).reorder( created_at: :desc ) }
+  scope :visible, -> { where( visible: true, archive: false ).reorder( created_at: :desc ) }
+  scope :hidden, -> { where( visible: false, archive: false ).reorder( created_at: :desc ) }
   scope :archival, -> { where( archive: true ).reorder( created_at: :desc ) }
   scope :manager_category, -> (category_id) { where( category_id: category_id, archive: false ).reorder( created_at: :desc ) }
   #Client scopes

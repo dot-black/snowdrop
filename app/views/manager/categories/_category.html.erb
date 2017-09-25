@@ -17,7 +17,7 @@
           </div>
           <div class="row">
             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-              <%= link_to "Delete", manager_category_path(category), class: "btn btn-xs btn-outline btn-danger", method: :delete %>
+              <%= link_to "Delete", manager_category_path(category), class: "btn btn-xs btn-outline btn-danger", method: :delete,data: { confirm: "Are you sure that you want to delete '#{category.title}'? #{ category.products.count } #{'products'.pluralize(category.products.count)} of this category will be deleted as well." } %>
             </div>
             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
               <% if category.visible %>

@@ -29,6 +29,9 @@
   width: 500px;
   padding: 30px;
   background: transparent;
+  p {
+    margin-left: 7px;
+  }
   .order-submit-button {
     @media (max-width: 767px) {
       text-align: center;

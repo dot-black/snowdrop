@@ -18,9 +18,9 @@
                     <tr>
                       <td>
                         <h4 class="aligncenter"> <%= "Order #{@order.id} #{@order.status}" %></h4>
-                        <%= @order.name %><br />
-                        <%= @order.telephone %><br />
-                        <%= @order.email %><br />
+                        <%= @order.user_information.name %><br />
+                        <%= @order.user_information.telephone %><br />
+                        <%= @order.user.email %><br />
                         Comment: <%= @order.comment %><br />
                       </td>
                     </tr>

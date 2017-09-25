@@ -1,7 +1,8 @@
 class Manager::CategoriesController < ApplicationController
   before_action :authenticate_manager!
   before_action :_set_category, only: [:edit, :update, :destroy, :change_appearance]
-  before_action :_set_line_items, only: :edit
+  before_action :_set_category_products, only: :edit
+  before_action :_set_category_orders, only: [:edit, :destroy]
   layout 'managers/dashboard'
 
   def index
@@ -23,7 +24,7 @@ class Manager::CategoriesController < ApplicationController
         format.html { redirect_to manager_categories_path, notice: 'Category was successfully created.' }
         format.json { render :show, status: :created, location: @category }
       else
-        format.html { render :new, notice: "Category wasn't created, please check errors below" }
+        format.html { render :new, notice: "Category wasn't created, please check errors below!" }
         format.json { render json: @category.errors, status: :unprocessable_entity }
       end
     end
@@ -35,7 +36,7 @@ class Manager::CategoriesController < ApplicationController
         format.html { redirect_to manager_categories_path, notice: "Category was successfully updated." }
         format.json { render :show, status: :ok, location: @category }
       else
-        format.html { render :edit, notice: "Category wasn't updated, please check errors below"  }
+        format.html { render :edit, notice: "Category wasn't updated, please check errors below!"  }
         format.json { render json: @category.errors, status: :unprocessable_entity }
       end
     end
@@ -43,25 +44,22 @@ class Manager::CategoriesController < ApplicationController
 
   def destroy
     respond_to do |format|
-      ivolved_products = @category.products.ids & LineItem.all.map(&:product_id)
-      unless ivolved_products.any?
-        @category.destroy
-        format.html { redirect_to manager_categories_path, notice: "Category was successfully destroyed." }
-        format.json { head :no_content }
+      unless @category_orders.any?
+        notice = @category.destroy ? "Category was successfully destroyed." : "Category wasn't destroyed."
+        format.html { redirect_to manager_categories_path, notice: notice }
         format.js
       else
-        format.html { redirect_to manager_categories_path, notice: "Category can't be destroyed, there are #{ ivolved_products.count } #{'product'.pluralize(ivolved_products.count)} involved."}
+        format.html { redirect_to manager_categories_path, notice: "Category can't be destroyed, because of #{ @category_orders.count } #{'order'.pluralize(@category_orders.count)} involved."}
       end
     end
   end
 
   def change_appearance
-    _set_categories
     respond_to do |format|
       if @category.update visible: !@category.visible
         format.html { redirect_to manager_categories_path, notice: "Category '#{@category.title}' is #{@category.visible ? "visible" : "invisible"} now." }
       else
-        format.html { redirect_to manager_categories_path, notice: "Category's appearance wasn't changed." }
+        format.html { redirect_to manager_categories_path, notice: "Change appearance failed!" }
       end
     end
   end
@@ -76,8 +74,12 @@ class Manager::CategoriesController < ApplicationController
       @categories = Category.all
     end
 
-    def _set_line_items
-      @line_items = LineItem.where(product_id: @category.products.ids).where.not(order_id: nil)
+    def _set_category_orders
+      @category_orders = Order.find(LineItem.where(product_id: @category.products.ids).map(&:order_id))
+    end
+
+    def _set_category_products
+      @category_products = @category.products
     end
 
     def _permitted_category_params

@@ -1,7 +1,10 @@
 <div class="container">
   <div class="order-headline">
-    <h2>Checkout</h2>
-    <span>Please enter required information below</span>
+    <h2>Leave your comment</h2>
+    <span>
+      <%= link_to "Enter different email",new_user_path  %>
+      <%= link_to "or change information",new_user_information_path %>
+    </span>
   </div>
   <%= render partial: "form", locals: { order: @order } %>
 </div>

@@ -9,16 +9,16 @@ class LineItemsTest < ApplicationSystemTestCase
   test "check counters and total amount" do
     visit store_url
     #Go to first product
-    click_on @category_first.title.pluralize(2)
-    click_on @product_first.title
+    click_on @category_first.title.pluralize(2), match: :first
+    click_on @product_first.title, match: :first
     #2 times add first product
     2.times do |time|
       click_on 'Add to cart'
       assert_selector ".cart-badge", text: "#{time + 1}"
     end
     #Go to second product
-    click_on @category_first.title.pluralize(2)
-    click_on @product_second.title
+    click_on @category_first.title.pluralize(2), match: :first
+    click_on @product_second.title, match: :first
     #Add second product with first size and check cart badge
     click_on 'Add to cart'
     assert_selector ".cart-badge", text: 3
@@ -29,23 +29,23 @@ class LineItemsTest < ApplicationSystemTestCase
     #Go to cart check line items count and total amount
     visit cart_url
     assert_selector "span", text: "(3 items)"
-    assert_selector "#cart-total-amount span strong", text: "Total: $#{(@product_first.price + @product_second.price) * 2}"
+    assert_selector ".cart-total-amount span strong", text: "Total: $#{(@product_first.price + @product_second.price) * 2}"
     #Reduce amount of first product by 1 and check cart badge
     find("td", text: @product_first.title).first(:xpath, './/..').find('.minus-button').click
     assert_selector ".cart-badge", text: 3
     #Check total amount
-    assert_selector "#cart-total-amount span strong", text: "Total: $#{@product_first.price + 2 * @product_second.price}"
+    assert_selector ".cart-total-amount span strong", text: "Total: $#{@product_first.price + 2 * @product_second.price}"
     #Check if there is no link for reducing amount, when it equal to 1
     find("td", text: @product_first.title).first(:xpath, './/..').has_no_link? '.minus-button'
     #Increase amount of first product by 1 and check cart badge
     find("td", text: @product_first.title).first(:xpath, './/..').find('.plus-button').click
     assert_selector ".cart-badge", text: 4
     #Check total amount
-    assert_selector "#cart-total-amount span strong", text: "Total: $#{(@product_first.price + @product_second.price) * 2}"
+    assert_selector ".cart-total-amount span strong", text: "Total: $#{(@product_first.price + @product_second.price) * 2}"
     #Check if link for reduceing amount is appear
     find("td", text: @product_first.title).first(:xpath, './/..').has_link? '.minus-button'
     #Check if checkout button is working
     click_on 'Checkout'
-    assert_selector "h2", text: "Checkout"
+    assert_selector "h2", text: "Enter your email"
   end
 end

@@ -1,0 +1,25 @@
+<% if @user_information.errors.any? %>
+  <div id="toast-container">
+    <% @user_information.errors.full_messages.each do |message| %>
+      <%= content_tag :div, message, class: 'toast' %>
+    <% end %>
+  </div>
+<% end %>
+
+<div class="order-form">
+  <div class="order-checkout">
+    <%= label_tag :email %>
+    <br>
+    <%= content_tag :p, @user.email %>
+    <br>
+    <%= form_for @user_information do |form| %>
+      <%= form.label :name %>
+      <%= form.text_field :name, required: true %>
+      <%= form.label :telephone %>
+      <%= form.telephone_field :telephone, required: true %>
+      <div class="order-submit-button">
+        <%= form.submit "continue", class: "material-button" %>
+      </div>
+    <% end %>
+  </div>
+</div>
