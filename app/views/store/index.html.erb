@@ -7,7 +7,9 @@
     <h2><%= category.title %></h2>
 
     <div class="category-button">
-      <%= link_to "Shop now", category_products_path(category: category.title.parameterize.underscore), class: "material-button" %>
+      <%= link_to category_products_path(category: category.title.parameterize.underscore), class: "material-button" do %>
+        <%= t ".shop_now" %>
+      <% end %>
     </div>
   </div>
 <% end %>

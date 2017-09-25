@@ -1,10 +1,10 @@
 <div class="text-center">
   <br>
-  <span>Thank you for your order!</span>
+  <span><%= t 'orders.create.successful_order' %></span>
 </div>
 <br><br>
 <div class="row text-center">
   <div class="col-xs-12">
-    <%= link_to "Go back shoping", store_path,  class:"material-button" %>
+    <%= link_to "#{t 'orders.create.back_shopping'}", store_path,  class:"material-button" %>
   </div>
 </div>

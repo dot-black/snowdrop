@@ -30,7 +30,75 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  en: English
+  ru: Русский
+  ua: Українська
   application_name: "Ari Dar Lingerie"
   application_name_short: "Ari Dar"
   application_name_shortest: "Ari"
+  category: "Category"
+  language: "Language"
+  store:
+    index:
+      shop_now: "Shop now"
+  products:
+    index:
+      item:
+        one: "item"
+        other: "items"
+    show:
+      add_to_cart: "Add to cart"
+      description: "Description"
+    flash:
+      index:
+        missing_category: "Category must be present!"
+        unavailable_category: "Category is not avalible"
+      show:
+        missing_product: "Can't find such product!"
+  carts:
+    show:
+      your_cart: 'Your Cart'
+      item:
+        one: "item"
+        other: "items"
+      size: 'Size'
+      total: 'Total'
+      checkout: 'Checkout'
+      your: 'Your'
+      is_empty: "is empty"
+      back_shoping: "Go back shopping"
+  user_informations:
+    new:
+      headline: "Enter your information"
+      change_email: "Enter different email adress"
+      back_to_order: "or get back to order"
+      continue: 'Continue'
+  users:
+    new:
+      headline: "Enter your email"
+      change_information: "Enter different information"
+      back_to_order: "or get back to order"
+      continue: 'Continue'
+  orders:
+    new:
+      headline: "Leave your comment"
+      change_email: "Enter different email adress"
+      change_information: "or information"
+      place_order: "Place order"
+    create:
+      successful_order: "Thank you for your order!"
+      back_shopping: "Go back shoping"
+    flash:
+      new:
+        empty_cart: "Please add something to cart."
+      create:
+        failure: "Order wasn't created, please fill in all the fields correctly."
+  line_items:
+    flash:
+      create:
+        success: "Product is added to cart"
+        failure: "Product wasn't added"
+      update:
+        failure: "Can't update line item!"
+      destroy:
+        failure: "Can't destroy line item!"

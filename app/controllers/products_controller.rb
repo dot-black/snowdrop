@@ -1,12 +1,12 @@
 class ProductsController < StoreController
   def index
     unless params[:category].present?
-      flash[:notice] = "Category must be present!"
+      flash[:notice] = t 'products.flash.index.missing_category'
       redirect_to store_path
     else
       _set_category
       unless @current_category.present? and @current_category.visible
-        flash[:notice] = "Category is not avalible"
+        flash[:notice] = t 'products.flash.index.unavailable_category'
         redirect_to store_path
       else
         @products = Product.shown.category(@current_category.id).page(params[:page])
@@ -18,7 +18,7 @@ class ProductsController < StoreController
     _set_product
     @current_category = @product.category
     unless @product.visible and @product.category.visible
-      flash[:notice] = "Can't find such product!"
+      flash[:notice] = t 'products.flash.show.missing_product'
       redirect_to store_path
     end
   end

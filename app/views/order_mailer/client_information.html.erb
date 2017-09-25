@@ -9,7 +9,7 @@
               <table cellpadding="0" cellspacing="0">
                 <tr>
                   <td>
-                    <%= link_to store_url do %>
+                    <%= link_to store_url(locale: I18n.locale) do %>
                       <%= image_tag (image_path 'mailer/header.png'), class:"img-responsive"  %>
                     <% end %>
                   </td>
@@ -31,7 +31,7 @@
                         <% @order.line_items.each do |line_item| %>
                           <tr>
                             <td>
-                              <%= link_to product_url(line_item.product) do %>
+                              <%= link_to product_url(line_item.product, locale: I18n.locale) do %>
                               <%= image_tag( (line_item.product.images == [] ?  image_path("default/default_product_image.png") : image_path(line_item.product.images.first)),size: 64) %>
                               <% end %>
                             </td>
@@ -55,7 +55,7 @@
         <div class="footer">
           <table width="100%">
             <tr>
-              <td class="aligncenter content-block">Visit <%= link_to "ARI DAR", store_url %> site</td>
+              <td class="aligncenter content-block">Visit <%= link_to "ARI DAR", store_url(locale: I18n.locale) %> site</td>
             </tr>
           </table>
         </div>

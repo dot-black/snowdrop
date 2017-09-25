@@ -3,17 +3,15 @@
 <div class="category-headline content">
   <%= image_tag category_image(@current_category.image), class: "hidden-xs" %>
   <h2> <%= @current_category.title.pluralize(2).capitalize %> </h2>
-  <span><%= "(#{pluralize @products.total_count, 'item'})" %></span>
+  <span>(<%= @products.total_count %> <%= t '.item', count: @products.total_count %>)</span>
 </div>
 
 <div class="container products">
-  <div class="row ">
+  <div class="row">
     <% @products.each do |product| %>
       <%= render partial: "product", locals: { product: product } %>
     <% end %>
   </div>
-</div>
-
 </div>
 
 <div class="text-center">

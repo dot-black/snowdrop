@@ -12,7 +12,7 @@
       <%= form.label :email %>
       <%= form.email_field :email, required: true %>
       <div class="order-submit-button">
-          <%= form.submit "continue", class: "material-button" %>
+        <%= form.submit "#{t 'users.new.continue'}", class: "material-button" %>
       </div>
     <% end %>
   </div>

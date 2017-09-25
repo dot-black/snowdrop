@@ -3,7 +3,7 @@ class OrdersController < StoreController
   before_action :_set_user, :_set_user_information, only:[:new, :create]
   def new
     if @line_items.empty?
-      flash[:notice] = "Please add something to cart."
+      flash[:notice] = t 'orders.falsh.new.empty_cart'
       redirect_to store_path
     else
       @order = Order.new
@@ -25,7 +25,7 @@ class OrdersController < StoreController
         format.html { render 'successful_order' }
         format.json { render :show, status: :created, location: @order }
       else
-        flash[:notice] = "Order wasn't created, please fill in all the fields correctly."
+        flash[:notice] = t 'orders.falsh.create.failure'
         format.html { render :new }
         format.json { render json: @order.errors, status: :unprocessable_entity }
       end

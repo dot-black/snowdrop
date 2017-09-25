@@ -24,7 +24,7 @@
       <%= form.label :comment %>
       <%= form.text_area :comment, id: :order_comment %>
       <div class="order-submit-button">
-          <%= form.submit "place order", class: "material-button" %>
+          <%= form.submit "#{t 'orders.new.place_order'}", class: "material-button" %>
       </div>
     <% end %>
   </div>

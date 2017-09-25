@@ -41,7 +41,7 @@
         </div>
         <div class="row cart-monile-size">
             <div class="col-xs-12">
-              Size: <%= line_item.size.values.join(" & ")  if line_item.size.present? %>
+              <%= t 'carts.show.size' %>: <%= line_item.size.values.join(" & ")  if line_item.size.present? %>
             </div>
         </div>
         <div class="row cart-mobile-price">
@@ -87,7 +87,7 @@
           </div>
         </td>
         <td class="col-sm-2 col-md-2 col-lg-2 cart-size" valign="middle">
-          Size: <%= line_item.size.values.join(" & ")  if line_item.size.present? %>
+          <%= t 'carts.show.size' %>: <%= line_item.size.values.join(" & ")  if line_item.size.present? %>
         </td>
         <td class="col-sm-2 col-md-2 col-lg-2 cart-price">
           <%= number_to_currency line_item.product.price %>
