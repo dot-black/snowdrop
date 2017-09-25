@@ -3,3 +3,19 @@
   left: -25px;
   top: -21px;
 }
+
+.product-discount-price {
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: $red;
+  padding: 6px 12px;
+
+  position: absolute;
+  top: -32px;
+  right: 0;
+}
+.price-old{
+  text-decoration:line-through;
+  font-size: 14px;
+}

@@ -14,6 +14,7 @@ class Product < ApplicationRecord
   has_many :line_items
   has_many :orders, through: :line_items
   belongs_to :category
+  belongs_to :discount, optional: true
 
   mount_uploaders :images, ProductImageUploader
 
@@ -28,4 +29,11 @@ class Product < ApplicationRecord
   scope :shown, -> { where( archive: false, visible: true,  category_id: Category.visible.ids ) }
   scope :category, -> (category_id) { where( category_id: category_id, archive: false, visible: true ) }
 
+  def discount_price
+    if discount and discount.actual
+      (price * (1 - discount.value * 0.01)).round(2)
+    else
+      price
+    end
+  end
 end

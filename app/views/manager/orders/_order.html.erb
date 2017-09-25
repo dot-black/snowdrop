@@ -21,13 +21,13 @@
                 <strong><%= line_item.product.title %></strong>
               </div>
               <div class="row">
-                Qnt:<%= line_item.quantity %>
+                Qnt: <%= line_item.quantity %>
               </div>
               <div class="row">
                 <%= line_item.size.values.join(' & ') %>
               </div>
               <div class="row">
-                <%= number_to_currency line_item.product.price %>
+                <%= number_to_currency line_item.actual_price %>
               </div>
             </div>
           </div>
@@ -76,6 +76,7 @@
             <strong>Comment: </strong><%=@order.comment %>
           </div>
         </div>
+        </div>
       </div>
     </div>
     <br>
@@ -87,6 +88,7 @@
         <%= f.submit "Just submit", class:"btn btn-primary", name: "send_email" %>
       </div>
     </div>
+    <br>
   </div>
 
 
