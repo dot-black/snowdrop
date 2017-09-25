@@ -25,7 +25,14 @@
                 <h2 class="font-bold m-b-xs"> <%= product.title %> </h2>
 
                 <div class="m-t-md">
-                  <h2 class="product-main-price"> <%= number_to_currency product.price %> </h2>
+                  <h2 class="product-main-price">
+                    <% if product.discount and product.discount.actual  %>
+                      <%= number_to_currency product.discount_price %>
+                      <span class="price-old"><%= number_to_currency product.price %> </span>
+                    <% else %>
+                      <%= number_to_currency product.discount_price %>
+                    <% end %>  
+                  </h2>
                 </div>
 
                 <hr>
@@ -53,6 +60,14 @@
                   <br>
                   <dt>Priority</dt>
                   <dd> <%= product.priority.upcase %> </dd>
+                  <br>
+                  <dt>Discount</dt>
+                  <dd>
+                    <%= product.discount ? product.discount.title : 'None'  %><br>
+                    <%= product.discount and product.discount.actual ? "Currently actual" : "Was actual"  %>
+                    <%= " from #{product.discount.start_at.strftime("%d-%m-%Y %H:%M")}" if product.discount and product.discount.start_at %>
+                    <%= " till  #{product.discount.end_at.strftime("%d-%m-%Y  %H:%M")}" if product.discount and product.discount.end_at %>
+                  </dd>
                 </dl>
 
                 <div>

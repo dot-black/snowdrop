@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170903081556) do
+ActiveRecord::Schema.define(version: 20170909063837) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension 'hstore' unless extension_enabled?('hstore')
 
   create_table "carts", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -28,6 +29,16 @@ ActiveRecord::Schema.define(version: 20170903081556) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "discounts", force: :cascade do |t|
+    t.string "title"
+    t.string "description"
+    t.float "value"
+    t.datetime "start_at"
+    t.datetime "end_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "line_items", force: :cascade do |t|
     t.bigint "product_id"
     t.bigint "cart_id"
@@ -36,6 +47,8 @@ ActiveRecord::Schema.define(version: 20170903081556) do
     t.datetime "updated_at", null: false
     t.bigint "order_id"
     t.jsonb "size"
+    t.float "actual_price"
+    t.jsonb "discount"
     t.index ["cart_id"], name: "index_line_items_on_cart_id"
     t.index ["order_id"], name: "index_line_items_on_order_id"
     t.index ["product_id"], name: "index_line_items_on_product_id"
@@ -83,6 +96,8 @@ ActiveRecord::Schema.define(version: 20170903081556) do
     t.boolean "archive", default: false
     t.integer "category_id"
     t.jsonb "sizes"
+    t.bigint "discount_id"
+    t.index ["discount_id"], name: "index_products_on_discount_id"
   end
 
   create_table "user_informations", force: :cascade do |t|
