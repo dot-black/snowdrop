@@ -78,13 +78,37 @@ en:
           success: "Category has been successfully created."
           failure: "Category has not been created, please check errors below!"
         update:
-          success: "Category was successfully updated."
-          failure: "Category wasn't updated, please check errors below!"
+          success: "Category has been successfully updated."
+          failure: "Category has not, please check errors below!"
         destroy:
-          success: "Category was successfully destroyed."
-          failure: "Category wasn't destroyed."
+          success: "Category has been successfully destroyed."
+          failure: "Category has not been destroyed."
           involvement: "Category can't be destroyed, because of something is involved in it."
         change_appearance:
-          visible: "Category is visible now."
-          invisible: "Category is invisible now."
-          failure: "Change appearance failed!"
+          visible: "Category become visible now."
+          invisible: "Category become invisible now."
+          failure: "Changing appearance failed!"
+    products:
+      flash:
+        create:
+          success: "Product has been successfully created."
+          failure: "Product has not been created, please check errors below!"
+        update:
+          success: "Product has been successfully updated."
+          failure: "Product has not, please check errors below!"
+        destroy:
+          success: "Product has been successfully destroyed."
+          failure: "Product has not been destroyed."
+          involvement: "Product can't be destroyed, because of something is involved in it."
+        appearance:
+          visible: "Product become visible now."
+          invisible: "Product become invisible now."
+          failure: "Changing appearance failed!"
+        archive:
+          archived: "Product has been arcieved."
+          restored: "Product has been restored."
+          failure:  "Addin to/restoring from archieve is failed!"
+        remove_single_image:
+          success: "Single image successfully removed form product."
+          failure: "Removing od single immage is failed!"
+    orders:

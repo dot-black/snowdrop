@@ -40,10 +40,10 @@ class Manager::ProductsController < ApplicationController
     respond_to do |format|
       if @product.save
         _add_more_images if _permitted_product_images_params.present?
-        format.html { redirect_to manager_products_path, notice: "Product has been successfully created." }
+        format.html { redirect_to manager_products_path, notice: (t 'manager.products.flash.create.success') }
       else
-        flash.now.notice = "Product wasn't created, please check errors below!"
         format.html { render :new }
+        flash.now.notice = t 'manager.products.flash.create.failure'
       end
     end
   end
@@ -52,10 +52,10 @@ class Manager::ProductsController < ApplicationController
     respond_to do |format|
       if @product.update _permitted_product_params
         _add_more_images if _permitted_product_images_params.present?
-        format.html { redirect_to manager_product_path(@product), notice: "Product has been successfully updated." }
+        format.html { redirect_to manager_product_path(@product), notice: (t 'manager.products.flash.update.success') }
       else
-        flash.now.notice = "Product wasn't updated, please check errors below!"
         format.html { render :edit }
+        flash.now.notice = t 'manager.products.flash.update.failure'
       end
     end
   end
@@ -63,31 +63,43 @@ class Manager::ProductsController < ApplicationController
   def destroy
     respond_to do |format|
       unless @product_orders.present?
-        notice = @product.destroy ? "Product has been successfully destroyed." : "Destroy failed!"
+        notice = @product.destroy ? (t 'manager.products.flash.destroy.success') : (t 'manager.products.flash.destroy.failure')
         format.html { redirect_to archival_manager_products_path, notice: notice }
       else
-        format.html { redirect_to archival_manager_products_path, notice: "Product can't be destroyed, because of #{ @product_orders.count } #{'order'.pluralize(@product_orders.count)} involved."}
+        format.html { redirect_to archival_manager_products_path, notice: (t 'manager.products.flash.destroy.involvement')}
      end
     end
   end
 
   def archive
     respond_to do |format|
-      notice = ( @product.update archive: !@product.archive, visible: false ) ? "Product #{@product.title } has been #{@product.archive ? 'archived' : 'restored'}." : "Archive failed!"
+      notice = if (@product.update archive: !@product.archive, visible: false)
+        @product.archive ? (t 'manager.products.flash.archieve.archived') : (t 'manager.products.flash.archieve.restored')
+      else
+        t 'manager.products.flash.archieve.failure'
+      end
       format.html { redirect_to (@product.archive ? manager_products_path : archival_manager_products_path), notice: notice }
     end
   end
 
   def change_appearance
     respond_to do |format|
-      notice = ( @product.update visible: !@product.visible ) ? "Product '#{@product.title }' has become #{@product.visible ? 'visible' : 'invisible' }." : "Change apperance failed!"
+      notice = if (@product.update visible: !@product.visible)
+        @product.visible ?  (t 'manager.products.flash.appearance.visible') : (t 'manager.products.flash.appearance.invisible')
+      else
+        t 'manager.products.flash.change_appearance.failure'
+      end
       format.html { redirect_to manager_products_path, notice: notice }
     end
   end
 
   def remove_single_image
     respond_to do |format|
-      notice = ( @product.update images: @product.images.tap{ |a| a.delete_at(params[:index].to_i) } ) ? "Single image was deleted." : "Remove single image failed!"
+      notice = if (@product.update images: @product.images.tap{ |a| a.delete_at(params[:index].to_i) })
+        t 'manager.products.flash.remove_single_image.success'
+      else
+        t 'manager.products.flash.remove_single_image.failure'
+      end
       format.html { redirect_to edit_manager_product_path(@product), notice: notice}
       format.js
     end
