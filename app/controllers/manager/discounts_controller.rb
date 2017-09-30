@@ -21,10 +21,10 @@ class Manager::DiscountsController < ApplicationController
     @discount = Discount.new _permitted_discount_params
     respond_to do |format|
       if @discount.save
-        format.html { redirect_to manager_discounts_path, notice: "Discount has been successfully created." }
+        format.html { redirect_to manager_discounts_path, notice: (t 'manager.discounts.flash.create.success') }
       else
-        flash.now.notice = "Discount wasn't created, please check errors below!"
         format.html { render :new }
+        flash.now.notice = t 'manager.discounts.flash.create.failure'
       end
     end
   end
@@ -32,10 +32,10 @@ class Manager::DiscountsController < ApplicationController
   def update
     respond_to do |format|
       if @discount.update _permitted_discount_params
-        format.html { redirect_to manager_discount_path(@discount), notice: "Discount has been successfully updated." }
+        format.html { redirect_to manager_discount_path(@discount), notice: (t 'manager.discounts.flash.update.success') }
       else
-        flash.now.notice = "Discount wasn't updated, please check errors below!"
         format.html { render :edit }
+        flash.now.notice = t 'manager.discounts.flash.update.failure'
       end
     end
   end
@@ -43,10 +43,10 @@ class Manager::DiscountsController < ApplicationController
   def destroy
     respond_to do |format|
       unless @discount.products.present?
-        notice = @discount.destroy ? "Discount has been successfully destroyed." : "Destroy failed!"
+        notice = @discount.destroy ? (t 'manager.discounts.flash.destroy.success') : (t 'manager.discounts.flash.destroy.success')
         format.html { redirect_to manager_discounts_path, notice: notice }
       else
-        format.html { redirect_to manager_discount_path(@discount), notice: "Discount can't be destroyed, because of #{ @discount.products.count } #{'product'.pluralize(@discount.products.count)} involved."}
+        format.html { redirect_to manager_discount_path(@discount), notice: (t 'manager.discounts.flash.destroy.involvement') }
      end
     end
   end
@@ -54,11 +54,11 @@ class Manager::DiscountsController < ApplicationController
   def change_appearance
     respond_to do |format|
       notice = if @discount.actual and @discount.update_attributes start_at: nil, end_at: Time.now
-        "Discount is not active right now."
+        t 'manager.discounts.flash.change_appearance.invisible'
       elsif not @discount.actual and @discount.update_attributes start_at: nil, end_at: nil
-        "Discount activated."
+        t 'manager.discounts.flash.change_appearance.visible'
       else
-        "An error is occured during updating appearence of discount"  
+        t 'manager.discounts.flash.change_appearance.failure'
       end
       format.html { redirect_to manager_discount_path(@discount), notice: notice }
     end

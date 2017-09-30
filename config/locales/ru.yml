@@ -111,6 +111,22 @@ ru:
         remove_single_image:
           success: "Картинка успешно удалена из товара."
           failure: "Не получилось удалить картинку!"
+    discounts:
+      flash:
+        create:
+          success: "Cкидка успешно создана."
+          failure: "Скидка не была создана, посмотрите ошибки ниже!"
+        update:
+          success: "Скидка успешно обновлена."
+          failure: "Скидка не была обновлена, посмотрите ошибки ниже!"
+        destroy:
+          success: "Скидка успешно удалена."
+          failure: "Скидка не была удалена!"
+          involvement: "Скидка не может быть удалена, потому что к ней привязаны заказы или продукты."
+        change_appearance:
+          visible: "Скидка стала активной."
+          invisible: "Скидка парестала быть активно"
+          failure: "Не получилось изменить отображение скидки!"
   order_mailer:
     client_information:
       subject: "ARI DAR LINGERIE заказ"

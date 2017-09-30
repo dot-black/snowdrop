@@ -111,6 +111,22 @@ ua:
         remove_single_image:
           success: "Світлина успішно видалена з товару."
           failure: "Не вдалося видалити світлину!"
+    discounts:
+      flash:
+        create:
+          success: "Знижка успішно створена."
+          failure: "Знижка не була створена, погляньте на помилки нижче!"
+        update:
+          success: "Знижка успішно оновлена."
+          failure: "Знижка не була оновлена, погляньте на помилки нижче!"
+        destroy:
+          success: "Знижка успішно видалена."
+          failure: "Знижка не була видалена!"
+          involvement: "Знижка не може бути видалена, адже до неї прив'язані замовлення чи товари'."
+        change_appearance:
+          visible: "Знижка стала активною."
+          invisible: "Знижка більше не активна."
+          failure: "Не вдалось змінити відображення знижки!"
   order_mailer:
     client_information:
       subject: "ARI DAR LINGERIE замовлення"

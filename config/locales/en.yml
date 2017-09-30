@@ -119,6 +119,22 @@ en:
         update:
           success: "Status of order has been successfully changed."
           failure: "Changing status of order failed!"
+    discounts:
+      flash:
+        create:
+          success: "Discount has been successfully created."
+          failure: "Discount has not been created, please check errors below!"
+        update:
+          success: "Discount has been successfully updated."
+          failure: "Discount has not been updated, please check errors below!"
+        destroy:
+          success: "Discount has been successfully destroyed."
+          failure: "Discount has not been destroyed."
+          involvement: "Discount can't be destroyed, because of something is involved in it."
+        change_appearance:
+          visible: "Discount has been activated now."
+          invisible: "Discount has beem deactivated now."
+          failure: "An error is occured during updating appearence of discount"
   order_mailer:
     client_information:
       subject: "ARI DAR LINGERIE order"
