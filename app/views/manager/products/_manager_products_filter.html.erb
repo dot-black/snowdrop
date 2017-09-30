@@ -1,7 +1,7 @@
 <ul class="nav nav-tabs">
   <% products_categories_links.each do |key,link| %>
     <% if @current_category == 'manager_category' %>
-      <%= content_tag :li, class: "#{'active' if key.to_s == Category.find(@current_id).title.parameterize}" do %>
+      <%= content_tag :li, class: "#{'active' if key.to_s == Category.find(@current_id).slug.parameterize}" do %>
         <%= link_to key.capitalize, link, remote: true %>
       <% end %>
     <% else %>

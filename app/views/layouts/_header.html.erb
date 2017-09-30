@@ -10,15 +10,15 @@
     <h4><%= t 'category' %></h4>
     <% @categories.each do |category| %>
       <li class="<%= category == @current_category ? 'active' : '' %>">
-        <%= link_to category.title.pluralize(2) , category_products_path(category: category.title.parameterize.underscore ) %>
+        <%= link_to category.title, category_products_path(category: category.slug.parameterize.underscore ) %>
       </li>
     <% end  %>
   </ul>
   <ul class="nav navmenu-nav">
     <h4><%= t 'language' %></h4>
     <% I18n.available_locales.each do |locale| %>
-      <li class="<%= params[:locale] == locale ? 'active' : '' %>">
-        <%= link_to update_locale_path(new_locale: locale) do  %>
+      <li class="<%= params[:locale] == locale.to_s ? 'active' : '' %>">
+        <%= link_to url_for(locale: locale) do  %>
          <%= image_tag "languages/#{locale}.png", size: 32 %> <%= t "#{locale}" %>
         <% end %>
       </li>
@@ -29,7 +29,7 @@
 <div class="navbar navbar-default container-fluid app-navbar">
   <div class="menu-logo col-xs-2 col-sm-2 col-md-2 col-lg-2">
     <% if @product.present?  %>
-      <%= link_to category_products_path(@product.category.title.parameterize.underscore) do %>
+      <%= link_to category_products_path(@product.category.slug.parameterize.underscore) do %>
         <%= content_tag :i, 'arrow_back', class:"material-icons md-24 pull-left" %>
       <% end %>
     <% else %>
@@ -37,8 +37,10 @@
         <%= content_tag :i, 'menu', class:"visible-xs material-icons md-24 pull-left" %>
       <% end %>
       <% I18n.available_locales.each do |locale| %>
-        <%= link_to update_locale_path(new_locale: locale)  do  %>
-         <%= image_tag "languages/#{locale}.png", size: 24, class:"hidden-xs pull-left" %>
+        <% unless params[:locale] == locale.to_s %>
+          <%= link_to url_for(locale: locale) do  %>
+           <%= image_tag "languages/#{locale}.png", size: 24, class:"hidden-xs pull-left" %>
+          <% end %>
         <% end %>
       <% end %>
     <% end %>

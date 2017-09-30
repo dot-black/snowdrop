@@ -2,7 +2,7 @@
   <%= content_tag :ul, class: "material-tabs" do %>
     <% @categories.each do |category| %>
       <%= content_tag :li, class: "#{ category == @current_category ? 'active' : '' }" do  %>
-        <%= link_to category.title.pluralize(2) , category_products_path(category: category.title.parameterize.underscore ) %>
+        <%= link_to category.title, category_products_path(category: category.slug.parameterize.underscore ) %>
       <% end %>
     <% end  %>
   <% end %>

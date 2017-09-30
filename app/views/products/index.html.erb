@@ -2,7 +2,7 @@
 
 <div class="category-headline content">
   <%= image_tag category_image(@current_category.image), class: "hidden-xs" %>
-  <h2> <%= @current_category.title.pluralize(2).capitalize %> </h2>
+  <h2> <%= @current_category.title %> </h2>
   <span>(<%= @products.total_count %> <%= t '.item', count: @products.total_count %>)</span>
 </div>
 

@@ -12,6 +12,18 @@
             Welcome to <%= t("application_name") %>
           </span>
         </li>
+          <% I18n.available_locales.each do |locale| %>
+            <%= link_to url_for(locale: locale)  do  %>
+              <% if params[:locale] == locale.to_s %>
+                <%= image_tag "languages/#{locale}.png", size: 24, class:"hidden-xs" %>
+              <% else %>
+                <%= image_tag "languages/#{locale}.png", size: 12, class:"hidden-xs" %>
+              <% end %>
+            <% end %>
+          <% end %>
+        <li>
+
+        </li>
 
         <li>
           <%= link_to manager_orders_path(status: 'pending'), class: "count-info" do %>

@@ -6,11 +6,14 @@
 #
 first_visible:
   title: Bra
+  slug: bra
   visible: true
 
 second_invisible:
   title: Panties
+  slug: panties
   visible: false
 
 third_to_delete:
   title: odd_category
+  slug: odd

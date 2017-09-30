@@ -21,11 +21,10 @@ class Manager::CategoriesController < ApplicationController
 
     respond_to do |format|
       if @category.save
-        format.html { redirect_to manager_categories_path, notice: 'Category was successfully created.' }
-        format.json { render :show, status: :created, location: @category }
+        format.html { redirect_to manager_categories_path, notice: (t 'manager.categories.flash.create.success') }
       else
-        format.html { render :new, notice: "Category wasn't created, please check errors below!" }
-        format.json { render json: @category.errors, status: :unprocessable_entity }
+        format.html { render :new }
+        flash.now.notice = t 'manager.categories.flash.create.failure'
       end
     end
   end
@@ -33,11 +32,10 @@ class Manager::CategoriesController < ApplicationController
   def update
     respond_to do |format|
       if @category.update(_permitted_category_params)
-        format.html { redirect_to manager_categories_path, notice: "Category was successfully updated." }
-        format.json { render :show, status: :ok, location: @category }
+        format.html { redirect_to manager_categories_path, notice: (t 'manager.categories.flash.update.success') }
       else
-        format.html { render :edit, notice: "Category wasn't updated, please check errors below!"  }
-        format.json { render json: @category.errors, status: :unprocessable_entity }
+        format.html { render :edit }
+        flash.now.notice = t 'manager.categories.flash.update.failure'
       end
     end
   end
@@ -45,11 +43,11 @@ class Manager::CategoriesController < ApplicationController
   def destroy
     respond_to do |format|
       unless @category_orders.any?
-        notice = @category.destroy ? "Category was successfully destroyed." : "Category wasn't destroyed."
+        notice = @category.destroy ? (t 'manager.categories.flash.destroy.success') : (t 'manager.categories.flash.destroy.failure')
         format.html { redirect_to manager_categories_path, notice: notice }
         format.js
       else
-        format.html { redirect_to manager_categories_path, notice: "Category can't be destroyed, because of #{ @category_orders.count } #{'order'.pluralize(@category_orders.count)} involved."}
+        format.html { redirect_to manager_categories_path, notice: (t 'manager.categories.flash.destroy.involvement') }
       end
     end
   end
@@ -57,9 +55,9 @@ class Manager::CategoriesController < ApplicationController
   def change_appearance
     respond_to do |format|
       if @category.update visible: !@category.visible
-        format.html { redirect_to manager_categories_path, notice: "Category '#{@category.title}' is #{@category.visible ? "visible" : "invisible"} now." }
+        format.html { redirect_to manager_categories_path, notice: @category.visible ?  (t 'manager.categories.flash.change_appearance.visible') : (t 'manager.categories.flash.change_appearance.invisible') }
       else
-        format.html { redirect_to manager_categories_path, notice: "Change appearance failed!" }
+        format.html { redirect_to manager_categories_path, notice: (t 'manager.categories.flash.change_appearance.failure') }
       end
     end
   end
@@ -83,6 +81,6 @@ class Manager::CategoriesController < ApplicationController
     end
 
     def _permitted_category_params
-      params.require(:category).permit(:title, :image)
+      params.require(:category).permit(:title, :slug, :image)
     end
 end

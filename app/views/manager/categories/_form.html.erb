@@ -34,6 +34,15 @@
 
                     <div class="field">
                       <div class="form-group">
+                        <%= form.label :slug, class:"col-xs-2 col-sm-2 col-md-2 col-lg-2  control-label" %>
+                        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                          <%= form.text_field :slug, id: :category_slug, placeholder:"Category slug", class:"form-control" %>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="field">
+                      <div class="form-group">
                         <%= form.label :image, class:"col-xs-2 col-sm-2 col-md-2 col-lg-2 control-label" %>
                         <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
                           <%= form.file_field :image, class:"form-control" %>
