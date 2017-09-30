@@ -21,7 +21,7 @@ en:
     flash:
       index:
         missing_category: "Category must be present!"
-        unavailable_category: "Category is not avalible"
+        unavailable_category: "Category is not available"
       show:
         missing_product: "Can't find such product!"
   carts:
@@ -39,7 +39,7 @@ en:
   user_informations:
     new:
       headline: "Enter your information"
-      change_email: "Enter different email adress"
+      change_email: "Enter different email address"
       back_to_order: "or get back to order"
       continue: 'Continue'
   users:
@@ -51,12 +51,12 @@ en:
   orders:
     new:
       headline: "Leave your comment"
-      change_email: "Enter different email adress"
+      change_email: "Enter different email address"
       change_information: "or information"
       place_order: "Place order"
     create:
       successful_order: "Thank you for your order!"
-      back_shopping: "Go back shoping"
+      back_shopping: "Go back shopping"
     flash:
       new:
         empty_cart: "Please add something to cart."
@@ -79,7 +79,7 @@ en:
           failure: "Category has not been created, please check errors below!"
         update:
           success: "Category has been successfully updated."
-          failure: "Category has not, please check errors below!"
+          failure: "Category has not been updated, please check errors below!"
         destroy:
           success: "Category has been successfully destroyed."
           failure: "Category has not been destroyed."
@@ -95,7 +95,7 @@ en:
           failure: "Product has not been created, please check errors below!"
         update:
           success: "Product has been successfully updated."
-          failure: "Product has not, please check errors below!"
+          failure: "Product has not been updated, please check errors below!"
         destroy:
           success: "Product has been successfully destroyed."
           failure: "Product has not been destroyed."
@@ -105,10 +105,53 @@ en:
           invisible: "Product become invisible now."
           failure: "Changing appearance failed!"
         archive:
-          archived: "Product has been arcieved."
+          archived: "Product has been archived."
           restored: "Product has been restored."
-          failure:  "Addin to/restoring from archieve is failed!"
+          failure:  "Adding to/restoring from archive is failed!"
         remove_single_image:
           success: "Single image successfully removed form product."
-          failure: "Removing od single immage is failed!"
+          failure: "Removing od single image is failed!"
     orders:
+      flash:
+        index:
+          prohibited: "Status parameter is prohibited!"
+          absent: "Status parameter must be present!"
+        update:
+          success: "Status of order has been successfully changed."
+          failure: "Changing status of order failed!"
+  order_mailer:
+    client_information:
+      subject: "ARI DAR LINGERIE order"
+      introduction: "Thank you for your order!"
+      main_part: "You've just made an order. Our manager will contact with you to confirm it."
+      details: "Details of your order are below:"
+      size: "Size"
+      total: "Total"
+      visit: "Visit"
+      site: "site"
+      visit_us: "Visit us:"
+    client_confirmation:
+      subject: "ARI DAR LINGERIE order"
+      introduction: "Dear client of ARI DAR LINGERIE,"
+      main_part: "You've received this email because status of your order is changed."
+      details: "Details of your order are below:"
+      your_order_is: "Your order is"
+      pending: "pending"
+      accepted: "accepted"
+      declined: "declined"
+      completed: "completed"
+      size: "Size"
+      total: "Total"
+      visit: "Visit"
+      site: "site"
+      visit_us: "Visit us:"
+    manager_information:
+      subject: "ARI DAR LINGERIE order"
+      comment: "Comment"
+      total: "Total"
+      view_in_browser: "View in browser"
+      order: "Order"
+      updated: "Updated"
+      status: "Status"
+      info: "Info"
+      link: "Link"

@@ -16,12 +16,13 @@
                 </tr>
                 <tr>
                   <td class="content-block">
-                    <h3>Thank you for your order!</h3>
+                    <h3><%= t 'order_mailer.client_information.introduction' %></h3>
                    </td>
                 </tr>
                 <tr>
                   <td class="content-block">
-                    You've just made an order. Our manager will contact with you to confirm it.
+                    <%= t 'order_mailer.client_information.main_part' %><br>
+                    <%= t 'order_mailer.client_information.details' %>
                    </td>
                 </tr>
                 <tr>
@@ -37,7 +38,7 @@
                             </td>
                             <td>
                               <%= line_item.quantity %>x <%= line_item.product.title %> <br>
-                              Size: <%= line_item.size.values.join(" / ") %> <br>
+                              <%= t 'order_mailer.client_information.size' %>: <%= line_item.size.values.join(" / ") %> <br>
                               <%= number_to_currency(line_item.quantity * line_item.product.price) %>
                             </td>
                           </tr>
@@ -45,7 +46,7 @@
                     </tbody>
                   </table>
                   <br>
-                  <p> <strong>Total: <%= number_to_currency @order.amount %></strong></p>
+                  <p> <strong><%= t 'order_mailer.client_information.total' %> <%= number_to_currency @order.amount %></strong></p>
                 </td>
               </tr>
             </table>
@@ -55,7 +56,7 @@
         <div class="footer">
           <table width="100%">
             <tr>
-              <td class="aligncenter content-block">Visit <%= link_to "ARI DAR", store_url(locale: I18n.locale) %> site</td>
+              <td class="aligncenter content-block"><%= t 'order_mailer.client_information.visit' %> <%= link_to "#{t 'application_name'}", store_url(locale: I18n.locale) %> <%= t 'order_mailer.client_information.site' %></td>
             </tr>
           </table>
         </div>

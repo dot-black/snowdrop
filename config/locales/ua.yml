@@ -23,7 +23,7 @@ ua:
         missing_category: "Категорія має бути присутня!"
         unavailable_category: "Категорія недоступна"
       show:
-        missing_product: "Не вдалося знайти такий продук!"
+        missing_product: "Не вдалося знайти такий продукт!"
   carts:
     show:
       your_cart: 'Ваш кошик'
@@ -61,14 +61,14 @@ ua:
       new:
         empty_cart: "Будь ласка, додайте щось в кошик."
       create:
-        failure: "Невдалося свторити ззамовлення, будь ласка, заповніть всі поля корректно."
+        failure: "Не вдалося створити замовлення, будь ласка, заповніть всі поля корректно."
   line_items:
     flash:
       create:
         success: "Товар доданий в кошик"
         failure: "Товар не був доданий"
       update:
-        failure: "Не вдалось оновити позиію!"
+        failure: "Не вдалось оновити позицію!"
       destroy:
         failure: "Не вдалось видалити позицію!"
   manager:
@@ -102,7 +102,7 @@ ua:
           involvement: "Товар не може бути видалений, адже до нього прив'язані замовлення'."
         appearance:
           visible: "Товар став видимим для клієнта."
-          invisible: "Товар став невидим для клієнта."
+          invisible: "Товар став невидимим для клієнта."
           failure: "Не вдалось змінити відображення товару!"
         archive:
           archived: "Товар доданий в архів."
@@ -111,3 +111,43 @@ ua:
         remove_single_image:
           success: "Світлина успішно видалена з товару."
           failure: "Не вдалося видалити світлину!"
+  order_mailer:
+    client_information:
+      subject: "ARI DAR LINGERIE замовлення"
+      introduction: "Дякуємо за ваше замовлення!"
+      main_part: "Наш менеджер скоро зв'яжеться з вами для підтвердження замовлення."
+      details: "Деталі вашого замовлення:"
+      size: "Розмір"
+      total: "Сума"
+      visit: "Заходьте на наш"
+      site: "сайт"
+      visit_us: "Заходите до нас:"
+    client_confirmation:
+      subject: "ARI DAR LINGERIE замовлення"
+      introduction: "Шановний клієнт ARI DAR LINGERIE,"
+      main_part: "Вы отримали цього листа, тому що статус вашого замовлення змінився."
+      details: "Деталі вашого замовлення нижче:"
+      your_order_is: "Ваше замовлення"
+      pending: "очікує"
+      accepted: "прийняте"
+      declined: "відхилене"
+      completed: "виконано"
+      size: "Розмір"
+      total: "Сума"
+      visit: "Заходьте на наш"
+      site: "сайт"
+      visit_us: "Заходьте до нас:"
+    manager_information:
+      subject: "ARI DAR LINGERIE замовлення"
+      comment: "Коментар"
+      total: "Сума"
+      view_in_browser: "Відкрити в браузері"
+      order: "Замовлення"
+      updated: "Оновлено"
+      status: "Статус"
+      info: "Інформація"
+      link: "Посилання"
+      pending: "очікує"
+      accepted: "прийняте"
+      declined: "відхилене"
+      completed: "виконано"

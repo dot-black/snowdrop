@@ -7,7 +7,7 @@
             <table width="100%" cellpadding="0" cellspacing="0">
               <tr>
                 <td class="content-block">
-                  <%= link_to manager_root_url do %>
+                  <%= link_to manager_root_url(locale: I18n.locale) do %>
                     <%= image_tag (image_path 'mailer/header.png'), class:"img-responsive"  %>
                   <% end %>
                 </td>
@@ -17,11 +17,11 @@
                   <table class="invoice">
                     <tr>
                       <td>
-                        <h4 class="aligncenter"> <%= "Order #{@order.id} #{@order.status}" %></h4>
+                        <h4 class="aligncenter"> <%= t '.order' %> #<%=@order.id %> <%= t ".#{@order.status}" %></h4>
                         <%= @order.user_information.name %><br />
                         <%= @order.user_information.telephone %><br />
                         <%= @order.user.email %><br />
-                        Comment: <%= @order.comment %><br />
+                        <%= t '.comment' %>: <%= @order.comment %><br />
                       </td>
                     </tr>
                     <tr>
@@ -29,7 +29,7 @@
                         <table class="invoice-items" cellpadding="0" cellspacing="0">
                           <% @order.line_items.each do |line_item| %>
                             <tr>
-                              <%= link_to manager_product_url(line_item.product) do %>
+                              <%= link_to manager_product_url(line_item.product, locale: I18n.locale) do %>
                                 <td><%= line_item.quantity %>x <%= line_item.product.title %> (<%= line_item.size.values.join(" / ") %>)</td>
                                 <td class="alignright"><%= number_to_currency(line_item.quantity * line_item.product.price) %></td>
                               <% end %>
@@ -37,7 +37,7 @@
                           <% end %>
 
                           <tr class="total">
-                            <td class="alignright" width="80%">Total</td>
+                            <td class="alignright" width="80%"><%= t '.total'  %></td>
                             <td class="alignright"><%= number_to_currency @order.amount %></td>
                           </tr>
                         </table>
@@ -48,7 +48,7 @@
               </tr>
               <tr>
                 <td class="content-block">
-                  <%= link_to "View in browser", manager_order_url(@order) %>
+                  <%= link_to "#{t '.view_in_browser'}", manager_order_url(@order, locale: I18n.locale) %>
                 </td>
               </tr>
             </table>

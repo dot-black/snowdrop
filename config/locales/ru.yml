@@ -20,7 +20,7 @@ ru:
       description: "Описание"
     flash:
       index:
-        missing_category: "Категория должна присутсвовать!"
+        missing_category: "Категория должна присутствовать!"
         unavailable_category: "Категория недоступна"
       show:
         missing_product: "Продукт не найден!"
@@ -47,21 +47,21 @@ ru:
       headline: "Ввести свой адрес электронной почты"
       change_information: "Ввести другую информацию"
       back_to_order: "или вернуться к заказу"
-      continue: 'Продовжити'
+      continue: Продолжить
   orders:
     new:
-      headline: "Оставить свой коментарий"
+      headline: "Оставить свой комментарий"
       change_email: "Ввести другой адрес электронной почты"
       change_information: "или информацию"
-      place_order: "Замовити"
+      place_order: "Заказать"
     create:
       successful_order: "Благодарим за ваш заказ!"
       back_shopping: "Вернуться"
     flash:
       new:
-        empty_cart: "Пожалуйста, добавте что-то в корзину."
+        empty_cart: "Пожалуйста, добавьте что-то в корзину."
       create:
-        failure: "Неудалось создать заказ, пожалуйста, заполните все поля корректно."
+        failure: "Не удалось создать заказ, пожалуйста, заполните все поля корректно."
   line_items:
     flash:
       create:
@@ -87,7 +87,7 @@ ru:
         change_appearance:
           visible: "Категория стала видима для клиента."
           invisible: "Категория стала невидима для клиента"
-          failure: "Не получилось именить отображение категории!"
+          failure: "Не получилось изменить отображение категории!"
     products:
       flash:
         create:
@@ -103,11 +103,47 @@ ru:
         appearance:
           visible: "Продукт стал видим для клиента."
           invisible: "Продукт стал невидим для клиента"
-          failure: "Не получилось именить отображение продукта!"
+          failure: "Не получилось изменить отображение продукта!"
         archive:
           archived: "Товар добавлен в архив."
-          restored: "Товар востановен."
-          failure:  "Не получиось добавить в/востановить из архива!"
+          restored: "Товар восстановлен."
+          failure:  "Не получилось добавить в/восстановить из архива!"
         remove_single_image:
           success: "Картинка успешно удалена из товара."
           failure: "Не получилось удалить картинку!"
+  order_mailer:
+    client_information:
+      subject: "ARI DAR LINGERIE заказ"
+      introduction: "Спасибо за ваш заказ!"
+      main_part: "Наш менеджер скоро свяжется с вами для подтверждения заказа."
+      details: "Детали вашего заказа:"
+      size: "Размер"
+      total: "Сумма"
+      visit: "Заходите на наш "
+      site: "сайт"
+      visit_us: "Заходите к нам:"
+    client_confirmation:
+      subject: "ARI DAR LINGERIE заказ"
+      introduction: "Дорогой клиент ARI DAR LINGERIE,"
+      main_part: "Вы получили это письмо, потому что статус вашего заказ изменился."
+      details: "Детали вашего заказа ниже:"
+      your_order_is: "Ваш заказ"
+      pending: "ожидает"
+      accepted: "принят"
+      declined: "отклонен"
+      completed: "выпилен"
+      size: "Размер"
+      total: "Сумма"
+      visit: "Заходите на наш"
+      site: "сайт"
+      visit_us: "Заходите к нам:"
+    manager_information:
+      subject: "ARI DAR LINGERIE заказ"
+      comment: "Комментарий"
+      total: "Сумма"
+      view_in_browser: "Открыть в браузере"
+      order: "Заказ"
+      updated: "Обновлен"
+      status: "Статус"
+      info: "Информация"
+      link: "Ссылка"
