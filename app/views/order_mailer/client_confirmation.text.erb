@@ -1,7 +1,7 @@
 <%= t 'order_mailer.client_confirmation.introduction' %>
 
 <%= t 'order_mailer.client_confirmation.main_part' %>
-<%= t 'order_mailer.client_confirmation.your_order_is' %> <%=t "order_mailer.client_confirmation.#{@order.status}"%>.
+<%= t 'order_mailer.client_confirmation.your_order_is' %> <%=t "activerecord.attributes.order.statuses.#{@order.status}"%>.
 
 
 <%= t 'order_mailer.client_confirmation.visit_us'  %> <%= store_url(locale: I18n.locale) %>

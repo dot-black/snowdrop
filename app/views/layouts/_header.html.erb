@@ -19,7 +19,7 @@
     <% I18n.available_locales.each do |locale| %>
       <li class="<%= params[:locale] == locale.to_s ? 'active' : '' %>">
         <%= link_to url_for(locale: locale) do  %>
-         <%= image_tag "languages/#{locale}.png", size: 32 %> <%= t "#{locale}" %>
+         <%= image_tag "languages/#{locale}.png", size: 32 %> <%= t "#{locale}_name" %>
         <% end %>
       </li>
     <% end %>

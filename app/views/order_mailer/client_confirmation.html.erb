@@ -16,7 +16,7 @@
                 </tr>
                 <tr>
                   <td class="content-block">
-                    <h3><%= t 'order_mailer.client_confirmation.your_order_is' %> <%=t "order_mailer.client_confirmation.#{@order.status}"%>.</h3>
+                    <h3><%= t 'order_mailer.client_confirmation.your_order_is' %> <%=t "activerecord.attributes.order.statuses.#{@order.status}"%>.</h3>
                   </td>
                 </tr>
                 <tr>
@@ -59,7 +59,7 @@
 <div class="footer">
   <table width="100%">
     <tr>
-      <td class="aligncenter content-block"><%= t 'order_mailer.client_confirmation.visit'  %> <%= link_to "#{t 'application_name'}", store_url(locale: I18n.locale) %> <%= t 'order_mailer.client_confirmation.site' %></td>
+      <td class="aligncenter content-block"><%= t 'order_mailer.client_confirmation.visit'  %> <%= link_to t('application_name'), store_url(locale: I18n.locale) %> <%= t 'order_mailer.client_confirmation.site' %></td>
     </tr>
   </table>
 </div>

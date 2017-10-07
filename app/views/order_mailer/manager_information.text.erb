@@ -1,6 +1,6 @@
 <%= t '.order' %> #<%= @order.id %>
 <%= t '.updated' %>: <%= @order.updated_at.strftime("%d.%m.%Y %H:%M") %>
-<%= t '.status' %>: <%= t ".#{@order.status}"%>
+<%= t '.status' %>: <%= t "activerecord.attributes.order.statuses.#{@order.status}"%>
 <%= t '.info' %>:
   <%= @order.user_information.name %>
   <%= @order.user_information.telephone %>

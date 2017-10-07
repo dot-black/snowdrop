@@ -17,7 +17,7 @@
                   <table class="invoice">
                     <tr>
                       <td>
-                        <h4 class="aligncenter"> <%= t '.order' %> #<%=@order.id %> <%= t ".#{@order.status}" %></h4>
+                        <h4 class="aligncenter"> <%= t '.order' %> #<%=@order.id %> <%= t "activerecord.attributes.order.statuses.#{@order.status}" %></h4>
                         <%= @order.user_information.name %><br />
                         <%= @order.user_information.telephone %><br />
                         <%= @order.user.email %><br />
@@ -48,7 +48,7 @@
               </tr>
               <tr>
                 <td class="content-block">
-                  <%= link_to "#{t '.view_in_browser'}", manager_order_url(@order, locale: I18n.locale) %>
+                  <%= link_to t('.view_in_browser'), manager_order_url(@order, locale: I18n.locale) %>
                 </td>
               </tr>
             </table>

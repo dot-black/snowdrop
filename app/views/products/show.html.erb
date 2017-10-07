@@ -26,7 +26,7 @@
         <%= f.fields_for :size do |ff| %>
           <% @product.sizes.each do |key,value| %>
             <% if @product.sizes[key].present? %>
-              <%= ff.label "#{key} size" %>
+              <%= ff.label "#{t "products.show.#{key}"} #{t 'products.show.size'}" %>
               <%= ff.select key, ( key.downcase == "bra" ? @product.sizes[key].sort : Product.sizes[:standard] & @product.sizes[key]), {}, { class: "material-select" } %>
             <% end %>
           <% end %>

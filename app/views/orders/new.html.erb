@@ -2,8 +2,8 @@
   <div class="order-headline">
     <h2><%= t '.headline' %></h2>
     <span>
-      <%= link_to "#{t '.change_email'}",new_user_path  %>
-      <%= link_to " #{t '.change_information'}",new_user_information_path %>
+      <%= link_to t('.change_email'),new_user_path  %>
+      <%= link_to t('.change_information'),new_user_information_path %>
     </span>
   </div>
   <%= render partial: "form", locals: { order: @order } %>

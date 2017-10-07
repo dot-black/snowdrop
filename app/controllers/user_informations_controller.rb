@@ -15,7 +15,7 @@ class UserInformationsController < StoreController
       redirect_to new_order_path
     else
       @user_information = user_information
-      render(:new)
+      render :new
     end
   end
 

@@ -8,14 +8,14 @@ class OrderMailer < ApplicationMailer
   def client_information order
     @order = order
     I18n.locale = @order.locale
-    mail to: order.user.email, subject: "#{t 'order_mailer.client_information.subject'} #{order.id}"
+    mail to: order.user.email, subject: t('order_mailer.client_information.subject')
   end
 
   def client_confirmation order
     @order = order
     I18n.locale = @order.locale
     mail to: order.user.email,
-         subject: "#{t 'order_mailer.client_confirmation.subject'} #{order.id}"
+         subject: t('order_mailer.client_confirmation.subject')
   end
 
   def manager_information order
