@@ -1,12 +1,290 @@
+---
 en:
-  en: English
-  ru: Русский
-  ua: Українська
+  activerecord:
+    errors:
+      messages:
+        record_invalid: "Validation failed: %{errors}"
+        restrict_dependent_destroy:
+          has_one: "Cannot delete record because a dependent %{record} exists"
+          has_many: "Cannot delete record because dependent %{record} exist"
+  date:
+    abbr_day_names:
+    - Sun
+    - Mon
+    - Tue
+    - Wed
+    - Thu
+    - Fri
+    - Sat
+    abbr_month_names:
+    -
+    - Jan
+    - Feb
+    - Mar
+    - Apr
+    - May
+    - Jun
+    - Jul
+    - Aug
+    - Sep
+    - Oct
+    - Nov
+    - Dec
+    day_names:
+    - Sunday
+    - Monday
+    - Tuesday
+    - Wednesday
+    - Thursday
+    - Friday
+    - Saturday
+    formats:
+      default: "%Y-%m-%d"
+      long: "%B %d, %Y"
+      short: "%b %d"
+    month_names:
+    -
+    - January
+    - February
+    - March
+    - April
+    - May
+    - June
+    - July
+    - August
+    - September
+    - October
+    - November
+    - December
+    order:
+    - :year
+    - :month
+    - :day
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: about 1 hour
+        other: about %{count} hours
+      about_x_months:
+        one: about 1 month
+        other: about %{count} months
+      about_x_years:
+        one: about 1 year
+        other: about %{count} years
+      almost_x_years:
+        one: almost 1 year
+        other: almost %{count} years
+      half_a_minute: half a minute
+      less_than_x_minutes:
+        one: less than a minute
+        other: less than %{count} minutes
+      less_than_x_seconds:
+        one: less than 1 second
+        other: less than %{count} seconds
+      over_x_years:
+        one: over 1 year
+        other: over %{count} years
+      x_days:
+        one: 1 day
+        other: "%{count} days"
+      x_minutes:
+        one: 1 minute
+        other: "%{count} minutes"
+      x_months:
+        one: 1 month
+        other: "%{count} months"
+      x_years:
+        one: 1 year
+        other: "%{count} years"
+      x_seconds:
+        one: 1 second
+        other: "%{count} seconds"
+    prompts:
+      day: Day
+      hour: Hour
+      minute: Minute
+      month: Month
+      second: Seconds
+      year: Year
+  errors:
+    format: "%{attribute} %{message}"
+    messages:
+      accepted: must be accepted
+      blank: can't be blank
+      present: must be blank
+      confirmation: doesn't match %{attribute}
+      empty: can't be empty
+      equal_to: must be equal to %{count}
+      even: must be even
+      exclusion: is reserved
+      greater_than: must be greater than %{count}
+      greater_than_or_equal_to: must be greater than or equal to %{count}
+      inclusion: is not included in the list
+      invalid: is invalid
+      less_than: must be less than %{count}
+      less_than_or_equal_to: must be less than or equal to %{count}
+      model_invalid: "Validation failed: %{errors}"
+      not_a_number: is not a number
+      not_an_integer: must be an integer
+      odd: must be odd
+      required: must exist
+      taken: has already been taken
+      too_long:
+        one: is too long (maximum is 1 character)
+        other: is too long (maximum is %{count} characters)
+      too_short:
+        one: is too short (minimum is 1 character)
+        other: is too short (minimum is %{count} characters)
+      wrong_length:
+        one: is the wrong length (should be 1 character)
+        other: is the wrong length (should be %{count} characters)
+      other_than: must be other than %{count}
+    template:
+      body: 'There were problems with the following fields:'
+      header:
+        one: 1 error prohibited this %{model} from being saved
+        other: "%{count} errors prohibited this %{model} from being saved"
+  helpers:
+    select:
+      prompt: Please select
+    submit:
+      create: Create %{model}
+      submit: Save %{model}
+      update: Update %{model}
+  number:
+    currency:
+      format:
+        delimiter: ","
+        format: "%u%n"
+        precision: 2
+        separator: "."
+        significant: false
+        strip_insignificant_zeros: false
+        unit: "₴"
+    format:
+      delimiter: ","
+      precision: 3
+      separator: "."
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: "%n %u"
+        units:
+          billion: Billion
+          million: Million
+          quadrillion: Quadrillion
+          thousand: Thousand
+          trillion: Trillion
+          unit: ''
+      format:
+        delimiter: ''
+        precision: 3
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        format: "%n %u"
+        units:
+          byte:
+            one: Byte
+            other: Bytes
+          gb: GB
+          kb: KB
+          mb: MB
+          tb: TB
+    percentage:
+      format:
+        delimiter: ''
+        format: "%n%"
+    precision:
+      format:
+        delimiter: ''
+  support:
+    array:
+      last_word_connector: ", and "
+      two_words_connector: " and "
+      words_connector: ", "
+  time:
+    am: am
+    formats:
+      default: "%B %d, %Y %H:%M:%S"
+      long: "%B %d, %Y %H:%M"
+      short: "%d %b %H:%M"
+    pm: pm
+
+#------------CUSTOM------------
+  en_name: English
+  ru_name: Русский
+  ua_name: Українська
   application_name: "Ari Dar Lingerie"
   application_name_short: "Ari Dar"
   application_name_shortest: "Ari"
   category: "Category"
   language: "Language"
+  activerecord:
+    models:
+      category: "Category"
+      discount: "Discount"
+      line_item: "Line item"
+      manager: "Manager"
+      order: "Order"
+      product: "Product"
+      user_information: "User information"
+      user: "User"
+    attributes:
+      category:
+        title: "Title"
+        slug: "Slug"
+        image: "Image"
+      discount:
+        title: "Title"
+        description: "Description"
+        value: "Value"
+        start_at: "Start"
+        end_at: "End"
+      line_item:
+        quantity: "Quantity"
+        size: "Size"
+        actual_price: "Actual price"
+        discount: "Discount"
+      order:
+        name: "Name"
+        comment: "Comment"
+        amount: "Amount"
+        status: "Status"
+        locale: "Language"
+        status: "Status"
+        delay: "Delay"
+        created: "Created"
+        updated_at: "Updated"
+        statuses:
+          pending: "pending"
+          accepted: "accepted"
+          declined: "declined"
+          completed: "completed"
+          all: "all"
+      product:
+        title: "Title"
+        description: "Description"
+        price: "Price"
+        images: "Images"
+        priority: "Priority"
+        size: "Sizes"
+        category: "Category"
+        discount: "Discount"
+        priorities:
+          hi: "HI"
+          low: "LOW"
+          mid: "MID"
+        sizes:
+          one: "Size"
+          bra: "Bra"
+          standard: "Panties"
+      user_information:
+        name: "Name"
+        telephone: "Telephone"
+      user:
+        email: "Email"
   store:
     index:
       shop_now: "Shop now"
@@ -18,6 +296,9 @@ en:
     show:
       add_to_cart: "Add to cart"
       description: "Description"
+      size: "size"
+      bra: "Bra"
+      standard: "Standard"
     flash:
       index:
         missing_category: "Category must be present!"
@@ -72,6 +353,57 @@ en:
       destroy:
         failure: "Can't destroy line item!"
   manager:
+    layout:
+      manager: "Manager"
+      welcome: "Welcome to"
+      logout: "Logout"
+      dashboard: "Dashboard"
+      categories: "Categories"
+      products: "Products"
+      archival: "Archival"
+      orders: "Orders"
+      client: "Client"
+      discounts: "Discounts"
+      users: "Users"
+      edit: "Edit"
+      new: "New"
+      delete: "Delete"
+      all: "All"
+      list: "List"
+      detailed: "Detailed"
+      hide: "Hide"
+      hidden: "Hidden"
+      release: "Release"
+      released: "Released"
+      archive: "Archive"
+      activate: Activate"
+      deactivate: "Deactivate"
+      add: "Add"
+      always: "Always"
+      never: "Never"
+      active: "Active"
+      update: "Update"
+      clear: "Clear"
+      search: "Search"
+      show: "Show"
+      none: "None"
+      schedule: "Schedule"
+      no_information: "No information"
+      true_yes: "Yes"
+      false_no: "No"
+      currently_actual: "Currently actual"
+      was_actual: "Was actual"
+      till: "till"
+      from: "from"
+      orders_statistics: "Orders statistics"
+      popular_categories: "Popular categories"
+      popular_sizes: "Popular sizes"
+      total_count: "Total count"
+      orders_count: "Orders count"
+      category: "Category"
+      info: "Info"
+      dependencies: "Dependencies"
+      count: "Count"
     categories:
       flash:
         create:
@@ -88,6 +420,10 @@ en:
           visible: "Category become visible now."
           invisible: "Category become invisible now."
           failure: "Changing appearance failed!"
+      confirm:
+        delete: "Are you sure? All products of this category will be deleted as well."
+        make_visible: "Are you sure that you want to make category visible?"
+        make_invisible: "Are you sure that you want to make category invisible?"
     products:
       flash:
         create:
@@ -133,8 +469,13 @@ en:
           involvement: "Discount can't be destroyed, because of something is involved in it."
         change_appearance:
           visible: "Discount has been activated now."
-          invisible: "Discount has beem deactivated now."
-          failure: "An error is occured during updating appearence of discount"
+          invisible: "Discount has been deactivated now."
+          failure: "An error is occurred during updating appearance of discount"
+      confirm:
+        activate: "Are you sure? Schedule date and time will be changed."
+        deactivate: "Are you sure? Schedule date and time will be erased."
+        delete: "Are you sure?"
+
   order_mailer:
     client_information:
       subject: "ARI DAR LINGERIE order"
@@ -152,10 +493,6 @@ en:
       main_part: "You've received this email because status of your order is changed."
       details: "Details of your order are below:"
       your_order_is: "Your order is"
-      pending: "pending"
-      accepted: "accepted"
-      declined: "declined"
-      completed: "completed"
       size: "Size"
       total: "Total"
       visit: "Visit"
