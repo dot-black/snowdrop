@@ -16,24 +16,21 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
     end
 
     test "should show products by category #{locale}" do
-      get manager_products_path(manager_category: @product.category, locale: locale), xhr: true
+      get manager_products_path(manager_category: @product.category, locale: locale)
       assert_response :success
       assert_equal "index", @controller.action_name
-      assert_equal "text/javascript", @response.content_type
     end
 
     test "should show visible products #{locale}" do
-      get manager_products_path(visible: true, locale: locale), xhr: true
+      get manager_products_path(visible: true, locale: locale)
       assert_response :success
       assert_equal "index", @controller.action_name
-      assert_equal "text/javascript", @response.content_type
     end
 
     test "should show hidden products #{locale}" do
-      get manager_products_path(hidden: true, locale: locale), xhr: true
+      get manager_products_path(hidden: true, locale: locale)
       assert_response :success
       assert_equal "index", @controller.action_name
-      assert_equal "text/javascript", @response.content_type
     end
 
     test "should show archival products #{locale}" do
@@ -108,10 +105,10 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
     test "should archive and restore product #{locale}" do
       get archive_manager_product_path(@product,locale: locale)
       assert_redirected_to manager_products_path locale: locale
-      assert_equal (I18n.translate 'manager.products.flash.archieve.archived'), flash[:notice]
+      assert_equal (I18n.translate 'manager.products.flash.archive.archived'), flash[:notice]
       get archive_manager_product_path(@product,locale: locale)
       assert_redirected_to archival_manager_products_path
-      assert_equal (I18n.translate 'manager.products.flash.archieve.restored'), flash[:notice]
+      assert_equal (I18n.translate 'manager.products.flash.archive.restored'), flash[:notice]
     end
 
     test "should destroy product #{locale}" do

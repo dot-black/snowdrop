@@ -1,8 +1,11 @@
 require 'test_helper'
 
 class StoreControllerTest < ActionDispatch::IntegrationTest
-  test "should get index" do
-    get store_path
-    assert_response :success
+  I18n.available_locales.each do |locale|
+    I18n.locale = locale
+    test "should get index #{locale}" do
+      get store_path locale: locale
+      assert_response :success
+    end
   end
 end

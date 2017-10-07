@@ -2,12 +2,13 @@ require 'test_helper'
 
 class CartsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @cart = carts(:one)
+    @cart = carts :one
   end
-
-  test "should show cart" do
-    get cart_url(@cart)
-    assert_response :success
+  I18n.available_locales.each do |locale|
+    I18n.locale = locale
+    test "should show cart #{locale}" do
+      get cart_url @cart, locale: locale
+      assert_response :success
+    end
   end
-
 end
