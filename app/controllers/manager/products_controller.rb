@@ -11,7 +11,7 @@ class Manager::ProductsController < ApplicationController
     _filtering_params(params).each do |key, value|
       if key.present?
         @products =  @products.public_send(key,value).page params[:page]
-        @current_category =  key
+        @current_category = key
         @current_id = value
       end
     end
@@ -74,9 +74,9 @@ class Manager::ProductsController < ApplicationController
   def archive
     respond_to do |format|
       notice = if (@product.update archive: !@product.archive, visible: false)
-        @product.archive ? (t 'manager.products.flash.archieve.archived') : (t 'manager.products.flash.archieve.restored')
+        @product.archive ? (t 'manager.products.flash.archive.archived') : (t 'manager.products.flash.archive.restored')
       else
-        t 'manager.products.flash.archieve.failure'
+        t 'manager.products.flash.archive.failure'
       end
       format.html { redirect_to (@product.archive ? manager_products_path : archival_manager_products_path), notice: notice }
     end

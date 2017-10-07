@@ -9,7 +9,7 @@
       <ul class="nav navbar-top-links navbar-right">
         <li>
           <span class="m-r-sm text-muted welcome-message" data-i18n="topnav.welcometext">
-            Welcome to <%= t("application_name") %>
+            <%= t 'manager.layout.welcome'  %> <%= t("application_name") %>
           </span>
         </li>
           <% I18n.available_locales.each do |locale| %>
@@ -33,7 +33,7 @@
         </li>
 
         <li>
-          <%= nav_link "Logout", destroy_manager_session_path, "fa fa-sign-out", :delete %>
+          <%= nav_link "#{t 'manager.layout.logout'}", destroy_manager_session_path, "fa fa-sign-out", :delete %>
         </li>
       </ul>
     </nav>

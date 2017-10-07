@@ -3,14 +3,11 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Snowdrop</title>
+    <title><%= t 'application_name_short' %></title>
     <%= render 'layouts/managers/header' %>
   </head>
 
   <body class="gray-bg">
-    <div class="flash">
-      <%= render 'layouts/flash'  %>
-    </div>
     <%= yield %>
   </body>
 </html>

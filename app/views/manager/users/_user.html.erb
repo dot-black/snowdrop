@@ -1,25 +1,25 @@
 <div class="ibox-content">
   <div class="row">
     <div class="col-md-6">
-      <h2 class="text-center">Client information</h1>
+      <h2 class="text-center"><%= t 'manager.layout.client' %></h1>
       <div class="chat-user">
         <div class="chat-user-name">
-          <strong>User #</strong><%= @user.id  %>
+          <strong>ID: </strong><%= @user.id  %>
         </div>
       </div>
 
       <div class="chat-user">
         <div class="chat-user-name">
-          <strong>Email: </strong><%=@user.email%>
+          <strong><%= t 'activerecord.attributes.user.email' %>: </strong><%=@user.email%>
         </div>
       </div>
 
       <div class="chat-user">
         <div class="chat-user-name">
-          <strong>Name: </strong>
+          <strong><%= t 'activerecord.attributes.user_information.name' %>: </strong>
           <% if @user.user_informations.present?%>
             <%= @user.user_informations.last.name %>
-            <%= button_tag "List", class: "btn btn-xs btn-outline btn-primary", data:{toggle: "collapse", target: "#names-list"} if @user.user_informations.size > 1%>
+            <%= button_tag t('manager.layout.list'), class: "btn btn-xs btn-outline btn-primary", data:{toggle: "collapse", target: "#names-list"} if @user.user_informations.size > 1%>
             <%= content_tag :br %>
             <%= content_tag :ul, id: "names-list", class: "list-group collapse" do %>
               <% @user.user_informations.each do |info| %>
@@ -34,10 +34,10 @@
 
       <div class="chat-user">
         <div class="chat-user-name">
-          <strong>Telephone: </strong>
+          <strong><%= t 'activerecord.attributes.user_information.telephone' %>: </strong>
           <% if @user.user_informations.present? %>
             <%= @user.user_informations.last.telephone %>
-            <%= button_tag "List", class: "btn btn-xs btn-outline btn-primary", data:{toggle: "collapse", target: "#telephones-list"} if @user.user_informations.size > 1%>
+            <%= button_tag t('manager.layout.list'), class: "btn btn-xs btn-outline btn-primary", data:{toggle: "collapse", target: "#telephones-list"} if @user.user_informations.size > 1%>
             <%= content_tag :br %>
             <%= content_tag :ul, id: "telephones-list", class: "list-group collapse" do %>
               <% @user.user_informations.each do |info| %>
@@ -51,25 +51,21 @@
       </div>
     </div>
     <div class="col-md-6">
-      <h2 class="text-center">Orders</h1>
+      <h2 class="text-center"><%= t 'manager.layout.orders' %></h1>
       <table class="table table-hover table-stripped toggle-arrow-tiny" >
-        <th>Order</th>
-        <th>Amount</th>
-        <th>Status</th>
-        <th>Updated</th>
+        <th>ID</th>
+        <th><%= t 'activerecord.attributes.order.amount' %></th>
+        <th><%= t 'activerecord.attributes.order.status' %></th>
+        <th><%= t 'activerecord.attributes.order.updated_at' %></th>
         <tbody>
           <% unless @user.orders.present? %>
-            <p class="text-center"> No information </p>
+            <p class="text-center"> <%= t 'manager.layout.no_information' %></p>
           <% end %>
           <% @user.orders.each do |order| %>
-            <tr>
-              <td>
-                <%= link_to manager_order_path order do  %>
-                  Order #<%= order.id %>
-                <% end %>
-              </td>
+            <tr data-link= "<%= manager_order_path(order) %>" class="selectable-row">
+              <td><%= order.id %></td>
               <td><%= number_to_currency order.amount %></td>
-              <td><%= order.status %></td>
+              <td><%= t "activerecord.attributes.order.statuses.#{order.status}" %></td>
               <td><%= order.updated_at.strftime("%a %b %d %Y - %H:%M:%S") %></td>
             </tr>
           <% end  %>

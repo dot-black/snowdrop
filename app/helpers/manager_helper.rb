@@ -1,7 +1,7 @@
 module ManagerHelper
 
   def current_page_name
-    controller.controller_name.split("_").map(&:capitalize).join(" ")
+    controller.controller_name.split("_").join(" ")
   end
 
   def nav_link link_text, link_path, icons_class = '', method = :get

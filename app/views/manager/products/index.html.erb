@@ -1,14 +1,14 @@
 <div class="row wrapper border-bottom white-bg page-heading">
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
-    <h2> <%= current_page_name %> </h2>
+    <h2><%= t "manager.layout.#{current_page_name}" %></h2>
 
     <div class="pull-right">
-      <%= link_to "New", new_manager_product_path, class: "btn btn-large  btn-warning" %>
+      <%= link_to t('manager.layout.new'), new_manager_product_path, class: "btn btn-large  btn-warning" %>
     </div>
     <ol class="breadcrumb">
-      <li><%= current_page_name %></li>
-      <li><b>List</b></li>
+      <li><%= t "manager.layout.#{current_page_name}" %></li>
+      <li><b><%= t 'manager.layout.list' %></b></li>
     </ol>
   </div>
 </div>
@@ -17,7 +17,7 @@
   <div class="manager-products-filter">
     <%= render "manager_products_filter" %>
   </div>
-  <div class="tab-content products-list">
-    <%= render "list_relevant" %>
+  <div class="products-list">
+    <%= render "list" %>
   </div>
 </div>
