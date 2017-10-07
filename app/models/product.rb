@@ -1,4 +1,5 @@
 class Product < ApplicationRecord
+  attribute :description
   enum size: {
      standard: [ "XS", "S", "M", "L", "XL"],
      bra: [ "70A", "70B", "70C", "75A", "75B", "75C", "75D", "80B", "80C", "85B", "85C" ]
@@ -28,7 +29,7 @@ class Product < ApplicationRecord
   default_scope { order( priority: :asc ) }
   scope :shown, -> { where( archive: false, visible: true,  category_id: Category.visible.ids ) }
   scope :category, -> (category_id) { where( category_id: category_id, archive: false, visible: true ) }
-
+  translates :description
   def discount_price
     if discount and discount.actual
       (price * (1 - discount.value * 0.01)).round(2)

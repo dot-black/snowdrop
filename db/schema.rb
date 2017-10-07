@@ -10,11 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170930150533) do
+ActiveRecord::Schema.define(version: 20171007194432) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "hstore"
 
   create_table "carts", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -43,7 +42,7 @@ ActiveRecord::Schema.define(version: 20170930150533) do
   create_table "discounts", force: :cascade do |t|
     t.string "title"
     t.string "description"
-    t.float "value"
+    t.integer "value"
     t.datetime "start_at"
     t.datetime "end_at"
     t.datetime "created_at", null: false
@@ -59,7 +58,6 @@ ActiveRecord::Schema.define(version: 20170930150533) do
     t.bigint "order_id"
     t.jsonb "size"
     t.float "actual_price"
-    t.jsonb "discount"
     t.index ["cart_id"], name: "index_line_items_on_cart_id"
     t.index ["order_id"], name: "index_line_items_on_order_id"
     t.index ["product_id"], name: "index_line_items_on_product_id"
@@ -91,9 +89,19 @@ ActiveRecord::Schema.define(version: 20170930150533) do
     t.integer "status", default: 0
     t.bigint "user_id"
     t.bigint "user_information_id"
-    t.string "locale", default: "ru"
+    t.string "locale", default: "ua"
     t.index ["user_id"], name: "index_orders_on_user_id"
     t.index ["user_information_id"], name: "index_orders_on_user_information_id"
+  end
+
+  create_table "product_translations", force: :cascade do |t|
+    t.integer "product_id", null: false
+    t.string "locale", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "description"
+    t.index ["locale"], name: "index_product_translations_on_locale"
+    t.index ["product_id"], name: "index_product_translations_on_product_id"
   end
 
   create_table "products", force: :cascade do |t|
