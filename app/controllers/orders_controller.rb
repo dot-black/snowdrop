@@ -35,7 +35,7 @@ class OrdersController < StoreController
   private
 
     def _permitted_order_params
-      params.require(:order).permit( :comment )
+      params.require(:order).permit( :comment, :locale )
     end
 
     def _ensure_session_for_user_presisted
