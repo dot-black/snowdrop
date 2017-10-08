@@ -1,13 +1,14 @@
 Rails.application.routes.draw do
+  require 'sidekiq/web'
   scope ":locale",locale: /#{I18n.available_locales.join("|")}/  do
-    devise_for :managers,
-      path: 'manager',
+    devise_for :managers, path: 'manager',
       controllers: { sessions: 'managers/sessions' },
       path_names: { sign_in: 'login', sign_out: 'logout' }
-
+      
     namespace :manager do
-      require 'sidekiq/web'
-      mount Sidekiq::Web => '/sidekiq'
+      authenticate :manager do
+        mount Sidekiq::Web => '/sidekiq'
+      end
       root 'dashboard#index'
       get :dashboard, to: 'dashboard#index'
       resources :products do
