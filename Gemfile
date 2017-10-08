@@ -19,6 +19,9 @@ gem 'active_interaction', '~> 3.5'
 gem 'globalize', github: 'globalize/globalize'
 gem 'activemodel-serializers-xml'
 
+gem 'sidekiq'
+gem 'sinatra', github: 'sinatra/sinatra'
+
 gem 'sass-rails', '~> 5.0'
 gem 'coffee-rails', '~> 4.2'
 gem 'uglifier', '>= 1.3.0'

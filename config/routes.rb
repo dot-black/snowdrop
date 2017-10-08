@@ -6,7 +6,8 @@ Rails.application.routes.draw do
       path_names: { sign_in: 'login', sign_out: 'logout' }
 
     namespace :manager do
-      # mount Sidekiq::Web => '/sidekiq'
+      require 'sidekiq/web'
+      mount Sidekiq::Web => '/sidekiq'
       root 'dashboard#index'
       get :dashboard, to: 'dashboard#index'
       resources :products do

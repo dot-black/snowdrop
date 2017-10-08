@@ -20,8 +20,8 @@ class OrdersController < StoreController
     respond_to do |format|
       if @order.save
         DestroyCart.run! session: session
-        OrderMailer.manager_information(@order).deliver
-        OrderMailer.client_information(@order).deliver
+        ManagerMailWorker.perform_async @order.id
+        ClientMailWorker.perform_async @order.id
         format.html { render 'successful_order' }
         format.json { render :show, status: :created, location: @order }
       else
