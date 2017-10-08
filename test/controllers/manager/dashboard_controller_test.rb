@@ -5,12 +5,12 @@ class DashboardControllerTest < ActionDispatch::IntegrationTest
   setup do
     sign_in managers(:first) #Login as manager
   end
-
-  test "should show index" do
-    get manager_dashboard_path
-    assert_response :success
-    assert_equal "index", @controller.action_name
+  I18n.available_locales.each do |locale|
+    I18n.locale = locale
+    test "should show index #{locale}" do
+      get manager_dashboard_path locale: locale
+      assert_response :success
+      assert_equal "index", @controller.action_name
+    end
   end
-
-
 end

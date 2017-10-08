@@ -12,6 +12,7 @@ module Snowdrop
     config.load_defaults 5.1
     config.autoload_paths += Dir.glob("#{config.root}/app/interactions/*")
     config.time_zone = 'Kyiv'
+    config.i18n.fallbacks = true
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

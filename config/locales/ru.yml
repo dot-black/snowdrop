@@ -1,0 +1,565 @@
+---
+ru:
+  activerecord:
+    errors:
+      messages:
+        record_invalid: 'Возникли ошибки: %{errors}'
+        restrict_dependent_destroy:
+          has_one: 'Невозможно удалить запись, так как существует зависимость: %{record}'
+          has_many: 'Невозможно удалить запись, так как существуют зависимости: %{record}'
+  date:
+    abbr_day_names:
+    - Вс
+    - Пн
+    - Вт
+    - Ср
+    - Чт
+    - Пт
+    - Сб
+    abbr_month_names:
+    -
+    - янв.
+    - февр.
+    - марта
+    - апр.
+    - мая
+    - июня
+    - июля
+    - авг.
+    - сент.
+    - окт.
+    - нояб.
+    - дек.
+    day_names:
+    - воскресенье
+    - понедельник
+    - вторник
+    - среда
+    - четверг
+    - пятница
+    - суббота
+    formats:
+      default: "%d.%m.%Y"
+      long: "%-d %B %Y"
+      short: "%-d %b"
+    month_names:
+    -
+    - января
+    - февраля
+    - марта
+    - апреля
+    - мая
+    - июня
+    - июля
+    - августа
+    - сентября
+    - октября
+    - ноября
+    - декабря
+    order:
+    - :day
+    - :month
+    - :year
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        few: около %{count} часов
+        many: около %{count} часов
+        one: около %{count} часа
+        other: около %{count} часаов
+      about_x_months:
+        few: около %{count} месяцев
+        many: около %{count} месяцев
+        one: около %{count} месяца
+        other: около %{count} месяца
+      about_x_years:
+        few: около %{count} лет
+        many: около %{count} лет
+        one: около %{count} года
+        other: около %{count} лет
+      almost_x_years:
+        one: почти 1 год
+        few: почти %{count} года
+        many: почти %{count} лет
+        other: почти %{count} лет
+      half_a_minute: меньше минуты
+      less_than_x_minutes:
+        few: меньше %{count} минут
+        many: меньше %{count} минут
+        one: меньше %{count} минуты
+        other: меньше %{count} минуты
+      less_than_x_seconds:
+        few: меньше %{count} секунд
+        many: меньше %{count} секунд
+        one: меньше %{count} секунды
+        other: меньше %{count} секунды
+      over_x_years:
+        few: больше %{count} лет
+        many: больше %{count} лет
+        one: больше %{count} года
+        other: больше %{count} лет
+      x_days:
+        few: "%{count} дня"
+        many: "%{count} дней"
+        one: "%{count} день"
+        other: "%{count} дней"
+      x_minutes:
+        few: "%{count} минуты"
+        many: "%{count} минут"
+        one: "%{count} минуту"
+        other: "%{count} минуты"
+      x_months:
+        few: "%{count} месяца"
+        many: "%{count} месяцев"
+        one: "%{count} месяц"
+        other: "%{count} месяца"
+      x_years:
+        few: "%{count} года"
+        many: "%{count} лет"
+        one: "%{count} год"
+        other: "%{count} года"
+      x_seconds:
+        few: "%{count} секунды"
+        many: "%{count} секунд"
+        one: "%{count} секунду"
+        other: "%{count} секунды"
+    prompts:
+      day: День
+      hour: Часов
+      minute: Минут
+      month: Месяц
+      second: Секунд
+      year: Год
+  errors:
+    format: "%{attribute} %{message}"
+    messages:
+      accepted: нужно подтвердить
+      blank: не может быть пустым
+      present: нужно оставить пустым
+      confirmation: не совпадает со значением поля %{attribute}
+      empty: не может быть пустым
+      equal_to: может иметь лишь значение, равное %{count}
+      even: может иметь лишь нечетное значение
+      exclusion: имеет зарезервированное значение
+      greater_than: может иметь значение большее %{count}
+      greater_than_or_equal_to: может иметь значение большее или равное %{count}
+      inclusion: имеет непредусмотренное значение
+      invalid: имеет неверное значение
+      less_than: может иметь значение меньшее чем %{count}
+      less_than_or_equal_to: может иметь значение меньшее или равное %{count}
+      model_invalid: 'Возникли ошибки: %{errors}'
+      not_a_number: не является числом
+      not_an_integer: не является целым числом
+      odd: может иметь лишь четное значение
+      required: не может отсутствовать
+      taken: уже существует
+      too_long:
+        few: слишком большой длины (не может быть больше чем %{count} символа)
+        many: слишком большой длины (не может быть больше чем %{count} символов)
+        one: слишком большой длины (не может быть больше чем %{count} символ)
+        other: слишком большой длины (не может быть больше чем %{count} символа)
+      too_short:
+        few: недостаточной длины (не может быть меньше %{count} символов)
+        many: недостаточной длины (не может быть меньше %{count} символов)
+        one: недостаточной длины (не может быть меньше %{count} символа)
+        other: недостаточной длины (не может быть меньше %{count} символа)
+      wrong_length:
+        few: неверной длины (может быть длиной ровно %{count} символа)
+        many: неверной длины (может быть длиной ровно %{count} символов)
+        one: неверной длины (может быть длиной ровно %{count} символ)
+        other: неверной длины (может быть длиной ровно %{count} символа)
+      other_than: должно отличаться от %{count}
+    template:
+      body: 'Проблемы возникли со следующими полями:'
+      header:
+        few: "%{model}: сохранение не удалось из-за %{count} ошибок"
+        many: "%{model}: сохранение не удалось из-за %{count} ошибок"
+        one: "%{model}: сохранение не удалось из-за %{count} ошибки"
+        other: "%{model}: сохранение не удалось из-за %{count} ошибки"
+  helpers:
+    select:
+      prompt: 'Выберите: '
+    submit:
+      create: Создать %{model}
+      submit: Сохранить %{model}
+      update: Сохранить %{model}
+  number:
+    currency:
+      format:
+        delimiter: " "
+        format: "%n %u"
+        precision: 2
+        separator: ","
+        significant: false
+        strip_insignificant_zeros: false
+        unit: грн.
+    format:
+      delimiter: " "
+      precision: 3
+      separator: ","
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: "%n %u"
+        units:
+          billion:
+            few: миллиардов
+            many: миллиардов
+            one: миллиард
+            other: миллиардов
+          million:
+            few: миллионов
+            many: миллионов
+            one: миллион
+            other: миллионов
+          quadrillion:
+            few: квадриллионов
+            many: квадриллионов
+            one: квадриллион
+            other: квадриллионов
+          thousand:
+            few: тысяч
+            many: тысяч
+            one: тысяча
+            other: тысяч
+          trillion:
+            few: триллионов
+            many: триллионов
+            one: триллион
+            other: триллионов
+          unit: ''
+      format:
+        delimiter: ''
+        precision: 1
+        significant: false
+        strip_insignificant_zeros: false
+      storage_units:
+        format: "%n %u"
+        units:
+          byte:
+            few: байта
+            many: байт
+            one: байт
+            other: байта
+          gb: ГБ
+          kb: КБ
+          mb: МБ
+          tb: ТБ
+    percentage:
+      format:
+        delimiter: ''
+        format: "%n%"
+    precision:
+      format:
+        delimiter: ''
+  support:
+    array:
+      last_word_connector: " и "
+      two_words_connector: " и "
+      words_connector: ", "
+  time:
+    am: утра
+    formats:
+      default: "%d %B %Y, %H:%M:%S"
+      long: "%d %B %Y, %H:%M"
+      short: "%d %b, %H:%M"
+    pm: вечера
+
+  #------------CUSTOM------------
+  en_name: English
+  ru_name: Русский
+  ua_name: Українська
+  application_name: "Ari Dar Lingerie"
+  application_name_short: "Ari Dar"
+  application_name_shortest: "Ari"
+  category: "Категория"
+  language: "Язык"
+  activerecord:
+    models:
+      category: "Категорию"
+      discount: "Скидку"
+      line_item: "Позицию"
+      manager: "Менеджера"
+      order: "Заказ"
+      product: "Товар"
+      user_information: "Информацию"
+      user: "Клиента"
+    attributes:
+      category:
+        title: "Заголовок"
+        slug: "Семантический URL"
+        image: "Картинка"
+      discount:
+        title: "Заголовок"
+        description: "Описание"
+        value: "Значение"
+        start_at: "Начало"
+        end_at: "Окончание"
+      line_item:
+        quantity: "Количество"
+        size: "Размер"
+        actual_price: "Фактическая цена"
+        discount: "Скидка"
+      order:
+        name: "Имя"
+        comment: "Комментарий"
+        amount: "Сумма"
+        status: "Статус"
+        locale: "Язык"
+        status: "Статус"
+        delay: "Задержка"
+        created: "Создано"
+        updated_at: "Обновлено"
+        statuses:
+          pending: "ожидает"
+          accepted: "принят"
+          declined: "отклонен"
+          completed: "выполнен"
+          all: "все"
+      product:
+        title: "Заголовок"
+        description: "Описание"
+        price: "Цена"
+        images: "Картинка"
+        priority: "Приоритет"
+        size: "Размеры"
+        category: "Категория"
+        discount: "Скидка"
+        priorities:
+          hi: "Выс."
+          low: "Низ."
+          mid: "Сред."
+        sizes:
+          one: "Размер"
+          other: "Размеры"
+          bra: "Бюст"
+          standard: "Трусы"
+      user_information:
+        name: "Имя"
+        telephone: "Телефон"
+      user:
+        email: "Эл. почта"
+  store:
+    index:
+      shop_now: "Купить"
+  products:
+    index:
+      item:
+        one: "позиция"
+        other: "позиции"
+    show:
+      add_to_cart: "Добавить"
+      description: "Описание"
+      size: ""
+      bra: "Размер бюстгальтера"
+      standard: "Размер трусов"
+    flash:
+      index:
+        missing_category: "Категория должна присутствовать!"
+        unavailable_category: "Категория недоступна"
+      show:
+        missing_product: "Продукт не найден!"
+  carts:
+    show:
+      your_cart: 'Ваша корзина'
+      item:
+        one: "позиция"
+        other: "позиции"
+      size: 'Размер'
+      total: 'Всего'
+      checkout: 'Оформить'
+      your: 'Ваша'
+      is_empty: "пуста"
+      back_shoping: "Продолжить"
+  user_informations:
+    new:
+      headline: "Введите свою информацию"
+      change_email: "Ввести другой адрес электронной почты"
+      back_to_order: "или вернуться к заказу"
+      continue: 'Продолжить'
+  users:
+    new:
+      headline: "Ввести свой адрес электронной почты"
+      change_information: "Ввести другую информацию"
+      back_to_order: "или вернуться к заказу"
+      continue: Продолжить
+  orders:
+    new:
+      headline: "Оставить свой комментарий"
+      change_email: "Ввести другой адрес электронной почты"
+      change_information: "или информацию"
+      place_order: "Заказать"
+    create:
+      successful_order: "Благодарим за ваш заказ!"
+      back_shopping: "Вернуться"
+    flash:
+      new:
+        empty_cart: "Пожалуйста, добавьте что-то в корзину."
+      create:
+        failure: "Не удалось создать заказ, пожалуйста, заполните все поля корректно."
+  line_items:
+    flash:
+      create:
+        success: "Товар добавлен в корзину"
+        failure: "Товар не был добавлен"
+      update:
+        failure: "Не удалось обновить позицию!"
+      destroy:
+        failure: "Не удалось обновить позицию!"
+  manager:
+    layout:
+      manager: "Менеджер"
+      welcome: "Добро пожаловать в"
+      logout: "Выйти"
+      dashboard: "Статистика"
+      categories: "Категории"
+      products: "Товары"
+      archival: "Архивные"
+      orders: "Заказы"
+      client: "Клиент"
+      discounts: "Скидки"
+      users: "Клиенты"
+      edit: "Редактировать"
+      new: "Добавить"
+      delete: "Удалить"
+      restore: "Возобновить"
+      all: "Все"
+      list: "Список"
+      detailed: "Детально"
+      hide: "Скрыть"
+      hidden: "Скрытые"
+      release: "Запустить"
+      released: "Запущенные"
+      archive: "Архив."
+      activate: "Активировать"
+      deactivate: "Деактивировать"
+      add: "Добавить"
+      always: "Всегда"
+      never: "Никогда"
+      active: "Активна"
+      update: "Обновить"
+      clear: "Очистить"
+      search: "Поиск"
+      show: "Показать"
+      none: "Нет"
+      schedule: "Расписание"
+      no_information: "Нет информации"
+      true_yes: "Да"
+      false_no: "Нет"
+      currently_actual: "На текущий момент актуальна"
+      was_actual: "Была актуальна"
+      till: "с"
+      from: "до"
+      orders_statistics: "Статистика заказов"
+      popular_categories: "Популярные категории"
+      popular_sizes: "Популярные размеры"
+      total_count: "Общее количество"
+      orders_count: "Количество заказов"
+      category: "Категория"
+      info: "Информация"
+      dependencies: "Зависимости"
+      count: "Количество"
+    categories:
+      flash:
+        create:
+          success: "Категория успешно создана."
+          failure: "Категория не была создана, посмотрите ошибки ниже!"
+        update:
+          success: "Категория успешно обновлена."
+          failure: "Категория не была обновлена, посмотрите ошибки ниже!"
+        destroy:
+          success: "Категория успешно удалена."
+          failure: "Категория не была удалена!"
+          involvement: "Категория не может быть удалена, потому что к ней привязаны заказы или продукты."
+        change_appearance:
+          visible: "Категория стала видима для клиента."
+          invisible: "Категория стала невидима для клиента"
+          failure: "Не получилось изменить отображение категории!"
+      confirm:
+        delete: "Вы уверены? Все продукты данной категории также будут удалены."
+        make_visible: "Вы уверены, что хотите сделать категорию видимой?"
+        make_invisible: "Вы уверены, что хотите сделать категорию невидимой?"
+    products:
+      flash:
+        create:
+          success: "Товар успешно создан."
+          failure: "Товар не была создан, посмотрите ошибки ниже!"
+        update:
+          success: "Товар успешно обновлен."
+          failure: "Товар не была обновлен, посмотрите ошибки ниже!"
+        destroy:
+          success: "Товар успешно удален."
+          failure: "Товар не был удален!"
+          involvement: "Товар не может быть удален, потому что к нему привязаны заказы."
+        appearance:
+          visible: "Продукт стал видим для клиента."
+          invisible: "Продукт стал невидим для клиента"
+          failure: "Не получилось изменить отображение продукта!"
+        archive:
+          archived: "Товар добавлен в архив."
+          restored: "Товар восстановлен."
+          failure:  "Не получилось добавить в/восстановить из архива!"
+        remove_single_image:
+          success: "Картинка успешно удалена из товара."
+          failure: "Не получилось удалить картинку!"
+    orders:
+      flash:
+        index:
+          prohibited: "Текущий параметр статус запрещен"
+          absent: "Параметр статус должен присутствовать!"
+        update:
+          success: "Статус заказа успешно изменено."
+          failure: "Изменение статуса ордера завершилось неудачей!"
+    discounts:
+      flash:
+        create:
+          success: "Скидка успешно создана."
+          failure: "Скидка не была создана, посмотрите ошибки ниже!"
+        update:
+          success: "Скидка успешно обновлена."
+          failure: "Скидка не была обновлена, посмотрите ошибки ниже!"
+        destroy:
+          success: "Скидка успешно удалена."
+          failure: "Скидка не была удалена!"
+          involvement: "Скидка не может быть удалена, потому что к ней привязаны заказы или продукты."
+        change_appearance:
+          visible: "Скидка стала активной."
+          invisible: "Скидка перестала быть активной."
+          failure: "Не получилось изменить отображение скидки!"
+      confirm:
+        activate: "Вы уверены? Расписание для начала и конца будет изменено"
+        deactivate: "Вы уверены? Расписание для начала и конца будет удалено."
+        delete: "Вы уверены, что хотите удалить скидку?"
+  order_mailer:
+    client_information:
+      subject: "ARI DAR LINGERIE заказ"
+      introduction: "Спасибо за ваш заказ!"
+      main_part: "Наш менеджер скоро свяжется с вами для подтверждения заказа."
+      details: "Детали вашего заказа:"
+      size: "Размер"
+      total: "Сумма"
+      visit: "Заходите на наш "
+      site: "сайт"
+      visit_us: "Заходите к нам:"
+    client_confirmation:
+      subject: "ARI DAR LINGERIE заказ"
+      introduction: "Дорогой клиент ARI DAR LINGERIE,"
+      main_part: "Вы получили это письмо, потому что статус вашего заказ изменился."
+      details: "Детали вашего заказа ниже:"
+      your_order_is: "Ваш заказ"
+      size: "Размер"
+      total: "Сумма"
+      visit: "Заходите на наш"
+      site: "сайт"
+      visit_us: "Заходите к нам:"
+    manager_information:
+      subject: "ARI DAR LINGERIE заказ"
+      comment: "Комментарий"
+      total: "Сумма"
+      view_in_browser: "Открыть в браузере"
+      order: "Заказ"
+      updated: "Обновлен"
+      status: "Статус"
+      info: "Информация"
+      link: "Ссылка"

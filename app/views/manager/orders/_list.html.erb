@@ -8,17 +8,17 @@
             <thead>
             <tr>
               <th>ID</th>
-              <th>Name</th>
-              <th class="hidden-xs hidden-sm">Email</th>
-              <th class="hidden-xs hidden-sm">Telephone</th>
-              <th class="hidden-xs">Amount</th>
-              <th class="hidden-xs hidden-sm">Created</th>
-              <th class="hidden-xs hidden-sm">Delay</th>
-              <th class="text-center">Status</th>
+              <th><%= t 'activerecord.attributes.order.name' %></th>
+              <th class="hidden-xs hidden-sm"><%= t 'activerecord.attributes.user.email' %></th>
+              <th class="hidden-xs hidden-sm"><%= t 'activerecord.attributes.user_information.telephone' %></th>
+              <th class="hidden-xs"><%= t 'activerecord.attributes.order.amount' %></th>
+              <th class="hidden-xs hidden-sm"><%= t 'activerecord.attributes.order.created' %></th>
+              <th class="hidden-xs hidden-sm"><%= t 'activerecord.attributes.order.delay' %></th>
+              <th class="text-center"><%= t 'activerecord.attributes.order.status' %></th>
             </tr>
             </thead>
             <tbody>
-              <% @orders.each do |order|  %>  
+              <% @orders.each do |order|  %>
                 <tr data-link= "<%= manager_order_path(order) %>" class="selectable-row">
                   <td><%= order.id %></td>
                   <td><%= order.user_information.name.truncate 20 %>
@@ -31,13 +31,13 @@
                     <%= link_to manager_order_path(order) do%>
                       <% case order.status %>
                       <% when "pending" %>
-                        <%= content_tag :span, order.status, class: "label label-success col-xs-12 col-sm-12" %>
+                        <%= content_tag :span, t("activerecord.attributes.order.statuses.#{order.status}"), class: "label label-success col-xs-12 col-sm-12" %>
                       <% when "accepted" %>
-                        <%= content_tag :span, order.status, class: "label label-warning col-xs-12 col-sm-12" %>
+                        <%= content_tag :span, t("activerecord.attributes.order.statuses.#{order.status}"), class: "label label-warning col-xs-12 col-sm-12" %>
                       <% when "declined" %>
-                        <%= content_tag :span, order.status, class: "label label-danger col-xs-12 col-sm-12" %>
+                        <%= content_tag :span, t("activerecord.attributes.order.statuses.#{order.status}"), class: "label label-danger col-xs-12 col-sm-12" %>
                       <% when "completed" %>
-                        <%= content_tag :span, order.status, class: "label label-primary col-xs-12 col-sm-12" %>
+                        <%= content_tag :span, t("activerecord.attributes.order.statuses.#{order.status}"), class: "label label-primary col-xs-12 col-sm-12" %>
                       <% end  %>
                     <% end %>
                   </td>
@@ -50,7 +50,7 @@
           </div>
         <% else %>
           <div class="text-center">
-            <h2>No information</h2>
+            <h2><%= t 'manager.layout.no_information' %></h2>
           </div>
         <% end %>
       </div>

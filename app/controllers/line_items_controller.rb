@@ -6,10 +6,10 @@ class LineItemsController < StoreController
         _set_line_items_variables
         format.html { redirect_to product_path(params[:line_item][:product_id]) }
         format.json { render :show, status: :created, location: @line_item }
-        format.js {flash.now[:notice] = "Product is added to cart"}
+        format.js {flash.now[:notice] = t 'line_items.flash.create.success'}
       else
-        flash[:warning] = "Product wasn't added"
-        format.html { redirect_to store_url }
+        flash[:warning] = t 'line_items.flash.create.failure'
+        format.html { redirect_to store_path}
         format.json { render json: @line_item.errors, status: :unprocessable_entity }
       end
     end
@@ -25,7 +25,7 @@ class LineItemsController < StoreController
         format.json
         format.js
       else
-        flash[:warning] = "Can't update line item!"
+        flash[:warning] = t 'line_items.flash.update.failure'
         format.html { redirect_to cart_path }
         format.json { render json: @line_item.errors, status: :unprocessable_entity }
       end
@@ -42,7 +42,7 @@ class LineItemsController < StoreController
         format.json { head :no_content }
         format.js
       else
-        flash[:warning] = "Can't destroy line item!"
+        flash[:warning] = t 'line_items.flash.destroy.failure'
         format.html { redirect_to cart_path }
         format.json { render json: @line_item.errors, status: :unprocessable_entity }
       end

@@ -1,5 +1,7 @@
-Your order was <%= @order.status %>.
+<%= t 'order_mailer.client_confirmation.introduction' %>
 
-You've received this email because status of your order is changed.
+<%= t 'order_mailer.client_confirmation.main_part' %>
+<%= t 'order_mailer.client_confirmation.your_order_is' %> <%=t "activerecord.attributes.order.statuses.#{@order.status}"%>.
 
-Visit us: <%= store_url %>
+
+<%= t 'order_mailer.client_confirmation.visit_us'  %> <%= store_url(locale: I18n.locale) %>

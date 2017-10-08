@@ -11,7 +11,7 @@ class UsersController < StoreController
       redirect_to new_user_information_path
     else
       @user = user
-      render(:new)
+      render :new
     end
   end
 end

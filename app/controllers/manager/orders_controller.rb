@@ -5,7 +5,7 @@ class Manager::OrdersController < ApplicationController
 
   def index
     unless params[:status].present? and Order.statuses.keys.push("all").include? params[:status]
-      flash[:notice] = params[:status].present? ? "Status parameter '#{params[:status]}' is prohibited." : "Status parameter must be present."
+      flash[:notice] = params[:status].present? ? (t 'manager.orders.flash.index.prohibited') : (t 'manager.orders.flash.index.absent')
       redirect_to manager_dashboard_path
     end
     @current_status = params[:status]
@@ -37,13 +37,12 @@ class Manager::OrdersController < ApplicationController
       if @order.update(_permitted_order_params)
         OrderMailer.manager_information(@order).deliver
         OrderMailer.client_confirmation(@order).deliver if @send_email
-        format.html { redirect_to manager_orders_path(status: _permitted_order_params[:status]), notice: "Status of order ##{@order.id} has been changed."}
-        format.json { render :show, status: :ok, location: @order }
+        format.html { redirect_to manager_orders_path(status: _permitted_order_params[:status]), notice: (t 'manager.orders.flash.update.success')}
       else
         format.html { render :edit }
-        format.json { render json: @order.errors, status: :unprocessable_entity }
+        flash.now.notice = (t 'manager.orders.flash.update.failure')
       end
-    end
+    end  
   end
 
   # def destroy
@@ -54,13 +53,12 @@ class Manager::OrdersController < ApplicationController
   #   end
   # end
 
-  private
+private
+  def _set_order
+    @order = Order.find(params[:id])
+  end
 
-    def _set_order
-      @order = Order.find(params[:id])
-    end
-
-    def _permitted_order_params
-      params.require(:order).permit(:title, :description, :image, :price, :status)
-    end
+  def _permitted_order_params
+    params.require(:order).permit(:title, :description, :image, :price, :status)
+  end
 end

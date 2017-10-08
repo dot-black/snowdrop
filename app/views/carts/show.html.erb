@@ -2,7 +2,7 @@
   <% unless @line_items.count == 0 %>
     <div class="full-cart">
       <div class="cart-headline text-center">
-        <h2>Your Cart</h2>
+        <h2><%= t '.your_cart'  %></h2>
           <span id="line-items-count">
             <%= render 'line_items_count' %>
           </span>
@@ -16,7 +16,7 @@
             <%= render 'cart_total_amount' %>
           </div>
           <div class="col-sm-3 col-md-3 col-xl-3">
-            <%= link_to "Checkout", new_order_path, class:"material-button" %>
+            <%= link_to t('.checkout'), new_order_path, class:"material-button" %>
           </div>
         </div>
       </div>
@@ -30,7 +30,7 @@
         <br>
         <div class="row text-center">
           <div class="col-xs-12">
-            <%= link_to "Checkout", new_order_path, class:"material-button" %>
+            <%= link_to t('.checkout'), new_order_path, class:"material-button" %>
           </div>
         </div>
       </div>

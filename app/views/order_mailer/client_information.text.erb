@@ -1,12 +1,14 @@
-Thank you for your order!
+<%= t 'order_mailer.client_information.introduction' %>
 
-You've just made an order. Our manager will contact with you to confirm the it.
+<%= t 'order_mailer.client_information.main_part' %>
 
-Details of order:
+<%= t 'order_mailer.client_information.details' %>
 <% @order.line_items.each do |line_item| %>
   <%= line_item.quantity %>x <%= line_item.product.title %> [<%= line_item.size.values.join(" / ") %>]
     <%= number_to_currency(line_item.quantity * line_item.product.price) %>
 <% end %>
 
-Total:
+<%= t 'order_mailer.client_information.total' %>
   <%= number_to_currency @order.amount %>
+
+<%= t 'order_mailer.client_information.visit_us' %> <%= store_url(locale: I18n.locale) %>

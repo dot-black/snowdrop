@@ -1,7 +1,7 @@
 module ManagerHelper
 
   def current_page_name
-    controller.controller_name.split("_").map(&:capitalize).join(" ")
+    controller.controller_name.split("_").join(" ")
   end
 
   def nav_link link_text, link_path, icons_class = '', method = :get
@@ -48,7 +48,7 @@ module ManagerHelper
       hidden: manager_products_path(hidden: "true")
     }
     Category.all.each do |category|
-      links_hash[category.title.parameterize.to_sym] = manager_products_path(manager_category: category.id)
+      links_hash[category.slug.parameterize.to_sym] = manager_products_path(manager_category: category.id)
     end
     links_hash
   end

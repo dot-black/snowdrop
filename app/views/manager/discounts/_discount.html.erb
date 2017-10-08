@@ -13,16 +13,16 @@
               </div>
 
               <hr>
-              <h4>Schedule</h4>
+              <h4><%= t 'manager.layout.schedule' %></h4>
 
               <div class="small text-muted">
-                Start: <%= @discount.start_at ? @discount.start_at.strftime("%d.%m.%Y") : "Any time"%>
-                End: <%= @discount.end_at ? @discount.end_at.strftime("%d.%m.%Y %H:%M:%S") : "Never"%>
+                <%= t 'activerecord.attributes.discount.start_at' %>: <%= @discount.start_at ? @discount.start_at.strftime("%d.%m.%Y") : t('manager.layout.always')%>
+                <%= t 'activerecord.attributes.discount.end_at' %>: <%= @discount.end_at ? @discount.end_at.strftime("%d.%m.%Y %H:%M:%S") : t('manager.layout.never')%>
               </div>
 
               <hr>
 
-              <h4>Description</h4>
+              <h4><%= t 'activerecord.attributes.discount.description' %></h4>
 
               <div class="small text-muted">
                 <%= @discount.description %>
@@ -30,14 +30,14 @@
 
               <hr>
 
-              <h4>Products</h4>
+              <h4><%= t 'manager.layout.products' %></h4>
               <div class="small text-muted">
                 <% if @discount.products.present?  %>
                   <%= collapse_button "Show", "btn btn-xs btn-outline btn-primary", "products-list", @discount.products do |item| %>
                     <%= link_to item.title, manager_product_path(item) %>
                   <% end %>
                 <% else %>
-                  <p>No products</p>
+                  <p><%= t 'manager.layout.none' %></p>
                 <% end %>
               </div>
 
@@ -45,23 +45,19 @@
                 <hr>
                 <div class="btn-group">
                   <% if @discount.actual %>
-                  <%= link_to change_appearance_manager_discount_path(@discount), class: "btn btn-warning btn-sm", data: { confirm: "Are you sure? Schedule date and time will be changed."} do %>
-                    <i class="fa fa-eye-slash"></i> Deactivate
-                  <% end %>
+                    <%= link_to t('manager.layout.deactivate'), change_appearance_manager_discount_path(@discount), class: "btn btn-warning btn-sm", data: { confirm: t('manager.discounts.confirm.activate')} %>
                   <% else  %>
-                    <%= link_to change_appearance_manager_discount_path(@discount), class: "btn btn-primary btn-sm",data: { confirm: "Are you sure? Schedule date and time will be erased."} do %>
-                      <i class="fa fa-eye"></i> Activate
-                    <% end %>
+                    <%= link_to t('manager.layout.activate'),change_appearance_manager_discount_path(@discount), class: "btn btn-primary btn-sm", data: { confirm: t('manager.discounts.confirm.deactivate')} %>
                   <% end  %>
                 </div>
                 <div class="btn-group">
-                  <%= link_to "Add products", edit_products_manager_discount_path(@discount), class: "btn btn-primary btn-sm"%>
+                  <%= link_to t('manager.layout.add'), edit_products_manager_discount_path(@discount), class: "btn btn-primary btn-sm"%>
                 </div>
                 <div class="btn-group">
-                  <%= link_to "Edit", edit_manager_discount_path(@discount), class: "btn btn-primary btn-sm pull-right"%>
+                  <%= link_to t('manager.layout.edit'), edit_manager_discount_path(@discount), class: "btn btn-primary btn-sm pull-right"%>
                 </div>
                 <div class="btn-group">
-                  <%= link_to "Destroy", manager_discount_path(@discount), class: "btn btn-danger btn-sm pull-right", method: "delete", data: { confirm: "Are you sure?"} %>
+                  <%= link_to t('manager.layout.delete'), manager_discount_path(@discount), class: "btn btn-danger btn-sm pull-right", method: "delete", data: { confirm: t('manager.discounts.confirm.delete')} %>
                 </div>
               </div>
             </div>

@@ -1,7 +1,7 @@
 <div class="panel-body">
   <div class="row">
     <% @products.each do |product| %>
-      <%= render partial: "product_relevant", locals: { product: product } %>
+      <%= render partial: "product", locals: { product: product } %>
     <% end %>
   </div>
 </div>

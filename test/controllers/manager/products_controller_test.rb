@@ -7,127 +7,134 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
     @odd_product = products(:odd_product)
     sign_in managers(:first) #Login as manager
   end
+  I18n.available_locales.each do |locale|
+    I18n.locale = locale
+    test "should show all products #{locale}" do
+      get manager_products_path locale: locale
+      assert_response :success
+      assert_equal "index", @controller.action_name
+    end
 
-  test "should show all products" do
-    get manager_products_path
-    assert_response :success
-    assert_equal "index", @controller.action_name
-  end
+    test "should show products by category #{locale}" do
+      get manager_products_path(manager_category: @product.category, locale: locale)
+      assert_response :success
+      assert_equal "index", @controller.action_name
+    end
 
-  test "should show products by category" do
-    get manager_products_path(manager_category: @product.category), xhr: true
-    assert_response :success
-    assert_equal "index", @controller.action_name
-    assert_equal "text/javascript", @response.content_type
-  end
+    test "should show visible products #{locale}" do
+      get manager_products_path(visible: true, locale: locale)
+      assert_response :success
+      assert_equal "index", @controller.action_name
+    end
 
-  test "should show visible products" do
-    get manager_products_path(visible: true), xhr: true
-    assert_response :success
-    assert_equal "index", @controller.action_name
-    assert_equal "text/javascript", @response.content_type
-  end
+    test "should show hidden products #{locale}" do
+      get manager_products_path(hidden: true, locale: locale)
+      assert_response :success
+      assert_equal "index", @controller.action_name
+    end
 
-  test "should show hidden products" do
-    get manager_products_path(hidden: true), xhr: true
-    assert_response :success
-    assert_equal "index", @controller.action_name
-    assert_equal "text/javascript", @response.content_type
-  end
+    test "should show archival products #{locale}" do
+      get archival_manager_products_path locale: locale
+      assert_response :success
+      assert_equal "archival", @controller.action_name
+    end
 
-  test "should show archival products" do
-    get archival_manager_products_path
-    assert_response :success
-    assert_equal "archival", @controller.action_name
-  end
+    test "should show product #{locale}" do
+      get manager_product_path(@product, locale: locale)
+      assert_response :success
+      assert_equal "show", @controller.action_name
+    end
 
-  test "should show product" do
-    get manager_product_path(@product)
-    assert_response :success
-    assert_equal "show", @controller.action_name
-  end
+    test "should show new product form #{locale}" do
+      get new_manager_product_path locale: locale
+      assert_response :success
+      assert_equal "new", @controller.action_name
+    end
 
-  test "should show new product form" do
-    get new_manager_product_path
-    assert_response :success
-    assert_equal "new", @controller.action_name
-  end
+    test "should show edit product form #{locale}" do
+      get edit_manager_product_path(@product, locale: locale)
+      assert_response :success
+      assert_equal "edit", @controller.action_name
+    end
 
-  test "should show edit product form" do
-    get edit_manager_product_path(@product)
-    assert_response :success
-    assert_equal "edit", @controller.action_name
-  end
+    test "should create product #{locale}" do
+      assert_difference 'Product.count' do
+        post manager_products_path(locale: locale), params: {
+          product: {
+            title: @product.title,
+            description: @product.description,
+            category_id: @product.category_id,
+            price: @product.price,
+            sizes: @product.sizes
+          }
+        }
+      end
+      assert_redirected_to manager_products_path locale: locale
+      assert_equal (I18n.translate 'manager.products.flash.create.success'), flash[:notice]
+    end
 
-  test "should create product" do
-    assert_difference 'Product.count' do
-      post manager_products_path, params: {
+    test "should not create product if params are missing #{locale}" do
+      assert_no_difference 'Product.count' do
+        post manager_products_path(locale: locale), params: {
+          product: {
+            category_id: @product.category_id
+          }
+        }
+      end
+      assert_equal (I18n.translate 'manager.products.flash.create.failure'), flash[:notice]
+    end
+
+    test "should update product #{locale}" do
+      put manager_product_path(@product,locale: locale), params: {
         product: {
-          title: @product.title,
-          description: @product.description,
-          category_id: @product.category_id,
-          price: @product.price,
-          sizes: @product.sizes
+          title: "new title"
         }
       }
+      assert_equal (I18n.translate 'manager.products.flash.update.success'), flash[:notice]
     end
-    assert_redirected_to manager_products_path
-    assert_equal "Product has been successfully created.", flash[:notice]
-  end
 
-  test "should not create product if params are missing" do
-    assert_no_difference 'Product.count' do
-      post manager_products_path, params: {
+    test "should not update product if validation failed #{locale}" do
+      put manager_product_path(@product,locale: locale), params: {
         product: {
-          category_id: @product.category_id
+          title: ""
         }
       }
+      assert_equal (I18n.translate 'manager.products.flash.update.failure'), flash[:notice]
     end
-    assert_equal "Product wasn't created, please check errors below!", flash[:notice]
-  end
 
-  test "should update product" do
-    put manager_product_path(@product), params: {
-      product: {
-        title: "new title"
-      }
-    }
-    assert_equal "Product has been successfully updated.", flash[:notice]
-  end
-
-  test "should archive and restore product" do
-    get archive_manager_product_path(@product)
-    assert_redirected_to manager_products_path
-    assert_equal "Product #{@product.title} has been archived.", flash[:notice]
-    get archive_manager_product_path(@product)
-    assert_redirected_to archival_manager_products_path
-    assert_equal "Product #{@product.title} has been restored.", flash[:notice]
-  end
-
-  test "should destroy product" do
-    assert_difference 'Product.count', -1 do
-      delete manager_product_path(@odd_product)
+    test "should archive and restore product #{locale}" do
+      get archive_manager_product_path(@product,locale: locale)
+      assert_redirected_to manager_products_path locale: locale
+      assert_equal (I18n.translate 'manager.products.flash.archive.archived'), flash[:notice]
+      get archive_manager_product_path(@product,locale: locale)
+      assert_redirected_to archival_manager_products_path
+      assert_equal (I18n.translate 'manager.products.flash.archive.restored'), flash[:notice]
     end
-    assert_redirected_to archival_manager_products_path
-    assert_equal "Product has been successfully destroyed.", flash[:notice]
-  end
 
-  test "should not destroy product" do
-    assert_no_difference 'Product.count', -1 do
-      delete manager_product_path(@product)
+    test "should destroy product #{locale}" do
+      assert_difference 'Product.count', -1 do
+        delete manager_product_path(@odd_product,locale: locale)
+      end
+      assert_redirected_to archival_manager_products_path locale: locale
+      assert_equal (I18n.translate 'manager.products.flash.destroy.success'), flash[:notice]
     end
-    assert_redirected_to archival_manager_products_path
-    assert_equal "Product can't be destroyed, because of 1 order involved.", flash[:notice]
+
+    test "should not destroy product #{locale}" do
+      assert_no_difference 'Product.count', -1 do
+        delete manager_product_path(@product, locale: locale)
+      end
+      assert_redirected_to archival_manager_products_path locale: locale
+      assert_equal (I18n.translate 'manager.products.flash.destroy.involvement'), flash[:notice]
+    end
+
+    test "should change appearance of product #{locale}" do
+      get change_appearance_manager_product_path(@product, locale: locale)
+      assert_redirected_to manager_products_path locale: locale
+      assert_equal (I18n.translate 'manager.products.flash.appearance.invisible'), flash[:notice]
+
+      get change_appearance_manager_product_path(@product, locale: locale)
+      assert_redirected_to manager_products_path locale: locale
+      assert_equal (I18n.translate 'manager.products.flash.appearance.visible'), flash[:notice]
+    end
   end
-
-  test "should change appearance of product" do
-    get change_appearance_manager_product_path(@product)
-    assert_redirected_to manager_products_path
-    assert_equal "Product '#{@product.title }' has become invisible.", flash[:notice]
-
-    get change_appearance_manager_product_path(@product)
-    assert_redirected_to manager_products_path
-    assert_equal "Product '#{@product.title }' has become visible.", flash[:notice]
-  end
-
 end

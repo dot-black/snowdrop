@@ -81,7 +81,7 @@
 .app-toolbar {
   height: 66px;
   text-align: center;
-  
+
   .material-tabs {
     display: flex;
     flex-flow: row;
@@ -178,4 +178,17 @@
 .pagination > li > a > i {
   line-height: inherit;
   color: #202020;
+}
+
+//Navmenu
+.navmenu {
+  i {
+    color: #202020;
+  }
+  h4 {
+    padding-left: 15px;
+  }
+  h3 {
+    color: #333333 !important;
+  }
 }

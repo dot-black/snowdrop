@@ -1,0 +1,565 @@
+---
+ua:
+  activerecord:
+    errors:
+      messages:
+        record_invalid: 'Виникли помилки: %{errors}'
+        restrict_dependent_destroy:
+          has_one: 'Немлжливо видалити запис, так як існує залежність: %{record}'
+          has_many: 'Немлжливо видалити запис, так як існують залежності: %{record}'
+  date:
+    abbr_day_names:
+    - Нд
+    - Пн
+    - Вт
+    - Ср
+    - Чт
+    - Пт
+    - Сб
+    abbr_month_names:
+    -
+    - січ.
+    - лют.
+    - бер.
+    - квіт.
+    - трав.
+    - черв.
+    - лип.
+    - серп.
+    - вер.
+    - жовт.
+    - лист.
+    - груд.
+    day_names:
+    - неділя
+    - понеділок
+    - вівторок
+    - середа
+    - четвер
+    - п'ятниця
+    - субота
+    formats:
+      default: "%d.%m.%Y"
+      long: "%-d %B %Y"
+      short: "%-d %b"
+    month_names:
+    -
+    - січня
+    - лютого
+    - березня
+    - квітня
+    - травня
+    - червня
+    - липня
+    - серпня
+    - вересня
+    - жовтня
+    - листопада
+    - грудня
+    order:
+    - :day
+    - :month
+    - :year
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        few: близько %{count} годин
+        many: близько %{count} годин
+        one: близько %{count} години
+        other: близько %{count} години
+      about_x_months:
+        few: близько %{count} місяців
+        many: близько %{count} місяців
+        one: близько %{count} місяця
+        other: близько %{count} місяця
+      about_x_years:
+        few: близько %{count} років
+        many: близько %{count} років
+        one: близько %{count} року
+        other: близько %{count} років
+      almost_x_years:
+        one: майже 1 рік
+        few: майже %{count} року
+        many: майже %{count} років
+        other: майже %{count} років
+      half_a_minute: менше хвилини
+      less_than_x_minutes:
+        few: менше %{count} хвилин
+        many: менше %{count} хвилин
+        one: менше %{count} хвилини
+        other: менше %{count} хвилини
+      less_than_x_seconds:
+        few: менше %{count} секунд
+        many: менше %{count} секунд
+        one: менше %{count} секунды
+        other: менше %{count} секунди
+      over_x_years:
+        few: більше %{count} років
+        many: більше %{count} років
+        one: більше %{count} року
+        other: більше %{count} років
+      x_days:
+        few: "%{count} дні"
+        many: "%{count} днів"
+        one: "%{count} день"
+        other: "%{count} днів"
+      x_minutes:
+        few: "%{count} хвилини"
+        many: "%{count} хвилин"
+        one: "%{count} хвилину"
+        other: "%{count} хвилини"
+      x_months:
+        few: "%{count} місяця"
+        many: "%{count} місяців"
+        one: "%{count} місяц"
+        other: "%{count} місяця"
+      x_years:
+        few: "%{count} року"
+        many: "%{count} років"
+        one: "%{count} рік"
+        other: "%{count} року"
+      x_seconds:
+        few: "%{count} секунди"
+        many: "%{count} секунд"
+        one: "%{count} секунду"
+        other: "%{count} секунди"
+    prompts:
+      day: День
+      hour: Годин
+      minute: Хвилин
+      month: Місяць
+      second: Секунд
+      year: Рік
+  errors:
+    format: "%{attribute} %{message}"
+    messages:
+      accepted: потрібно підтвердити
+      blank: не може бути пустим
+      present: потрібно залишити пустим
+      confirmation: не співпадає зі значенням поля %{attribute}
+      empty: не може бути пустим
+      equal_to: може мати лише значення, рівне %{count}
+      even: може мати тільки непарне значення
+      exclusion: має зарезервоване значення
+      greater_than: може мати значення більше %{count}
+      greater_than_or_equal_to: може мати значення більше чи рівне %{count}
+      inclusion: має непередбачене значення
+      invalid: має неправильне значення
+      less_than: може мати значення менше ніж %{count}
+      less_than_or_equal_to: може мати значення менше чи рівне %{count}
+      model_invalid: 'Виникли помилки: %{errors}'
+      not_a_number: не являється числом
+      not_an_integer: не являється цілим числом
+      odd: може мати тільки парне значення
+      required: не може бути відсутнім
+      taken: уже існує
+      too_long:
+        few: занадто великої довжини (не може бути більше ніж %{count} символу)
+        many: занадто великої довжини (не може бути більше ніж %{count} символів)
+        one: занадто великої довжини (не може бути більше ніж %{count} символ)
+        other: занадто великої довжини (не може бути більше ніж %{count} символів)
+      too_short:
+        few: недостатньої довжини (не може бути менше %{count} символу)
+        many: недостатньої довжини (не може бути менше %{count} символів)
+        one: недостатньої довжини (не може бути менше %{count} символа)
+        other: недостатньої довжини (не може бути менше %{count} символів)
+      wrong_length:
+        few: неправильної довжини (може бути довжини рівно %{count} символ)
+        many: неправильної довжини (може бути довжини рівно %{count} символів)
+        one: неправильної довжини (може бути довжини рівно %{count} символ)
+        other: неправильної довжини (може бути довжини рівно %{count} символів)
+      other_than: повинно відрізнятися від %{count}
+    template:
+      body: 'Проблеми виникли з наступними полями:'
+      header:
+        few: "%{model}: не вдалося зберегти через %{count} помилок"
+        many: "%{model}: не вдалося зберегти ь через %{count} помилок"
+        one: "%{model}: не вдалося зберегти  через %{count} помилку"
+        other: "%{model}: не вдалося зберегти  через %{count} помилки"
+  helpers:
+    select:
+      prompt: 'Виберіть: '
+    submit:
+      create: Зберегти %{model}
+      submit: Зберегти %{model}
+      update: Зберегти %{model}
+  number:
+    currency:
+      format:
+        delimiter: " "
+        format: "%n %u"
+        precision: 2
+        separator: ","
+        significant: false
+        strip_insignificant_zeros: false
+        unit: грн.
+    format:
+      delimiter: " "
+      precision: 3
+      separator: ","
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: "%n %u"
+        units:
+          billion:
+            few: мільярдів
+            many: мільярдів
+            one: мільярд
+            other: мільярдів
+          million:
+            few: мільйонів
+            many: мільйонів
+            one: мільйон
+            other: мільйонів
+          quadrillion:
+            few: квадрильйонів
+            many: квадрильйонів
+            one: квадрильйон
+            other: квадрильйонів
+          thousand:
+            few: тисяч
+            many: тисяч
+            one: тисяча
+            other: тисяч
+          trillion:
+            few: трильйонів
+            many: трильйонів
+            one: трильйон
+            other: трильйонів
+          unit: ''
+      format:
+        delimiter: ''
+        precision: 1
+        significant: false
+        strip_insignificant_zeros: false
+      storage_units:
+        format: "%n %u"
+        units:
+          byte:
+            few: байта
+            many: байт
+            one: байт
+            other: байта
+          gb: ГБ
+          kb: КБ
+          mb: МБ
+          tb: ТБ
+    percentage:
+      format:
+        delimiter: ''
+        format: "%n%"
+    precision:
+      format:
+        delimiter: ''
+  support:
+    array:
+      last_word_connector: " и "
+      two_words_connector: " и "
+      words_connector: ", "
+  time:
+    am: утра
+    formats:
+      default: "%d %B %Y, %H:%M:%S"
+      long: "%d %B %Y, %H:%M"
+      short: "%d %b, %H:%M"
+    pm: вечера
+
+#------------CUSTOM------------
+  en_name: English
+  ru_name: Русский
+  ua_name: Українська
+  application_name: "Ari Dar Lingerie"
+  application_name_short: "Ari Dar"
+  application_name_shortest: "Ari"
+  category: "Категорія"
+  language: "Мова"
+  activerecord:
+    models:
+      category: "Категорію"
+      discount: "Знижку"
+      line_item: "Позицію"
+      manager: "Менеджера"
+      order: "Замовлення"
+      product: "Товар"
+      user_information: "Інформацію"
+      user: "Клієнта"
+    attributes:
+      category:
+        title: "Заголовок"
+        slug: "Семантичний URL"
+        image: "Світлина"
+      discount:
+        title: "Заголовок"
+        description: "Опис"
+        value: "Значення"
+        start_at: "Початок"
+        end_at: "Кінець"
+      line_item:
+        quantity: "Кількість"
+        size: "Розмір"
+        actual_price: "Фактична ціна"
+        discount: "Знижка"
+      order:
+        name: "Ім'я"
+        comment: "Коментар"
+        amount: "Кількість"
+        status: "Статус"
+        locale: "Мова"
+        status: "Статус"
+        delay: "Затримка"
+        created: "Створено"
+        updated_at: "Оновлено"
+        statuses:
+          pending: "очікує"
+          accepted: "прийняте"
+          declined: "відхилене"
+          completed: "виконане"
+          all: "всі"
+      product:
+        title: "Заголовок"
+        description: "Опис"
+        price: "Ціна"
+        images: "Світлини"
+        priority: "Пріоритет"
+        size: "Розміри"
+        category: "Категорія"
+        discount: "Знижка"
+        sizes:
+          one: "Розмір"
+          other: "Розміри"
+          bra: "Бюст"
+          standard: "Труси"
+        priorities:
+          hi: "Вис."
+          low: "Низ."
+          mid: "Сер."
+      user_information:
+        name: "Ім'я"
+        telephone: "Телефон"
+      user:
+        email: "Ел. пошта"
+  store:
+    index:
+      shop_now: "Купити"
+  products:
+    index:
+      item:
+        one: "позиція"
+        other: "позиції"
+    show:
+      add_to_cart: "Додати в кошик"
+      description: "Опис"
+      size: ""
+      bra: "Розмір бюстгальтера"
+      standard: "Розмір трусів"
+    flash:
+      index:
+        missing_category: "Категорія має бути присутня!"
+        unavailable_category: "Категорія недоступна"
+      show:
+        missing_product: "Не вдалося знайти такий продукт!"
+  carts:
+    show:
+      your_cart: 'Ваш кошик'
+      item:
+        one: "позиція"
+        other: "позиції"
+      size: 'Розмір'
+      total: 'Всього'
+      checkout: 'Оформити'
+      your: 'Ваш'
+      is_empty: "пустий"
+      back_shoping: "Продовжити"
+  user_informations:
+    new:
+      headline: "Введіть свою інформацію"
+      change_email: "Ввести іншу адресу електронної пошти"
+      back_to_order: "чи повернутися до замовлення"
+      continue: 'Продовжити'
+  users:
+    new:
+      headline: "Введіть свою адресу електронної пошти"
+      change_information: "Ввести іншу інформацію"
+      back_to_order: "чи повернутися до замовлення"
+      continue: 'Продовжити'
+  orders:
+    new:
+      headline: "Залиште свій коментар"
+      change_email: "Ввести іншу адресу електронної пошти"
+      change_information: "чи інформацію"
+      place_order: "Замовити"
+    create:
+      successful_order: "Дякуємо за ваше замовлення!"
+      back_shopping: "Повернутися"
+    flash:
+      new:
+        empty_cart: "Будь ласка, додайте щось в кошик."
+      create:
+        failure: "Не вдалося створити замовлення, будь ласка, заповніть всі поля корректно."
+  line_items:
+    flash:
+      create:
+        success: "Товар доданий в кошик"
+        failure: "Товар не був доданий"
+      update:
+        failure: "Не вдалось оновити позицію!"
+      destroy:
+        failure: "Не вдалось видалити позицію!"
+  manager:
+    layout:
+      manager: "Менеджер"
+      welcome: "Ласкаво просимо до"
+      logout: "Вийти"
+      dashboard: "Статистика"
+      categories: "Категорії"
+      products: "Товари"
+      archival: "Архівні"
+      orders: "Замовлення"
+      client: "Клієнт"
+      discounts: "Знижки"
+      users: "Клієнти"
+      edit: "Редагувати"
+      new: "Додати"
+      delete: "Видалити"
+      restore: "Відновити"
+      all: "Всі"
+      list: "Список"
+      detailed: "Детально"
+      hide: "Приховати"
+      hidden: "Приховані"
+      release: "Запустити"
+      released: "Запущені"
+      archive: "Архів."
+      activate: Активувати"
+      deactivate: "Деактивувати"
+      add: "Додати"
+      always: "Завжди"
+      never: "Ніколи"
+      active: "Активна"
+      update: "Оновити"
+      clear: "Очистити"
+      search: "Пошук"
+      show: "Показати"
+      none: "Немає"
+      schedule: "Розклад"
+      no_information: "Немає інформації"
+      true_yes: "Так"
+      false_no: "Ні"
+      currently_actual: "На даний момент актуальна"
+      was_actual: "Була актуальна"
+      till: "з"
+      from: "до"
+      orders_statistics: "Статистика замовлень"
+      popular_categories: "Популярні категорії"
+      popular_sizes: "Популярні розміри"
+      total_count: "Загальна кількість"
+      orders_count: "Кількість замовлень"
+      category: "Категорія"
+      info: "Інформація"
+      dependencies: "Залежності"
+      count: "Кількість"
+    categories:
+      flash:
+        create:
+          success: "Категорія успішно створена."
+          failure: "Категорія не була створена, погляньте на помилки нижче!"
+        update:
+          success: "Категорія успішно оновлена."
+          failure: "Категорія не була оновлена, погляньте на помилки нижче!"
+        destroy:
+          success: "Категорія успішно видалена."
+          failure: "Категорія не була видалена!"
+          involvement: "Категорія не може бути видалена, адже до неї прив'язані замовлення чи товари'."
+        change_appearance:
+          visible: "Категорія стала видимою для клієнта."
+          invisible: "Категорія стала невидимою для клієнта."
+          failure: "Не вдалось змінити відображення категорії!"
+      confirm:
+        delete: "Ви впевнені? Всі продукти даної категорії будуть також видалені."
+        make_visible: "Ви впевнені, що хочете зробити категорію невидимою?"
+        make_invisible: "Ви впевнені, що хочете зробити категорію видимою?"
+    products:
+      flash:
+        create:
+          success: "Товар успішно створений."
+          failure: "Товар не був створений, погляньте на помилки нижче!"
+        update:
+          success: "Товар успішно оновлений."
+          failure: "Товар не був оновлений, погляньте на помилки нижче!"
+        destroy:
+          success: "Товар успішно видалений."
+          failure: "Товар не був видалений!"
+          involvement: "Товар не може бути видалений, адже до нього прив'язані замовлення'."
+        appearance:
+          visible: "Товар став видимим для клієнта."
+          invisible: "Товар став невидимим для клієнта."
+          failure: "Не вдалось змінити відображення товару!"
+        archive:
+          archived: "Товар доданий в архів."
+          restored: "Товар відновлений."
+          failure:  "Не вдалося додати до/відновити з архіву!"
+        remove_single_image:
+          success: "Світлина успішно видалена з товару."
+          failure: "Не вдалося видалити світлину!"
+    orders:
+      flash:
+        index:
+          prohibited: "Даний параметр статус заборонений!"
+          absent: "Параметр статус повинен бути присутній!"
+        update:
+          success: "Статус замовлення було успішно змінено."
+          failure: "Зміна статусу замовлення завершилась помилкою!"
+    discounts:
+      flash:
+        create:
+          success: "Знижка успішно створена."
+          failure: "Знижка не була створена, погляньте на помилки нижче!"
+        update:
+          success: "Знижка успішно оновлена."
+          failure: "Знижка не була оновлена, погляньте на помилки нижче!"
+        destroy:
+          success: "Знижка успішно видалена."
+          failure: "Знижка не була видалена!"
+          involvement: "Знижка не може бути видалена, адже до неї прив'язані замовлення чи товари'."
+        change_appearance:
+          visible: "Знижка стала активною."
+          invisible: "Знижка більше не активна."
+          failure: "Не вдалось змінити відображення знижки!"
+      confirm:
+        activate: "Ви впевнені? Розклад для початку та кінця буде змінено"
+        deactivate: "Ви впевнені? Розклад для початку та кінця буде видалено."
+        delete: "Вы впевнені, що хочете видалити знижку?"
+  order_mailer:
+    client_information:
+      subject: "ARI DAR LINGERIE замовлення"
+      introduction: "Дякуємо за ваше замовлення!"
+      main_part: "Наш менеджер скоро зв'яжеться з вами для підтвердження замовлення."
+      details: "Деталі вашого замовлення:"
+      size: "Розмір"
+      total: "Сума"
+      visit: "Заходьте на наш"
+      site: "сайт"
+      visit_us: "Заходите до нас:"
+    client_confirmation:
+      subject: "ARI DAR LINGERIE замовлення"
+      introduction: "Шановний клієнт ARI DAR LINGERIE,"
+      main_part: "Вы отримали цього листа, тому що статус вашого замовлення змінився."
+      details: "Деталі вашого замовлення нижче:"
+      your_order_is: "Ваше замовлення"
+      size: "Розмір"
+      total: "Сума"
+      visit: "Заходьте на наш"
+      site: "сайт"
+      visit_us: "Заходьте до нас:"
+    manager_information:
+      subject: "ARI DAR LINGERIE замовлення"
+      comment: "Коментар"
+      total: "Сума"
+      view_in_browser: "Відкрити в браузері"
+      order: "Замовлення"
+      updated: "Оновлено"
+      status: "Статус"
+      info: "Інформація"
+      link: "Посилання"

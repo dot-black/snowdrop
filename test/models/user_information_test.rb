@@ -34,6 +34,9 @@ class UserInformationTest < ActiveSupport::TestCase
     info.telephone = "534543453453443500000"
     assert info.invalid?
     info.errors[:telephone]
+    info.telephone = "rfcs;ex'"
+    assert info.invalid?
+    info.errors[:telephone]
     info.telephone = "380631001010"
     assert info.valid?
   end

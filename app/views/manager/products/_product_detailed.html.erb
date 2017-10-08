@@ -31,13 +31,13 @@
                       <span class="price-old"><%= number_to_currency product.price %> </span>
                     <% else %>
                       <%= number_to_currency product.discount_price %>
-                    <% end %>  
+                    <% end %>
                   </h2>
                 </div>
 
                 <hr>
 
-                <h4>Product description</h4>
+                <h4><%= t 'activerecord.attributes.product.description' %></h4>
 
                 <div class="small text-muted">
                   <%= product.description %>
@@ -46,45 +46,43 @@
                 <hr>
 
                 <dl class="small m-t-md">
-                  <dt>Category</dt>
+                  <dt><%= t 'activerecord.attributes.product.category' %></dt>
                   <dd>
                     <%= product.category.title %>
 
                   </dd>
                   <br>
-                  <dt>Avalible sizes</dt>
+                  <dt><%= t 'activerecord.attributes.product.size' %></dt>
                   <dd>
-                    <%= "Bra: #{product.sizes["bra"].to_a.join(" ")}" if product.sizes["bra"].present? %><br>
-                    <%= "Standard: #{product.sizes["standard"].to_a.join(" ")}" if product.sizes["standard"].present? %>
+                    <%= "#{t('activerecord.attributes.product.sizes.bra').capitalize}: #{product.sizes["bra"].to_a.join(" ")}" if product.sizes["bra"].present? %><br>
+                    <%= "#{t('activerecord.attributes.product.sizes.standard').capitalize}: #{product.sizes["standard"].to_a.join(" ")}" if product.sizes["standard"].present? %>
                   </dd>
                   <br>
-                  <dt>Priority</dt>
-                  <dd> <%= product.priority.upcase %> </dd>
+                  <dt><%= t 'activerecord.attributes.product.priority' %></dt>
+                  <dd><%= t "activerecord.attributes.product.priorities.#{product.priority}" %></dd>
                   <br>
-                  <dt>Discount</dt>
+                  <dt><%= t 'activerecord.attributes.product.discount' %></dt>
                   <dd>
-                    <%= product.discount ? product.discount.title : 'None'  %><br>
-                    <%= product.discount and product.discount.actual ? "Currently actual" : "Was actual"  %>
-                    <%= " from #{product.discount.start_at.strftime("%d-%m-%Y %H:%M")}" if product.discount and product.discount.start_at %>
-                    <%= " till  #{product.discount.end_at.strftime("%d-%m-%Y  %H:%M")}" if product.discount and product.discount.end_at %>
+                    <%= product.discount ? product.discount.title : t('manager.layout.none') %><br>
+                    <%= product.discount and product.discount.actual ? t('manager.layout.currently_actual') : t('manager.layout.was_actual') %>
+                    <%= " #{t('manager.layout.from')} #{product.discount.start_at.strftime("%d-%m-%Y %H:%M")}" if product.discount and product.discount.start_at %>
+                    <%= " #{t('manager.layout.till')}  #{product.discount.end_at.strftime("%d-%m-%Y  %H:%M")}" if product.discount and product.discount.end_at %>
                   </dd>
                 </dl>
 
                 <div>
                   <hr>
                   <div class="btn-group">
-                    <% if product.visible %>
-                    <%= link_to change_appearance_manager_product_path(product), class: "btn btn-warning btn-sm" do %>
-                      <i class="fa fa-eye-slash"></i> Hide
-                    <% end %>
-                    <% else  %>
-                      <%= link_to change_appearance_manager_product_path(product), class: "btn btn-primary btn-sm" do %>
-                        <i class="fa fa-eye"></i> Release
-                      <% end %>
+                    <% unless product.archive %>
+                      <% if product.visible %>
+                      <%= link_to t('manager.layout.hide'), change_appearance_manager_product_path(product), class: "btn btn-warning btn-sm"%>
+                      <% else  %>
+                        <%= link_to t('manager.layout.release'), change_appearance_manager_product_path(product), class: "btn btn-primary btn-sm"%>
+                      <% end  %>
                     <% end  %>
                   </div>
                   <div class="btn-group">
-                    <%= link_to "Edit", edit_manager_product_path(product), class: "btn btn-primary btn-sm"%>
+                    <%= link_to t('manager.layout.edit'), edit_manager_product_path(product), class: "btn btn-primary btn-sm"%>
                   </div>
                 </div>
               </div>

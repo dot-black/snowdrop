@@ -1,1 +1,1 @@
-<%= "(#{pluralize @line_items.count, 'item'})" %>
+<%= @line_items.count %> <%= t 'carts.show.item', count: @line_items.count %>

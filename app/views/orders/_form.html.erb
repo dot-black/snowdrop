@@ -8,23 +8,24 @@
 <div class="order-form">
   <div class="order-checkout">
 
-    <%= label_tag :name %>
+    <%= label_tag t 'activerecord.attributes.user_information.name' %>
     <br>
     <%= content_tag :p, @user_information.name %>
     <br>
-    <%= label_tag :email %>
+    <%= label_tag t 'activerecord.attributes.user.email' %>
     <br>
     <%= content_tag :p, @user.email %>
     <br>
-    <%= label_tag :telephone %>
+    <%= label_tag t 'activerecord.attributes.user_information.telephone'%>
     <br>
     <%= content_tag :p, @user_information.telephone %>
     <br>
     <%= form_for @order do |form| %>
       <%= form.label :comment %>
       <%= form.text_area :comment, id: :order_comment %>
+      <%= form.hidden_field :locale, value: I18n.locale %>
       <div class="order-submit-button">
-          <%= form.submit "place order", class: "material-button" %>
+          <%= form.submit t('orders.new.place_order'), class: "material-button" %>
       </div>
     <% end %>
   </div>
