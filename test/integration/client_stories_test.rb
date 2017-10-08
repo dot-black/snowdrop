@@ -1,4 +1,5 @@
 require 'test_helper'
+require 'sidekiq/testing/inline'
 
 class ClienStoriesTest < ActionDispatch::IntegrationTest
   fixtures :products
