@@ -1,22 +1,15 @@
-<% if @user_information.errors.any? %>
-  <div id="toast-container">
-    <% @user_information.errors.full_messages.each do |message| %>
-      <%= content_tag :div, message, class: 'toast' %>
-    <% end %>
-  </div>
-<% end %>
-
+<%= render partial: "layouts/error", locals: { object: @user_information } if @user_information.errors.any? %>
 <div class="order-form">
   <div class="order-checkout">
     <%= label_tag t 'activerecord.attributes.user.email' %>
     <br>
-    <%= content_tag :p, @user.email %>
+    <p><%= @user.email %></p>
     <br>
     <%= form_for @user_information do |form| %>
       <%= form.label :name %>
       <%= form.text_field :name, required: true %>
       <%= form.label :telephone %>
-      <%= form.telephone_field :telephone, required: true %>
+      <%= form.telephone_field :telephone, class:"phone_ukraine", required: true %>
       <div class="order-submit-button">
         <%= form.submit "#{t 'user_informations.new.continue'}", class: "material-button" %>
       </div>

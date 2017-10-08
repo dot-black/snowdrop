@@ -33,7 +33,7 @@
               <h4><%= t 'manager.layout.products' %></h4>
               <div class="small text-muted">
                 <% if @discount.products.present?  %>
-                  <%= collapse_button "Show", "btn btn-xs btn-outline btn-primary", "products-list", @discount.products do |item| %>
+                  <%= collapse_button t('manager.layout.show'), "btn btn-xs btn-outline btn-primary", "products-list", @discount.products do |item| %>
                     <%= link_to item.title, manager_product_path(item) %>
                   <% end %>
                 <% else %>
@@ -51,7 +51,7 @@
                   <% end  %>
                 </div>
                 <div class="btn-group">
-                  <%= link_to t('manager.layout.add'), edit_products_manager_discount_path(@discount), class: "btn btn-primary btn-sm"%>
+                  <%= link_to t('manager.layout.products'), edit_products_manager_discount_path(@discount), class: "btn btn-primary btn-sm"%>
                 </div>
                 <div class="btn-group">
                   <%= link_to t('manager.layout.edit'), edit_manager_discount_path(@discount), class: "btn btn-primary btn-sm pull-right"%>

@@ -73,20 +73,13 @@
                           <th><%= t 'manager.layout.count' %></th>
                         <tr>
                           <td>
-                            <%= content_tag :span, t('manager.layout.products')%>
-                            <%= content_tag :br %>
+                            <span><%=t('manager.layout.products')%></span>
                             <% if @category_products.present?  %>
-                              <%= button_tag t('manager.layout.list'), class: "btn btn-xs btn-outline btn-primary", data:{toggle: "collapse", target: "#products-list"} %>
+                              <br>
+                              <br>
                               <%= link_to t('manager.layout.all'), manager_products_path(manager_category: @category), class: "btn btn-xs btn-outline btn-warning" %>
-                              <%= content_tag :br %>
-                              <%= content_tag :ul, id: "products-list", class: "list-group collapse" do %>
-                                <% @category_products.each do |product| %>
-                                  <%= content_tag :li, class: "list-group-item" do %>
-                                    <%= link_to manager_product_path(product) do %>
-                                      <%= product.title  %>
-                                    <% end %>
-                                  <% end %>
-                                <% end %>
+                              <%= collapse_button t('manager.layout.list'), "btn btn-xs btn-outline btn-primary", "products-list", @category_products do |item| %>
+                                <%= link_to item.title, manager_product_path(item)%>
                               <% end %>
                             <% end %>
                           </td>
@@ -95,19 +88,12 @@
                         </tr>
                         <tr>
                           <td>
-                            <%= content_tag :span, t('manager.layout.orders') %>
-                            <%= content_tag :br %>
+                            <span><%=t('manager.layout.orders') %></span>
+                            <br>
+                            <br>
                             <% if @category_products.present?  %>
-                              <%= button_tag t('manager.layout.list'), class: "btn btn-xs btn-outline btn-primary", data:{toggle: "collapse", target: "#orders-list"} %>
-                              <%= content_tag :br %>
-                              <%= content_tag :ul, id: "orders-list", class: "list-group collapse" do %>
-                                <% @category_orders.each do |order| %>
-                                  <%= content_tag :li, class: "list-group-item" do %>
-                                    <%= link_to manager_order_path(order) do %>
-                                      <%= "Order##{order.id}: #{order.status}" %>
-                                    <% end %>
-                                  <% end %>
-                                <% end %>
+                              <%= collapse_button t('manager.layout.list'), "btn btn-xs btn-outline btn-primary", "orders-list", @category_orders do |item| %>
+                                <%= link_to "#{t 'manager.layout.order'}##{item.id}: #{t "activerecord.attributes.order.statuses.#{item.status}"}", manager_order_path(item)%>
                               <% end %>
                             <% end %>
                           </td>

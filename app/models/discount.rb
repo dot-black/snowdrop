@@ -8,8 +8,8 @@ class Discount < ApplicationRecord
     if start_at and end_at
       Time.now.between? start_at, end_at
     elsif start_at or end_at
-      return start_at < Time.now if start_at
-      return end_at   > Time.now if end_at
+      start_at < Time.now if start_at
+      end_at   > Time.now if end_at
     else
       true
     end

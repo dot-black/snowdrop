@@ -1,12 +1,5 @@
 ---
 ua:
-  activerecord:
-    errors:
-      messages:
-        record_invalid: 'Виникли помилки: %{errors}'
-        restrict_dependent_destroy:
-          has_one: 'Немлжливо видалити запис, так як існує залежність: %{record}'
-          has_many: 'Немлжливо видалити запис, так як існують залежності: %{record}'
   date:
     abbr_day_names:
     - Нд
@@ -276,6 +269,13 @@ ua:
   category: "Категорія"
   language: "Мова"
   activerecord:
+    errors:
+      messages:
+        invalid_price: "неправильна, значення повинно бути не менше ніж 0.01 або рівне"
+        record_invalid: "Виникли помилки: %{errors}"
+        restrict_dependent_destroy:
+          has_one: 'Немлжливо видалити запис, так як існує залежність: %{record}'
+          has_many: 'Немлжливо видалити запис, так як існують залежності: %{record}'
     models:
       category: "Категорію"
       discount: "Знижку"
@@ -460,6 +460,7 @@ ua:
       info: "Інформація"
       dependencies: "Залежності"
       count: "Кількість"
+      order: "Замовлення"
     categories:
       flash:
         create:

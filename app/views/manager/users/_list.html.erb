@@ -22,7 +22,7 @@
                   <td><%= user.user_informations.last.telephone if user.user_informations.present?  %></td>
                   <td class="unselectable">
                     <%= link_to manager_user_path(user) do %>
-                        <%= content_tag :span, t('manager.layout.show'), class: "label label-success col-xs-12 col-sm-12" %>
+                        <span class="label label-success col-xs-12 col-sm-12"><%= t 'manager.layout.show' %></span>
                     <% end %>
                   </td>
                 </tr>

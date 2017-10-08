@@ -1,12 +1,5 @@
 ---
 ru:
-  activerecord:
-    errors:
-      messages:
-        record_invalid: 'Возникли ошибки: %{errors}'
-        restrict_dependent_destroy:
-          has_one: 'Невозможно удалить запись, так как существует зависимость: %{record}'
-          has_many: 'Невозможно удалить запись, так как существуют зависимости: %{record}'
   date:
     abbr_day_names:
     - Вс
@@ -276,6 +269,13 @@ ru:
   category: "Категория"
   language: "Язык"
   activerecord:
+    errors:
+      messages:
+        invalid_price: "неверная, значение должно быть не меньше чем 0.01 или равное"
+        record_invalid: "Возникли ошибки: %{errors}"
+        restrict_dependent_destroy:
+          has_one: 'Невозможно удалить запись, так как существует зависимость: %{record}'
+          has_many: 'Невозможно удалить запись, так как существуют зависимости: %{record}'
     models:
       category: "Категорию"
       discount: "Скидку"
@@ -460,6 +460,7 @@ ru:
       info: "Информация"
       dependencies: "Зависимости"
       count: "Количество"
+      order: "Заказ"
     categories:
       flash:
         create:

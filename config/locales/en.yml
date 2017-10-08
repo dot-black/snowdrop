@@ -1,12 +1,5 @@
 ---
 en:
-  activerecord:
-    errors:
-      messages:
-        record_invalid: "Validation failed: %{errors}"
-        restrict_dependent_destroy:
-          has_one: "Cannot delete record because a dependent %{record} exists"
-          has_many: "Cannot delete record because dependent %{record} exist"
   date:
     abbr_day_names:
     - Sun
@@ -222,6 +215,13 @@ en:
   category: "Category"
   language: "Language"
   activerecord:
+    errors:
+      messages:
+        invalid_price: "incorrect, please enter a value at least greater then 0.01 or equal one"
+        record_invalid: "Validation failed: %{errors}"
+        restrict_dependent_destroy:
+          has_one: "Cannot delete record because a dependent %{record} exists"
+          has_many: "Cannot delete record because dependent %{record} exist"
     models:
       category: "Category"
       discount: "Discount"
@@ -404,6 +404,7 @@ en:
       info: "Info"
       dependencies: "Dependencies"
       count: "Count"
+      order: "Order"
     categories:
       flash:
         create:

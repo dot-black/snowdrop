@@ -19,13 +19,10 @@
           <strong><%= t 'activerecord.attributes.user_information.name' %>: </strong>
           <% if @user.user_informations.present?%>
             <%= @user.user_informations.last.name %>
-            <%= button_tag t('manager.layout.list'), class: "btn btn-xs btn-outline btn-primary", data:{toggle: "collapse", target: "#names-list"} if @user.user_informations.size > 1%>
-            <%= content_tag :br %>
-            <%= content_tag :ul, id: "names-list", class: "list-group collapse" do %>
-              <% @user.user_informations.each do |info| %>
-                <%= content_tag :li, class: "list-group-item" do %>
-                    <%= info.name %>
-                <% end %>
+            <% if @user.user_informations.size > 1 %>
+              <br>
+              <%= collapse_button t('manager.layout.show'), "btn btn-xs btn-outline btn-primary", "names-list", @user.user_informations do |item| %>
+                <%= item.name %>
               <% end %>
             <% end %>
           <% end %>
@@ -37,13 +34,10 @@
           <strong><%= t 'activerecord.attributes.user_information.telephone' %>: </strong>
           <% if @user.user_informations.present? %>
             <%= @user.user_informations.last.telephone %>
-            <%= button_tag t('manager.layout.list'), class: "btn btn-xs btn-outline btn-primary", data:{toggle: "collapse", target: "#telephones-list"} if @user.user_informations.size > 1%>
-            <%= content_tag :br %>
-            <%= content_tag :ul, id: "telephones-list", class: "list-group collapse" do %>
-              <% @user.user_informations.each do |info| %>
-                <%= content_tag :li, class: "list-group-item" do %>
-                    <%= info.telephone %>
-                <% end %>
+            <% if @user.user_informations.size > 1 %>
+            <br>
+              <%= collapse_button t('manager.layout.show'), "btn btn-xs btn-outline btn-primary", "telephones-list", @user.user_informations do |item| %>
+                <%= item.telephone %>
               <% end %>
             <% end %>
           <% end %>

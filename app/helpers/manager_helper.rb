@@ -66,4 +66,8 @@ module ManagerHelper
       end
     end
   end
+
+  def time_delay created_at
+    time_ago_in_words(Time.now - (Time.now - created_at.to_time).seconds)
+  end
 end
