@@ -88,18 +88,14 @@
                 </div>
               </div>
 
-              <div class="field">
                 <div class="form-group">
                   <%= form.label :images, class:"col-sm-2 col-lg-1 control-label text-left" %>
-                  <div class="col-sm-10 col-lg-11">
-                    <div class="row" id="product-image-preview">
-                      <%= render "product_image_preview"%>
-                    </div>
-                    <br>
+                  <div class="col-sm-10 col-lg-11" id="product-image-preview">
+                    <%= render "product_image_preview"%>
+                    <br><br>
                     <%= form.file_field :images, multiple: true, id: "manager-product-images-upload" %>
                   </div>
                 </div>
-              </div>
             </fieldset>
 
             <br>

@@ -461,6 +461,7 @@ ua:
       dependencies: "Залежності"
       count: "Кількість"
       order: "Замовлення"
+      visible: "Запущені"
     categories:
       flash:
         create:

@@ -461,6 +461,7 @@ ru:
       dependencies: "Зависимости"
       count: "Количество"
       order: "Заказ"
+      visible: "Запущеные"
     categories:
       flash:
         create:

@@ -1,12 +1,12 @@
 <%= form_for [:manager, @order], method: "put" do |f| %>
-<div class="ibox-title">
-  <div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center form-group">
-      <stong><%= t 'activerecord.attributes.order.status' %>:</strong>
-        <%= select_tag "order[status]", options_for_select(Order.statuses.keys.map{|key| [t("activerecord.attributes.order.statuses.#{key}"),key]}), class:'form-control m-b'%>
+  <div class="ibox-title">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center form-group">
+        <stong><%= t 'activerecord.attributes.order.status' %>:</strong>
+          <%= select_tag "order[status]", options_for_select(Order.statuses.keys.map{|key| [t("activerecord.attributes.order.statuses.#{key}"),key]}), class:'form-control m-b'%>
+      </div>
     </div>
   </div>
-</div>
 
   <div class="ibox-content">
     <div class="row">
@@ -82,8 +82,8 @@
             <strong><%= t 'activerecord.attributes.order.locale' %>: </strong><%=@order.locale.upcase %>
           </div>
         </div>
-        </div>
       </div>
+
     </div>
     <br>
     <div class="row">
@@ -96,6 +96,4 @@
     </div>
     <br>
   </div>
-
-
 <% end %>

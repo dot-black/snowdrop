@@ -405,6 +405,7 @@ en:
       dependencies: "Dependencies"
       count: "Count"
       order: "Order"
+      visible: "Visible"
     categories:
       flash:
         create:

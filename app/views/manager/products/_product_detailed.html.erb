@@ -74,7 +74,7 @@
                   <div class="btn-group">
                     <% unless product.archive %>
                       <% if product.visible %>
-                      <%= link_to t('manager.layout.hide'), change_appearance_manager_product_path(product), class: "btn btn-warning btn-sm"%>
+                        <%= link_to t('manager.layout.hide'), change_appearance_manager_product_path(product), class: "btn btn-warning btn-sm"%>
                       <% else  %>
                         <%= link_to t('manager.layout.release'), change_appearance_manager_product_path(product), class: "btn btn-primary btn-sm"%>
                       <% end  %>

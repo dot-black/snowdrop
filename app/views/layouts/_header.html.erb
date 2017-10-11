@@ -1,6 +1,6 @@
-<nav id="myNavmenu" class="navmenu navmenu-default navmenu-fixed-left offcanvas" role="navigation">
+<nav id="mobileNavMenu" class="navmenu navmenu-default navmenu-fixed-left offcanvas" role="navigation">
 
-  <%= link_to "#", data:{ toggle: "offcanvas", target: "#myNavmenu", canvas: "body"}, class: "navmenu-brand" do %>
+  <%= link_to "#", data:{ toggle: "offcanvas", target: "#mobileNavMenu", canvas: "body"}, class: "navmenu-brand" do %>
     <i class="visible-xs material-icons md-24 pull-left">arrow_back</i>
   <% end %>
   <%= link_to store_path, class: "navmenu-brand" do %>
@@ -33,7 +33,7 @@
         <i class="material-icons md-24 pull-left">arrow_back</i>
       <% end %>
     <% else %>
-      <%= link_to "#", data:{ toggle: "offcanvas", target: "#myNavmenu", canvas: "body"} do %>
+      <%= link_to "#", data:{ toggle: "offcanvas", target: "#mobileNavMenu", canvas: "body"} do %>
         <i class="visible-xs material-icons md-24 pull-left">menu</i>
       <% end %>
       <% I18n.available_locales.each do |locale| %>

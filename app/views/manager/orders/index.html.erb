@@ -8,15 +8,18 @@
   </div>
 </div>
 <div class="tabs-container">
-  <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 manager-orders-filter">
-    <%= render 'manager_orders_filter' %>
-  </div>
-  <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 pull-right" >
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 manager-orders-filter">
+      <%= render 'manager_orders_filter' %>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 pull-right" >
       <%= form_tag manager_orders_path, class: "form-group search-form input-group", method: :get, remote: true do  %>
-          <%= hidden_field_tag :status, @current_status %>
-          <%= text_field_tag :search_query, nil, class: "form-control", placeholder: t('manager.layout.search'), autofocus: true %>
-          <span class="input-group-btn"><%= button_tag t('manager.layout.clear'), id: "clear_search", class: "btn btn-default" %></span>
+        <%= hidden_field_tag :status, @current_status %>
+        <%= text_field_tag :search_query, nil, class: "form-control", placeholder: t('manager.layout.search'), autofocus: true %>
+        <span class="input-group-btn"><%= button_tag t('manager.layout.clear'), id: "clear_search", class: "btn btn-default" %></span>
       <% end %>
+
+    </div>
   </div>
   <div class="orders-list">
     <%= render 'list' %>
