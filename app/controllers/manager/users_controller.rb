@@ -4,16 +4,7 @@ class Manager::UsersController < ApplicationController
   layout 'managers/dashboard'
 
   def index
-    @search_query = params[:search_query]
-    @users = if @search_query.present?
-      User.joins(:user_informations).where(
-        "lower(users.email) like lower('#{@search_query}%')
-        or user_informations.telephone like '#{@search_query}%'
-        or lower(user_informations.name) like lower('#{@search_query}%')"
-      ).page params[:page]
-    else
-      User.all.page params[:page]
-    end
+    @users = User.search_by_name_or_email_or_telephone(params[:search_query]).page params[:page]
     respond_to do |format|
       format.html
       format.js

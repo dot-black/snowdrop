@@ -6,15 +6,9 @@ class Manager::ProductsController < ApplicationController
   layout 'managers/dashboard'
 
   def index
-    @current_category = "all"
-    @products = Product.relevant.page params[:page]
-    _filtering_params(params).each do |key, value|
-      if key.present?
-        @products =  @products.public_send(key,value).page params[:page]
-        @current_category = key
-        @current_id = value
-      end
-    end
+    _set_categories
+    _fetch_current_category if params[:manager_category].present?
+    @products = Product.relevant.filter(_filtering_params).page
     respond_to do |format|
       format.html
       format.js
@@ -116,7 +110,7 @@ class Manager::ProductsController < ApplicationController
       params.require(:product).permit(:title, :description, :price, :priority, :index, :category_id, sizes:[bra:[], panties:[], standard:[]])
     end
 
-    def _filtering_params(params)
+    def _filtering_params
       params.slice(:visible, :hidden, :manager_category)
     end
 
@@ -130,6 +124,14 @@ class Manager::ProductsController < ApplicationController
 
     def _set_product_orders
       @product_orders = Order.find(LineItem.where(product_id: @product.id).map(&:order_id))
+    end
+
+    def _fetch_current_category
+      @current_category = Category.find_by_id params[:manager_category]
+    end
+
+    def _set_categories
+      @categories = Category.all
     end
 
 end

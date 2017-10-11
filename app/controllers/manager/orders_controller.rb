@@ -9,17 +9,7 @@ class Manager::OrdersController < ApplicationController
       redirect_to manager_dashboard_path
     end
     @current_status = params[:status]
-    @search_query = params[:search_query]
-
-    @orders = if @search_query.present?
-      Order.by_status(params[:status]).joins(:user).joins(:user_information).where(
-        "lower(users.email) like lower('#{@search_query}%')
-        or lower(user_informations.name) like lower('#{@search_query}%')
-        or user_informations.telephone like '#{@search_query}%' "
-      ).page params[:page]
-    else
-      Order.by_status(params[:status]).page params[:page]
-    end
+    @orders = Order.filter_by_status(@current_status).search_by_name_or_email_or_telephone(params[:search_query]).page params[:page]
 
     respond_to do |format|
       format.html
@@ -42,7 +32,7 @@ class Manager::OrdersController < ApplicationController
         format.html { render :edit }
         flash.now.notice = (t 'manager.orders.flash.update.failure')
       end
-    end  
+    end
   end
 
   # def destroy

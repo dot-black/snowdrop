@@ -1,4 +1,5 @@
 class Product < ApplicationRecord
+  include Filterable
   attribute :description
   enum size: {
      standard: [ "XS", "S", "M", "L", "XL"],

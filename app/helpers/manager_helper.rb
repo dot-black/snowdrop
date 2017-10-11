@@ -41,17 +41,6 @@ module ManagerHelper
     Order.where(status: 'pending').count
   end
 
-  def products_categories_links
-    links_hash = {
-      all: manager_products_path,
-      visible: manager_products_path(visible: "true"),
-      hidden: manager_products_path(hidden: "true")
-    }
-    Category.all.each do |category|
-      links_hash[category.slug.parameterize.to_sym] = manager_products_path(manager_category: category.id)
-    end
-    links_hash
-  end
 
   def collapse_button button_title, button_class, target_id, target, &block
     concat button_tag button_title, class: button_class, data: { toggle: "collapse", target: "##{target_id}" }
