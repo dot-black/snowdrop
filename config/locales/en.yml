@@ -218,6 +218,7 @@ en:
     errors:
       messages:
         invalid_price: "incorrect, please enter a value at least greater then 0.01 or equal one"
+        invalid_quantity: "quantity must be positive"
         record_invalid: "Validation failed: %{errors}"
         restrict_dependent_destroy:
           has_one: "Cannot delete record because a dependent %{record} exists"

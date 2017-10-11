@@ -272,6 +272,7 @@ ua:
     errors:
       messages:
         invalid_price: "неправильна, значення повинно бути не менше ніж 0.01 або рівне"
+        invalid_quantity: "Кількість повинна бути додатньою"
         record_invalid: "Виникли помилки: %{errors}"
         restrict_dependent_destroy:
           has_one: 'Немлжливо видалити запис, так як існує залежність: %{record}'

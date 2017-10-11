@@ -272,6 +272,7 @@ ru:
     errors:
       messages:
         invalid_price: "неверная, значение должно быть не меньше чем 0.01 или равное"
+        invalid_quantity: "Количество должно быть полодительным"
         record_invalid: "Возникли ошибки: %{errors}"
         restrict_dependent_destroy:
           has_one: 'Невозможно удалить запись, так как существует зависимость: %{record}'
