@@ -22,15 +22,15 @@ class Product < ApplicationRecord
   }
   #Client scopes
   default_scope { order priority: :asc }
-  scope :shown,             -> { where arel_table[:archive].eq(false), arel_table[:visible].eq(true), arel_table[:category_id].in(Category.visible.ids) }
-  scope :category,          -> (category_id) { where arel_table[:category_id].eq(category_id), arel_table[:archive].eq(false), arel_table[:visible].eq(true) }
+  scope :shown,             -> { where archive: false, visible: true, category_id: Category.visible.ids }
+  scope :category,          -> (category_id) { where category_id: category_id, archive: false, visible: true }
   #Manager scopes
-  scope :relevant,          -> { where(arel_table[:archive].eq(false)).reorder created_at: :desc }
-  scope :archival,          -> { where(arel_table[:archive].eq(true)) .reorder created_at: :desc }
-  scope :visible,           -> { where(arel_table[:archive].eq(false), arel_table[:visible].eq(true))  .reorder created_at: :desc }
-  scope :hidden,            -> { where(arel_table[:archive].eq(false), arel_table[:visible].eq(false)) .reorder created_at: :desc }
+  scope :relevant,          -> { where(archive: false).reorder created_at: :desc }
+  scope :archival,          -> { where(archive: true) .reorder created_at: :desc }
+  scope :visible,           -> { where(archive: false, visible: true)  .reorder created_at: :desc }
+  scope :hidden,            -> { where(archive: false, visible: false) .reorder created_at: :desc }
 
-  scope :manager_category,  -> (category_id) { where(arel_table[:category_id].eq(category_id), arel_table[:archive].eq(false)).reorder created_at: :desc }
+  scope :manager_category,  -> (category_id) { where(category_id: category_id, archive: false).reorder created_at: :desc }
 
   def discount_price
     if discount and discount.actual
