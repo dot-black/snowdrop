@@ -312,6 +312,7 @@ ru:
         delay: "Задержка"
         created: "Создано"
         updated_at: "Обновлено"
+        notification: "Оповищение"
         statuses:
           pending: "ожидает"
           accepted: "принят"
@@ -463,6 +464,9 @@ ru:
       count: "Количество"
       order: "Заказ"
       visible: "Запущеные"
+      qnt: "Кол."
+      details: "Детали"
+      action: "Действие"
     categories:
       flash:
         create:

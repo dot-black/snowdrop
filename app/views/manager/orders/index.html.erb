@@ -13,12 +13,11 @@
       <%= render 'manager_orders_filter' %>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 pull-right" >
-      <%= form_tag manager_orders_path, class: "form-group search-form input-group", method: :get, remote: true do  %>
+      <%= form_tag manager_orders_path, class: "search-form input-group", method: :get, remote: true do  %>
         <%= hidden_field_tag :status, @current_status %>
         <%= text_field_tag :search_query, nil, class: "form-control", placeholder: t('manager.layout.search'), autofocus: true %>
         <span class="input-group-btn"><%= button_tag t('manager.layout.clear'), id: "clear_search", class: "btn btn-default" %></span>
       <% end %>
-
     </div>
   </div>
   <div class="orders-list">

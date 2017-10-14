@@ -10,11 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171007194432) do
+ActiveRecord::Schema.define(version: 20171014172259) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension 'hstore' unless extension_enabled?('hstore')
+  enable_extension "hstore"
 
   create_table "carts", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -38,16 +38,6 @@ ActiveRecord::Schema.define(version: 20171007194432) do
     t.string "title"
     t.index ["category_id"], name: "index_category_translations_on_category_id"
     t.index ["locale"], name: "index_category_translations_on_locale"
-  end
-
-  create_table "discounts", force: :cascade do |t|
-    t.string "title"
-    t.string "description"
-    t.integer "value"
-    t.datetime "start_at"
-    t.datetime "end_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "discounts", force: :cascade do |t|
@@ -92,7 +82,6 @@ ActiveRecord::Schema.define(version: 20171007194432) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.string "name"
     t.text "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

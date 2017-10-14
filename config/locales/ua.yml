@@ -312,6 +312,7 @@ ua:
         delay: "Затримка"
         created: "Створено"
         updated_at: "Оновлено"
+        notification: "Сповіщення"
         statuses:
           pending: "очікує"
           accepted: "прийняте"
@@ -433,7 +434,7 @@ ua:
       release: "Запустити"
       released: "Запущені"
       archive: "Архів."
-      activate: Активувати"
+      activate: "Активувати"
       deactivate: "Деактивувати"
       add: "Додати"
       always: "Завжди"
@@ -463,6 +464,9 @@ ua:
       count: "Кількість"
       order: "Замовлення"
       visible: "Запущені"
+      qnt: "Кіль."
+      details: "Деталі"
+      action: "Дія"
     categories:
       flash:
         create:

@@ -43,3 +43,6 @@ bower.json
 
 # Ignore test support directory
 test/support
+
+#Ignore dump.rdb
+dump.rdb

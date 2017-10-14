@@ -258,6 +258,7 @@ en:
         delay: "Delay"
         created: "Created"
         updated_at: "Updated"
+        notification: "Notification"
         statuses:
           pending: "pending"
           accepted: "accepted"
@@ -377,7 +378,7 @@ en:
       release: "Release"
       released: "Released"
       archive: "Archive"
-      activate: Activate"
+      activate: "Activate"
       deactivate: "Deactivate"
       add: "Add"
       always: "Always"
@@ -407,6 +408,10 @@ en:
       count: "Count"
       order: "Order"
       visible: "Visible"
+      qnt: "Qnt"
+      details: "Details"
+      action: "Action"
+
     categories:
       flash:
         create:
