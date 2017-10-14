@@ -8,17 +8,14 @@ class OrdersControllerTest < ActionDispatch::IntegrationTest
   end
   I18n.available_locales.each do |locale|
     I18n.locale = locale
-    test "should not show orders when status parameter not present or invalid #{locale}" do
-      get manager_orders_path(locale: locale)
-      assert_redirected_to manager_dashboard_path(locale: locale)
-      assert_equal (I18n.translate 'manager.orders.flash.index.absent'), flash[:notice]
+    test "should not show orders when status parameter is invalid #{locale}" do
       get manager_orders_path(status: "invalid", locale: locale)
-      assert_redirected_to manager_dashboard_path(locale: locale)
+      assert_redirected_to manager_orders_path(locale: locale)
       assert_equal (I18n.translate 'manager.orders.flash.index.prohibited'), flash[:notice]
     end
 
     test "should show all orders #{locale}" do
-      get manager_orders_path(status: "all", locale: locale)
+      get manager_orders_path locale: locale
       assert_response :success
     end
 
@@ -31,7 +28,7 @@ class OrdersControllerTest < ActionDispatch::IntegrationTest
     end
 
     test "should filter by search query #{locale}" do
-      get manager_orders_path(status: "all", search_query: "something", locale: locale), xhr: true
+      get manager_orders_path(search_query: "something", locale: locale), xhr: true
       assert_response :success
       assert_equal "text/javascript", @response.content_type
     end

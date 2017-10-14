@@ -18,6 +18,7 @@
                 </span>
               </span>
             </a>
+
             <ul class="dropdown-menu animated fadeInRight m-t-xs">
               <li>
                 <%= nav_link t('manager.layout.logout'), destroy_manager_session_path, "fa fa-sign-out", :delete %>
@@ -43,7 +44,7 @@
         </li>
 
         <li>
-          <%= nav_link t('manager.layout.orders'), manager_orders_path(status: "all"), "fa fa-tasks" %>
+          <%= nav_link t('manager.layout.orders'), manager_orders_path, "fa fa-bell" %>
         </li>
 
         <li>

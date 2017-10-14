@@ -128,7 +128,7 @@ class ManagerStoriesTest < ActionDispatch::IntegrationTest
     test "check orders #{locale}" do
       sign_in managers :first #Login as manager
 
-      get manager_orders_path status: :all, locale: locale
+      get manager_orders_path locale: locale
       assert_response :success
       assert_template :index
 

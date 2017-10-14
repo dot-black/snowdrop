@@ -32,7 +32,7 @@ module ManagerHelper
   end
 
   def orders_status_links
-    links_hash = {all: manager_orders_path(status: 'all')  }
+    links_hash = {}
     Order.statuses.keys.each { |status| links_hash[status] = manager_orders_path(status: status) }
     links_hash
   end

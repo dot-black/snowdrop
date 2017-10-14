@@ -1,15 +1,19 @@
 <ul class="nav nav-tabs hidden-xs">
+  <%= content_tag :li, class: "#{'active' if @current_status.blank? }" do %>
+    <%= link_to t("activerecord.attributes.order.statuses.all").capitalize, manager_orders_path %>
+  <% end %>
   <% orders_status_links.each do |key,link| %>
     <%= content_tag :li, class: "#{'active' if key.to_s == @current_status }" do %>
-      <%= link_to t("activerecord.attributes.order.statuses.#{key}").capitalize, link, remote: true %>
+      <%= link_to t("activerecord.attributes.order.statuses.#{key}").capitalize, link %>
     <% end %>
   <% end %>
 </ul>
 
 <ul class="nav nav-tabs visible-xs">
-  <% ["all", "pending"].each do |status| %>
-    <%= content_tag :li, class: "#{'active' if status == @current_status }" do %>
-      <%= link_to t("activerecord.attributes.order.statuses.#{status}".capitalize), manager_orders_path(status: status) , remote: true %>
-    <% end %>
+  <%= content_tag :li, class: "#{'active' if @current_status.blank? }" do %>
+    <%= link_to t("activerecord.attributes.order.statuses.all").capitalize, manager_orders_path %>
+  <% end %>
+  <%= content_tag :li, class: "#{'active' if "pending" == @current_status }" do %>
+    <%= link_to t("activerecord.attributes.order.statuses.pending").capitalize, manager_orders_path(status: "pending") %>
   <% end %>
 </ul>

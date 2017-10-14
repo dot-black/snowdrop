@@ -1,99 +1,128 @@
-<%= form_for [:manager, @order], method: "put" do |f| %>
-  <div class="ibox-title">
-    <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center form-group">
-        <stong><%= t 'activerecord.attributes.order.status' %>:</strong>
-          <%= select_tag "order[status]", options_for_select(Order.statuses.keys.map{|key| [t("activerecord.attributes.order.statuses.#{key}"),key]}), class:'form-control m-b'%>
-      </div>
-    </div>
-  </div>
+<div class="ibox-title">
+  <h2><%= t 'manager.layout.details' %></h2>
+</div>
 
-  <div class="ibox-content">
-    <div class="row">
-      <div class="col-md-6">
-        <% @order.line_items.each do |line_item| %>
-          <div class="row">
-            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-              <%= image_tag first_image(line_item.product), class:"img-responsive" %>
+<div class="ibox-content">
+  <div class="row">
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+      <h3><%= t 'manager.layout.products' %></h3>
+      <div class="hr-line-dashed"></div>
+      <% @order.line_items.each do |line_item| %>
+        <div class="row">
+          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+            <%= image_tag first_image(line_item.product), class:"img-responsive" %>
+          </div>
+          <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+            <div class="row">
+              <strong><%= line_item.product.title %></strong>
             </div>
-            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-              <div class="row">
-                <strong><%= line_item.product.title %></strong>
-              </div>
-              <div class="row">
-                Qnt: <%= line_item.quantity %>
-              </div>
-              <div class="row">
-                <%= line_item.size.values.join(' & ') %>
-              </div>
-              <div class="row">
-                <%= number_to_currency line_item.actual_price %>
-              </div>
+            <div class="row">
+              <%=t 'manager.layout.qnt' %>: <%= line_item.quantity %>
+            </div>
+            <div class="row">
+              <%= line_item.size.values.join(' & ') %>
+            </div>
+            <div class="row">
+              <%= number_to_currency line_item.actual_price %>
             </div>
           </div>
-          <br>
-        <% end  %>
-      </div>
-
-      <div class="col-md-6">
-        <div class="chat-user">
-          <div class="chat-user-name">
-            <strong>ID:</strong> <%= @order.id  %>
-          </div>
         </div>
-        <div class="chat-user">
-          <div class="chat-user-name">
-            <strong><%= t 'activerecord.attributes.order.created' %>:</strong> <%= l @order.created_at %>
-          </div>
-        </div>
-
-        <div class="chat-user">
-          <div class="chat-user-name">
-            <strong><%= t 'activerecord.attributes.user_information.name' %>: </strong><%=@order.user_information.name%>
-          </div>
-        </div>
-
-        <div class="chat-user">
-          <div class="chat-user-name">
-            <strong><%= t 'activerecord.attributes.user.email' %>: </strong><%=@order.user.email%>
-          </div>
-        </div>
-
-        <div class="chat-user">
-          <div class="chat-user-name">
-            <strong><%= t 'activerecord.attributes.user_information.telephone' %>: </strong><%= @order.user_information.telephone %>
-          </div>
-        </div>
-
-        <div class="chat-user">
-          <div class="chat-user-name">
-            <strong><%= t 'activerecord.attributes.order.amount' %>: </strong><%=number_to_currency @order.amount%>
-          </div>
-        </div>
-
-        <div class="chat-user">
-          <div class="chat-user-name">
-            <strong><%= t 'activerecord.attributes.order.comment' %>: </strong><%=@order.comment %>
-          </div>
-        </div>
-
-        <div class="chat-user">
-          <div class="chat-user-name">
-            <strong><%= t 'activerecord.attributes.order.locale' %>: </strong><%=@order.locale.upcase %>
-          </div>
-        </div>
-      </div>
+        <div class="hr-line-dashed"></div>
+      <% end  %>
 
     </div>
-    <br>
-    <div class="row">
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-left">
-        <%= f.submit class:"btn btn-warning", name: "send_email" %>
+
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+      <h3><%= t 'manager.layout.info' %></h3>
+      <div class="hr-line-dashed"></div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <strong>ID:</strong> <%= @order.id  %>
+        </div>
       </div>
-      <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-right">
-        <%= f.submit class:"btn btn-primary", name: "send_email" %>
+      <div class="hr-line-dashed"></div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <strong><%= t 'activerecord.attributes.order.created' %>:</strong> <%= l @order.created_at %>
+        </div>
       </div>
+      <div class="hr-line-dashed"></div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <strong><%= t 'activerecord.attributes.user_information.name' %>: </strong><%=@order.user_information.name%>
+        </div>
+      </div>
+      <div class="hr-line-dashed"></div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <strong><%= t 'activerecord.attributes.user.email' %>: </strong><%=@order.user.email%>
+        </div>
+      </div>
+      <div class="hr-line-dashed"></div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <strong><%= t 'activerecord.attributes.user_information.telephone' %>: </strong><%= @order.user_information.telephone %>
+        </div>
+      </div>
+      <div class="hr-line-dashed"></div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <strong><%= t 'activerecord.attributes.order.amount' %>: </strong><%=number_to_currency @order.amount%>
+        </div>
+      </div>
+      <div class="hr-line-dashed"></div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <strong><%= t 'activerecord.attributes.order.comment' %>: </strong><%=@order.comment %>
+        </div>
+      </div>
+      <div class="hr-line-dashed"></div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <strong><%= t 'activerecord.attributes.order.locale' %>: </strong><%=@order.locale.upcase %>
+        </div>
+      </div>
+      <div class="hr-line-dashed"></div>
     </div>
-    <br>
   </div>
-<% end %>
+</div>
+<div class="ibox-title">
+  <h2><%= t 'manager.layout.action' %></h2>
+</div>
+<div class="ibox-content">
+  <%= form_for [:manager, @order], method: "put" do |form| %>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="field">
+          <div class="form-group">
+            <%= form.label :status, class:"col-xs-12 col-sm-2 col-md-2 col-lg-2 control-label" %>
+            <div class="col-xs-12 col-sm-10 col-md-10 col-lg-10">
+              <%= select_tag "order[status]", options_for_select(Order.statuses.keys.map{|key| [t("activerecord.attributes.order.statuses.#{key}"),key]}), class:'form-control m-b'%>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="field">
+          <div class="form-group">
+            <%= form.label :notification, class:"col-xs-12 col-sm-2 col-md-2 col-lg-2 control-label" %>
+            <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+              <%= check_box_tag :notification %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="form-group">
+          <%= form.submit class:"btn btn-primary pull-right" %>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+  <br>
+</div>
