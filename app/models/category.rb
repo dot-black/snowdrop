@@ -11,7 +11,6 @@ class Category < ApplicationRecord
   validates_format_of :slug, with: /\A[[a-z]\s\']+\z/
   validates :slug, uniqueness: { case_sensitive: false }
 
-  default_scope { order id: :desc }
-  scope :visible, -> { where(visible: true).order created_at: :desc  }
-  scope :hidden,  -> { where(visible: false).order created_at: :desc }
+  scope :visible, -> { where arel_table[:visible].eq true  }
+  scope :hidden,  -> { where arel_table[:visible].eq false }
 end

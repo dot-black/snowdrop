@@ -8,7 +8,7 @@ class Order < ApplicationRecord
 
   validates :comment, length: { maximum: 500 }
 
-  scope :filter_by_status,                     -> (status)  { status == "all" ? where(nil) : where(status: status)}
+  scope :status,                               -> (status)  { where arel_table[:status].eq status }
   scope :search_by_name_or_email_or_telephone, -> (query)   { joins(:user_information).joins(:user).merge(
                                                               UserInformation.search_by_telephone(query)
                                                               .or(UserInformation.search_by_name(query))
