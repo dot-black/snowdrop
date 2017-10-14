@@ -60,7 +60,7 @@ end
       email:"user#{count}@mail.com").id,
     user_information_id: User.find(user_id).user_informations.create!(
       name:"User-#{count}",
-      telephone: "38063475#{rand(1000..9999)}").id
+      telephone: "380 63 475 #{rand(10..99)} #{rand(10..99)}").id
   )
 end
 

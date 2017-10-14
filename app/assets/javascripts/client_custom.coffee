@@ -18,7 +18,7 @@ client_ready = ->
   $('.close').click ->
     $('#product-image-modal').css('display','none')
     return
-  $('.phone_ukraine').mask('+(380) 00 000-00-00');
+  $('.phone_ukraine').mask('380 00 000 00 00');
 
 # $(document).ready(client_ready)
 $(document).on('page:load', client_ready)
