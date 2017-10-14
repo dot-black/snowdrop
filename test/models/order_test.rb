@@ -28,4 +28,16 @@ class OrderTest < ActiveSupport::TestCase
     end
   end
 
+  test "should get orders by their status" do
+    Order.statuses.keys.each do |status|
+      (Order.statuses.keys - [status]).each do |excluded|
+        assert Order.status(status).map(&:status).exclude?(excluded)
+      end
+    end
+  end
+  test "should search by name or telephone or email" do
+    assert Order.search_by_name_or_email_or_telephone(@order.user.email).map(&:id).include?(@order.id)
+    assert Order.search_by_name_or_email_or_telephone(@order.user_information.name).map(&:id).include?(@order.id)
+    assert Order.search_by_name_or_email_or_telephone(@order.user_information.telephone).map(&:id).include?(@order.id)
+  end
 end

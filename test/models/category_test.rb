@@ -47,4 +47,12 @@ class CategoryTest < ActiveSupport::TestCase
       @category.destroy
     end
   end
+
+  test "shold get visible categories" do
+    assert Category.visible.map(&:visible).exclude?(false)
+  end
+
+  test "shold get hidden categories" do
+    assert Category.hidden.map(&:visible).exclude?(true)
+  end
 end
