@@ -1,6 +1,6 @@
 class Manager::DiscountsController < ApplicationController
   before_action :authenticate_manager!
-  before_action :_set_discount, except:[:index, :new, :create]
+  before_action :_ensure_discount_present, except:[:index, :new, :create]
   layout 'managers/dashboard'
 
   def index
@@ -75,14 +75,18 @@ class Manager::DiscountsController < ApplicationController
     redirect_to edit_products_manager_discount_path
   end
 
-  private
+private
 
-    def _set_discount
-      @discount = Discount.find(params[:id])
-    end
+  def _set_discount
+    @discount = Discount.find_by_id params[:id]
+  end
 
-    def _permitted_discount_params
-      params.require(:discount).permit(:title, :description, :value, :start_at, :end_at)
-    end
+  def _ensure_discount_present
+    redirect_to manager_discounts_path unless params[:id].present? and _set_discount
+  end
+
+  def _permitted_discount_params
+    params.require(:discount).permit(:title, :description, :value, :start_at, :end_at)
+  end
 
 end

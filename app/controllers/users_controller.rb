@@ -1,10 +1,12 @@
 class UsersController < StoreController
+  before_action :_set_cart_variables
+  
   def new
     @user = User.new
   end
 
   def create
-    user = User.find_or_create_by(email: params[:user][:email])
+    user = User.find_or_create_by _permitted_user_params
     if user.valid?
       session[:user_id] = user.id
       session[:user_information_id] = nil
@@ -13,5 +15,9 @@ class UsersController < StoreController
       @user = user
       render :new
     end
+  end
+private
+  def _permitted_user_params
+    params.require(:user).permit :email
   end
 end

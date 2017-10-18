@@ -50,18 +50,18 @@ class ProductTest < ActiveSupport::TestCase
 
   test "should include appropriate products by categories for client" do
     Category.all.ids.each do |category_id|
-      assert Product.category(category_id).map(&:archive).include? false
-      assert Product.category(category_id).map(&:visible).include? true
+      assert Product.by_category(category_id).map(&:archive).include? false
+      assert Product.by_category(category_id).map(&:visible).include? true
       Product.where(category_id: category_id, visible: true, archive: false).ids.each do |id|
-        assert Product.category(category_id).map(&:id).include? id
+        assert Product.by_category(category_id).map(&:id).include? id
       end
     end
   end
 
   test "should exclude inappropriate products by categories for client" do
     Category.all.ids.each do |id|
-      assert Product.category(id).map(&:archive).exclude? true
-      assert Product.category(id).map(&:visible).exclude? false
+      assert Product.by_category(id).map(&:archive).exclude? true
+      assert Product.by_category(id).map(&:visible).exclude? false
     end
   end
   test "should include relevant products for manager" do

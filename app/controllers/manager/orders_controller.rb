@@ -1,18 +1,19 @@
 class Manager::OrdersController < ApplicationController
   before_action :authenticate_manager!
-  before_action :_set_order, only: [:show, :update]
+  before_action :_ensure_order_present, only: [:show, :update]
   layout 'managers/dashboard'
 
   def index
     if params[:status].present? and Order.statuses.keys.exclude? params[:status]
       redirect_to manager_orders_path, notice: t('manager.orders.flash.index.prohibited')
-    end
-    @current_status = params[:status]
-    @orders = Order.filter(_filtering_params).search_by_name_or_email_or_telephone(params[:search_query]).page params[:page]
+    else
+      @current_status = params[:status]
+      @orders = Order.filter(_filtering_params).search_by_name_or_email_or_telephone(params[:search_query]).page params[:page]
 
-    respond_to do |format|
-      format.html
-      format.js
+      respond_to do |format|
+        format.html
+        format.js
+      end
     end
   end
 
@@ -21,7 +22,7 @@ class Manager::OrdersController < ApplicationController
 
   def update
     respond_to do |format|
-      if @order.update(_permitted_order_params)
+      if @order.update _permitted_order_params
         OrderMailer.manager_information(@order).deliver
         OrderMailer.client_confirmation(@order).deliver if params[:notification]
         format.html { redirect_to manager_orders_path(status: _permitted_order_params[:status]), notice: (t 'manager.orders.flash.update.success')}
@@ -32,17 +33,13 @@ class Manager::OrdersController < ApplicationController
     end
   end
 
-  # def destroy
-  #   @order.destroy
-  #   respond_to do |format|
-  #     format.html { redirect_to orders_url, notice: 'Order was successfully destroyed.' }
-  #     format.json { head :no_content }
-  #   end
-  # end
-
 private
   def _set_order
-    @order = Order.find(params[:id])
+    @order = Order.find_by_id params[:id]
+  end
+
+  def _ensure_order_present
+    redirect_to manager_order_path unless params[:id].present? and _set_order
   end
 
   def _permitted_order_params

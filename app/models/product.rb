@@ -23,7 +23,7 @@ class Product < ApplicationRecord
   #Client scopes
   default_scope { order priority: :asc }
   scope :shown,             -> { where archive: false, visible: true, category_id: Category.visible.ids }
-  scope :category,          -> (category_id) { where category_id: category_id, archive: false, visible: true }
+  scope :by_category,       -> (category_id) { where category_id: category_id, archive: false, visible: true }
   #Manager scopes
   scope :relevant,          -> { where(archive: false).reorder created_at: :desc }
   scope :archival,          -> { where(archive: true) .reorder created_at: :desc }
