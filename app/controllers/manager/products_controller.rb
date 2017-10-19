@@ -8,7 +8,7 @@ class Manager::ProductsController < ApplicationController
   def index
     _set_categories
     _fetch_current_category if params[:manager_category].present?
-    @products = Product.relevant.filter(_permitted_filtering_params).page params[:page]
+    @products = Product.relevant.filter(params.slice(:visible, :hidden, :manager_category)).page params[:page]
     respond_to do |format|
       format.html
       format.js
@@ -112,10 +112,6 @@ private
 
   def _permitted_product_params
     params.require(:product).permit(:title, :description, :price, :priority, :index, :category_id, sizes:[bra:[], panties:[], standard:[]])
-  end
-
-  def _permitted_filtering_params
-    params.slice(:visible, :hidden, :manager_category)
   end
 
   def _permitted_product_images_params
