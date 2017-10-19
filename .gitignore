@@ -29,6 +29,8 @@ config/initializers/secret_token.rb
 
 # unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
 .rvmrc
+# ignore rbenv ruby version file
+.rbenv-version
 
 # if using bower-rails ignore default bower_components path bower.json files
 /vendor/assets/bower_components
@@ -40,3 +42,9 @@ bower.json
 
 # Ignore Byebug command history file.
 .byebug_history
+
+# Ignore test support directory
+test/support
+
+#Ignore dump.rdb
+dump.rdb

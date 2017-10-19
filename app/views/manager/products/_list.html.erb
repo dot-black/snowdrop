@@ -1,0 +1,14 @@
+<div class="panel-body">
+  <div class="row">
+    <% if @products.present? %>
+      <% @products.each do |product| %>
+        <%= render partial: "product", locals: { product: product } %>
+      <% end %>
+    <% else %>
+      <div class="text-center">
+        <h2><%= t 'manager.layout.no_information' %></h2>
+      </div>
+    <% end %>  
+  </div>
+</div>
+<%= paginate @products %>

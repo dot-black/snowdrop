@@ -23,3 +23,4 @@
 //= require base/morris/morris.js
 //= require base/morris/raphael-2.1.0.min
 //= require jquery.validate
+//= require jquery.mask

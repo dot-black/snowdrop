@@ -4,6 +4,6 @@ class FetchCategory < ActiveInteraction::Base
   string :category_parameter
 
   def execute
-    Category.where(['lower(title) = ?', category_parameter.gsub("_", " ")]).take
+    Category.find_by_slug category_parameter.gsub("_", " ")
   end
 end

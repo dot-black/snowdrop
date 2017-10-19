@@ -3,8 +3,8 @@
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
       <div class="tabs-container">
         <ul class="nav nav-tabs">
-          <li class="active"><a data-toggle="tab" href="#tab-1"> Category</a></li>
-          <li class=""><a data-toggle="tab" href="#tab-2"> Info</a></li>
+          <li class="active"><a data-toggle="tab" href="#tab-1"> <%= t 'manager.layout.category' %></a></li>
+          <li class=""><a data-toggle="tab" href="#tab-2"> <%= t 'manager.layout.info' %></a></li>
         </ul>
         <div class="tab-content">
 
@@ -25,17 +25,26 @@
                   <fieldset class="form-horizontal">
                     <div class="field">
                       <div class="form-group">
-                        <%= form.label :title, class:"col-xs-2 col-sm-2 col-md-2 col-lg-2  control-label" %>
-                        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-                          <%= form.text_field :title, id: :category_title, placeholder:"Category name", class:"form-control" %>
+                        <%= form.label :title, class:"hidden-xs col-sm-2 col-md-2 col-lg-2  control-label" %>
+                        <div class="col-xs-12 col-sm-10 col-md-10 col-lg-10">
+                          <%= form.text_field :title, id: :category_title, placeholder: t('activerecord.attributes.category.title'), class:"form-control" %>
                         </div>
                       </div>
                     </div>
 
                     <div class="field">
                       <div class="form-group">
-                        <%= form.label :image, class:"col-xs-2 col-sm-2 col-md-2 col-lg-2 control-label" %>
-                        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                        <%= form.label :slug, class:"hidden-xs  col-sm-2 col-md-2 col-lg-2  control-label" %>
+                        <div class="col-xs-12 col-sm-10 col-md-10 col-lg-10">
+                          <%= form.text_field :slug, id: :category_slug, placeholder:t('activerecord.attributes.category.slug'), class:"form-control" %>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="field">
+                      <div class="form-group">
+                        <%= form.label :image, class:"hidden-xs  col-sm-2 col-md-2 col-lg-2 control-label" %>
+                        <div class="col-xs-12 col-sm-10 col-md-10 col-lg-10">
                           <%= form.file_field :image, class:"form-control" %>
                         </div>
                       </div>
@@ -60,45 +69,31 @@
                     <div class="row">
                       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <table class="table">
-                          <th>Dependencies</th>
-                          <th>Count</th>
+                          <th><%= t 'manager.layout.dependencies' %></th>
+                          <th><%= t 'manager.layout.count' %></th>
                         <tr>
                           <td>
-                            <%= content_tag :span, "Products" %>
-                            <%= content_tag :br %>
-                            <% if @category_products.present?  %>
-                              <%= button_tag "List", class: "btn btn-xs btn-outline btn-primary", data:{toggle: "collapse", target: "#products-list"} %>
-                              <%= link_to "All", manager_products_path(manager_category: @category), class: "btn btn-xs btn-outline btn-warning" %>
-                              <%= content_tag :br %>
-                              <%= content_tag :ul, id: "products-list", class: "list-group collapse" do %>
-                                <% @category_products.each do |product| %>
-                                  <%= content_tag :li, class: "list-group-item" do %>
-                                    <%= link_to manager_product_path(product) do %>
-                                      <%= product.title  %>
-                                    <% end %>
-                                  <% end %>
-                                <% end %>
+                            <span><%=t('manager.layout.products')%></span>
+                            <% if @category.products.present?  %>
+                              <br>
+                              <br>
+                              <%= link_to t('manager.layout.all'), manager_products_path(manager_category: @category), class: "btn btn-xs btn-outline btn-warning" %>
+                              <%= collapse_button t('manager.layout.list'), "btn btn-xs btn-outline btn-primary", "products-list", @category.products do |item| %>
+                                <%= link_to item.title, manager_product_path(item)%>
                               <% end %>
                             <% end %>
                           </td>
                           </td>
-                          <td><%= @category_products.present? ? @category_products.count : 0 %></td>
+                          <td><%= @category.products.present? ? @category.products.count : 0 %></td>
                         </tr>
                         <tr>
                           <td>
-                            <%= content_tag :span, "Orders" %>
-                            <%= content_tag :br %>
-                            <% if @category_products.present?  %>
-                              <%= button_tag "List", class: "btn btn-xs btn-outline btn-primary", data:{toggle: "collapse", target: "#orders-list"} %>
-                              <%= content_tag :br %>
-                              <%= content_tag :ul, id: "orders-list", class: "list-group collapse" do %>
-                                <% @category_orders.each do |order| %>
-                                  <%= content_tag :li, class: "list-group-item" do %>
-                                    <%= link_to manager_order_path(order) do %>
-                                      <%= "Order##{order.id}: #{order.status}" %>
-                                    <% end %>
-                                  <% end %>
-                                <% end %>
+                            <span><%=t('manager.layout.orders') %></span>
+                            <br>
+                            <br>
+                            <% if @category_orders.present?  %>
+                              <%= collapse_button t('manager.layout.list'), "btn btn-xs btn-outline btn-primary", "orders-list", @category_orders do |item| %>
+                                <%= link_to "#{t 'manager.layout.order'}##{item.id}: #{t "activerecord.attributes.order.statuses.#{item.status}"}", manager_order_path(item)%>
                               <% end %>
                             <% end %>
                           </td>

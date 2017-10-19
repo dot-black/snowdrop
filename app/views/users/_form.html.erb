@@ -1,18 +1,11 @@
-<% if @user.errors.any? %>
-  <div id="toast-container">
-    <% @user.errors.full_messages.each do |message| %>
-      <%= content_tag :div, message, class: 'toast' %>
-    <% end %>
-  </div>
-<% end %>
-
+<%= render partial: "layouts/error", locals: { object: @user } if @user.errors.any? %>
 <div class="order-form">
   <div class="order-checkout">
     <%= form_for @user do |form| %>
       <%= form.label :email %>
       <%= form.email_field :email, required: true %>
       <div class="order-submit-button">
-          <%= form.submit "continue", class: "material-button" %>
+        <%= form.submit "#{t 'users.new.continue'}", class: "material-button" %>
       </div>
     <% end %>
   </div>

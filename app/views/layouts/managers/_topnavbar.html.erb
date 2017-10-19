@@ -9,19 +9,27 @@
       <ul class="nav navbar-top-links navbar-right">
         <li>
           <span class="m-r-sm text-muted welcome-message" data-i18n="topnav.welcometext">
-            Welcome to <%= t("application_name") %>
+            <%= t 'manager.layout.welcome'  %> <%= t("application_name") %>
           </span>
         </li>
-
+          <% I18n.available_locales.each do |locale| %>
+            <%= link_to url_for(locale: locale)  do  %>
+              <% if params[:locale] == locale.to_s %>
+                <%= image_tag "languages/#{locale}.png", size: 24, class:"hidden-xs" %>
+              <% else %>
+                <%= image_tag "languages/#{locale}.png", size: 12, class:"hidden-xs" %>
+              <% end %>
+            <% end %>
+          <% end %>
         <li>
           <%= link_to manager_orders_path(status: 'pending'), class: "count-info" do %>
-            <i class="fa fa-tasks"></i>
+            <i class="fa fa-bell"></i>
             <span class="label label-warning"> <%= pending_orders_counter %></span>
           <% end %>
         </li>
 
         <li>
-          <%= nav_link "Logout", destroy_manager_session_path, "fa fa-sign-out", :delete %>
+          <%= nav_link "#{t 'manager.layout.logout'}", destroy_manager_session_path, "fa fa-sign-out", :delete %>
         </li>
       </ul>
     </nav>

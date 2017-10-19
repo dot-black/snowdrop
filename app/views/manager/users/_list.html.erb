@@ -7,23 +7,22 @@
           <table class="table table-hover table-stripped toggle-arrow-tiny" id="users-table">
             <thead>
             <tr>
-              <th>ID</th>
-              <th>Email</th>
-              <th>Name</th>
-
-              <th>Telephone</th>
+              <th class="hidden-xs">ID</th>
+              <th><%= t 'activerecord.attributes.user.email' %></th>
+              <th><%= t 'activerecord.attributes.user_information.name' %></th>
+              <th><%= t 'activerecord.attributes.user_information.telephone' %></th>
             </tr>
             </thead>
             <tbody>
               <% @users.each do |user|  %>
                 <tr data-link= "<%= manager_user_path(user) %>" class="selectable-row">
-                  <td><%= user.id %></td>
-                  <td><%= user.email.truncate 20 %></td>
+                  <td class="hidden-xs"><%= user.id %></td>
+                  <td><%= user.email.truncate 10 %></td>
                   <td><%= user.user_informations.last.name.truncate(20) if user.user_informations.present?  %></td>
                   <td><%= user.user_informations.last.telephone if user.user_informations.present?  %></td>
                   <td class="unselectable">
                     <%= link_to manager_user_path(user) do %>
-                        <%= content_tag :span, 'show', class: "label label-success col-xs-12 col-sm-12" %>
+                        <span class="label label-success col-xs-12 col-sm-12"><%= t 'manager.layout.show' %></span>
                     <% end %>
                   </td>
                 </tr>
@@ -35,7 +34,7 @@
           </div>
         <% else %>
           <div class="text-center">
-            <h2>No information</h2>
+            <h2><%= t 'manager.layout.no_information' %></h2>
           </div>
         <% end %>
       </div>

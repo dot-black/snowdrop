@@ -3,45 +3,46 @@
     <div class="ibox">
       <div class="ibox-content">
         <% if @discounts.present? %>
-        <div class="form-group">
-          <table class="table table-hover table-stripped toggle-arrow-tiny" id="discounts-table">
-            <thead>
-            <tr>
-              <th>Title</th>
-              <th>Value</th>
-              <th class="hidden-xs">Starts at</th>
-              <th class="hidden-xs">Ends at</th>
-              <th class="hidden-xs">Products</th>
-              <th class="text-center">Active</th>
-            </tr>
-            </thead>
-            <tbody>
-              <% @discounts.each do |discount|  %>
-                <tr data-link= "<%= manager_discount_path(discount) %>" class="selectable-row">
-                  <td><%= discount.title %>
-                  <td><%= number_to_percentage discount.value, precision: 0 %></td>
-                  <td class="hidden-xs"><%= discount.start_at ? discount.start_at.strftime("%d.%m.%Y") : "Any time"%></td>
-                  <td class="hidden-xs"><%= discount.end_at ? discount.end_at.strftime("%d.%m.%Y") : "Never"%></td>
-                  <td class="hidden-xs"><%= discount.products.count%></td>
-                  <td class="unselectable">
-                    <%= link_to manager_discount_path(discount) do %>
-                      <% if discount.actual %>
-                        <%= content_tag :span, discount.actual, class: "label label-success col-xs-12 col-sm-12" %>
-                      <% else %>
-                        <%= content_tag :span, discount.actual, class: "label label-warning col-xs-12 col-sm-12" %>
-                      <% end  %>
-                    <% end %>
-                  </td>
+          <div class="form-group">
+            <table class="table table-hover table-stripped toggle-arrow-tiny" id="discounts-table">
+              <thead>
+                <tr>
+                  <th><%= t 'activerecord.attributes.discount.title' %></th>
+                  <th><%= t 'activerecord.attributes.discount.value' %></th>
+                  <th class="hidden-xs"><%= t 'activerecord.attributes.discount.start_at' %></th>
+                  <th class="hidden-xs"><%= t 'activerecord.attributes.discount.end_at' %></th>
+                  <th class="hidden-xs"><%= t 'manager.layout.products'%></th>
+                  <th class="text-center"><%= t 'manager.layout.active'%></th>
                 </tr>
-              <% end %>
-            </tbody>
-        </table>
-          <div class="text-center">
-            <%= paginate @discounts %>
+              </thead>
+              <tbody>
+                <% @discounts.each do |discount|  %>
+                  <tr data-link= "<%= manager_discount_path(discount) %>" class="selectable-row">
+                    <td><%= discount.title %>
+                    <td><%= number_to_percentage discount.value, precision: 0 %></td>
+                    <td class="hidden-xs"><%= discount.start_at ? discount.start_at.strftime("%d.%m.%Y") : t('manager.layout.always')%></td>
+                    <td class="hidden-xs"><%= discount.end_at ? discount.end_at.strftime("%d.%m.%Y") : t('manager.layout.never')%></td>
+                    <td class="hidden-xs"><%= discount.products.count%></td>
+                    <td class="unselectable">
+                      <%= link_to manager_discount_path(discount) do %>
+                        <% if discount.actual %>
+                          <span class="label label-success col-xs-12 col-sm-12"><%= t "manager.layout.#{discount.actual}_yes" %></span>
+                        <% else %>
+                          <span class="label label-warning col-xs-12 col-sm-12"><%= t "manager.layout.#{discount.actual}_no" %></span>
+                        <% end  %>
+                      <% end %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+            <div class="text-center">
+              <%= paginate @discounts %>
+            </div>
           </div>
         <% else %>
           <div class="text-center">
-            <h2>No information</h2>
+            <h2><%= t 'manager.layout.no_information' %></h2>
           </div>
         <% end %>
       </div>

@@ -1,20 +1,19 @@
-Order #<%= @order.id %>
-Updated: <%= @order.updated_at.strftime("%d.%m.%Y %H:%M") %>
-Status: <%= @order.status %>
-Info:
+<%= t '.order' %> #<%= @order.id %>
+<%= t '.updated' %>: <%= @order.updated_at.strftime("%d.%m.%Y %H:%M") %>
+<%= t '.status' %>: <%= t "activerecord.attributes.order.statuses.#{@order.status}"%>
+<%= t '.info' %>:
   <%= @order.user_information.name %>
   <%= @order.user_information.telephone %>
   <%= @order.user.email %>
-  Comment: <%= @order.comment %>
-
-Order:
+  <%= t '.comment' %>: <%= @order.comment %>
+<%= t '.order' %>:
 <% @order.line_items.each do |line_item| %>
   <%= line_item.quantity %>x <%= line_item.product.title %> [<%= line_item.size.values.join(" / ") %>]
     <%= number_to_currency(line_item.quantity * line_item.product.price) %>
 <% end %>
 
-Total:
+<%= t '.total' %>
   <%= number_to_currency @order.amount %>
 
-Link:
-  <%= manager_order_url(@order) %>
+<%= t '.link' %>:
+  <%= manager_order_url(@order, locale:I18n.locale) %>

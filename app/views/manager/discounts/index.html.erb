@@ -1,17 +1,19 @@
 <div class="row wrapper border-bottom white-bg page-heading">
-  <div class="col-sx-12 col-sm-12 col-md-12 col-lg-12">
-    <h2> <%= current_page_name %> </h2>
+  <div class="col-sx-10 col-sm-10 col-md-10 col-lg-10">
+    <h2><%= t "manager.layout.#{current_page_name}" %></h2>
     <ol class="breadcrumb">
-      <div class="pull-right">
-        <%= link_to "New", new_manager_discount_path, class: "btn btn-large  btn-warning" %>
-      </div>
-      <li><%= current_page_name %></li>
-      <li><b>List</b></li>
+      <li><%= t "manager.layout.#{current_page_name}" %></li>
+      <li><b><%= t 'manager.layout.list' %></b></li>
     </ol>
   </div>
+  <div class="col-sx-2 col-sm-2 col-md-2 col-lg-2">
+    <h2>
+      <%= link_to t('manager.layout.new'), new_manager_discount_path, class: "btn btn-primary pull-right" %>
+    </h2>
+  </div>
 </div>
-<div class="wrapper wrapper-content animated fadeInRight ecommerce">
-</div>
+
+<div class="tabs-container">
   <div class="discounts-list">
     <%= render 'list' %>
   </div>

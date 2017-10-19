@@ -9,20 +9,21 @@
               <table cellpadding="0" cellspacing="0">
                 <tr>
                   <td>
-                    <%= link_to store_url do  %>
+                    <%= link_to store_url locale: I18n.locale do  %>
                       <%= image_tag (image_path 'mailer/header.png'), class:"img-responsive"  %>
                     <% end %>
                   </td>
                 </tr>
                 <tr>
                   <td class="content-block">
-                    <h3>Your order is <%= @order.status %>.</h3>
+                    <h3><%= t 'order_mailer.client_confirmation.your_order_is' %> <%=t "activerecord.attributes.order.statuses.#{@order.status}"%>.</h3>
                   </td>
                 </tr>
                 <tr>
                   <td class="content-block">
-                    You've received this email because status of your order is changed.<br>
-                    Details of your order are below:
+                    <%= t 'order_mailer.client_confirmation.introduction' %><br>
+                    <%= t 'order_mailer.client_confirmation.main_part' %><br>
+                    <%= t 'order_mailer.client_confirmation.details' %>
                   </td>
                 </tr>
                 <tr>
@@ -31,20 +32,20 @@
                       <% @order.line_items.each do |line_item| %>
                         <tr>
                           <td>
-                            <%= link_to product_url(line_item.product) do %>
+                            <%= link_to product_url(line_item.product, locale: I18n.locale) do %>
                               <%= image_tag( (line_item.product.images == [] ?  image_path("default/default_product_image.png") : image_path(line_item.product.images.first)),size: 64) %>
                             <% end %>
                           </td>
                           <td>
                             <%= line_item.quantity %>x <%= line_item.product.title %> <br>
-                            Size: <%= line_item.size.values.join(" / ") %> <br>
+                            <%= t 'order_mailer.client_confirmation.size' %><%= line_item.size.values.join(" / ") %> <br>
                             <%= number_to_currency(line_item.quantity * line_item.product.price) %>
                           </td>
                         </tr>
                       <% end %>
                     </table>
                     <br>
-                    <p> <strong>Total: <%= number_to_currency @order.amount %></strong></p>
+                    <p> <strong><%= t 'order_mailer.client_confirmation.total' %> <%= number_to_currency @order.amount %></strong></p>
                   </td>
                 </td>
               </table>
@@ -58,7 +59,7 @@
 <div class="footer">
   <table width="100%">
     <tr>
-      <td class="aligncenter content-block">Visit <%= link_to "ARI DAR", store_url %> site.</td>
+      <td class="aligncenter content-block"><%= t 'order_mailer.client_confirmation.visit'  %> <%= link_to t('application_name'), store_url(locale: I18n.locale) %> <%= t 'order_mailer.client_confirmation.site' %></td>
     </tr>
   </table>
 </div>

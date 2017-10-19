@@ -1,16 +1,15 @@
+<% if @product.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= t 'activerecord.errors.messages.record_invalid', errors: @product.errors.count %></h2>
+    <ul>
+    <% @product.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <%= form_for [:manager, @product] do |form| %>
-  <% if @product.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
-
-      <ul>
-      <% @product.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
   <div class="wrapper wrapper-content animated fadeInRight ecommerce">
     <div class="row">
       <div class="col-lg-12">
@@ -22,7 +21,7 @@
                 <div class="form-group">
                   <%= form.label :title, class:"col-sm-2 col-lg-1 control-label" %>
                   <div class="col-sm-10 col-lg-11">
-                    <%= form.text_field :title, id: :product_title, placeholder:"Product name", class:"form-control", required: true %>
+                    <%= form.text_field :title, id: :product_title, placeholder: t('activerecord.attributes.product.title'), class:"form-control", required: true %>
                   </div>
                 </div>
               </div>
@@ -30,28 +29,28 @@
               <div class="form-group">
                 <%= form.label :price, class:"col-sm-2 col-lg-1 control-label" %>
                 <div class="col-sm-10 col-lg-11">
-                  <%= form.text_field :price, id: :product_price, placeholder:"Product price", class:"form-control", required: true %>
+                  <%= form.text_field :price, id: :product_price, placeholder: t('activerecord.attributes.product.price'), class:"form-control", required: true %>
                 </div>
               </div>
 
               <div class="form-group">
-                <%= form.label :category, class:"col-sm-2 col-lg-1 control-label", title: "choose category" %>
+                <%= form.label :category, class:"col-sm-2 col-lg-1 control-label" %>
                 <div class="col-sm-10 col-lg-11">
-                  <%= form.collection_select :category_id, Category.all, :id, :title, { }, { class:"form-control m-b", title: 'Select category' } %>
+                  <%= form.collection_select :category_id, Category.all, :id, :title, { }, { class:"form-control m-b"} %>
                 </div>
               </div>
 
               <div class="form-group">
-                <%= form.label :discount, class:"col-sm-2 col-lg-1 control-label", title: "choose discount" %>
+                <%= form.label :discount, class:"col-sm-2 col-lg-1 control-label"%>
                 <div class="col-sm-10 col-lg-11">
-                  <%= form.collection_select :discount_id, Discount.all, :id, :title, { include_blank: "None" }, { class:"form-control m-b", title: 'Select discount' } %>
+                  <%= form.collection_select :discount_id, Discount.all, :id, :title, { include_blank: t('manager.layout.none') }, { class:"form-control m-b" } %>
                 </div>
               </div>
 
               <div class="form-group">
                 <%= form.label :priority, class:"col-sm-2 col-lg-1 control-label"%>
                 <div class="col-sm-10 col-lg-11">
-                  <%= form.select :priority, Product.priorities.keys, {}, { class:"form-control m-b" } %>
+                  <%= form.select :priority, Product.priorities.keys.map{ |key| [t("activerecord.attributes.product.priorities.#{key}"),key]}, {}, { class:"form-control m-b" } %>
                 </div>
               </div>
 
@@ -59,19 +58,19 @@
               <div class="form-group">
                 <%= form.label :description, class:"col-sm-2 col-lg-1 control-label" %>
                 <div class="col-sm-10 col-lg-11">
-                  <%= form.text_area :description, id: :product_description, placeholder: "Enter description here", class: "form-control", required: true %>
+                  <%= form.text_area :description, id: :product_description, placeholder: t('activerecord.attributes.product.description'), class: "form-control", required: true %>
                 </div>
               </div>
 
               <div class="form-group">
 
-                <%= form.label :sizes, class:"col-sm-2 col-lg-1 control-label" %>
+                <%= form.label :size, class:"col-sm-2 col-lg-1 control-label" %>
                 <div class="col-sm-10 col-lg-11">
                   <%= form.fields_for :sizes do |ff| %>
                     <% Product.sizes.each do |key, value| %>
                       <div class="row">
                         <div class="col-sm-1">
-                          <small><%= key.capitalize %></small>
+                          <small><%= t "activerecord.attributes.product.sizes.#{key}" %></small>
                         </div>
                         <div class="col-sm-10">
                           <% value.each do |size| %>
@@ -89,18 +88,14 @@
                 </div>
               </div>
 
-              <div class="field">
                 <div class="form-group">
                   <%= form.label :images, class:"col-sm-2 col-lg-1 control-label text-left" %>
-                  <div class="col-sm-10 col-lg-11">
-                    <div class="row" id="product-image-preview">
-                      <%= render "product_image_preview"%>
-                    </div>
-                    <br>
+                  <div class="col-sm-10 col-lg-11" id="product-image-preview">
+                    <%= render "product_image_preview"%>
+                    <br><br>
                     <%= form.file_field :images, multiple: true, id: "manager-product-images-upload" %>
                   </div>
                 </div>
-              </div>
             </fieldset>
 
             <br>

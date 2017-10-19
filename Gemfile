@@ -16,6 +16,11 @@ gem 'kaminari'
 gem 'carrierwave', '~> 1.0'
 gem "mini_magick"
 gem 'active_interaction', '~> 3.5'
+gem 'globalize', github: 'globalize/globalize'
+gem 'activemodel-serializers-xml'
+
+gem 'sidekiq'
+gem 'sinatra', github: 'sinatra/sinatra'
 
 gem 'sass-rails', '~> 5.0'
 gem 'coffee-rails', '~> 4.2'
@@ -24,6 +29,7 @@ gem 'bootstrap-sass', '~> 3.3.7'
 gem "font-awesome-rails"
 gem 'jquery-rails'
 gem 'jquery-validation-rails'
+gem 'jquery_mask_rails'
 
 # gem 'therubyracer', platforms: :ruby
 # Use ActiveModel has_secure_password

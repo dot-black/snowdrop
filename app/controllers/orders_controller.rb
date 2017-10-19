@@ -1,15 +1,14 @@
 class OrdersController < StoreController
-  before_action :_ensure_session_for_user_presisted, only:[:new, :create]
-  before_action :_set_user, :_set_user_information, only:[:new, :create]
+  before_action :_set_cart_variables, :_set_categories
+  before_action :_ensure_user_presisted, :_ensure_user_information_presisted
+
   def new
-    if @line_items.empty?
-      flash[:notice] = "Please add something to cart."
-      redirect_to store_path
+    if @cart.line_items.empty?
+      redirect_to store_path, notice: t('orders.flash.new.empty_cart')
     else
       @order = Order.new
     end
   end
-
 
   def create
     @order = @user.orders.new _permitted_order_params
@@ -20,38 +19,35 @@ class OrdersController < StoreController
     respond_to do |format|
       if @order.save
         DestroyCart.run! session: session
-        OrderMailer.manager_information(@order).deliver
-        OrderMailer.client_information(@order).deliver
+        ManagerMailWorker.perform_async @order.id
+        ClientMailWorker.perform_async @order.id
         format.html { render 'successful_order' }
-        format.json { render :show, status: :created, location: @order }
       else
-        flash[:notice] = "Order wasn't created, please fill in all the fields correctly."
+        flash[:notice] = t 'orders.falsh.create.failure'
         format.html { render :new }
-        format.json { render json: @order.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  private
+private
 
-    def _permitted_order_params
-      params.require(:order).permit( :comment )
-    end
+  def _permitted_order_params
+    params.require(:order).permit(:comment, :locale)
+  end
 
-    def _ensure_session_for_user_presisted
-      if session[:user_id].present?
-        redirect_to new_user_information_path unless session[:user_information_id].present?
-      else
-        redirect_to new_user_path
-      end
-    end
+  def _ensure_user_presisted
+    redirect_to new_user_path unless session[:user_id].present? and _set_user
+  end
 
-    def _set_user
-      @user = User.find_by_id session[:user_id]
-      redirect_to new_user_path unless @user
-    end
-    def _set_user_information
-      @user_information = UserInformation.find session[:user_information_id]
-      redirect_to new_user_information_path unless @user_information.present?
-    end
+  def _ensure_user_information_presisted
+    redirect_to new_user_information_path unless session[:user_information_id].present? and _set_user_information
+  end
+
+  def _set_user
+    @user = User.find_by_id session[:user_id]
+  end
+
+  def _set_user_information
+    @user_information = UserInformation.find_by_id session[:user_information_id]
+  end
 end

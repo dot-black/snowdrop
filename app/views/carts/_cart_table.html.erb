@@ -1,4 +1,4 @@
-<% @line_items.each do |line_item| %>
+<% @cart.line_items.each do |line_item| %>
   <div class="row">
 <!-- Mobie version -->
     <div class="row visible-xs">
@@ -41,16 +41,16 @@
         </div>
         <div class="row cart-monile-size">
             <div class="col-xs-12">
-              Size: <%= line_item.size.values.join(" & ")  if line_item.size.present? %>
+              <%= t 'carts.show.size' %>: <%= line_item.size.values.join(" & ")  if line_item.size.present? %>
             </div>
         </div>
         <div class="row cart-mobile-price">
           <div class="col-xs-12">
             <% if line_item.product.discount and line_item.product.discount.actual %>
-              <%= content_tag :span, number_to_currency(line_item.product.discount_price) %>
-              <%= content_tag :span, number_to_currency(line_item.product.price), class: "old-price"  %>
+              <span><%= number_to_currency line_item.product.discount_price %></span>
+              <span class="old-price"><%= number_to_currency line_item.product.price %></span>
             <% else %>
-              <%= content_tag :span, number_to_currency(line_item.product.price) %>
+              <span><%= number_to_currency line_item.product.price  %></span>
             <% end %>
           </div>
         </div>
@@ -92,12 +92,12 @@
           </div>
         </td>
         <td class="col-sm-2 col-md-2 col-lg-2 cart-size" valign="middle">
-          Size: <%= line_item.size.values.join(" & ")  if line_item.size.present? %>
+          <%= t 'carts.show.size' %>: <%= line_item.size.values.join(" & ")  if line_item.size.present? %>
         </td>
         <td class="col-sm-2 col-md-2 col-lg-2 cart-price">
           <% if line_item.product.discount and line_item.product.discount.actual %>
             <%= number_to_currency line_item.product.discount_price %>
-            <%= content_tag :span, number_to_currency(line_item.product.price), class: "old-price"  %>
+            <span class="old-price"><%= number_to_currency line_item.product.price %></span>
           <% else %>
             <%= number_to_currency line_item.product.price %>
           <% end %>

@@ -1,7 +1,7 @@
 <div id="toast-container">
   <% flash.each do |key, value| %>
-    <%= content_tag :div, class: "toast" do %>
+    <div class="toast">
       <%= value %>
-    <% end %>
+    </div>
   <% end %>
 </div>

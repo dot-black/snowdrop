@@ -17,13 +17,13 @@
           </div>
           <div class="row">
             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-              <%= link_to "Delete", manager_category_path(category), class: "btn btn-xs btn-outline btn-danger", method: :delete,data: { confirm: "Are you sure that you want to delete '#{category.title}'? #{ category.products.count } #{'products'.pluralize(category.products.count)} of this category will be deleted as well." } %>
+              <%= link_to t('manager.layout.delete'), manager_category_path(category), class: "btn btn-xs btn-outline btn-danger", method: :delete,data: { confirm: t('manager.categories.confirm.delete')} %>
             </div>
             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
               <% if category.visible %>
-                <%= link_to "Hide", change_appearance_manager_category_path(category), class: "btn btn-xs btn-outline btn-warning pull-right", data: { confirm: "Are you sure that you want to make category '#{ category.title }' invisible ?" }  %>
+                <%= link_to t('manager.layout.hide'), change_appearance_manager_category_path(category), class: "btn btn-xs btn-outline btn-warning pull-right", data: { confirm: t('manager.categories.confirm.make_visible')}  %>
               <% else %>
-                <%= link_to "Release", change_appearance_manager_category_path(category), class: "btn btn-xs btn-outline btn-primary pull-right",  data: { confirm: "Are you sure that you want to make category '#{ category.title }' visible ?" } %>
+                <%= link_to t('manager.layout.release'), change_appearance_manager_category_path(category), class: "btn btn-xs btn-outline btn-primary pull-right",  data: { confirm: t('manager.categories.confirm.make_visible')} %>
               <% end %>
             </div>
           </div>

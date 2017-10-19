@@ -7,6 +7,7 @@ Dir.glob(Rails.root.join("app/assets/images/categories/*")).each do |category|
   Category.create(
     title: "#{current_category.capitalize}",
     image: Rails.root.join("app/assets/images/categories/#{current_category}/#{current_category}.jpg").open,
+    slug: "#{current_category}",
     visible: [true, false].sample,
   )
 end
@@ -59,7 +60,7 @@ end
       email:"user#{count}@mail.com").id,
     user_information_id: User.find(user_id).user_informations.create!(
       name:"User-#{count}",
-      telephone: "38063475#{rand(1000..9999)}").id
+      telephone: "380 63 475 #{rand(10..99)} #{rand(10..99)}").id
   )
 end
 

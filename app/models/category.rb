@@ -1,9 +1,16 @@
 class Category < ApplicationRecord
   has_many :products, dependent: :destroy
-  validates :title, :image, presence: true
-  validates_format_of :title, with: /\A[\w\s\']+\z/
+
+  attribute :title
+  attribute :slug
+  attribute :image
+  translates :title
   mount_uploader :image, CategoryImageUploader
-  default_scope { order( id: :desc ) }
-  scope :visible, -> { where( visible: true ).order( created_at: :desc ) }
-  scope :hidden, -> { where( visible: false ).order( created_at: :desc ) }
+
+  validates :title, :slug, :image, presence: true
+  validates_format_of :slug, with: /\A[[a-z]\s\']+\z/
+  validates :slug, uniqueness: { case_sensitive: false }
+
+  scope :visible, -> { where arel_table[:visible].eq true  }
+  scope :hidden,  -> { where arel_table[:visible].eq false }
 end

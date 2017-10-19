@@ -1,24 +1,47 @@
-<nav id="myNavmenu" class="navmenu navmenu-default navmenu-fixed-left offcanvas" role="navigation">
-  <%= link_to t("application_name_short"), store_path, class: "navmenu-brand" %>
+<nav id="mobileNavMenu" class="navmenu navmenu-default navmenu-fixed-left offcanvas" role="navigation">
 
+  <%= link_to "#", data:{ toggle: "offcanvas", target: "#mobileNavMenu", canvas: "body"}, class: "navmenu-brand" do %>
+    <i class="visible-xs material-icons md-24 pull-left">arrow_back</i>
+  <% end %>
+  <%= link_to store_path, class: "navmenu-brand" do %>
+    <h3> <%= t 'application_name' %></h3>
+  <% end %>
   <ul class="nav navmenu-nav">
+    <h4><%= t 'category' %></h4>
     <% @categories.each do |category| %>
       <li class="<%= category == @current_category ? 'active' : '' %>">
-        <%= link_to category.title.pluralize(2) , category_products_path(category: category.title.parameterize.underscore ) %>
+        <%= link_to category.title, category_products_path(category: category.slug.parameterize.underscore ) %>
       </li>
     <% end  %>
+  </ul>
+  <ul class="nav navmenu-nav">
+    <h4><%= t 'language' %></h4>
+    <% I18n.available_locales.each do |locale| %>
+      <li class="<%= params[:locale] == locale.to_s ? 'active' : '' %>">
+        <%= link_to url_for(locale: locale) do  %>
+         <%= image_tag "languages/#{locale}.png", size: 32 %> <%= t "#{locale}_name" %>
+        <% end %>
+      </li>
+    <% end %>
   </ul>
 
 </nav>
 <div class="navbar navbar-default container-fluid app-navbar">
   <div class="menu-logo col-xs-2 col-sm-2 col-md-2 col-lg-2">
     <% if @product.present?  %>
-      <%= link_to category_products_path(@product.category.title.parameterize.underscore) do %>
-        <%= content_tag :i, 'arrow_back', class:"material-icons md-24 pull-left" %>
+      <%= link_to category_products_path(@product.category.slug.parameterize.underscore) do %>
+        <i class="material-icons md-24 pull-left">arrow_back</i>
       <% end %>
     <% else %>
-      <%= link_to "#", data:{ toggle: "offcanvas", target: "#myNavmenu", canvas: "body"} do %>
-        <%= content_tag :i, 'menu', class:"visible-xs material-icons md-24 pull-left" %>
+      <%= link_to "#", data:{ toggle: "offcanvas", target: "#mobileNavMenu", canvas: "body"} do %>
+        <i class="visible-xs material-icons md-24 pull-left">menu</i>
+      <% end %>
+      <% I18n.available_locales.each do |locale| %>
+        <% unless params[:locale] == locale.to_s %>
+          <%= link_to url_for(locale: locale) do  %>
+           <%= image_tag "languages/#{locale}.png", size: 24, class:"hidden-xs pull-left" %>
+          <% end %>
+        <% end %>
       <% end %>
     <% end %>
   </div>

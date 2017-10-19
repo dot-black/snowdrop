@@ -16,3 +16,4 @@
 //= require turbolinks
 //= require client_custom
 //= require base/jasny-bootstrap.min.js
+//= require jquery.mask

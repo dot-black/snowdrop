@@ -1,7 +1,7 @@
 module ManagerHelper
 
   def current_page_name
-    controller.controller_name.split("_").map(&:capitalize).join(" ")
+    controller.controller_name.split("_").join(" ")
   end
 
   def nav_link link_text, link_path, icons_class = '', method = :get
@@ -32,7 +32,7 @@ module ManagerHelper
   end
 
   def orders_status_links
-    links_hash = {all: manager_orders_path(status: 'all')  }
+    links_hash = {}
     Order.statuses.keys.each { |status| links_hash[status] = manager_orders_path(status: status) }
     links_hash
   end
@@ -41,17 +41,6 @@ module ManagerHelper
     Order.where(status: 'pending').count
   end
 
-  def products_categories_links
-    links_hash = {
-      all: manager_products_path,
-      visible: manager_products_path(visible: "true"),
-      hidden: manager_products_path(hidden: "true")
-    }
-    Category.all.each do |category|
-      links_hash[category.title.parameterize.to_sym] = manager_products_path(manager_category: category.id)
-    end
-    links_hash
-  end
 
   def collapse_button button_title, button_class, target_id, target, &block
     concat button_tag button_title, class: button_class, data: { toggle: "collapse", target: "##{target_id}" }
@@ -65,5 +54,9 @@ module ManagerHelper
         )
       end
     end
+  end
+
+  def time_delay created_at
+    time_ago_in_words(Time.now - (Time.now - created_at.to_time).seconds)
   end
 end

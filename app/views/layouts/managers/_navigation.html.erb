@@ -13,46 +13,48 @@
                   <strong class="font-bold"> <%= current_manager.email %> </strong>
                 </span>
                 <span class="text-muted text-xs block">
-                  Manager
+                  <%= t 'manager.layout.manager' %>
                   <b class="caret"></b>
                 </span>
               </span>
             </a>
+
             <ul class="dropdown-menu animated fadeInRight m-t-xs">
               <li>
-                <%= nav_link "Logout", destroy_manager_session_path, "fa fa-sign-out", :delete %>
+                <%= nav_link t('manager.layout.logout'), destroy_manager_session_path, "fa fa-sign-out", :delete %>
               </li>
             </ul>
           </div>
         </li>
 
         <li>
-          <%= nav_link "Dashboard", manager_dashboard_path, "fa fa-th-large" %>
+          <%= nav_link t('manager.layout.dashboard'), manager_dashboard_path, "fa fa-th-large" %>
         </li>
 
         <li>
-          <%= nav_link "Categories", manager_categories_path, "fa fa-tags" %>
+          <%= nav_link t('manager.layout.categories'), manager_categories_path, "fa fa-tags" %>
         </li>
 
         <li>
-          <%= nav_link "Products", manager_products_path, "fa fa-gift" %>
+          <%= nav_link t('manager.layout.products'), manager_products_path, "fa fa-gift" %>
         </li>
 
         <li>
-          <%= nav_link "Archival", archival_manager_products_path, "fa fa-minus-square-o" %>
+          <%= nav_link t('manager.layout.archival'), archival_manager_products_path, "fa fa-minus-square-o" %>
         </li>
 
         <li>
-          <%= nav_link "Orders", manager_orders_path(status: "all"), "fa fa-tasks" %>
+          <%= nav_link t('manager.layout.orders'), manager_orders_path, "fa fa-bell" %>
         </li>
 
         <li>
-          <%= nav_link "Clients", manager_users_path, "fa fa-address-book-o" %>
+          <%= nav_link t('manager.layout.users'), manager_users_path, "fa fa-address-book-o" %>
         </li>
 
         <li>
-          <%= nav_link "Discounts", manager_discounts_path, "fa fa-percent" %>
+          <%= nav_link t('manager.layout.discounts'), manager_discounts_path, "fa fa-percent" %>
         </li>
+
       </ul>
     </div>
   </nav>

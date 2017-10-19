@@ -30,6 +30,8 @@ manager_ready = ->
   $('#new_product').validate
     debag: false
 
+  $('.date-time').mask('00/00/0000 00:00')  
+
 # $(document).ready manager_ready
 $(document).on 'page:load', manager_ready
 $(document).on 'turbolinks:load', manager_ready

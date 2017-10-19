@@ -3,64 +3,56 @@ class LineItemsController < StoreController
     @line_item = AddProductOrUpdateQuantity.run! session: session, line_item_params: _permitted_line_item_params
     respond_to do |format|
       if @line_item.save
-        _set_line_items_variables
+        _set_cart_variables
         format.html { redirect_to product_path(params[:line_item][:product_id]) }
-        format.json { render :show, status: :created, location: @line_item }
-        format.js {flash.now[:notice] = "Product is added to cart"}
+        format.js { flash.now[:notice] = t 'line_items.flash.create.success' }
       else
-        flash[:warning] = "Product wasn't added"
-        format.html { redirect_to store_url }
-        format.json { render json: @line_item.errors, status: :unprocessable_entity }
+        format.html { redirect_to store_path, notice: t('line_items.flash.create.failure') }
       end
     end
   end
 
   def update
-    # _ensure_cart_isnt_empty
-    _set_line_item
-    respond_to do |format|
-      if @line_item.update _permitted_line_item_params
-        _set_line_items_variables
-        format.html { redirect_to new_order_path }
-        format.json
-        format.js
-      else
-        flash[:warning] = "Can't update line item!"
-        format.html { redirect_to cart_path }
-        format.json { render json: @line_item.errors, status: :unprocessable_entity }
+    unless _set_line_item
+      redirect_to store_path, notice: t('line_items.flash.update.failure')
+    else
+      respond_to do |format|
+        if @line_item.update _permitted_line_item_params
+          _set_cart_variables
+          format.html { redirect_to new_order_path }
+          format.js
+        else
+          format.html { redirect_to cart_path, notice: t('line_items.flash.update.failure') }
+        end
       end
     end
 
   end
 
   def destroy
-    _set_line_item
-    respond_to do |format|
-      if @line_item.destroy
-        _set_line_items_variables
-        format.html { redirect_to cart_path }
-        format.json { head :no_content }
-        format.js
-      else
-        flash[:warning] = "Can't destroy line item!"
-        format.html { redirect_to cart_path }
-        format.json { render json: @line_item.errors, status: :unprocessable_entity }
+    unless _set_line_item
+      redirect_to store_path, notice: t('line_items.flash.destroy.failure')
+    else
+      respond_to do |format|
+        if @line_item.destroy
+          _set_cart_variables
+          format.html { redirect_to cart_path }
+          format.js
+        else
+          format.html { redirect_to cart_path, notice: t('line_items.flash.destroy.failure') }
+        end
       end
     end
   end
 
-  private
-    def _permitted_line_item_params
-      params.require(:line_item).permit(:product_id, :quantity, size:[:bra, :panties, :standard])
-    end
+private
 
-    def _set_line_item
-      outcome = FetchLineItem.run(params)
-      if outcome.valid?
-        @line_item = outcome.result
-      else
-        raise ActiveRecord::RecordNotFound,
-          outcome.errors.full_messages.to_sentence
-      end
-    end
+  def _permitted_line_item_params
+    params.require(:line_item).permit(:product_id, :quantity, size:[:bra, :panties, :standard])
+  end
+
+  def _set_line_item
+    @line_item = LineItem.find_by_id params[:id]
+  end
+
 end
