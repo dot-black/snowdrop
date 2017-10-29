@@ -4,10 +4,6 @@ class StoreController < ApplicationController
     _set_cart_variables
   end
 
-  def get_cart_items_count
-    render json: { catr_items_count: @cart_line_items_quantity, status: :success }
-  end
-
 private
   def _set_categories
     @categories = Category.visible
