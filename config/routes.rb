@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     devise_for :managers, path: 'manager',
       controllers: { sessions: 'managers/sessions' },
       path_names: { sign_in: 'login', sign_out: 'logout' }
-      
+
     namespace :manager do
       authenticate :manager do
         mount Sidekiq::Web => '/sidekiq'
@@ -42,7 +42,6 @@ Rails.application.routes.draw do
     resources :line_items, only:[:create, :destroy, :update]
     resources :products, only: [:show]
     get 'category/:category', to: 'products#index', as: 'category_products'
-    get   :cart_items_count, to: "store#get_cart_items_count"
 
     get   :cart,   to: 'carts#show'
     get   :order,  to: 'orders#new',               as: 'new_order'

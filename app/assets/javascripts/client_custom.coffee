@@ -1,10 +1,3 @@
-$(window).on 'popstate', (e) ->
-  if e.originalEvent.state != null
-    $.ajax
-      url: '/cart_items_count'
-      success: (response) ->
-        $('#cart-badge').html(response['catr_items_count'])
-        return
 client_ready = ->
   #Flash toast animation
   $('.toast').delay(3000).fadeOut(600);

@@ -14,7 +14,6 @@ ActiveRecord::Schema.define(version: 20171014172259) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "hstore"
 
   create_table "carts", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -43,7 +42,7 @@ ActiveRecord::Schema.define(version: 20171014172259) do
   create_table "discounts", force: :cascade do |t|
     t.string "title"
     t.string "description"
-    t.float "value"
+    t.integer "value"
     t.datetime "start_at"
     t.datetime "end_at"
     t.datetime "created_at", null: false
