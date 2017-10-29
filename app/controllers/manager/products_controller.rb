@@ -1,6 +1,6 @@
 class Manager::ProductsController < ApplicationController
   before_action :authenticate_manager!
-  before_action :_set_product, except:[:index, :archival,:new, :create]
+  before_action :_ensure_product_present, except:[:index, :archival,:new, :create]
   before_action :_set_product_orders, only: :destroy
 
   layout 'managers/dashboard'
@@ -8,7 +8,7 @@ class Manager::ProductsController < ApplicationController
   def index
     _set_categories
     _fetch_current_category if params[:manager_category].present?
-    @products = Product.relevant.filter(_filtering_params).page
+    @products = Product.relevant.filter(_permitted_filtering_params).page params[:page]
     respond_to do |format|
       format.html
       format.js
@@ -100,38 +100,41 @@ class Manager::ProductsController < ApplicationController
   end
 
 
-  private
+private
 
-    def _set_product
-      @product = Product.find(params[:id])
-    end
+  def _set_product
+    @product = Product.find_by_id params[:id]
+  end
 
-    def _permitted_product_params
-      params.require(:product).permit(:title, :description, :price, :priority, :index, :category_id, sizes:[bra:[], panties:[], standard:[]])
-    end
+  def _ensure_product_present
+    redirect_to manager_order_path unless params[:id] and _set_product
+  end
 
-    def _filtering_params
-      params.slice(:visible, :hidden, :manager_category)
-    end
+  def _permitted_product_params
+    params.require(:product).permit(:title, :description, :price, :priority, :index, :category_id, sizes:[bra:[], panties:[], standard:[]])
+  end
 
-    def _permitted_product_images_params
-      params.require(:product).permit({images: []})
-    end
+  def _permitted_filtering_params
+    params.slice(:visible, :hidden, :manager_category)
+  end
 
-    def _add_more_images
-      @product.update images: (@product.images + _permitted_product_images_params[:images])
-    end
+  def _permitted_product_images_params
+    params.require(:product).permit({images: []})
+  end
 
-    def _set_product_orders
-      @product_orders = Order.find(LineItem.where(product_id: @product.id).map(&:order_id))
-    end
+  def _add_more_images
+    @product.update images: (@product.images + _permitted_product_images_params[:images])
+  end
 
-    def _fetch_current_category
-      @current_category = Category.find_by_id params[:manager_category]
-    end
+  def _set_product_orders
+    @product_orders = Order.find(LineItem.where(product_id: @product.id).map(&:order_id))
+  end
 
-    def _set_categories
-      @categories = Category.all
-    end
+  def _fetch_current_category
+    @current_category = Category.find_by_id params[:manager_category]
+  end
 
+  def _set_categories
+    @categories = Category.all
+  end
 end

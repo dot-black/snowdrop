@@ -74,24 +74,24 @@
                         <tr>
                           <td>
                             <span><%=t('manager.layout.products')%></span>
-                            <% if @category_products.present?  %>
+                            <% if @category.products.present?  %>
                               <br>
                               <br>
                               <%= link_to t('manager.layout.all'), manager_products_path(manager_category: @category), class: "btn btn-xs btn-outline btn-warning" %>
-                              <%= collapse_button t('manager.layout.list'), "btn btn-xs btn-outline btn-primary", "products-list", @category_products do |item| %>
+                              <%= collapse_button t('manager.layout.list'), "btn btn-xs btn-outline btn-primary", "products-list", @category.products do |item| %>
                                 <%= link_to item.title, manager_product_path(item)%>
                               <% end %>
                             <% end %>
                           </td>
                           </td>
-                          <td><%= @category_products.present? ? @category_products.count : 0 %></td>
+                          <td><%= @category.products.present? ? @category.products.count : 0 %></td>
                         </tr>
                         <tr>
                           <td>
                             <span><%=t('manager.layout.orders') %></span>
                             <br>
                             <br>
-                            <% if @category_products.present?  %>
+                            <% if @category_orders.present?  %>
                               <%= collapse_button t('manager.layout.list'), "btn btn-xs btn-outline btn-primary", "orders-list", @category_orders do |item| %>
                                 <%= link_to "#{t 'manager.layout.order'}##{item.id}: #{t "activerecord.attributes.order.statuses.#{item.status}"}", manager_order_path(item)%>
                               <% end %>

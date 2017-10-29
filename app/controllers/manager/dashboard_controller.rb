@@ -4,8 +4,8 @@ class Manager::DashboardController < ApplicationController
 
   def index
 
-    @products = GetPercentageStatistics.run!({ scopes:[:visible, :hidden], model: Product, scope_for_total: :relevant})
-    @orders = GetPercentageStatistics.run!({ scopes: Order.statuses.keys, model: Order})
+    @products = GetPercentageStatistics.run!({ scopes:[:visible, :hidden], model: Product, scope_for_total: :relevant })
+    @orders = GetPercentageStatistics.run!({ scopes: Order.statuses.keys, model: Order })
     @categories = GetCategoriesStatistics.run!
     @visual_statistics = GetVisualStatistics.run!
   end
