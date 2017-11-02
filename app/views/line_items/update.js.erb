@@ -1,3 +1,4 @@
+Turbolinks.clearCache();
 $(".cart-total-amount").each(function(){
   $(this).html('<%= j render(partial: "carts/cart_total_amount", locals: { total: @total }) %>');
 });
