@@ -3,10 +3,12 @@ class Manager::DashboardController < ApplicationController
   layout 'managers/dashboard'
 
   def index
+    @products   = GetScopeStat.run!({ scopes:[:visible, :hidden], model: Product, scope_for_total: :relevant })
+    @orders     = GetScopeStat.run!({ scopes: Order.statuses.keys.map(&:to_sym), model: Order })
+    @categories = GetCategoriesStat.run!
+  end
 
-    @products = GetPercentageStatistics.run!({ scopes:[:visible, :hidden], model: Product, scope_for_total: :relevant })
-    @orders = GetPercentageStatistics.run!({ scopes: Order.statuses.keys, model: Order })
-    @categories = GetCategoriesStatistics.run!
-    @visual_statistics = GetVisualStatistics.run!
+  def chart_statistics
+    render json: { line: SetLineChart.run!, donut: SetDonutChart.run! }
   end
 end
