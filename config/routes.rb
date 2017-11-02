@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       end
       root 'dashboard#index'
       get :dashboard, to: 'dashboard#index'
+      get :chart_statistics, to: 'dashboard#chart_statistics'
       resources :products do
         member do
           get 'change_appearance'
@@ -35,7 +36,6 @@ Rails.application.routes.draw do
           put 'update_products'
         end
       end
-      get :update_locale, to: "dashboard#update_locale"
     end
 
     root 'store#index', as: 'store'
