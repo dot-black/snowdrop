@@ -3,8 +3,9 @@ require 'test_helper'
 class OrdersControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
   setup do
-    @order = orders(:one)
-    sign_in managers(:first) #Login as manager
+    @order = orders :one
+
+    sign_in managers :first #Login as manager
   end
   I18n.available_locales.each do |locale|
     I18n.locale = locale
@@ -40,11 +41,7 @@ class OrdersControllerTest < ActionDispatch::IntegrationTest
 
     test "should update status of order #{locale}" do
       Order.statuses.keys.each do |status|
-        put manager_order_path(@order,locale: locale), params: {
-          order: {
-            status: status
-          }
-        }
+        put manager_order_path(@order,locale: locale), params: { order: { status: status }}
         manager_orders_path(status: status,locale: locale)
         assert_equal (I18n.translate 'manager.orders.flash.update.success'), flash[:notice]
       end

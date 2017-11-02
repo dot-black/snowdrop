@@ -3,8 +3,9 @@ require 'test_helper'
 class UsersControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
   setup do
-    @user = users(:first)
-    sign_in managers(:first) #Login as manager
+    @user = users :first
+
+    sign_in managers :first #Login as manager
   end
   I18n.available_locales.each do |locale|
     I18n.locale = locale

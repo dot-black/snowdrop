@@ -6,16 +6,18 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
     @product_hidden = products :bra_invisible
     @product_archived = products :bra_archive
     @product_of_invisible_category = products :panties_invisible_category
+    @visible_category = categories :first_visible
+    @invisible_category = categories(:second_invisible)
   end
   I18n.available_locales.each do |locale|
     I18n.locale = locale
     test "should get to products of visible category #{locale}" do
-      get category_products_path category: categories(:first_visible).slug, locale: locale
+      get category_products_path category: @visible_category.slug, locale: locale
       assert_response :success
     end
 
     test "should not get to products of invisible category #{locale}" do
-      get category_products_path category: categories(:second_invisible).slug, locale: locale
+      get category_products_path category: @invisible_category.slug, locale: locale
       assert_response :redirect
     end
 

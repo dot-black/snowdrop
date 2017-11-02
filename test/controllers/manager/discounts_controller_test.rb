@@ -3,10 +3,11 @@ require 'test_helper'
 class DiscountsControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
   setup do
-    @discount = discounts(:one)
-    @odd_discount = discounts(:two)
-    @product = products(:new_bra)
-    sign_in managers(:first) #Login as manager
+    @discount = discounts :one
+    @odd_discount = discounts :two
+    @product = products :new_bra
+
+    sign_in managers :first #Login as manager
   end
   I18n.available_locales.each do |locale|
     I18n.locale = locale
@@ -36,13 +37,7 @@ class DiscountsControllerTest < ActionDispatch::IntegrationTest
 
     test "should create discount #{locale}" do
       assert_difference 'Discount.count' do
-        post manager_discounts_path(locale: locale), params: {
-          discount: {
-            title: @discount.title,
-            value: @discount.value,
-            description: @discount.description,
-          }
-        }
+        post manager_discounts_path(locale: locale), params: { discount: @discount.as_json }
       end
       assert_redirected_to manager_discounts_path(locale: locale)
       assert_equal (I18n.translate 'manager.discounts.flash.create.success'), flash[:notice]
@@ -50,30 +45,18 @@ class DiscountsControllerTest < ActionDispatch::IntegrationTest
 
     test "should not create discount if params are missing #{locale}" do
       assert_no_difference 'Discount.count' do
-        post manager_discounts_path(locale: locale), params: {
-          discount: {
-            description: @discount.description
-          }
-        }
+        post manager_discounts_path(locale: locale), params: { discount: @discount.as_json(only: [:description]) }
       end
       assert_equal (I18n.translate 'manager.discounts.flash.create.failure'), flash[:notice]
     end
 
     test "should update discount #{locale}" do
-      put manager_discount_path(@discount,locale: locale), params: {
-        discount: {
-          title: "new title"
-        }
-      }
+      put manager_discount_path(@discount,locale: locale), params: { discount: { title: "New"} }
       assert_equal (I18n.translate 'manager.discounts.flash.update.success'), flash[:notice]
     end
 
     test "should not update discount if validation is failed #{locale}" do
-      put manager_discount_path(@discount,locale: locale), params: {
-        discount: {
-          title: ""
-        }
-      }
+      put manager_discount_path(@discount,locale: locale), params: { discount: { title: "" } }
       assert_equal (I18n.translate 'manager.discounts.flash.update.failure'), flash[:notice]
     end
 

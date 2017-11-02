@@ -2,33 +2,42 @@ require 'test_helper'
 
 class OrdersControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @order = orders(:one)
+    @order = orders :one
+    @user = users :first
+    @user_information = user_informations :one
+    @line_item = line_items :one
   end
+
   I18n.available_locales.each do |locale|
     I18n.locale = locale
-    test "should not get new unless cart is empty #{locale}" do
+    test "shouldn't get to new order unless user exists #{locale}" do
       get new_order_url locale: locale
       assert_response :redirect
     end
+    test "shouldn't get to new order unless user information exists #{locale}" do
+      _set_user @user, locale
+      get new_order_url locale: locale
+      assert_response :redirect
+    end
+    test "shouldn't get to new order unless line items exist #{locale}" do
+      _set_user @user, locale
+      _set_user_information @user_information, locale
+      get new_order_url locale: locale
+      assert_response :redirect
+    end
+    test "should get new unless cart is empty #{locale}" do
+      _set_user @user, locale
+      _set_user_information @user_information, locale
+      _set_line_item @line_item, locale
+      get new_order_url locale: locale
+      assert_response :success
+    end
 
     test "should create order #{locale}" do
-      post users_url(locale: locale), params: {
-        user: {
-          email: 'test@email.com'
-        }
-      }
-      post user_informations_url(locale: locale), params:{
-        user_information:{
-          name: 'some name',
-          telephone: '456789876545'
-        }
-      }
+      _set_user @user, locale
+      _set_user_information @user_information, locale
       assert_difference('Order.count') do
-        post orders_url(locale: locale), params: {
-          order: {
-            comment: @order.comment
-          }
-        }
+        _set_order @order, locale
       end
     end
   end

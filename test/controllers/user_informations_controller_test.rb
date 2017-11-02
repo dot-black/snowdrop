@@ -1,21 +1,17 @@
 require 'test_helper'
 
 class UserInformationsControllerTest < ActionDispatch::IntegrationTest
+  setup do
+    @user = users :first
+    @new_user_information = UserInformation.new name: 'Ronald McDonald', telephone: '380 63 4543 34 43'
+  end
+
   I18n.available_locales.each do |locale|
     I18n.locale = locale
     test "should create information #{locale}" do
-      post users_url(locale: locale), params: {
-        user: {
-          email: 'test@email.com',
-        }
-      }
+      _set_user @user, locale
       assert_difference('UserInformation.count') do
-        post user_informations_url(locale: locale), params: {
-          user_information: {
-            name: 'some name',
-            telephone: '380635444849',
-          }
-        }
+        _set_user_information @new_user_information, locale
       end
     end
     test "should redirect to new user if user don't exist #{locale}" do
