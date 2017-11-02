@@ -1,6 +1,6 @@
 class UserInformationsController < StoreController
   before_action :_ensure_session_and_user_present
-  before_action :_set_cart_variables
+  before_action :_set_cart_variables, :_set_categories
 
   def new
     @user_information = @user.user_informations.new

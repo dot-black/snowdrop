@@ -18,5 +18,14 @@ class UserInformationsControllerTest < ActionDispatch::IntegrationTest
         }
       end
     end
+    test "should redirect to new user if user don't exist #{locale}" do
+      get user_informations_url(locale: locale)
+      assert_response :redirect
+    end
+    test "should visit new user_information page if user exist#{locale}" do
+      _set_user @user, locale
+      get user_informations_url(locale: locale)
+      assert_response :success
+    end
   end
 end

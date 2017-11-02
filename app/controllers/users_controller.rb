@@ -1,6 +1,6 @@
 class UsersController < StoreController
-  before_action :_set_cart_variables
-  
+  before_action :_set_cart_variables, :_set_categories
+
   def new
     @user = User.new
   end
