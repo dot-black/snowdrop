@@ -192,3 +192,26 @@
     color: #333333 !important;
   }
 }
+//Footer
+.footer-tab{
+  box-sizing: border-box;
+  width: 120px;
+  padding: 6px;
+  margin: 8px auto 0;
+  background-color: #202020;
+  color: white;
+  text-transform: uppercase;
+  a{
+    color: white;
+    text-decoration: none;
+  }
+}
+.social-icon a {
+  background: black;
+  color: #fff;
+  padding: 4px 8px;
+  height: 28px;
+  width: 28px;
+  display: block;
+  border-radius: 50px;
+}
