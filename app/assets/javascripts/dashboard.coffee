@@ -13,7 +13,7 @@ $(document).on 'turbolinks:load', ->
     url: "/#{page.locale()}/manager/chart_statistics"
     success: (response) ->
       Morris.Line   #Dashboard orders line-chart
-        element: 'morris-line-chart'
+        element: 'morris-line-chart-orders'
         data: response.line.orders
         xkey: 'x'
         ykeys: 'y'
@@ -25,7 +25,7 @@ $(document).on 'turbolinks:load', ->
         lineColors: [ '#54cdb4' ]
 
       Morris.Donut #Dashboard categories donut-chart
-        element: 'morris-donut-chart'
+        element: 'morris-donut-chart-categories'
         data: response.donut.category
         resize: true
         colors: response.donut.colors
