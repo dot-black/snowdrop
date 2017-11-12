@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+# This model initially had no columns defined. If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+email:
+  kind: 'email'
+  value: 'test@email.com'
+
+address:
+  kind: 'address'
+  value: 'Kyiv, Ukraine'
+
+telephone:
+  kind: 'telephone'
+  value: '+(380) 63 123 34 56'
+
+socaial_one:
+  kind: 'social'
+  social_type: 'facebook'
+  value: 'https://facebook.com/ari-dar'
+
+socaial_two:
+  kind: 'social'
+  social_type: 'facebook'
+  value: 'https://www.instagram.com/aridar_lingerie'

@@ -85,3 +85,11 @@ Order.all.each do |order|
 end
 
 Order.where(amount: 0).each { |order| order.destroy }
+
+#Contacts
+Contact.create kind: :email,    value: "ari-dar@mail.com"
+Contact.create kind: :address,  value: "Kyiv, Ukraine"
+Contact.create kind: :telephone, value: "+(380) 12 345 67 89"
+Contact.social_types.keys.each do |social_type|
+  Contact.create kind: :social, social_type: social_type, value: "https://www.google.com.ua/search?q=#{social_type}"
+end
