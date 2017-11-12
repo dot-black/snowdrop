@@ -9,7 +9,7 @@
 
           <div class="product-desc">
             <% if product.discount and product.discount.actual %>
-              <span class="product-price"> <%= product.price %> </span>
+              <span class="product-discount-price"> <%= product.price %> </span>
             <% else %>
               <span class="product-price"> <%= product.price %> </span>
             <% end %>

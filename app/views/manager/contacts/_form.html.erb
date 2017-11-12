@@ -1,0 +1,58 @@
+<% if @contact.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= t 'activerecord.errors.messages.record_invalid', errors: @contact.errors.count %></h2>
+    <ul>
+    <% @contact.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_for [:manager, @contact] do |form| %>
+  <div class="wrapper wrapper-content animated fadeInRight ecommerce">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="ibox contact-detail">
+          <div class="ibox-content">
+            <fieldset class="form-horizontal">
+
+              <div class="form-group">
+                <%= form.label :kind, class:"col-sm-2 col-lg-1 control-label" %>
+                <div class="col-sm-10 col-lg-11">
+                  <%= form.select :kind, Contact.kinds.keys.map{ |key| [t("activerecord.attributes.contact.kinds.#{key}"), key]}, { }, { class:"form-control m-b"} %>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <%= form.label :social_type, class:"col-sm-2 col-lg-1 control-label" %>
+                <div class="col-sm-10 col-lg-11">
+                  <%= form.select :social_type, Contact.social_types.keys.map{ |key| [key.capitalize, key ]}, { include_blank: t('manager.layout.none') }, { class:"form-control m-b"} %>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <%= form.label :value, class:"col-sm-2 col-lg-1 control-label" %>
+                <div class="col-sm-10 col-lg-11">
+                  <%= form.text_field :value, placeholder: t('activerecord.attributes.contact.value'), class: "form-control", required: true %>
+                </div>
+              </div>
+
+
+            </fieldset>
+
+            <br>
+
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="form-group">
+                  <%= form.submit class: "btn btn-primary pull-right" %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
