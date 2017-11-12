@@ -22,15 +22,33 @@ class SetDonutChart < ActiveInteraction::Base
 
   def _set_size_statistics
     @result[:size] = []
-    line_items = LineItem.all.map(&:size).map{|size|size.values}.map{|size| size[0]}
+    line_items = LineItem.all.map{ |li| li.size.values.first }
     Product.sizes.values.flatten.each do |size|
       @result[:size] << { label: size, value: line_items.count(size) }
     end
   end
 
   def _set_colors
-    @result[:colors] = [ '#E0F2F1', '#B2DFDB', '#80CBC4', '#4DB6AC', '#26A69A','#FFF3E0','#FFE0B2', '#FFCC80','#FFB74D','#FFA726','#FF9800', #Colors for bra sizes
-      '#FB8C00','#F57C00','#EF6C00','#E65100','#FF5722'] #Colors for panties sizes
+    @result[:colors] = [
+      #Colors for panties sizes
+      '#E0F2F1',#XS
+      '#B2DFDB',#S
+      '#80CBC4',#M
+      '#4DB6AC',#L
+      '#26A69A',#XL
+      #Colors for bra sizes
+      '#FFF3E0',#70A
+      '#FFE0B2',#70B
+      '#FFCC80',#70C
+      '#FFB74D',#75A
+      '#FFA726',#75B
+      '#FF9800',#75C
+      '#FB8C00',#75D
+      '#F57C00',#80B
+      '#EF6C00',#80C
+      '#E65100',#85B
+      '#FF5722' #85C
+    ]
   end
 
   def _set_empty_result
