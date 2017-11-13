@@ -1,0 +1,38 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+
+    <h2><%= t "manager.layout.#{current_page_name}" %></h2>
+
+    <ol class="breadcrumb">
+      <li><%= t "manager.layout.#{current_page_name}" %></li>
+      <li><b><%= t 'manager.layout.list' %></b></li>
+    </ol>
+  </div>
+  <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+    <h2><%= link_to t('manager.layout.new'), new_manager_contact_path, class: "btn btn-primary pull-right" %></h2>
+  </div>
+</div>
+
+<div class="tabs-container">
+  <% @contacts.each do |key, value| %>
+    <h2><%= t "activerecord.attributes.contact.kinds.#{key}" %></h2>
+    <table class="table">
+      <% value.each do |contact| %>
+        <tr>
+          <td><%= contact.kind == "social" ? content_tag(:i, class:"fa fa-#{Contact.social_types[contact.social_type]}"){} : content_tag(:i, class:"fa fa-#{Contact.kinds[contact.kind]}"){} %></td>
+          <td><%= contact.value %></td>
+          <td class="pull-right">
+            <%= link_to edit_manager_contact_path(contact) do %>
+              <i class="fa fa-pencil-square-o"></i>
+            <% end %>
+          </td>
+          <td class="pull-right">
+            <%= link_to manager_contact_path(contact), method: :delete do %>
+              <i class="fa fa-trash-o"></i>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  <% end %>
+</div>

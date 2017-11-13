@@ -26,11 +26,11 @@ manager_ready = ->
   $('.close').on 'click', ->
     $('#product-image-modal').css('display','none')
     return
-
+  #Validate prsence of product fields
   $('#new_product').validate
     debag: false
-
-  $('.date-time').mask('00/00/0000 00:00')  
+  #Mask for date and time of deiscount stars and ends
+  $('.date-time').mask('00/00/0000 00:00')
 
 # $(document).ready manager_ready
 $(document).on 'page:load', manager_ready

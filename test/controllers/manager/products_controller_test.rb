@@ -3,9 +3,10 @@ require 'test_helper'
 class ProductsControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
   setup do
-    @product = products(:bra)
-    @odd_product = products(:odd_product)
-    sign_in managers(:first) #Login as manager
+    @product = products :bra
+    @odd_product = products :odd_product
+
+    sign_in managers :first #Login as manager
   end
   I18n.available_locales.each do |locale|
     I18n.locale = locale
@@ -59,15 +60,7 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
 
     test "should create product #{locale}" do
       assert_difference 'Product.count' do
-        post manager_products_path(locale: locale), params: {
-          product: {
-            title: @product.title,
-            description: @product.description,
-            category_id: @product.category_id,
-            price: @product.price,
-            sizes: @product.sizes
-          }
-        }
+        post manager_products_path(locale: locale), params: { product: @product.as_json }
       end
       assert_redirected_to manager_products_path locale: locale
       assert_equal (I18n.translate 'manager.products.flash.create.success'), flash[:notice]
@@ -75,30 +68,18 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
 
     test "should not create product if params are missing #{locale}" do
       assert_no_difference 'Product.count' do
-        post manager_products_path(locale: locale), params: {
-          product: {
-            category_id: @product.category_id
-          }
-        }
+        post manager_products_path(locale: locale), params: { product: @product.as_json(only: [:title]) }
       end
       assert_equal (I18n.translate 'manager.products.flash.create.failure'), flash[:notice]
     end
 
     test "should update product #{locale}" do
-      put manager_product_path(@product,locale: locale), params: {
-        product: {
-          title: "new title"
-        }
-      }
+      put manager_product_path(@product,locale: locale), params: { product: { title: "new title" } }
       assert_equal (I18n.translate 'manager.products.flash.update.success'), flash[:notice]
     end
 
     test "should not update product if validation failed #{locale}" do
-      put manager_product_path(@product,locale: locale), params: {
-        product: {
-          title: ""
-        }
-      }
+      put manager_product_path(@product,locale: locale), params: { product: { title: "" } }
       assert_equal (I18n.translate 'manager.products.flash.update.failure'), flash[:notice]
     end
 

@@ -7,5 +7,10 @@ class StoreControllerTest < ActionDispatch::IntegrationTest
       get store_path locale: locale
       assert_response :success
     end
+
+    test "should get contacts #{locale}" do
+      get store_contacts_path locale: locale
+      assert_response :success
+    end
   end
 end

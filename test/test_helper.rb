@@ -1,32 +1,26 @@
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
+require 'carrierwave_test_config'
 
 Capybara.javascript_driver = :chrome
 
 class ActiveSupport::TestCase
-  # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   fixtures :all
-  # Add more helper methods to be used by all tests here...
-end
 
-require 'fileutils'
+protected
+  def _set_user user, locale
+    post users_url(locale: locale), params: { user: user.as_json }
+  end
 
-# Carrierwave setup and teardown
-carrierwave_template = Rails.root.join('test','fixtures','files')
-carrierwave_root = Rails.root.join('test','support','carrierwave')
+  def _set_user_information user_information, locale
+    post user_informations_url(locale: locale), params: { user_information: user_information.as_json }
+  end
 
-# Carrierwave configuration is set here instead of in initializer
-CarrierWave.configure do |config|
-  config.root = carrierwave_root
-  config.enable_processing = false
-  config.storage = :file
-  config.cache_dir = Rails.root.join('test','support','carrierwave','carrierwave_cache')
-end
+  def _set_line_item line_item, locale
+    post line_items_url(locale: locale), params: { line_item: line_item.as_json }
+  end
 
-at_exit do
-  #puts "Removing carrierwave test directories:"
-  Dir.glob(carrierwave_root.join('*')).each do |dir|
-    #puts "   #{dir}"
-    FileUtils.remove_entry(dir)
+  def _set_order order, locale
+    post orders_url(locale: locale), params: { order: order.as_json }
   end
 end

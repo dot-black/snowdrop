@@ -214,6 +214,7 @@ en:
   application_name_shortest: "Ari"
   category: "Category"
   language: "Language"
+  contacts: "Contacts"
   activerecord:
     errors:
       messages:
@@ -232,6 +233,7 @@ en:
       product: "Product"
       user_information: "User information"
       user: "User"
+      contact: "Contact"
     attributes:
       category:
         title: "Title"
@@ -287,9 +289,22 @@ en:
         telephone: "Telephone"
       user:
         email: "Email"
+      contact:
+        kind: "Kind"
+        value: "Value"
+        social_type: "Social network"
+        kinds:
+          address: "Address"
+          telephone: "Telephone"
+          email: "Email"
+          social: "Social network"
   store:
     index:
       shop_now: "Shop now"
+    contacts:
+      contact_us: "Contact us"
+      send_mail: "Send us mail"
+      follow_us: "Follow us on social platforms"
   products:
     index:
       item:
@@ -411,6 +426,7 @@ en:
       qnt: "Qnt"
       details: "Details"
       action: "Action"
+      contacts: "Contacts"
 
     categories:
       flash:
@@ -483,6 +499,17 @@ en:
         activate: "Are you sure? Schedule date and time will be changed."
         deactivate: "Are you sure? Schedule date and time will be erased."
         delete: "Are you sure?"
+    contacts:
+      flash:
+        create:
+          success: "Contact has been successfully created."
+          failure: "Contact has not been created, please check errors below!"
+        update:
+          success: "Contact has been successfully updated."
+          failure: "Contact has not been updated, please check errors below!"
+        destroy:
+          success: "Contact has been successfully destroyed."
+          failure: "Contact has not been destroyed."
 
   order_mailer:
     client_information:

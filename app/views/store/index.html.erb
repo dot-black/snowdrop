@@ -1,15 +1,20 @@
 <%= render partial: "categories" %>
 <% @categories.each do |category|  %>
-  <div class="category-item">
-    <%= link_to category_products_path(category: category.slug.parameterize.underscore), class: "content" do %>
+  <div class="category-item content">
+    <%= link_to category_products_path(category: category.slug.parameterize.underscore) do %>
       <%= image_tag category_image(category.image) %>
     <% end %>
     <h2><%= category.title %></h2>
 
     <div class="category-button">
-      <%= link_to category_products_path(category: category.slug.parameterize.underscore), class: "material-button" do %>
-        <%= t ".shop_now" %>
-      <% end %>
+      <%= link_to t('.shop_now'),category_products_path(category: category.slug.parameterize.underscore), class: "material-button" %>
     </div>
   </div>
 <% end %>
+<footer class="footer">
+  <div class="app-toolbar">
+    <ul class="material-tabs">
+      <li><div class="footer-tab"><%= link_to t('contacts'), store_contacts_path %></div></li>
+    </ul>
+  </div>
+</footer>

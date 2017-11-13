@@ -5,8 +5,10 @@
 <!-- Main javascript files -->
 <%= javascript_include_tag 'manager', 'data-turbolinks-track' => true %>
 <%= csrf_meta_tags %>
-
 <%= javascript_include_tag "https://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.min.js" %>
+
+<!-- Controller, action and locale spesific tag -->
+<%= tag :meta, name: :page_spesific_javascript, action: action_name, controller: controller_name, locale: I18n.locale %>
 
 <!--[if lt IE 9]>
   <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js"></script>

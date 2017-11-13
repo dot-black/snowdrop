@@ -268,6 +268,7 @@ ru:
   application_name_shortest: "Ari"
   category: "Категория"
   language: "Язык"
+  contacts: "Контакты"
   activerecord:
     errors:
       messages:
@@ -286,6 +287,7 @@ ru:
       product: "Товар"
       user_information: "Информацию"
       user: "Клиента"
+      contact: "Контакт"
     attributes:
       category:
         title: "Заголовок"
@@ -342,9 +344,22 @@ ru:
         telephone: "Телефон"
       user:
         email: "Эл. почта"
+      contact:
+        kind: "Тип"
+        value: "Значение"
+        social_type: "Соц.сеть"
+        kinds:
+          address: "Адрес"
+          telephone: "Телефон"
+          email: "Эл. почта"
+          social: "Соц. сеть"
   store:
     index:
       shop_now: "Купить"
+    contacts:
+      contact_us: "Наши контакты"
+      send_mail: "Эл. письмо"
+      follow_us: "Мы в соц. сетях"
   products:
     index:
       item:
@@ -467,6 +482,7 @@ ru:
       qnt: "Кол."
       details: "Детали"
       action: "Действие"
+      contacts: "Контакти"
     categories:
       flash:
         create:
@@ -538,6 +554,18 @@ ru:
         activate: "Вы уверены? Расписание для начала и конца будет изменено"
         deactivate: "Вы уверены? Расписание для начала и конца будет удалено."
         delete: "Вы уверены, что хотите удалить скидку?"
+    contacts:
+      flash:
+        create:
+          success: "Контакт успешно создан."
+          failure: "Контакт не была создан, посмотрите ошибки ниже!"
+        update:
+          success: "Контакт успешно обновлен."
+          failure: "Контакт не была обновлен, посмотрите ошибки ниже!"
+        destroy:
+          success: "Контакт успешно удален."
+          failure: "Контакт не был удален!"
+
   order_mailer:
     client_information:
       subject: "ARI DAR LINGERIE заказ"

@@ -3,11 +3,15 @@ require 'test_helper'
 class CategoriesControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
   setup do
-    @category = categories(:first_visible)
-    @category.update image: fixture_file_upload(Rails.root.join('test','fixtures','files', 'image.png'))
-    @odd_category = categories(:third_to_delete)
-    sign_in managers(:first) #Login as manager
+    @category = categories :first_visible
+    @odd_category = categories :third_to_delete
+    @image = fixture_file_upload Rails.root.join('test','fixtures','files', 'image.png')
+
+
+    @category.update image: @image
+    sign_in managers :first #Login as manager
   end
+
   I18n.available_locales.each do |locale|
     I18n.locale = locale
     test "should show all categories #{locale}" do
@@ -30,13 +34,7 @@ class CategoriesControllerTest < ActionDispatch::IntegrationTest
 
     test "should create category #{locale}" do
       assert_difference 'Category.count' do
-        post manager_categories_path(locale: locale), params: {
-          category: {
-            title: @category.title,
-            slug: "#{@category.title.parameterize}#{locale}",
-            image: fixture_file_upload(Rails.root.join('test','fixtures','files', 'image.png'))
-          }
-        }
+        post manager_categories_path(locale: locale ), params: { category: { title: "New", slug: "new", image: @image }}
       end
       assert_redirected_to manager_categories_path locale: locale
       assert_equal (I18n.translate 'manager.categories.flash.create.success'), flash[:notice]
@@ -44,40 +42,27 @@ class CategoriesControllerTest < ActionDispatch::IntegrationTest
 
     test "should not create category if params are missing #{locale}" do
       assert_no_difference 'Category.count' do
-        post manager_categories_path(locale: locale), params: {
-          category: {
-            title: @category.title
-          }
-        }
+        post manager_categories_path(locale: locale), params: { category: { title: "New" } }
       end
       assert_equal (I18n.translate 'manager.categories.flash.create.failure'), flash[:notice]
     end
 
     test "should update category #{locale}" do
-      put manager_category_path(@category, locale: locale), params: {
-        category: {
-          image: fixture_file_upload(Rails.root.join('test','fixtures','files', 'image.png'))
-        }
-      }
+      put manager_category_path(@category, locale: locale), params: { category: { image: @image }}
       assert_equal (I18n.translate 'manager.categories.flash.update.success'), flash[:notice]
     end
 
     test "should not update category if validation is failed #{locale}" do
-      put manager_category_path(@category, locale: locale), params: {
-        category: {
-          title: ""
-        }
-      }
+      put manager_category_path(@category, locale: locale), params: { category: { title: "" } }
       assert_equal (I18n.translate 'manager.categories.flash.update.failure'), flash[:notice]
     end
 
-
-      test "should destroy category #{locale}" do
-        assert_difference 'Category.count', -1 do
-          delete manager_category_path @odd_category, locale: locale
-        end
-        assert_redirected_to manager_categories_path locale: locale
-        assert_equal (I18n.translate 'manager.categories.flash.destroy.success.'), flash[:notice]
+    test "should destroy category #{locale}" do
+      assert_difference 'Category.count', -1 do
+        delete manager_category_path @odd_category, locale: locale
+      end
+      assert_redirected_to manager_categories_path locale: locale
+      assert_equal (I18n.translate 'manager.categories.flash.destroy.success.'), flash[:notice]
     end
 
     test "should not destroy category if something is invlved #{locale}" do
@@ -98,4 +83,5 @@ class CategoriesControllerTest < ActionDispatch::IntegrationTest
       assert_equal (I18n.translate 'manager.categories.flash.change_appearance.visible'), flash[:notice]
     end
   end
+
 end

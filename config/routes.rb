@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       end
       root 'dashboard#index'
       get :dashboard, to: 'dashboard#index'
+      get :chart_statistics, to: 'dashboard#chart_statistics'
       resources :products do
         member do
           get 'change_appearance'
@@ -35,7 +36,7 @@ Rails.application.routes.draw do
           put 'update_products'
         end
       end
-      get :update_locale, to: "dashboard#update_locale"
+      resources :contacts, except: [:show]
     end
 
     root 'store#index', as: 'store'
@@ -43,13 +44,14 @@ Rails.application.routes.draw do
     resources :products, only: [:show]
     get 'category/:category', to: 'products#index', as: 'category_products'
 
-    get   :cart,   to: 'carts#show'
-    get   :order,  to: 'orders#new',               as: 'new_order'
-    post  :order,  to: 'orders#create',            as: 'orders'
-    get   :client, to: 'users#new',                as: 'new_user'
-    post  :client, to: 'users#create',             as: 'users'
-    get   :info,   to: 'user_informations#new',    as: 'new_user_information'
-    post  :info,   to: 'user_informations#create', as: 'user_informations'
+    get   :cart,      to: 'carts#show'
+    get   :order,     to: 'orders#new',               as: 'new_order'
+    post  :order,     to: 'orders#create',            as: 'orders'
+    get   :client,    to: 'users#new',                as: 'new_user'
+    post  :client,    to: 'users#create',             as: 'users'
+    get   :info,      to: 'user_informations#new',    as: 'new_user_information'
+    post  :info,      to: 'user_informations#create', as: 'user_informations'
+    get   :contacts,  to: 'store#contacts',           as: 'store_contacts'
   end
   get '*path', to: redirect("/#{I18n.default_locale}/%{path}"), constraints: lambda { |req| !req.path.starts_with? "/#{I18n.default_locale}/" }
   get '', to: redirect("/#{I18n.default_locale}")
