@@ -1,6 +1,13 @@
 Rails.application.routes.draw do
   require 'sidekiq/web'
   scope ":locale",locale: /#{I18n.available_locales.join("|")}/  do
+    namespace :api do
+      namespace :v1 do
+        resources :categories, only: [:index]
+        resources :products,   only: [:index, :show]
+        resources :store,      only: [:index]
+      end
+    end
     devise_for :managers, path: 'manager',
       controllers: { sessions: 'managers/sessions' },
       path_names: { sign_in: 'login', sign_out: 'logout' }

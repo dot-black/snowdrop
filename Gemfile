@@ -21,6 +21,7 @@ gem 'activemodel-serializers-xml'
 
 gem 'sidekiq'
 gem 'sinatra', github: 'sinatra/sinatra'
+gem 'rack-cors'
 
 gem 'sass-rails', '~> 5.0'
 gem 'coffee-rails', '~> 4.2'
