@@ -13,26 +13,34 @@
   </div>
 </div>
 
-<div class="tabs-container">
-  <% @contacts.each do |key, value| %>
-    <h2><%= t "activerecord.attributes.contact.kinds.#{key}" %></h2>
-    <table class="table">
+<div class="wrapper wrapper-content">
+  <table class="table">
+    <% @contacts.each do |key, value| %>
+      <tr>
+        <td colspan="3">
+          <h2><%= t "activerecord.attributes.contact.kinds.#{key}" %></h2>
+        </td>
+      </tr>
       <% value.each do |contact| %>
-        <tr>
-          <td><%= contact.kind == "social" ? content_tag(:i, class:"fa fa-#{Contact.social_types[contact.social_type]}"){} : content_tag(:i, class:"fa fa-#{Contact.kinds[contact.kind]}"){} %></td>
-          <td><%= contact.value %></td>
-          <td class="pull-right">
-            <%= link_to edit_manager_contact_path(contact) do %>
-              <i class="fa fa-pencil-square-o"></i>
+        <tr class="white-bg">
+          <td class="text-center">
+            <% if contact.social? %>
+              <%= content_tag(:i, class:"fa fa-#{Contact.social_types[contact.social_type]}"){}  %>
+            <% else %>
+              <%= content_tag(:i, class:"fa fa-#{Contact.kinds[contact.kind]}"){} %>
             <% end %>
           </td>
-          <td class="pull-right">
+          <td><%= contact.value %></td>
+          <td class="text-center">
+            <%= link_to edit_manager_contact_path(contact) do %>
+              <i class="fa fa-pencil-square"></i>
+            <% end %>
             <%= link_to manager_contact_path(contact), method: :delete do %>
               <i class="fa fa-trash-o"></i>
             <% end %>
           </td>
         </tr>
       <% end %>
-    </table>
-  <% end %>
+    <% end %>
+  </table>
 </div>
