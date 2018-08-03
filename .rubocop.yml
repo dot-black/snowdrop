@@ -704,10 +704,6 @@ Style/MethodCallWithoutArgsParentheses:
 Style/MethodDefParentheses:
   Enabled: false
 
-# Offense count: 1
-Style/MethodMissing:
-  Exclude:
-    - 'spec/support/interactor_stub.rb'
 
 # Offense count: 2
 Style/MixinUsage:
@@ -849,13 +845,6 @@ Style/StringLiterals:
 Style/SymbolArray:
   Enabled: false
 
-# Offense count: 2
-# Cop supports --auto-correct.
-# Configuration parameters: IgnoredMethods.
-# IgnoredMethods: respond_to, define_method
-Style/SymbolProc:
-  Exclude:
-    - 'app/admin/order.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.
@@ -869,10 +858,14 @@ Style/TrailingCommaInArguments:
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyleForMultiline.
 # SupportedStylesForMultiline: comma, consistent_comma, no_comma
-Style/TrailingCommaInLiteral:
+Style/TrailingCommaInArrayLiteral:
   Exclude:
     - 'db/seeds.rb'
-    - 'spec/services/orders/create_spec.rb'
+
+Style/TrailingCommaInHashLiteral:
+  Exclude:
+    - 'db/seeds.rb'
+
 
 # Offense count: 4
 # Cop supports --auto-correct.
