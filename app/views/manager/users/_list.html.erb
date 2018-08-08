@@ -3,41 +3,42 @@
     <div class="ibox">
       <div class="ibox-content">
         <% if @users.present? %>
-        <div class="form-group">
-          <table class="table table-hover table-stripped toggle-arrow-tiny" id="users-table">
-            <thead>
-            <tr>
-              <th class="hidden-xs">ID</th>
-              <th><%= t 'activerecord.attributes.user.email' %></th>
-              <th><%= t 'activerecord.attributes.user_information.name' %></th>
-              <th><%= t 'activerecord.attributes.user_information.telephone' %></th>
-            </tr>
-            </thead>
-            <tbody>
-              <% @users.each do |user|  %>
-                <tr data-link= "<%= manager_user_path(user) %>" class="selectable-row">
-                  <td class="hidden-xs"><%= user.id %></td>
-                  <td><%= user.email.truncate 10 %></td>
-                  <td><%= user.user_informations.last.name.truncate(20) if user.user_informations.present?  %></td>
-                  <td><%= user.user_informations.last.telephone if user.user_informations.present?  %></td>
-                  <td class="unselectable">
-                    <%= link_to manager_user_path(user) do %>
-                        <span class="label label-success col-xs-12 col-sm-12"><%= t 'manager.layout.show' %></span>
-                    <% end %>
-                  </td>
-                </tr>
-              <% end %>
-            </tbody>
-        </table>
+          <div class="form-group">
+            <table class="table table-hover table-stripped toggle-arrow-tiny" id="users-table">
+              <thead>
+              <tr>
+                <th class="hidden-xs">ID</th>
+                <th><%= t('activerecord.attributes.user.email') %></th>
+                <th><%= t('activerecord.attributes.user_information.name') %></th>
+                <th><%= t('activerecord.attributes.user_information.telephone') %></th>
+              </tr>
+              </thead>
+              <tbody>
+                <% @users.each do |user|  %>
+                  <tr data-link= "<%= manager_user_path(user) %>" class="selectable-row">
+                    <td class="hidden-xs"><%= user.id %></td>
+                    <td><%= user.email.truncate 10 %></td>
+                    <td><%= user.user_informations.last.name.truncate(20) if user.user_informations.present?  %></td>
+                    <td><%= user.user_informations.last.telephone if user.user_informations.present?  %></td>
+                    <td class="unselectable">
+                      <%= link_to manager_user_path(user) do %>
+                          <span class="label label-success col-xs-12 col-sm-12"><%= t('manager.layout.show') %></span>
+                      <% end %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
           <div class="text-center">
             <%= paginate @users %>
           </div>
         <% else %>
           <div class="text-center">
-            <h2><%= t 'manager.layout.no_information' %></h2>
+            <h2><%= t('manager.layout.no_information') %></h2>
           </div>
         <% end %>
-      </div>
+      </div>  
     </div>
   </div>
 </div>

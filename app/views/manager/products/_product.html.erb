@@ -13,7 +13,10 @@
             <% else %>
               <span class="product-price"> <%= product.price %> </span>
             <% end %>
-            <small class="text-muted"><%=t 'activerecord.attributes.product.priority' %>: <%= t "activerecord.attributes.product.priorities.#{product.priority}" %></small>
+            <small class="text-muted">
+              <%= t('activerecord.attributes.product.priority') %>:
+              <%= t("activerecord.attributes.product.priorities.#{product.priority}") %>
+            </small>
 
             <span class="product-name">
               <%= product.title.truncate 20 %>
@@ -21,15 +24,21 @@
 
             <div class="m-t text-righ">
               <% unless product.archive %>
-                <%= link_to t('manager.layout.archive'), archive_manager_product_path(product), class: "btn btn-xs btn-outline btn-danger"%>
+                <%= link_to t('manager.layout.archive'), archive_manager_product_path(product),
+                  class: "btn btn-xs btn-outline btn-danger" %>
                 <% if product.visible %>
-                  <%= link_to t('manager.layout.hide'), change_appearance_manager_product_path(product), class: "btn btn-xs btn-outline btn-warning pull-right" %>
+                  <%= link_to t('manager.layout.hide'), change_appearance_manager_product_path(product),
+                    class: "btn btn-xs btn-outline btn-warning pull-right" %>
                 <% else %>
-                  <%= link_to t('manager.layout.release'), change_appearance_manager_product_path(product), class: "btn btn-xs btn-outline btn-primary pull-right" %>
+                  <%= link_to t('manager.layout.release'), change_appearance_manager_product_path(product),
+                    class: "btn btn-xs btn-outline btn-primary pull-right" %>
                 <% end %>
               <% else %>
-                <%= link_to t('manager.layout.delete'), manager_product_path(product), class: "btn btn-xs btn-outline btn-danger", method: "delete" %>
-                <%= link_to t('manager.layout.restore'), archive_manager_product_path(product), class: "btn btn-xs btn-outline btn-warning pull-right" %>
+                <%= link_to t('manager.layout.delete'), manager_product_path(product),
+                  class: "btn btn-xs btn-outline btn-danger",
+                  method: "delete" %>
+                <%= link_to t('manager.layout.restore'), archive_manager_product_path(product),
+                class: "btn btn-xs btn-outline btn-warning pull-right" %>
               <% end %>
             </div>
           </div>

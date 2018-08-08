@@ -5,11 +5,16 @@
 
     <ol class="breadcrumb">
       <li><%= t "manager.layout.#{current_page_name}" %></li>
-      <li><b><%= t 'manager.layout.list' %></b></li>
+      <li>
+        <b><%= t 'manager.layout.list' %></b>
+      </li>
     </ol>
   </div>
   <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-    <h2><%= link_to t('manager.layout.new'), new_manager_contact_path, class: "btn btn-primary pull-right" %></h2>
+    <h2>
+      <%= link_to t('manager.layout.new'), new_manager_contact_path,
+        class: "btn btn-primary pull-right" %>
+      </h2>
   </div>
 </div>
 
@@ -18,7 +23,7 @@
     <% @contacts.each do |key, value| %>
       <tr>
         <td colspan="3">
-          <h2><%= t "activerecord.attributes.contact.kinds.#{key}" %></h2>
+          <h2><%= t("activerecord.attributes.contact.kinds.#{key}") %></h2>
         </td>
       </tr>
       <% value.each do |contact| %>
