@@ -3,6 +3,7 @@ class Order < ApplicationRecord
   enum status: { pending: 0, accepted: 1, declined: 2, completed: 3 }
 
   has_many :line_items, dependent: :destroy
+  has_many :products, through: :line_items, source: :product
   belongs_to :user
   belongs_to :user_information
 

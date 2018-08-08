@@ -39,7 +39,7 @@ class Manager::OrdersController < ApplicationController
   private
 
   def _ensure_order_present
-    @order = Order.find_by(id: params[:id])
+    @order = Order.includes(:products).find_by(id: params[:id])
     redirect_to manager_order_path unless @order
   end
 
