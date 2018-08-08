@@ -24,7 +24,7 @@ class UserInformationsController < StoreController
   end
 
   def _ensure_session_and_user_present
-    @user = User.find_by_id session[:user_id]
+    @user = User.find_by(id: session[:user_id])
     redirect_to new_user_path unless @user
   end
 end

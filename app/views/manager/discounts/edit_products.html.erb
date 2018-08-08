@@ -45,7 +45,7 @@
                         <% end %>
                       </td>
                       <td>
-                        <%= image_tag first_image(product), size: 32 %>
+                        <%= image_tag default_or_first_image(product), size: 32 %>
                         <% if product.discount and product.discount.id == @discount.id %>
                           <i class = "fa fa-check text-navy"></i>
                         <% end %>
