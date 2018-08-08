@@ -24,15 +24,15 @@ class Product < ApplicationRecord
   scope :by_category,       ->(category_id) { where category_id: category_id, archive: false, visible: true }
   # Manager scopes
   scope :relevant,          -> { where(archive: false).reorder created_at: :desc }
-  scope :archival,          -> { where(archive: true) .reorder created_at: :desc }
-  scope :visible,           -> { where(archive: false, visible: true)  .reorder created_at: :desc }
-  scope :hidden,            -> { where(archive: false, visible: false) .reorder created_at: :desc }
+  scope :archival,          -> { where(archive: true).reorder created_at: :desc }
+  scope :visible,           -> { where(archive: false, visible: true).reorder created_at: :desc }
+  scope :hidden,            -> { where(archive: false, visible: false).reorder created_at: :desc }
   scope :manager_category,  ->(category_id) { where(category_id: category_id, archive: false).reorder created_at: :desc }
   # Filterable scopes
   scope :filter_relevant,          ->(_) { where(archive: false).reorder created_at: :desc }
-  scope :filter_archival,          ->(_) { where(archive: true) .reorder created_at: :desc }
-  scope :filter_visible,           ->(_) { where(archive: false, visible: true)  .reorder created_at: :desc }
-  scope :filter_hidden,            ->(_) { where(archive: false, visible: false) .reorder created_at: :desc }
+  scope :filter_archival,          ->(_) { where(archive: true).reorder created_at: :desc }
+  scope :filter_visible,           ->(_) { where(archive: false, visible: true).reorder created_at: :desc }
+  scope :filter_hidden,            ->(_) { where(archive: false, visible: false).reorder created_at: :desc }
   scope :filter_shown,             ->(_) { where archive: false, visible: true, category_id: Category.visible.ids }
   scope :filter_by_category,       ->(category_id) { where category_id: category_id, archive: false, visible: true }
   scope :filter_manager_category,  ->(category_id) { where(category_id: category_id, archive: false).reorder created_at: :desc }
@@ -43,12 +43,5 @@ class Product < ApplicationRecord
     else
       price
     end
-  end
-
-  def self.update_discounts discount, product_ids
-    if discount.products.present?
-      where(id: discount.products.ids - [*product_ids]).update_all(discount_id: nil)
-    end
-    where(id: product_ids).update_all(discount_id: discount.id)
   end
 end
