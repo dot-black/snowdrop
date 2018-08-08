@@ -2,7 +2,7 @@
   <% @product.images.each_with_index do |image, index| %>
     <%= image_tag image, size: 64, class:"manager-product-image" %>
       <%= link_to remove_single_image_manager_product_path(@product, index: index), class:"btn btn-danger btn-xs product-image-preview-icon", remote: true do %>
-        <i class="fa fa-times " aria-hidden="true"></i>
+        <i class="fa fa-times" aria-hidden="true"></i>
       <% end %>
   <% end %>
 <% end %>

@@ -10,7 +10,7 @@ class StoreController < ApplicationController
     _set_contacts_variables
   end
 
-private
+  private
 
   def _set_categories
     @categories = Category.visible

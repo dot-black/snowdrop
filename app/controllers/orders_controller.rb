@@ -29,25 +29,20 @@ class OrdersController < StoreController
     end
   end
 
-private
+  private
 
   def _permitted_order_params
     params.require(:order).permit(:comment, :locale)
   end
 
   def _ensure_user_presisted
-    redirect_to new_user_path unless session[:user_id].present? and _set_user
+    @user = User.find_by(id: session[:user_id])
+    redirect_to new_user_path unless @user
   end
 
   def _ensure_user_information_presisted
-    redirect_to new_user_information_path unless session[:user_information_id].present? and _set_user_information
+    @user_information = UserInformation.find_by(id: session[:user_information_id])
+    redirect_to new_user_information_path unless @user_information
   end
 
-  def _set_user
-    @user = User.find_by_id session[:user_id]
-  end
-
-  def _set_user_information
-    @user_information = UserInformation.find_by_id session[:user_information_id]
-  end
 end

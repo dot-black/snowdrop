@@ -19,10 +19,9 @@ class Managers::SessionsController < Devise::SessionsController
 
   # DELETE /resource/sign_out
   def destroy
-    if sign_out current_manager
-      redirect_to new_manager_session_path
-      flash[:notice] = I18n.t('devise.sessions.signed_out')
-    end
+    return unless sign_out(current_manager)
+    redirect_to new_manager_session_path
+    flash[:notice] = I18n.t('devise.sessions.signed_out')
   end
 
   # protected

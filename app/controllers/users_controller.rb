@@ -16,7 +16,9 @@ class UsersController < StoreController
       render :new
     end
   end
-private
+
+  private
+
   def _permitted_user_params
     params.require(:user).permit :email
   end

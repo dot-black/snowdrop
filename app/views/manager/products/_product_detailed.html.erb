@@ -8,7 +8,7 @@
               <div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
                 <div class="row">
                   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <%= image_tag first_image(product), class:"img-responsive manager-product-image" %>
+                    <%= image_tag default_or_first_image(product), class:"img-responsive manager-product-image" %>
                   </div>
                 </div>
                 <br>
@@ -37,7 +37,7 @@
 
                 <hr>
 
-                <h4><%= t 'activerecord.attributes.product.description' %></h4>
+                <h4><%= t('activerecord.attributes.product.description') %></h4>
 
                 <div class="small text-muted">
                   <%= product.description %>
@@ -46,21 +46,21 @@
                 <hr>
 
                 <dl class="small m-t-md">
-                  <dt><%= t 'activerecord.attributes.product.category' %></dt>
+                  <dt><%= t('activerecord.attributes.product.category') %></dt>
                   <dd>
                     <%= product.category.title %>
                   </dd>
                   <br>
-                  <dt><%= t 'activerecord.attributes.product.size' %></dt>
+                  <dt><%= t('activerecord.attributes.product.size') %></dt>
                   <dd>
                     <%= "#{t('activerecord.attributes.product.sizes.bra').capitalize}: #{product.sizes["bra"].to_a.join(" ")}" if product.sizes["bra"].present? %><br>
                     <%= "#{t('activerecord.attributes.product.sizes.standard').capitalize}: #{product.sizes["standard"].to_a.join(" ")}" if product.sizes["standard"].present? %>
                   </dd>
                   <br>
-                  <dt><%= t 'activerecord.attributes.product.priority' %></dt>
-                  <dd><%= t "activerecord.attributes.product.priorities.#{product.priority}" %></dd>
+                  <dt><%= t('activerecord.attributes.product.priority') %></dt>
+                  <dd><%= t("activerecord.attributes.product.priorities.#{product.priority}") %></dd>
                   <br>
-                  <dt><%= t 'activerecord.attributes.product.discount' %></dt>
+                  <dt><%= t('activerecord.attributes.product.discount') %></dt>
                   <dd>
                     <%= product.discount ? product.discount.title : t('manager.layout.none') %><br>
                     <%= product.discount and product.discount.actual ? t('manager.layout.currently_actual') : t('manager.layout.was_actual') %>

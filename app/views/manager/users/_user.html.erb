@@ -5,69 +5,70 @@
       <div class="hr-line-dashed"></div>
       <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <strong>ID: </strong><%= @user.id  %>
+          <strong>ID: </strong><%= @user.id  %>
+        </div>
       </div>
-    </div>
-    <div class="hr-line-dashed"></div>
-    <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <strong><%= t 'activerecord.attributes.user.email' %>: </strong><%=@user.email%>
+      <div class="hr-line-dashed"></div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <strong><%= t 'activerecord.attributes.user.email' %>: </strong><%=@user.email%>
+        </div>
       </div>
-    </div>
-    <div class="hr-line-dashed"></div>
-    <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <strong><%= t 'activerecord.attributes.user_information.name' %>: </strong>
-        <% if @user.user_informations.present?%>
-          <%= @user.user_informations.last.name %>
-          <% if @user.user_informations.size > 1 %>
+      <div class="hr-line-dashed"></div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <strong><%= t 'activerecord.attributes.user_information.name' %>: </strong>
+          <% if @user.user_informations.present?%>
+            <%= @user.user_informations.last.name %>
+            <% if @user.user_informations.size > 1 %>
+              <br>
+              <%= collapse_button t('manager.layout.show'), "btn btn-xs btn-outline btn-primary", "names-list", @user.user_informations do |item| %>
+                <%= item.name %>
+              <% end %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+      <div class="hr-line-dashed"></div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <strong><%= t 'activerecord.attributes.user_information.telephone' %>: </strong>
+          <% if @user.user_informations.present? %>
+            <%= @user.user_informations.last.telephone %>
+            <% if @user.user_informations.size > 1 %>
             <br>
-            <%= collapse_button t('manager.layout.show'), "btn btn-xs btn-outline btn-primary", "names-list", @user.user_informations do |item| %>
-              <%= item.name %>
+              <%= collapse_button t('manager.layout.show'), "btn btn-xs btn-outline btn-primary", "telephones-list", @user.user_informations do |item| %>
+                <%= item.telephone %>
+              <% end %>
             <% end %>
           <% end %>
-        <% end %>
+        </div>
       </div>
+      <div class="hr-line-dashed"></div>
     </div>
-    <div class="hr-line-dashed"></div>
-    <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <strong><%= t 'activerecord.attributes.user_information.telephone' %>: </strong>
-        <% if @user.user_informations.present? %>
-          <%= @user.user_informations.last.telephone %>
-          <% if @user.user_informations.size > 1 %>
-          <br>
-            <%= collapse_button t('manager.layout.show'), "btn btn-xs btn-outline btn-primary", "telephones-list", @user.user_informations do |item| %>
-              <%= item.telephone %>
-            <% end %>
-          <% end %>
-        <% end %>
-      </div>
-    </div>
-    <div class="hr-line-dashed"></div>
-  </div>
 
-  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-    <h2><%= t 'manager.layout.orders' %></h1>
-    <div class="hr-line-dashed"></div>
-    <table class="table table-bordered table-hover table-striped toggle-arrow-tiny" >
-      <th>ID</th>
-      <th><%= t 'activerecord.attributes.order.amount' %></th>
-      <th><%= t 'activerecord.attributes.order.status' %></th>
-      <th><%= t 'activerecord.attributes.order.updated_at' %></th>
-      <tbody>
-        <% unless @user.orders.present? %>
-          <p class="text-center"> <%= t 'manager.layout.no_information' %></p>
-        <% end %>
-        <% @user.orders.each do |order| %>
-          <tr data-link= "<%= manager_order_path(order) %>" class="selectable-row">
-            <td><%= order.id %></td>
-            <td><%= number_to_currency order.amount %></td>
-            <td><%= t "activerecord.attributes.order.statuses.#{order.status}" %></td>
-            <td><%= l order.updated_at %></td>
-          </tr>
-        <% end  %>
-      </tbody>
-    </table>
-  </div>
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+      <h2><%= t 'manager.layout.orders' %></h2>
+      <div class="hr-line-dashed"></div>
+      <table class="table table-bordered table-hover table-striped toggle-arrow-tiny" >
+        <th>ID</th>
+        <th><%= t 'activerecord.attributes.order.amount' %></th>
+        <th><%= t 'activerecord.attributes.order.status' %></th>
+        <th><%= t 'activerecord.attributes.order.updated_at' %></th>
+        <tbody>
+          <% unless @user.orders.present? %>
+            <p class="text-center"> <%= t 'manager.layout.no_information' %></p>
+          <% end %>
+          <% @user.orders.each do |order| %>
+            <tr data-link= "<%= manager_order_path(order) %>" class="selectable-row">
+              <td><%= order.id %></td>
+              <td><%= number_to_currency order.amount %></td>
+              <td><%= t "activerecord.attributes.order.statuses.#{order.status}" %></td>
+              <td><%= l order.updated_at %></td>
+            </tr>
+          <% end  %>
+        </tbody>
+      </table>
+    </div>
+  </div>  
 </div>

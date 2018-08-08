@@ -21,7 +21,7 @@
                 <% @orders.each do |order|  %>
                   <tr data-link="<%= manager_order_path(order) %>" class="selectable-row">
                     <td><%= order.id %></td>
-                    <td><%= order.user_information.name.truncate 20 %>
+                    <td><%= order.user_information.name.truncate 20 %></td>
                     <td class="hidden-xs hidden-sm"><%= order.user.email.truncate 20 %></td>
                     <td class="hidden-xs hidden-sm"><%= order.user_information.telephone %></td>
                     <td class="hidden-xs"><%= number_to_currency order.amount %></td>
@@ -29,16 +29,23 @@
                     <td class="hidden-xs hidden-sm"><%= time_delay order.created_at %></td>
                     <td class="unselectable">
                       <%= link_to manager_order_path(order) do %>
-                        <% case order.status %>
-                        <% when "pending" %>
-                          <span class="label label-success col-xs-12 col-sm-12"><%= t "activerecord.attributes.order.statuses.#{order.status}" %></span>
-                        <% when "accepted" %>
-                          <span class="label label-warning col-xs-12 col-sm-12"><%= t "activerecord.attributes.order.statuses.#{order.status}" %></span>
-                        <% when "declined" %>
-                          <span class="label label-danger col-xs-12 col-sm-12"><%= t "activerecord.attributes.order.statuses.#{order.status}" %></span>
-                        <% when "completed" %>
-                          <span class="label label-primary col-xs-12 col-sm-12"><%= t "activerecord.attributes.order.statuses.#{order.status}" %></span>
-                        <% end  %>
+                        <% if order.pending? %>
+                          <span class="label label-success col-xs-12 col-sm-12">
+                            <%= t "activerecord.attributes.order.statuses.#{order.status}" %>
+                          </span>
+                        <% elsif order.accepted? %>
+                          <span class="label label-warning col-xs-12 col-sm-12">
+                            <%= t "activerecord.attributes.order.statuses.#{order.status}" %>
+                          </span>
+                        <% elsif order.declined? %>
+                          <span class="label label-danger col-xs-12 col-sm-12">
+                            <%= t "activerecord.attributes.order.statuses.#{order.status}" %>
+                          </span>
+                        <% elsif order.completed? %>
+                          <span class="label label-primary col-xs-12 col-sm-12">
+                            <%= t "activerecord.attributes.order.statuses.#{order.status}" %>
+                          </span>
+                        <% end %>
                       <% end %>
                     </td>
                   </tr>

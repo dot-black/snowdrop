@@ -1,9 +1,9 @@
 <div class="row wrapper border-bottom white-bg page-heading">
   <div class="col-lg-10">
-    <h2><%= t "manager.layout.#{current_page_name}" %></h2>
+    <h2><%= t("manager.layout.#{current_page_name}") %></h2>
     <ol class="breadcrumb">
-      <li><%= t "manager.layout.#{current_page_name}" %></li>
-      <li><b><%= t 'manager.layout.edit' %></b></li>
+      <li><%= t("manager.layout.#{current_page_name}") %></li>
+      <li><b><%= t('manager.layout.edit') %></b></li>
     </ol>
   </div>
   <div class="col-lg-2"></div>
@@ -45,7 +45,7 @@
                         <% end %>
                       </td>
                       <td>
-                        <%= image_tag first_image(product), size: 32 %>
+                        <%= image_tag default_or_first_image(product), size: 32 %>
                         <% if product.discount and product.discount.id == @discount.id %>
                           <i class = "fa fa-check text-navy"></i>
                         <% end %>

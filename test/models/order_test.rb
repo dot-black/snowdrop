@@ -31,7 +31,7 @@ class OrderTest < ActiveSupport::TestCase
   test "should get orders by their status" do
     Order.statuses.keys.each do |status|
       (Order.statuses.keys - [status]).each do |excluded|
-        assert Order.status(status).map(&:status).exclude?(excluded)
+        assert Order.filter_status(status).map(&:status).exclude?(excluded)
       end
     end
   end

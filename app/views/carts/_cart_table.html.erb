@@ -4,7 +4,7 @@
     <div class="row visible-xs">
       <div class="col-xs-4 cart-mobile-image">
         <%= link_to product_path(line_item.product) do %>
-          <%= image_tag first_image(line_item.product),  class:'img-responsive'%>
+          <%= image_tag default_or_first_image(line_item.product),  class:'img-responsive'%>
         <% end %>
       </div>
       <div class="col-xs-8">
@@ -21,8 +21,11 @@
         <div class="row cart-mobile-quantity pull-left">
           <% if line_item.quantity > 1 %>
             <div class="col-xs-4 text-center">
-              <%= link_to line_item_path(line_item, line_item:{ quantity: "#{line_item.quantity - 1}" }), method: :put, remote: true, class: "minus-button" do  %>
-                <i class="material-icons">remove</i>
+              <%= link_to line_item_path(line_item,
+                line_item:{ quantity: "#{line_item.quantity - 1}" }),
+                method: :put,
+                remote: true, class: "minus-button" do  %>
+                  <i class="material-icons">remove</i>
               <% end  %>
             </div>
           <% else %>
@@ -34,8 +37,12 @@
             <span><strong><%= line_item.quantity %></strong></span>
           </div>
           <div class="col-xs-4 text-center">
-            <%= link_to line_item_path(line_item, line_item:{ quantity: "#{line_item.quantity + 1}" }), method: :put, remote: true, class: "plus-button" do  %>
-              <i class="material-icons">add</i>
+            <%= link_to line_item_path(line_item,
+              line_item:{ quantity: "#{line_item.quantity + 1}" }),
+              method: :put,
+              remote: true,
+              class: "plus-button" do  %>
+                <i class="material-icons">add</i>
             <% end  %>
           </div>
         </div>
@@ -62,7 +69,7 @@
       <tr>
         <td class="col-sm-2 col-md-2 col-lg-2 cart-image" valign="middle">
           <%= link_to product_path(line_item.product) do %>
-            <%= image_tag first_image(line_item.product), class:'img-responsive' %>
+            <%= image_tag default_or_first_image(line_item.product), class:'img-responsive' %>
           <% end %>
         </td>
         <td class="col-sm-3 col-md-3 col-lg-3" valign="middle">
@@ -72,8 +79,12 @@
           <div class="row">
             <% if line_item.quantity > 1 %>
               <div class="col-sm-4 col-md-4 col-lg-4 text-center">
-                <%= link_to line_item_path(line_item, line_item:{ quantity: "#{line_item.quantity - 1}" }), method: :put, remote: true, class: "minus-button" do  %>
-                  <i class="material-icons">remove</i>
+                <%= link_to line_item_path(line_item,
+                  line_item:{ quantity: "#{line_item.quantity - 1}" }),
+                  method: :put,
+                  remote: true,
+                  class: "minus-button" do  %>
+                    <i class="material-icons">remove</i>
                 <% end  %>
               </div>
             <% else %>
@@ -85,8 +96,12 @@
               <span><strong><%= line_item.quantity %></strong></span>
             </div>
             <div class="col-sm-4 col-md-4 col-lg-4 text-center">
-              <%= link_to line_item_path(line_item, line_item:{ quantity: "#{line_item.quantity + 1}" }), method: :put, remote: true, class: "plus-button" do  %>
-                <i class="material-icons">add</i>
+              <%= link_to line_item_path(line_item,
+                line_item:{ quantity: "#{line_item.quantity + 1}" }),
+                method: :put,
+                remote: true,
+                class: "plus-button" do  %>
+                  <i class="material-icons">add</i>
               <% end  %>
             </div>
           </div>

@@ -1,7 +1,11 @@
 <div class="cart-headline text-center">
   <br>
-  <span><%= t 'carts.show.your' %> <i class="material-icons md-24">shopping_cart</i> <%= t 'carts.show.is_empty' %></span>
+  <span>
+    <%= t('carts.show.your') %>
+    <i class="material-icons md-24">shopping_cart</i>
+    <%= t 'carts.show.is_empty' %>
+  </span>
 </div>
 <div class="row text-center">
-    <%= link_to t('carts.show.back_shoping'), store_path,  class:"material-button" %>
+  <%= link_to t('carts.show.back_shoping'), store_path,  class:"material-button" %>
 </div>

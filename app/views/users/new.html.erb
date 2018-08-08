@@ -4,7 +4,7 @@
     <span>
       <%= link_to("#{t '.change_information'}",new_user_information_path) if session[:user_information_id].present? %>
       <%= link_to(" #{t '.back_to_order'}",new_order_path) if session[:user_id].present? and session[:user_information_id].present? %>
-     </span>
+    </span>
   </div>
   <%= render "form"%>
 </div>

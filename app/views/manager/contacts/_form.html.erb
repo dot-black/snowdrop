@@ -16,25 +16,35 @@
         <div class="ibox contact-detail">
           <div class="ibox-content">
             <fieldset class="form-horizontal">
-
-              <div class="form-group">
-                <%= form.label :kind, class:"col-sm-2 col-lg-1 control-label" %>
-                <div class="col-sm-10 col-lg-11">
-                  <%= form.select :kind, Contact.kinds.keys.map{ |key| [t("activerecord.attributes.contact.kinds.#{key}"), key]}, { }, { class:"form-control m-b"} %>
+              <% if @contact.social? %>
+                <div class="form-group">
+                  <%= form.label :kind, class:"col-sm-2 col-lg-1 control-label" %>
+                  <div class="col-sm-10 col-lg-11">
+                    <%= form.select :kind,
+                      Contact.kinds.keys.map{ |key| [t("activerecord.attributes.contact.kinds.#{key}"), key]},
+                      { },
+                      { class: "form-control m-b" } %>
+                  </div>
                 </div>
-              </div>
+              <% end %>
 
               <div class="form-group">
                 <%= form.label :social_type, class:"col-sm-2 col-lg-1 control-label" %>
                 <div class="col-sm-10 col-lg-11">
-                  <%= form.select :social_type, Contact.social_types.keys.map{ |key| [key.capitalize, key ]}, { include_blank: t('manager.layout.none') }, { class:"form-control m-b"} %>
+                  <%= form.select :social_type,
+                    Contact.social_types.keys.map{ |key| [key.capitalize, key ]},
+                    { include_blank: t('manager.layout.none') },
+                    { class:"form-control m-b"} %>
                 </div>
               </div>
 
               <div class="form-group">
                 <%= form.label :value, class:"col-sm-2 col-lg-1 control-label" %>
                 <div class="col-sm-10 col-lg-11">
-                  <%= form.text_field :value, placeholder: t('activerecord.attributes.contact.value'), class: "form-control", required: true %>
+                  <%= form.text_field :value,
+                    placeholder: t('activerecord.attributes.contact.value'),
+                    class: "form-control",
+                    required: true %>
                 </div>
               </div>
 

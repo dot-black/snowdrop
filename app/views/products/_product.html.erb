@@ -6,7 +6,7 @@
           <% if product.discount and product.discount.actual  %>
             <span class="discount-value">-<%= number_to_percentage(product.discount.value, precision: 0) %></span>
           <% end %>
-          <%= image_tag first_image(product), class: "img-responsive" %>
+          <%= image_tag default_or_first_image(product), class: "img-responsive" %>
         </div>
 
         <div class="product-title text-center">

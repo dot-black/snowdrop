@@ -5,7 +5,7 @@ class LineItemsController < StoreController
       if @line_item.save
         _set_cart_variables
         format.html { redirect_to product_path(params[:line_item][:product_id]) }
-        format.js { flash.now[:notice] = t 'line_items.flash.create.success' }
+        format.js { flash.now[:notice] = t('line_items.flash.create.success') }
       else
         format.html { redirect_to store_path, notice: t('line_items.flash.create.failure') }
       end
@@ -13,9 +13,7 @@ class LineItemsController < StoreController
   end
 
   def update
-    unless _set_line_item
-      redirect_to store_path, notice: t('line_items.flash.update.failure')
-    else
+    if _set_line_item
       respond_to do |format|
         if @line_item.update _permitted_line_item_params
           _set_cart_variables
@@ -25,14 +23,13 @@ class LineItemsController < StoreController
           format.html { redirect_to cart_path, notice: t('line_items.flash.update.failure') }
         end
       end
+    else
+      redirect_to store_path, notice: t('line_items.flash.update.failure')
     end
-
   end
 
   def destroy
-    unless _set_line_item
-      redirect_to store_path, notice: t('line_items.flash.destroy.failure')
-    else
+    if _set_line_item
       respond_to do |format|
         if @line_item.destroy
           _set_cart_variables
@@ -42,17 +39,20 @@ class LineItemsController < StoreController
           format.html { redirect_to cart_path, notice: t('line_items.flash.destroy.failure') }
         end
       end
+    else
+      redirect_to store_path, notice: t('line_items.flash.destroy.failure')
     end
   end
 
-private
+  private
 
   def _permitted_line_item_params
-    params.require(:line_item).permit(:product_id, :quantity, size:[:bra, :panties, :standard])
+    params.require(:line_item).permit :product_id,
+                                      :quantity,
+                                      size: [:bra, :panties, :standard]
   end
 
   def _set_line_item
     @line_item = LineItem.find_by_id params[:id]
   end
-
 end

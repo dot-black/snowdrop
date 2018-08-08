@@ -12,22 +12,18 @@ class Manager::DashboardController < ApplicationController
     render json: { line: SetLineChart.run!, donut: SetDonutChart.run! }
   end
 
-private
+  private
 
   def _get_products
-    outcome = GetScopeStat.run({
-      scopes:[:visible, :hidden],
-      model: Product,
-      scope_for_total: :relevant
-    })
+    outcome = GetScopeStat.run scopes: [:visible, :hidden],
+                               model: Product,
+                               scope_for_total: :relevant
     @products = outcome.valid? ? outcome.result : nil
   end
 
   def _get_orders
-    outcome = GetScopeStat.run({
-      scopes: Order.statuses.keys.map(&:to_sym),
-      model: Order
-    })
+    outcome = GetScopeStat.run scopes: Order.statuses.keys.map(&:to_sym),
+                               model: Order
     @orders = outcome.valid? ? outcome.result : nil
   end
 

@@ -7,8 +7,8 @@
             <table class="table table-hover table-stripped toggle-arrow-tiny" id="discounts-table">
               <thead>
                 <tr>
-                  <th><%= t 'activerecord.attributes.discount.title' %></th>
-                  <th><%= t 'activerecord.attributes.discount.value' %></th>
+                  <th><%= t('activerecord.attributes.discount.title') %></th>
+                  <th><%= t('activerecord.attributes.discount.value') %></th>
                   <th class="hidden-xs"><%= t 'activerecord.attributes.discount.start_at' %></th>
                   <th class="hidden-xs"><%= t 'activerecord.attributes.discount.end_at' %></th>
                   <th class="hidden-xs"><%= t 'manager.layout.products'%></th>
@@ -18,7 +18,7 @@
               <tbody>
                 <% @discounts.each do |discount|  %>
                   <tr data-link= "<%= manager_discount_path(discount) %>" class="selectable-row">
-                    <td><%= discount.title %>
+                    <td><%= discount.title %></td>
                     <td><%= number_to_percentage discount.value, precision: 0 %></td>
                     <td class="hidden-xs"><%= discount.start_at ? discount.start_at.strftime("%d.%m.%Y") : t('manager.layout.always')%></td>
                     <td class="hidden-xs"><%= discount.end_at ? discount.end_at.strftime("%d.%m.%Y") : t('manager.layout.never')%></td>
