@@ -12,8 +12,7 @@ class Manager::CategoriesController < ApplicationController
     @category = Category.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @category = Category.new _permitted_category_params
@@ -23,7 +22,7 @@ class Manager::CategoriesController < ApplicationController
         format.html { redirect_to manager_categories_path, notice: t('manager.categories.flash.create.success') }
       else
         format.html { render :new }
-        flash.now.notice = t 'manager.categories.flash.create.failure'
+        flash.now.notice = t('manager.categories.flash.create.failure')
       end
     end
   end
@@ -34,15 +33,20 @@ class Manager::CategoriesController < ApplicationController
         format.html { redirect_to manager_categories_path, notice: t('manager.categories.flash.update.success') }
       else
         format.html { render :edit }
-        flash.now.notice = t 'manager.categories.flash.update.failure'
+        flash.now.notice = t('manager.categories.flash.update.failure')
       end
     end
   end
 
   def destroy
     respond_to do |format|
-      unless @category_orders.any?
-        notice = @category.destroy ? t('manager.categories.flash.destroy.success') : t('manager.categories.flash.destroy.failure')
+      if @category_orders.empty?
+        notice =
+          if @category.destroy
+            t('manager.categories.flash.destroy.success')
+          else
+            t('manager.categories.flash.destroy.failure')
+          end
         format.html { redirect_to manager_categories_path, notice: notice }
         format.js
       else
@@ -54,21 +58,27 @@ class Manager::CategoriesController < ApplicationController
   def change_appearance
     respond_to do |format|
       if @category.update visible: !@category.visible
-        format.html { redirect_to manager_categories_path, notice: @category.visible ?  t('manager.categories.flash.change_appearance.visible') : t('manager.categories.flash.change_appearance.invisible') }
+        notice =
+          if @category.visible
+            t('manager.categories.flash.change_appearance.visible')
+          else
+            t('manager.categories.flash.change_appearance.invisible')
+          end
+        format.html { redirect_to manager_categories_path, notice: notice  }
       else
         format.html { redirect_to manager_categories_path, notice: t('manager.categories.flash.change_appearance.failure') }
       end
     end
   end
 
-private
+  private
 
   def _set_category
     @category = Category.find_by_id params[:id]
   end
 
   def _ensure_category_present
-    redirect_to manager_categories_path unless params[:id].present? and _set_category
+    redirect_to manager_categories_path unless params[:id].present? && _set_category
   end
 
   def _set_categories

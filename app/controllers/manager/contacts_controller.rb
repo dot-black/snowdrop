@@ -1,20 +1,19 @@
 class Manager::ContactsController < ApplicationController
   before_action :authenticate_manager!
-  before_action :_set_contact, only:[:edit, :update, :destroy, :create]
+  before_action :_set_contact, only: [:edit, :update, :destroy, :create]
 
   layout 'managers/dashboard'
 
   def index
     @contacts = {}
-    Contact.kinds.keys.each{ |kind| @contacts[kind] = Contact.public_send kind }
+    Contact.kinds.keys.each { |kind| @contacts[kind] = Contact.public_send kind }
   end
 
   def new
     @contact = Contact.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @contact = Contact.new _permitted_contact_params
@@ -44,19 +43,18 @@ class Manager::ContactsController < ApplicationController
       if @contact.destroy
         format.html { redirect_to manager_contacts_path, notice: t('manager.contacts.flash.destroy.success') }
       else
-        format.html { redirect_to manager_contacts_path, notice: (t 'manager.contacts.flash.destroy.failure')}
+        format.html { redirect_to manager_contacts_path, notice: (t 'manager.contacts.flash.destroy.failure') }
       end
     end
   end
 
-private
+  private
 
   def _set_contact
     @contact = Contact.find_by_id params[:id]
   end
 
   def _permitted_contact_params
-    params.require(:contact).permit(:kind, :value, :social_type )
+    params.require(:contact).permit(:kind, :value, :social_type)
   end
-
 end

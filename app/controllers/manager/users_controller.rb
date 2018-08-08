@@ -11,13 +11,8 @@ class Manager::UsersController < ApplicationController
   end
 
   def show
-    redirect_to users_path unless params[:id].present? and _set_user
-  end
-
-private
-
-  def _set_user
-    @user = User.find_by_id params[:id]
+    @user = User.find_by(id: params[:id])
+    redirect_to users_path unless @user
   end
 
 end

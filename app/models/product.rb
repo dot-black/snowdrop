@@ -4,10 +4,8 @@ class Product < ApplicationRecord
   translates :description
   mount_uploaders :images, ProductImageUploader
 
-  enum size: {
-    standard: [ "XS", "S", "M", "L", "XL"],
-    bra:      [ "70A", "70B", "70C", "75A", "75B", "75C", "75D", "80B", "80C", "85B", "85C" ]
-  }
+  enum size: { standard: %w[XS S M L XL],
+               bra:      %w[70A 70B 70C 75A 75B 75C 75D 80B 80C 85B 85C] }
   enum priority: { hi: 1, mid: 2, low: 3 }
 
   has_many :line_items
@@ -40,10 +38,17 @@ class Product < ApplicationRecord
   scope :filter_manager_category,  ->(category_id) { where(category_id: category_id, archive: false).reorder created_at: :desc }
 
   def discount_price
-    if discount and discount.actual
+    if discount.present? && discount.actual
       (price * (1 - discount.value * 0.01)).round(2)
     else
       price
     end
+  end
+
+  def self.update_discounts discount, product_ids
+    if discount.products.present?
+      where(id: discount.products.ids - [*product_ids]).update_all(discount_id: nil)
+    end
+    where(id: product_ids).update_all(discount_id: discount.id)
   end
 end

@@ -8,10 +8,13 @@ class Order < ApplicationRecord
 
   validates :comment, length: { maximum: 500 }
 
-  scope :filter_status,                        -> (status)  { where(status: status).reorder created_at: :desc }
-  scope :search_by_name_or_email_or_telephone, -> (query)   { joins(:user_information).joins(:user).merge(
-                                                              UserInformation.search_by_telephone(query)
-                                                              .or(UserInformation.search_by_name(query))
-                                                              .or(User.search_by_email(query))) }
+  scope :filter_status, ->(status)  { where(status: status).reorder created_at: :desc }
   paginates_per 20
+
+  def self.search_by_name_or_email_or_telephone query
+    joins(:user_information).joins(:user)
+                            .merge(UserInformation.search_by_telephone(query)
+                            .or(UserInformation.search_by_name(query))
+                            .or(User.search_by_email(query)))
+  end
 end
