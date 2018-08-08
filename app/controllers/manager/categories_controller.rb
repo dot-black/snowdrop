@@ -50,7 +50,7 @@ class Manager::CategoriesController < ApplicationController
         format.html { redirect_to manager_categories_path, notice: notice }
         format.js
       else
-        format.html { redirect_to manager_categories_path, notice: (t 'manager.categories.flash.destroy.involvement') }
+        format.html { redirect_to manager_categories_path, notice: t('manager.categories.flash.destroy.involvement') }
       end
     end
   end

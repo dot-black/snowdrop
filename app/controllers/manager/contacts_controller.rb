@@ -19,10 +19,10 @@ class Manager::ContactsController < ApplicationController
     @contact = Contact.new _permitted_contact_params
     respond_to do |format|
       if @contact.save
-        format.html { redirect_to manager_contacts_path, notice: (t 'manager.contacts.flash.create.success') }
+        format.html { redirect_to manager_contacts_path, notice: t('manager.contacts.flash.create.success') }
       else
         format.html { render :new }
-        flash.now.notice = t 'manager.contacts.flash.create.failure'
+        flash.now.notice = t('manager.contacts.flash.create.failure')
       end
     end
   end
@@ -30,10 +30,10 @@ class Manager::ContactsController < ApplicationController
   def update
     respond_to do |format|
       if @contact.update _permitted_contact_params
-        format.html { redirect_to manager_contacts_path, notice: (t 'manager.contacts.flash.update.success') }
+        format.html { redirect_to manager_contacts_path, notice: t('manager.contacts.flash.update.success') }
       else
         format.html { render :edit }
-        flash.now.notice = t 'manager.contacts.flash.update.failure'
+        flash.now.notice = t('manager.contacts.flash.update.failure')
       end
     end
   end
@@ -43,7 +43,7 @@ class Manager::ContactsController < ApplicationController
       if @contact.destroy
         format.html { redirect_to manager_contacts_path, notice: t('manager.contacts.flash.destroy.success') }
       else
-        format.html { redirect_to manager_contacts_path, notice: (t 'manager.contacts.flash.destroy.failure') }
+        format.html { redirect_to manager_contacts_path, notice: t('manager.contacts.flash.destroy.failure') }
       end
     end
   end

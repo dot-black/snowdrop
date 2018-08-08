@@ -19,9 +19,9 @@ class Manager::DiscountsController < ApplicationController
     @discount = Discount.new _permitted_discount_params
     respond_to do |format|
       if @discount.save
-        format.html { redirect_to manager_discounts_path, notice: (t 'manager.discounts.flash.create.success') }
+        format.html { redirect_to manager_discounts_path, notice: t('manager.discounts.flash.create.success') }
       else
-        flash.now.notice = t 'manager.discounts.flash.create.failure'
+        flash.now.notice = t('manager.discounts.flash.create.failure')
         format.html { render :new }
       end
     end
@@ -30,7 +30,7 @@ class Manager::DiscountsController < ApplicationController
   def update
     respond_to do |format|
       if @discount.update _permitted_discount_params
-        format.html { redirect_to manager_discount_path(@discount), notice: (t 'manager.discounts.flash.update.success') }
+        format.html { redirect_to manager_discount_path(@discount), notice: t('manager.discounts.flash.update.success') }
       else
         flash.now.notice = t 'manager.discounts.flash.update.failure'
         format.html { render :edit }
@@ -73,7 +73,10 @@ class Manager::DiscountsController < ApplicationController
   end
 
   def update_products
-    Product.update_discounts(@discount, params[:product_ids])
+    if @discount.products.present?
+      Product.where(id: @discount.products.ids - [*params[:product_ids]]).update_all(discount_id: nil)
+    end
+    Product.where(id: params[:product_ids]).update_all(discount_id: @discount.id)
     redirect_to edit_products_manager_discount_path
   end
 
