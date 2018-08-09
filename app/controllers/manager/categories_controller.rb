@@ -90,6 +90,6 @@ class Manager::CategoriesController < ApplicationController
   end
 
   def _permitted_category_params
-    params.require(:category).permit(:title, :slug, :image)
+    params.require(:category).permit(:title, :slug, :image, translations_attributes: [:id, :attribute_name, :locale, :value])
   end
 end
