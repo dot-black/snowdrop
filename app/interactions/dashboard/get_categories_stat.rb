@@ -9,14 +9,15 @@ class GetCategoriesStat < ActiveInteraction::Base
     @result
   end
 
-private
+  private
+
   def _set_empty_result
     @result = {}
   end
 
   def _set_products_count_for_each_category
     Category.all.each do |category|
-      @result[category.title.downcase] = {
+      @result[category.slug] = {
         count: Product.public_send(scope_for_product, category.id).count,
         id: category.id
       }
