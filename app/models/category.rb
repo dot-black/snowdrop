@@ -13,6 +13,7 @@ class Category < ApplicationRecord
   validates :title, :slug, :image, presence: true
   validates :slug, format: { with: SLUG_REGEX }, uniqueness: true
 
+  default_scope { includes(:translations) }
   scope :visible, -> { where arel_table[:visible].eq true  }
   scope :hidden,  -> { where arel_table[:visible].eq false }
 

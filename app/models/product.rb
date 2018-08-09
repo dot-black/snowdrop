@@ -23,7 +23,7 @@ class Product < ApplicationRecord
     message: I18n.translate('activerecord.errors.messages.invalid_price')
   }
   # Client scopes
-  default_scope { order priority: :asc }
+  default_scope { includes(:translations).order priority: :asc }
   scope :shown,             -> { where archive: false, visible: true, category_id: Category.visible.ids }
   scope :by_category,       ->(category_id) { where category_id: category_id, archive: false, visible: true }
   # Manager scopes
