@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171112090541) do
+ActiveRecord::Schema.define(version: 20180809164711) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -125,6 +125,17 @@ ActiveRecord::Schema.define(version: 20171112090541) do
     t.jsonb "sizes"
     t.bigint "discount_id"
     t.index ["discount_id"], name: "index_products_on_discount_id"
+  end
+
+  create_table "translations", force: :cascade do |t|
+    t.string "attribute_name", null: false
+    t.text "value"
+    t.string "locale", null: false
+    t.integer "translateable_id"
+    t.string "translateable_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["translateable_type", "translateable_id"], name: "index_translations_on_translateable_type_and_translateable_id"
   end
 
   create_table "user_informations", force: :cascade do |t|
