@@ -290,8 +290,8 @@ ru:
       contact: "Контакт"
     attributes:
       category:
-        title: "Заголовок"
-        slug: "Семантический URL"
+        title: "Заголовок %{language}"
+        slug: "Семантический URL %{language}"
         image: "Картинка"
       discount:
         title: "Заголовок"
@@ -339,6 +339,9 @@ ru:
           other: "Размеры"
           bra: "Бюст"
           standard: "Трусы"
+        translation:
+          description: "Описание %{language}"
+          title: "Заголовок %{language}"
       user_information:
         name: "Имя"
         telephone: "Телефон"
