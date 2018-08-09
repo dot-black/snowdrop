@@ -27,17 +27,22 @@
                 <%= image_tag category_image(@category.image), class:'img-responsive' %>
                 <div class="panel-body">
                   <fieldset class="form-horizontal">
-                    <div class="field">
-                      <div class="form-group">
-                        <%= form.label :title, class:"hidden-xs col-sm-2 col-md-2 col-lg-2  control-label" %>
-                        <div class="col-xs-12 col-sm-10 col-md-10 col-lg-10">
-                          <%= form.text_field :title,
-                            id: :category_title,
-                            placeholder: t('activerecord.attributes.category.title'),
-                            class:"form-control" %>
+                    <%= form.fields_for :translations do |ff| %>
+                      <div class="field">
+                        <div class="form-group">
+                          <%= ff.label t("activerecord.attributes.translation.#{ff.object.attribute_name}", language: ff.object.locale),
+                            class: "hidden-xs col-sm-2 col-md-2 col-lg-2 control-label" %>
+                          <div class="col-xs-12 col-sm-10 col-md-10 col-lg-10">
+                            <%= ff.text_field :value,
+                              placeholder: t('activerecord.attributes.category.title'),
+                              class:"form-control" %>
+                            <%= ff.hidden_field :id, value: ff.object.id %>
+                            <%= ff.hidden_field :attribute_name, value: ff.object.attribute_name %>
+                            <%= ff.hidden_field :locale, value: ff.object.locale %>
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    <% end %>
 
                     <div class="field">
                       <div class="form-group">
