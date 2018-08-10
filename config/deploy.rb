@@ -25,7 +25,6 @@ set :pty, true
 
 set :linked_files, %w[config/database.yml
                       config/sidekiq.yml
-                      config/credentials.yml.enc
                       config/master.key]
 
 # Default value for linked_dirs is []

@@ -9,7 +9,7 @@ Bundler.require(*Rails.groups)
 module Snowdrop
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 5.1
+    config.load_defaults 5.2
     config.autoload_paths += Dir.glob("#{config.root}/app/interactions/*")
     config.time_zone = 'Kyiv'
     config.i18n.fallbacks = true
