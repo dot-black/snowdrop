@@ -339,6 +339,9 @@ ua:
           hi: "Вис."
           low: "Низ."
           mid: "Сер."
+      translation:
+        description: "Опис %{language}"
+        title: "Заголовок %{language}"
       user_information:
         name: "Ім'я"
         telephone: "Телефон"

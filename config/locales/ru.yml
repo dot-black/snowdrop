@@ -339,6 +339,9 @@ ru:
           other: "Размеры"
           bra: "Бюст"
           standard: "Трусы"
+        translation:
+          description: "Описание %{language}"
+          title: "Заголовок %{language}"
       user_information:
         name: "Имя"
         telephone: "Телефон"

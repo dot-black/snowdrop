@@ -24,6 +24,6 @@ class ProductsController < StoreController
   end
 
   def _set_category
-    @current_category = FetchCategory.run!(category_parameter: params[:category])
+    @current_category = Category.find_by(slug: params[:category])
   end
 end

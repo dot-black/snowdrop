@@ -284,6 +284,9 @@ en:
           one: "Size"
           bra: "Bra"
           standard: "Panties"
+      translation:
+        description: "Description %{language}"
+        title: "Title %{language}"
       user_information:
         name: "Name"
         telephone: "Telephone"

@@ -1,7 +1,10 @@
 class Product < ApplicationRecord
+  TRANSLATEABLE_ATTRBUTES = [:title, :description].freeze
+
   include Filterable
-  attribute :description
-  translates :description
+  include Translateable
+  translate TRANSLATEABLE_ATTRBUTES
+
   mount_uploaders :images, ProductImageUploader
 
   enum size: { standard: %w[XS S M L XL],
@@ -10,6 +13,7 @@ class Product < ApplicationRecord
 
   has_many :line_items
   has_many :orders, through: :line_items
+  has_many :translations, as: :translateable
   belongs_to :category
   belongs_to :discount, optional: true
 
@@ -19,7 +23,7 @@ class Product < ApplicationRecord
     message: I18n.translate('activerecord.errors.messages.invalid_price')
   }
   # Client scopes
-  default_scope { order priority: :asc }
+  default_scope { includes(:translations).order priority: :asc }
   scope :shown,             -> { where archive: false, visible: true, category_id: Category.visible.ids }
   scope :by_category,       ->(category_id) { where category_id: category_id, archive: false, visible: true }
   # Manager scopes
@@ -36,6 +40,10 @@ class Product < ApplicationRecord
   scope :filter_shown,             ->(_) { where archive: false, visible: true, category_id: Category.visible.ids }
   scope :filter_by_category,       ->(category_id) { where category_id: category_id, archive: false, visible: true }
   scope :filter_manager_category,  ->(category_id) { where(category_id: category_id, archive: false).reorder created_at: :desc }
+
+  accepts_nested_attributes_for :translations, reject_if: :all_blank
+
+  after_create :add_translations
 
   def discount_price
     if discount.present? && discount.actual

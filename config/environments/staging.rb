@@ -93,6 +93,6 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   routes.default_url_options = {
-    host: "http://aridar.com"
+    host: "http://staging.aridar.com"
   }
 end
