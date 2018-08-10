@@ -19,7 +19,7 @@ class Manager::CategoriesController < ApplicationController
 
     respond_to do |format|
       if @category.save
-        format.html { redirect_to manager_categories_path, notice: t('manager.categories.flash.create.success') }
+        format.html { redirect_to edit_manager_category_path(@category), notice: t('manager.categories.flash.create.success') }
       else
         format.html { render :new }
         flash.now.notice = t('manager.categories.flash.create.failure')
@@ -90,6 +90,6 @@ class Manager::CategoriesController < ApplicationController
   end
 
   def _permitted_category_params
-    params.require(:category).permit(:title, :slug, :image)
+    params.require(:category).permit(:title, :slug, :image, translations_attributes: [:id, :attribute_name, :locale, :value])
   end
 end

@@ -62,7 +62,7 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
       assert_difference 'Product.count' do
         post manager_products_path(locale: locale), params: { product: @product.as_json }
       end
-      assert_redirected_to manager_products_path locale: locale
+      assert_redirected_to edit_manager_product_path(Product.order(:created_at).last), locale: locale
       assert_equal (I18n.translate 'manager.products.flash.create.success'), flash[:notice]
     end
 
