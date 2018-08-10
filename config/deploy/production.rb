@@ -9,6 +9,7 @@
 server "aridar.com", user: "deploy", roles: %w{app db web}
 set :branch,    'master'
 set :rails_env, 'production'
+set :deploy_to, '/home/deploy/www/snowdrop/production'
 
 # role-based syntax
 # ==================

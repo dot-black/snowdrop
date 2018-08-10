@@ -8,9 +8,7 @@ set :rbenv_type, :user
 set :rbenv_ruby, '2.5.1'
 
 set :passenger_restart_with_touch, true
-set :deploy_to, "/home/deploy/windblow"
 set :pty, true
-
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -27,7 +25,7 @@ set :pty, true
 
 set :linked_files, %w[config/database.yml
                       config/sidekiq.yml
-                      config/secrets.yml
+                      config/credentials.yml.enc
                       config/master.key]
 
 # Default value for linked_dirs is []

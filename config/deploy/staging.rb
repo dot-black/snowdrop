@@ -10,6 +10,7 @@
 server "staging.aridar.com", user: "deploy", roles: %w{app db web}
 set :branch,    'staging'
 set :rails_env, 'staging'
+set :deploy_to, '/home/deploy/www/snowdrop/staging'
 
 # role-based syntax
 # ==================
