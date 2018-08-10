@@ -290,8 +290,8 @@ ru:
       contact: "Контакт"
     attributes:
       category:
-        title: "Заголовок %{language}"
-        slug: "Семантический URL %{language}"
+        title: "Заголовок"
+        slug: "Семантический URL"
         image: "Картинка"
       discount:
         title: "Заголовок"
