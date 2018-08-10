@@ -1,5 +1,5 @@
 class Product < ApplicationRecord
-  TRANSLATEABLE_ATTRBUTES = [:description].freeze
+  TRANSLATEABLE_ATTRBUTES = [:title, :description].freeze
 
   include Filterable
   include Translateable
@@ -41,7 +41,7 @@ class Product < ApplicationRecord
   scope :filter_by_category,       ->(category_id) { where category_id: category_id, archive: false, visible: true }
   scope :filter_manager_category,  ->(category_id) { where(category_id: category_id, archive: false).reorder created_at: :desc }
 
-  accepts_nested_attributes_for :translations
+  accepts_nested_attributes_for :translations, reject_if: :all_blank
 
   after_create :add_translations
 
