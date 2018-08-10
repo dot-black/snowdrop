@@ -128,7 +128,7 @@ class Manager::ProductsController < ApplicationController
                                     :index,
                                     :category_id,
                                     sizes: [bra: [], panties: [], standard: []],
-                                    translations_attributes: [:attribute_name, :locale, :value]
+                                    translations_attributes: [:id, :attribute_name, :locale, :value]
   end
 
   def _permitted_product_images_params
