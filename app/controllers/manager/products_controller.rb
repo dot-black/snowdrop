@@ -32,7 +32,7 @@ class Manager::ProductsController < ApplicationController
     respond_to do |format|
       if @product.save
         _add_more_images if _permitted_product_images_params.present?
-        format.html { redirect_to manager_products_path, notice: t('manager.products.flash.create.success') }
+        format.html { redirect_to edit_manager_product_path(@product), notice: t('manager.products.flash.create.success') }
       else
         format.html { render :new }
         flash.now.notice = t('manager.products.flash.create.failure')
