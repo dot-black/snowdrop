@@ -48,3 +48,6 @@ test/support
 
 #Ignore dump.rdb
 dump.rdb
+
+# Ignore encrypted secrets key file.
+config/secrets.yml.key
