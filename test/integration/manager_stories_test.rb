@@ -41,7 +41,7 @@ class ManagerStoriesTest < ActionDispatch::IntegrationTest
           image: fixture_file_upload(Rails.root.join('test','fixtures','files', 'image.png'))
         }
       }
-      assert_redirected_to manager_categories_path
+      assert_redirected_to edit_manager_category_path(Category.last)
       new_category = Category.find_by title: "New category"
       assert new_category.present?
       assert_not new_category.visible
@@ -88,7 +88,7 @@ class ManagerStoriesTest < ActionDispatch::IntegrationTest
           sizes:{ standard:["XS"], bra:["70C"] }
         }
       }
-      assert_redirected_to manager_products_path locale: locale
+      assert_redirected_to edit_manager_product_path(Product.order(:created_at).last),locale: locale
       new_product = Product.find_by title: "New product"
       assert new_product.present?
       assert_not new_product.visible

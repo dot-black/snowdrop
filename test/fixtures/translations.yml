@@ -4,8 +4,12 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
+# one:
+#   attribute_name: title
+#   value: Some name
+#   locale: en
 #
-two: {}
-# column: value
+# one:
+#   attribute_name: description
+#   value: Some description
+#   locale: en

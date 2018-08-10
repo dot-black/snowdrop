@@ -36,7 +36,7 @@ class CategoriesControllerTest < ActionDispatch::IntegrationTest
       assert_difference 'Category.count' do
         post manager_categories_path(locale: locale ), params: { category: { title: "New", slug: "new", image: @image }}
       end
-      assert_redirected_to manager_categories_path locale: locale
+      assert_redirected_to edit_manager_category_path(Category.last), locale: locale
       assert_equal (I18n.translate 'manager.categories.flash.create.success'), flash[:notice]
     end
 
