@@ -10,7 +10,7 @@
     <h4><%= t 'category' %></h4>
     <% @categories.each do |category| %>
       <li class="<%= category == @current_category ? 'active' : '' %>">
-        <%= link_to category.title, category_products_path(category: category.slug.parameterize.underscore ) %>
+        <%= link_to category.title, category_products_path(category: category.slug ) %>
       </li>
     <% end  %>
   </ul>
@@ -29,7 +29,7 @@
 <div class="navbar navbar-default container-fluid app-navbar">
   <div class="menu-logo col-xs-2 col-sm-2 col-md-2 col-lg-2">
     <% if @product.present?  %>
-      <%= link_to category_products_path(@product.category.slug.parameterize.underscore) do %>
+      <%= link_to category_products_path(@product.category.slug) do %>
         <i class="material-icons md-24 pull-left">arrow_back</i>
       <% end %>
     <% else %>

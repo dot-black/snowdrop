@@ -1,5 +1,5 @@
 class Category < ApplicationRecord
-  SLUG_REGEX = /\A[[a-z]\s\']+\z/
+  SLUG_REGEX = /\A[[a-z]\-]+\z/
   TRANSLATEABLE_ATTRBUTES = [:title].freeze
 
   include Translateable
