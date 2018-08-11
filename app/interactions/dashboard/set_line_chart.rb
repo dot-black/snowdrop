@@ -9,6 +9,7 @@ class SetLineChart < ActiveInteraction::Base
     _get_total_count
     @result
   end
+
   private
 
   def _set_empty_result
@@ -19,7 +20,7 @@ class SetLineChart < ActiveInteraction::Base
     @result[:orders] = []
     orders_count_by_date = Order.group("orders.created_at::date").count
     (1.month.ago.to_date..Date.today).each do |date|
-       @result[:orders] << { x: date.strftime("%Y-%m-%d"), y: orders_count_by_date.key?(date) ? orders_count_by_date[date] : 0 }
+      @result[:orders] << { x: date.strftime("%Y-%m-%d"), y: orders_count_by_date.key?(date) ? orders_count_by_date[date] : 0 }
     end
   end
 
