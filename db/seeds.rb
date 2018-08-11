@@ -1,5 +1,5 @@
 #Managers
-Manager.create email: "manager@snowdrop.com", password: "qweqweqwe"
+Manager.create email: "manager@snowdrop.com", password: "rK7g%H8g"
 
 #Categories
 Dir.glob(Rails.root.join("app/assets/images/categories/*")).each do |category|
