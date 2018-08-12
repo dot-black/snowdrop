@@ -172,6 +172,30 @@
       margin-left: -200%;
     }
   }
+  @-moz-document url-prefix() {
+    img {
+      left: 0;
+      margin-left: 0;
+      position: relative;
+      height: 240px;
+    }
+    @media (max-width: 768px) {
+      img {
+        position: relative;
+        height: 240px;
+        left: 50%;
+        margin-left: -100%;
+      }
+    }
+    @media (max-width: 568px) {
+      img {
+        position: relative;
+        height: 240px;
+        left: 100%;
+        margin-left: -200%;
+      }
+    }
+  }
 }
 
 //PAGINATION
