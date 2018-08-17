@@ -272,8 +272,8 @@ ru:
   activerecord:
     errors:
       messages:
-        invalid_price: "неверная, значение должно быть не меньше чем 0.01 или равное"
-        invalid_quantity: "Количество должно быть полодительным"
+        invalid_price: "неверная, значение должно быть не меньше чем 0.01"
+        invalid_quantity: "Количество должно быть полжоительным"
         record_invalid: "Возникли ошибки: %{errors}"
         restrict_dependent_destroy:
           has_one: 'Невозможно удалить запись, так как существует зависимость: %{record}'
@@ -298,7 +298,7 @@ ru:
         description: "Описание"
         value: "Значение"
         start_at: "Начало"
-        end_at: "Окончание"
+        end_at: "Конец"
       line_item:
         quantity: "Количество"
         size: "Размер"
@@ -311,7 +311,7 @@ ru:
         status: "Статус"
         locale: "Язык"
         status: "Статус"
-        delay: "Задержка"
+        delay: "Время от последнего изменения статуса"
         created: "Создано"
         updated_at: "Обновлено"
         notification: "Оповищение"
@@ -339,9 +339,9 @@ ru:
           other: "Размеры"
           bra: "Бюст"
           standard: "Трусы"
-        translation:
-          description: "Описание %{language}"
-          title: "Заголовок %{language}"
+      translation:
+        description: "Описание %{language}"
+        title: "Заголовок %{language}"
       user_information:
         name: "Имя"
         telephone: "Телефон"
@@ -362,7 +362,7 @@ ru:
     contacts:
       contact_us: "Наши контакты"
       send_mail: "Эл. письмо"
-      follow_us: "Мы в соц. сетях"
+      follow_us: "Мы в социальных сетях"
   products:
     index:
       item:
@@ -376,7 +376,7 @@ ru:
       standard: "Размер трусов"
     flash:
       index:
-        missing_category: "Категория должна присутствовать!"
+        missing_category: "Категория не найдена"
         unavailable_category: "Категория недоступна"
       show:
         missing_product: "Продукт не найден!"
@@ -417,7 +417,7 @@ ru:
       new:
         empty_cart: "Пожалуйста, добавьте что-то в корзину."
       create:
-        failure: "Не удалось создать заказ, пожалуйста, заполните все поля корректно."
+        failure: "Не удалось создать заказ, пожалуйста, заполните все поля."
   line_items:
     flash:
       create:
@@ -525,15 +525,15 @@ ru:
         archive:
           archived: "Товар добавлен в архив."
           restored: "Товар восстановлен."
-          failure:  "Не получилось добавить в/восстановить из архива!"
+          failure:  "Не получилось добавить/восстановить из архива!"
         remove_single_image:
           success: "Картинка успешно удалена из товара."
           failure: "Не получилось удалить картинку!"
     orders:
       flash:
         index:
-          prohibited: "Текущий параметр статус запрещен"
-          absent: "Параметр статус должен присутствовать!"
+          prohibited: "Текущий статус запрещен"
+          absent: "Статус должен присутствовать!"
         update:
           success: "Статус заказа успешно изменено."
           failure: "Изменение статуса ордера завершилось неудачей!"
@@ -554,8 +554,8 @@ ru:
           invisible: "Скидка перестала быть активной."
           failure: "Не получилось изменить отображение скидки!"
       confirm:
-        activate: "Вы уверены? Расписание для начала и конца будет изменено"
-        deactivate: "Вы уверены? Расписание для начала и конца будет удалено."
+        activate: "Вы уверены? Расписание будет изменено"
+        deactivate: "Вы уверены? Расписание будет удалено."
         delete: "Вы уверены, что хотите удалить скидку?"
     contacts:
       flash:
