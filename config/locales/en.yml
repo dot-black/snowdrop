@@ -442,7 +442,7 @@ en:
         destroy:
           success: "Category has been successfully destroyed."
           failure: "Category has not been destroyed."
-          involvement: "Category can't be destroyed, because of something is involved in it."
+          involvement: "Category can't be destroyed, because of relation."
         change_appearance:
           visible: "Category become visible now."
           invisible: "Category become invisible now."
@@ -462,7 +462,7 @@ en:
         destroy:
           success: "Product has been successfully destroyed."
           failure: "Product has not been destroyed."
-          involvement: "Product can't be destroyed, because of something is involved in it."
+          involvement: "Product can't be destroyed, because of relation"
         appearance:
           visible: "Product become visible now."
           invisible: "Product become invisible now."
